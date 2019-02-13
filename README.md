@@ -5,7 +5,7 @@ folio - personal/family info organizer, based on life events.
 * Data is organized into categories of People, Places and Things
 * Common life organizational categories like Taxes, Money, Insurance, etc.
 * User can add other family members to the archive
-* Protect your privacy: store your important personal business information in asecure archive
+* Protect your privacy: store your important personal business information in a secure archive
 
 ## Folios - the client
 
