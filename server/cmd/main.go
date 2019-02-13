@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	db, err := gorm.Open("sqlite3", "/tmp/gorm.db?_busy_timeout=3000")
+	db, err := gorm.Open("sqlite3", "/tmp/foliosvc.db?_busy_timeout=3000")
 	if err != nil {
 		log.Fatalf("Database nope %v", err)
 	}
