@@ -1,0 +1,777 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "folio.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {},
+  "definitions": {
+    "SortCriteriaOrder": {
+      "type": "string",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "default": "ASC",
+      "description": "Order is a sort order.\n\n - ASC: ascending sort order\n - DESC: descending sort order"
+    },
+    "apiField": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "subs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiField"
+          }
+        }
+      },
+      "description": "Field represents a single field for an object.\nIt contains fields name and also may contain a group of sub-fields for cases\nwhen a fields represents some structure."
+    },
+    "apiFieldSelection": {
+      "type": "object",
+      "properties": {
+        "fields": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiField"
+          }
+        }
+      },
+      "description": "atlas.api.field_selection",
+      "title": "FieldSelection represents a group of fields for some object.\nMain use case for if is to store information about object fields that\nneed to be ratained prior to sending object as a response"
+    },
+    "apiFiltering": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "$ref": "#/definitions/apiLogicalOperator"
+        },
+        "string_condition": {
+          "$ref": "#/definitions/apiStringCondition"
+        },
+        "number_condition": {
+          "$ref": "#/definitions/apiNumberCondition"
+        },
+        "null_condition": {
+          "$ref": "#/definitions/apiNullCondition"
+        },
+        "string_array_condition": {
+          "$ref": "#/definitions/apiStringArrayCondition"
+        },
+        "number_array_condition": {
+          "$ref": "#/definitions/apiNumberArrayCondition"
+        }
+      },
+      "description": "atlas.api.filtering"
+    },
+    "apiLogicalOperator": {
+      "type": "object",
+      "properties": {
+        "left_operator": {
+          "$ref": "#/definitions/apiLogicalOperator"
+        },
+        "left_string_condition": {
+          "$ref": "#/definitions/apiStringCondition"
+        },
+        "left_number_condition": {
+          "$ref": "#/definitions/apiNumberCondition"
+        },
+        "left_null_condition": {
+          "$ref": "#/definitions/apiNullCondition"
+        },
+        "left_string_array_condition": {
+          "$ref": "#/definitions/apiStringArrayCondition"
+        },
+        "left_number_array_condition": {
+          "$ref": "#/definitions/apiNumberArrayCondition"
+        },
+        "right_operator": {
+          "$ref": "#/definitions/apiLogicalOperator"
+        },
+        "right_string_condition": {
+          "$ref": "#/definitions/apiStringCondition"
+        },
+        "right_number_condition": {
+          "$ref": "#/definitions/apiNumberCondition"
+        },
+        "right_null_condition": {
+          "$ref": "#/definitions/apiNullCondition"
+        },
+        "right_string_array_condition": {
+          "$ref": "#/definitions/apiStringArrayCondition"
+        },
+        "right_number_array_condition": {
+          "$ref": "#/definitions/apiNumberArrayCondition"
+        },
+        "type": {
+          "$ref": "#/definitions/apiLogicalOperatorType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "description": "LogicalOperator represents binary logical operator, either AND or OR depending on type.\nleft and right are respectively left and right operands of the operator, could be\neither LogicalOperator or one of the supported conditions.\nis_negative is set to true if the operator is negated."
+    },
+    "apiLogicalOperatorType": {
+      "type": "string",
+      "enum": [
+        "AND",
+        "OR"
+      ],
+      "default": "AND"
+    },
+    "apiNullCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "description": "NullCondition represents a condition with a null literal, e.g. field == null.\nfield_path is a reference to a value of a resource.\nis_negative is set to true if the condition is negated."
+    },
+    "apiNumberArrayCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/apiNumberArrayConditionType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "NumberArrayCondition represents a condition with string arrays, e.g. field in [1, 5, 7]\nfield_path is a reference to a value of a resource.\nis_negative is set to true if the condition is negated"
+    },
+    "apiNumberArrayConditionType": {
+      "type": "string",
+      "enum": [
+        "IN"
+      ],
+      "default": "IN"
+    },
+    "apiNumberCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "$ref": "#/definitions/apiNumberConditionType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "description": "NumberCondition represents a condition with a number literal, e.g. field \u003e 3.\nfield_path is a reference to a value of a resource.\nvalue is the number literal.\ntype is a type of the condition.\nis_negative is set to true if the condition is negated."
+    },
+    "apiNumberConditionType": {
+      "type": "string",
+      "enum": [
+        "EQ",
+        "GT",
+        "GE",
+        "LT",
+        "LE"
+      ],
+      "default": "EQ"
+    },
+    "apiPageInfo": {
+      "type": "object",
+      "properties": {
+        "page_token": {
+          "type": "string",
+          "description": "The service response should contain a string to indicate\nthe next page of resources.\nA null value indicates no more pages."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The service may optionally include the total number of resources being paged."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The service may optionally include the offset of the next page of resources.\nA null value indicates no more pages."
+        }
+      },
+      "description": "PageInfo represents both server-driven and client-driven pagination response.\nServer-driven pagination is a model in which the server returns some\namount of data along with an token indicating there is more data\nand where subsequent queries can get the next page of data.\nClient-driven pagination is a model in which rows are addressable by\noffset and page size (limit)."
+    },
+    "apiPagination": {
+      "type": "object",
+      "properties": {
+        "page_token": {
+          "type": "string",
+          "description": "The service-defined string used to identify a page of resources.\nA null value indicates the first page."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The integer index of the offset into a collection of resources.\nIf omitted or null the value is assumed to be \"0\"."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The integer number of resources to be returned in the response.\nThe service may impose maximum value.\nIf omitted the service may impose a default value."
+        }
+      },
+      "description": "atlas.api.paging"
+    },
+    "apiSortCriteria": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "Tag is a JSON tag."
+        },
+        "order": {
+          "$ref": "#/definitions/SortCriteriaOrder"
+        }
+      },
+      "title": "SortCriteria represents sort criteria"
+    },
+    "apiSorting": {
+      "type": "object",
+      "properties": {
+        "criterias": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiSortCriteria"
+          }
+        }
+      },
+      "description": "atlas.api.sorting"
+    },
+    "apiStringArrayCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/apiStringArrayConditionType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "StringArrayCondition represents a condition with string arrays, e.g. field in ['hello','world']\nfield_path is a reference to a value of a resource.\nis_negative is set to true if the condition is negated"
+    },
+    "apiStringArrayConditionType": {
+      "type": "string",
+      "enum": [
+        "IN"
+      ],
+      "default": "IN"
+    },
+    "apiStringCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "value": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/apiStringConditionType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "description": "StringCondition represents a condition with a string literal, e.g. field == 'string'.\nfield_path is a reference to a value of a resource.\nvalue is the string literal.\ntype is a type of the condition.\nis_negative is set to true if the condition is negated."
+    },
+    "apiStringConditionType": {
+      "type": "string",
+      "enum": [
+        "EQ",
+        "MATCH",
+        "GT",
+        "GE",
+        "LT",
+        "LE",
+        "IEQ"
+      ],
+      "default": "EQ"
+    },
+    "folioAccount": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Nickname": {
+          "type": "string"
+        },
+        "Kind": {
+          "type": "string"
+        },
+        "Archive": {
+          "$ref": "#/definitions/folioArchive",
+          "title": "links"
+        },
+        "Users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioUser"
+          }
+        }
+      },
+      "description": "Account is the top level entity for as a client account",
+      "title": "import \"google/protobuf/timestamp.proto\";\nimport \"github.com/infobloxopen/atlas-app-toolkit/rpc/resource/resource.proto\";"
+    },
+    "folioArchive": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Desc": {
+          "type": "string"
+        },
+        "Folios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioFolio"
+          },
+          "title": "links"
+        },
+        "account": {
+          "$ref": "#/definitions/folioAccount"
+        },
+        "owner": {
+          "$ref": "#/definitions/folioUser"
+        }
+      },
+      "title": "Archive is the container for a bunch of Folios"
+    },
+    "folioAsset": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "folio": {
+          "$ref": "#/definitions/folioFolio"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "Path": {
+          "type": "string"
+        },
+        "asset": {
+          "$ref": "#/definitions/folioAsset"
+        },
+        "blob": {
+          "type": "string",
+          "format": "byte"
+        }
+      },
+      "title": "Asset main doc"
+    },
+    "folioCreateAccountResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioAccount",
+          "title": "Convention also requires that the return type be the same and named 'result'"
+        }
+      }
+    },
+    "folioCreateArchiveResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioArchive",
+          "title": "Convention also requires that the return type be the same and named 'result'"
+        }
+      }
+    },
+    "folioCreateFolioResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioFolio",
+          "title": "Convention also requires that the return type be the same and named 'result'"
+        }
+      }
+    },
+    "folioCreateUserResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioUser",
+          "title": "Convention also requires that the return type be the same and named 'result'"
+        }
+      }
+    },
+    "folioDeleteAccountResponse": {
+      "type": "object",
+      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
+    },
+    "folioDeleteArchiveResponse": {
+      "type": "object",
+      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
+    },
+    "folioDeleteFolioResponse": {
+      "type": "object",
+      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
+    },
+    "folioDeleteUserResponse": {
+      "type": "object",
+      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
+    },
+    "folioFolio": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "UUID": {
+          "type": "string"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Desc": {
+          "type": "string"
+        },
+        "archive": {
+          "$ref": "#/definitions/folioArchive"
+        },
+        "Assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioAsset"
+          }
+        },
+        "Notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioNote"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioTag"
+          },
+          "title": "links\nTags      []*Tag   `gorm:\"many2many:folio_tags;\"`"
+        },
+        "shares": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioShare"
+          },
+          "title": "Shares    []*Share `gorm:\"many2many:folio_shares;\"`"
+        }
+      },
+      "title": "Folio center piece"
+    },
+    "folioListAccountResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioAccount"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListArchiveResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioArchive"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListFolioResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioFolio"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListUserResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioUser"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioNote": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "Note": {
+          "type": "string"
+        },
+        "folio": {
+          "$ref": "#/definitions/folioFolio"
+        }
+      },
+      "title": "Note text junk"
+    },
+    "folioReadAccountResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioAccount",
+          "title": "Again the type with 'result' name"
+        }
+      }
+    },
+    "folioReadArchiveResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioArchive",
+          "title": "Again the type with 'result' name"
+        }
+      }
+    },
+    "folioReadFolioResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioFolio",
+          "title": "Again the type with 'result' name"
+        }
+      }
+    },
+    "folioReadUserResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioUser",
+          "title": "Again the type with 'result' name"
+        }
+      }
+    },
+    "folioShare": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "friend": {
+          "$ref": "#/definitions/folioTag"
+        },
+        "folios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioFolio"
+          }
+        }
+      },
+      "title": "Share is a linkage allowing someone to work with the contents of a folio"
+    },
+    "folioTag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Kind": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Label": {
+          "type": "string"
+        },
+        "Desc": {
+          "type": "string"
+        },
+        "folios": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioFolio"
+          },
+          "title": "links"
+        }
+      },
+      "title": "Tag is a attribute on something"
+    },
+    "folioUpdateAccountResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioAccount"
+        }
+      }
+    },
+    "folioUpdateArchiveResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioArchive"
+        }
+      }
+    },
+    "folioUpdateFolioResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioFolio"
+        }
+      }
+    },
+    "folioUpdateUserResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioUser"
+        }
+      }
+    },
+    "folioUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Email": {
+          "type": "string"
+        },
+        "Firstname": {
+          "type": "string"
+        },
+        "Lastname": {
+          "type": "string"
+        },
+        "account": {
+          "$ref": "#/definitions/folioAccount",
+          "title": "links"
+        }
+      },
+      "title": "User human message who owns the archive"
+    },
+    "protobufFieldMask": {
+      "type": "object",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of field mask paths."
+        }
+      },
+      "description": "paths: \"f.a\"\n    paths: \"f.b.d\"\n\nHere `f` represents a field in some root message, `a` and `b`\nfields in the message found in `f`, and `d` a field found in the\nmessage in `f.b`.\n\nField masks are used to specify a subset of fields that should be\nreturned by a get operation or modified by an update operation.\nField masks also have a custom JSON encoding (see below).\n\n# Field Masks in Projections\n\nWhen used in the context of a projection, a response message or\nsub-message is filtered by the API to only contain those fields as\nspecified in the mask. For example, if the mask in the previous\nexample is applied to a response message as follows:\n\n    f {\n      a : 22\n      b {\n        d : 1\n        x : 2\n      }\n      y : 13\n    }\n    z: 8\n\nThe result will not contain specific values for fields x,y and z\n(their value will be set to the default, and omitted in proto text\noutput):\n\n\n    f {\n      a : 22\n      b {\n        d : 1\n      }\n    }\n\nA repeated field is not allowed except at the last position of a\npaths string.\n\nIf a FieldMask object is not present in a get operation, the\noperation applies to all fields (as if a FieldMask of all fields\nhad been specified).\n\nNote that a field mask does not necessarily apply to the\ntop-level response message. In case of a REST get operation, the\nfield mask applies directly to the response, but in case of a REST\nlist operation, the mask instead applies to each individual message\nin the returned resource list. In case of a REST custom method,\nother definitions may be used. Where the mask applies will be\nclearly documented together with its declaration in the API.  In\nany case, the effect on the returned resource/resources is required\nbehavior for APIs.\n\n# Field Masks in Update Operations\n\nA field mask in update operations specifies which fields of the\ntargeted resource are going to be updated. The API is required\nto only change the values of the fields as specified in the mask\nand leave the others untouched. If a resource is passed in to\ndescribe the updated values, the API ignores the values of all\nfields not covered by the mask.\n\nIf a repeated field is specified for an update operation, the existing\nrepeated values in the target resource will be overwritten by the new values.\nNote that a repeated field is only allowed in the last position of a `paths`\nstring.\n\nIf a sub-message is specified in the last position of the field mask for an\nupdate operation, then the existing sub-message in the target resource is\noverwritten. Given the target message:\n\n    f {\n      b {\n        d : 1\n        x : 2\n      }\n      c : 1\n    }\n\nAnd an update message:\n\n    f {\n      b {\n        d : 10\n      }\n    }\n\nthen if the field mask is:\n\n paths: \"f.b\"\n\nthen the result will be:\n\n    f {\n      b {\n        d : 10\n      }\n      c : 1\n    }\n\nHowever, if the update mask was:\n\n paths: \"f.b.d\"\n\nthen the result would be:\n\n    f {\n      b {\n        d : 10\n        x : 2\n      }\n      c : 1\n    }\n\nIn order to reset a field's value to the default, the field must\nbe in the mask and set to the default value in the provided resource.\nHence, in order to reset all fields of a resource, provide a default\ninstance of the resource and set all fields in the mask, or do\nnot provide a mask as described below.\n\nIf a field mask is not present on update, the operation applies to\nall fields (as if a field mask of all fields has been specified).\nNote that in the presence of schema evolution, this may mean that\nfields the client does not know and has therefore not filled into\nthe request will be reset to their default. If this is unwanted\nbehavior, a specific service may require a client to always specify\na field mask, producing an error if not.\n\nAs with get operations, the location of the resource which\ndescribes the updated values in the request message depends on the\noperation kind. In any case, the effect of the field mask is\nrequired to be honored by the API.\n\n## Considerations for HTTP REST\n\nThe HTTP kind of an update operation which uses a field mask must\nbe set to PATCH instead of PUT in order to satisfy HTTP semantics\n(PUT must only be used for full updates).\n\n# JSON Encoding of Field Masks\n\nIn JSON, a field mask is encoded as a single string where paths are\nseparated by a comma. Fields name in each path are converted\nto/from lower-camel naming conventions.\n\nAs an example, consider the following message declarations:\n\n    message Profile {\n      User user = 1;\n      Photo photo = 2;\n    }\n    message User {\n      string display_name = 1;\n      string address = 2;\n    }\n\nIn proto a field mask for `Profile` may look as such:\n\n    mask {\n      paths: \"user.display_name\"\n      paths: \"photo\"\n    }\n\nIn JSON, the same mask is represented as below:\n\n    {\n      mask: \"user.displayName,photo\"\n    }\n\n# Field Masks and Oneof Fields\n\nField masks treat fields in oneofs just as regular fields. Consider the\nfollowing message:\n\n    message SampleMessage {\n      oneof test_oneof {\n        string name = 4;\n        SubMessage sub_message = 9;\n      }\n    }\n\nThe field mask can be:\n\n    mask {\n      paths: \"name\"\n    }\n\nOr:\n\n    mask {\n      paths: \"sub_message\"\n    }\n\nNote that oneof type names (\"test_oneof\" in this case) cannot be used in\npaths.\n\n## Field Mask Verification\n\nThe implementation of the all the API methods, which have any FieldMask type\nfield in the request, should verify the included field paths, and return\n`INVALID_ARGUMENT` error if any path is duplicated or unmappable.",
+      "title": "`FieldMask` represents a set of symbolic field paths, for example:"
+    }
+  }
+}
