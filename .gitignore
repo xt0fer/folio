@@ -1,4 +1,7 @@
+# project executables.
 wraps
+server
+cltest
 
 # Binaries for programs and plugins
 *.exe
