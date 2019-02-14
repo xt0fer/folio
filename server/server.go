@@ -26,12 +26,12 @@ func NewFolioServer(db *gorm.DB) *FolioServer {
 		log.Printf("NO DATABASE db: %+v\n", db)
 	}
 	log.Printf("db: %+v\n", db)
-	if !db.HasTable(&pb.AccountORM{}) {
-		db.CreateTable(&pb.AccountORM{}, &pb.UserORM{}, &pb.ArchiveORM{}, &pb.FolioORM{},
+	if !db.HasTable(&pb.UserORM{}) {
+		db.CreateTable(&pb.UserORM{}, &pb.FolioORM{}, //&pb.AccountORM{}, &pb.ArchiveORM{},
 			&pb.TagORM{}, &pb.ShareORM{}, &pb.AssetORM{}, &pb.NoteORM{})
 		log.Printf("created tables: %+v\n", db)
 	}
-	db.AutoMigrate(&pb.AccountORM{}, &pb.UserORM{}, &pb.ArchiveORM{}, &pb.FolioORM{},
+	db.AutoMigrate(&pb.UserORM{}, &pb.FolioORM{}, //&pb.AccountORM{}, &pb.ArchiveORM{},
 		&pb.TagORM{}, &pb.ShareORM{}, &pb.AssetORM{}, &pb.NoteORM{})
 	rt := &FolioSvc{}
 	rt.DB = db

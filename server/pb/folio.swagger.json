@@ -349,71 +349,6 @@
       ],
       "default": "EQ"
     },
-    "folioAccount": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "UUID": {
-          "type": "string"
-        },
-        "Name": {
-          "type": "string"
-        },
-        "Nickname": {
-          "type": "string"
-        },
-        "Kind": {
-          "type": "string"
-        },
-        "Archive": {
-          "$ref": "#/definitions/folioArchive",
-          "title": "links"
-        },
-        "Users": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/folioUser"
-          }
-        }
-      },
-      "description": "Account is the top level entity for as a client account",
-      "title": "import \"google/protobuf/timestamp.proto\";\nimport \"github.com/infobloxopen/atlas-app-toolkit/rpc/resource/resource.proto\";"
-    },
-    "folioArchive": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "integer",
-          "format": "int64"
-        },
-        "UUID": {
-          "type": "string"
-        },
-        "Name": {
-          "type": "string"
-        },
-        "Desc": {
-          "type": "string"
-        },
-        "Folios": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/folioFolio"
-          },
-          "title": "links"
-        },
-        "account": {
-          "$ref": "#/definitions/folioAccount"
-        },
-        "owner": {
-          "$ref": "#/definitions/folioUser"
-        }
-      },
-      "title": "Archive is the container for a bunch of Folios"
-    },
     "folioAsset": {
       "type": "object",
       "properties": {
@@ -439,27 +374,12 @@
         "blob": {
           "type": "string",
           "format": "byte"
+        },
+        "Thumbnail": {
+          "$ref": "#/definitions/folioAsset"
         }
       },
       "title": "Asset main doc"
-    },
-    "folioCreateAccountResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/folioAccount",
-          "title": "Convention also requires that the return type be the same and named 'result'"
-        }
-      }
-    },
-    "folioCreateArchiveResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/folioArchive",
-          "title": "Convention also requires that the return type be the same and named 'result'"
-        }
-      }
     },
     "folioCreateAssetResponse": {
       "type": "object",
@@ -515,14 +435,6 @@
         }
       }
     },
-    "folioDeleteAccountResponse": {
-      "type": "object",
-      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
-    },
-    "folioDeleteArchiveResponse": {
-      "type": "object",
-      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
-    },
     "folioDeleteAssetResponse": {
       "type": "object",
       "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
@@ -563,20 +475,21 @@
         "Desc": {
           "type": "string"
         },
-        "archive": {
-          "$ref": "#/definitions/folioArchive"
-        },
         "Assets": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/folioAsset"
-          }
+          },
+          "title": "Archive archive = 5;"
         },
         "Notes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/folioNote"
           }
+        },
+        "Owner": {
+          "$ref": "#/definitions/folioUser"
         },
         "tags": {
           "type": "array",
@@ -591,39 +504,12 @@
             "$ref": "#/definitions/folioShare"
           },
           "title": "Shares    []*Share `gorm:\"many2many:folio_shares;\"`"
+        },
+        "Thumbnail": {
+          "$ref": "#/definitions/folioAsset"
         }
       },
       "title": "Folio center piece"
-    },
-    "folioListAccountResponse": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/folioAccount"
-          },
-          "title": "Note repeated field and plural name 'results'"
-        },
-        "page_info": {
-          "$ref": "#/definitions/apiPageInfo"
-        }
-      }
-    },
-    "folioListArchiveResponse": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/folioArchive"
-          },
-          "title": "Note repeated field and plural name 'results'"
-        },
-        "page_info": {
-          "$ref": "#/definitions/apiPageInfo"
-        }
-      }
     },
     "folioListAssetResponse": {
       "type": "object",
@@ -730,27 +616,12 @@
         },
         "folio": {
           "$ref": "#/definitions/folioFolio"
+        },
+        "Thumbnail": {
+          "$ref": "#/definitions/folioAsset"
         }
       },
       "title": "Note text junk"
-    },
-    "folioReadAccountResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/folioAccount",
-          "title": "Again the type with 'result' name"
-        }
-      }
-    },
-    "folioReadArchiveResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/folioArchive",
-          "title": "Again the type with 'result' name"
-        }
-      }
     },
     "folioReadAssetResponse": {
       "type": "object",
@@ -814,7 +685,7 @@
           "format": "int64"
         },
         "friend": {
-          "$ref": "#/definitions/folioTag"
+          "$ref": "#/definitions/folioUser"
         },
         "folios": {
           "type": "array",
@@ -848,25 +719,12 @@
             "$ref": "#/definitions/folioFolio"
           },
           "title": "links"
+        },
+        "Thumbnail": {
+          "$ref": "#/definitions/folioAsset"
         }
       },
       "title": "Tag is a attribute on something"
-    },
-    "folioUpdateAccountResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/folioAccount"
-        }
-      }
-    },
-    "folioUpdateArchiveResponse": {
-      "type": "object",
-      "properties": {
-        "result": {
-          "$ref": "#/definitions/folioArchive"
-        }
-      }
     },
     "folioUpdateAssetResponse": {
       "type": "object",
@@ -932,9 +790,8 @@
         "Lastname": {
           "type": "string"
         },
-        "account": {
-          "$ref": "#/definitions/folioAccount",
-          "title": "links"
+        "Thumbnail": {
+          "$ref": "#/definitions/folioAsset"
         }
       },
       "title": "User human message who owns the archive"

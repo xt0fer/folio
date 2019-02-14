@@ -4,71 +4,11 @@ import (
 	"context"
 	"log"
 	
-	pb "./pb"
+	pb "../server/pb"
 )
 
 type FolioSvc struct {
 	pb.FolioServiceDefaultServer
-}
-
-// CreateAccount ...
-func (m *FolioSvc) CreateAccount(ctx context.Context, in *pb.CreateAccountRequest) (*pb.CreateAccountResponse, error) {
-	log.Println("(m *FolioSvc) CreateAccount")
-	nugget, err := pb.DefaultCreateAccount(ctx, in.Payload, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.CreateAccountResponse{
-		Result: nugget,
-	}, nil
-}
-
-// ReadAccount ...
-func (m *FolioSvc) ReadAccount(ctx context.Context, in *pb.ReadAccountRequest) (*pb.ReadAccountResponse, error) {
-	log.Println("(m *FolioSvc) ReadAccount")
-	nugget, err := pb.DefaultReadAccount(ctx, &pb.Account{Id: in.Id}, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ReadAccountResponse{
-		Result: nugget,
-	}, nil
-}
-
-// UpdateAccount ...
-func (m *FolioSvc) UpdateAccount(ctx context.Context, in *pb.UpdateAccountRequest) (*pb.UpdateAccountResponse, error) {
-	log.Println("(m *FolioSvc) UpdateAccount")
-	nugget, err := pb.DefaultStrictUpdateAccount(ctx, in.Payload, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.UpdateAccountResponse{
-		Result: nugget,
-	}, nil
-}
-
-// DeleteAccount ...
-func (m *FolioSvc) DeleteAccount(ctx context.Context, in *pb.DeleteAccountRequest) (*pb.DeleteAccountResponse, error) {
-	log.Println("(m *FolioSvc) DeleteAccount")
-	err := pb.DefaultDeleteAccount(ctx, &pb.Account{Id: in.Id}, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.DeleteAccountResponse{
-		
-	}, nil
-}
-
-// ListAccount ...
-func (m *FolioSvc) ListAccount(ctx context.Context, in *pb.ListAccountRequest) (*pb.ListAccountResponse, error) {
-	log.Println("(m *FolioSvc) ListAccount")
-	nugget, err := pb.DefaultListAccount(ctx, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ListAccountResponse{
-		Results: nugget,
-	}, nil
 }
 
 // CreateUser ...
@@ -187,66 +127,6 @@ func (m *FolioSvc) ListFolio(ctx context.Context, in *pb.ListFolioRequest) (*pb.
 		return nil, err
 	}
 	return &pb.ListFolioResponse{
-		Results: nugget,
-	}, nil
-}
-
-// CreateArchive ...
-func (m *FolioSvc) CreateArchive(ctx context.Context, in *pb.CreateArchiveRequest) (*pb.CreateArchiveResponse, error) {
-	log.Println("(m *FolioSvc) CreateArchive")
-	nugget, err := pb.DefaultCreateArchive(ctx, in.Payload, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.CreateArchiveResponse{
-		Result: nugget,
-	}, nil
-}
-
-// ReadArchive ...
-func (m *FolioSvc) ReadArchive(ctx context.Context, in *pb.ReadArchiveRequest) (*pb.ReadArchiveResponse, error) {
-	log.Println("(m *FolioSvc) ReadArchive")
-	nugget, err := pb.DefaultReadArchive(ctx, &pb.Archive{Id: in.Id}, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ReadArchiveResponse{
-		Result: nugget,
-	}, nil
-}
-
-// UpdateArchive ...
-func (m *FolioSvc) UpdateArchive(ctx context.Context, in *pb.UpdateArchiveRequest) (*pb.UpdateArchiveResponse, error) {
-	log.Println("(m *FolioSvc) UpdateArchive")
-	nugget, err := pb.DefaultStrictUpdateArchive(ctx, in.Payload, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.UpdateArchiveResponse{
-		Result: nugget,
-	}, nil
-}
-
-// DeleteArchive ...
-func (m *FolioSvc) DeleteArchive(ctx context.Context, in *pb.DeleteArchiveRequest) (*pb.DeleteArchiveResponse, error) {
-	log.Println("(m *FolioSvc) DeleteArchive")
-	err := pb.DefaultDeleteArchive(ctx, &pb.Archive{Id: in.Id}, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.DeleteArchiveResponse{
-		
-	}, nil
-}
-
-// ListArchive ...
-func (m *FolioSvc) ListArchive(ctx context.Context, in *pb.ListArchiveRequest) (*pb.ListArchiveResponse, error) {
-	log.Println("(m *FolioSvc) ListArchive")
-	nugget, err := pb.DefaultListArchive(ctx, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ListArchiveResponse{
 		Results: nugget,
 	}, nil
 }

@@ -7,7 +7,6 @@ package main
  */
 import (
 	"flag"
-	"fmt"
 	"log"
 
 	pb "../server/pb"
@@ -24,16 +23,15 @@ var (
 func main() {
 	flag.Parse()
 
-	var thisUser *pb.User
-	var thisAccount *pb.Account
+	//var thisUser *pb.User
 
 	fcl := NewFolioClient()
 	defer fcl.Close()
 
 	//userResp, err := client.ReadUser(ctx, &pb.ReadUserRequest{Id: 1})
-	userResp, err := fcl.GetUser("test@test.com")
+	thisUser, err := fcl.GetUser("test@test.com")
 	if err == nil {
-		log.Printf("Get User %+v\n", userResp)
+		log.Printf("Get User %+v\n", thisUser)
 	} else {
 		thisUser, _ = fcl.CreateUser(&pb.User{
 			Email:     "test@test.com",
@@ -42,19 +40,29 @@ func main() {
 		})
 		log.Printf("New User %+v\n", thisUser)
 	}
-	accountResp, err := fcl.client.ReadAccount(fcl.ctx, &pb.ReadAccountRequest{Id: 1})
 
+	// create a test folio
+
+	err = fcl.SaveUser(thisUser)
 	if err == nil {
-		log.Printf("Found Account %+v\n", accountResp.Result)
+		log.Printf("SavedUser %+v\n", thisUser)
 	} else {
-		thisAccount, _ = fcl.CreateAccount(&pb.Account{
-			UUID:     fmt.Sprintf("%v", GimmeUUID()),
-			Name:     fmt.Sprintf("Acct: %v %v", thisUser.Firstname, thisUser.Lastname),
-			Nickname: "Default",
-			Kind:     "Digital Asset Trust",
-			Users:    []*pb.User{thisUser},
-		})
-		log.Printf("New Account %+v\n", thisAccount)
+		log.Printf("Unable to Save User %+v -  %v\n", thisUser, err)
 	}
+
+	// accountResp, err := fcl.client.ReadAccount(fcl.ctx, &pb.ReadAccountRequest{Id: 1})
+
+	// if err == nil {
+	// 	log.Printf("Found Account %+v\n", accountResp.Result)
+	// } else {
+	// 	thisAccount, _ = fcl.CreateAccount(&pb.Account{
+	// 		UUID:     fmt.Sprintf("%v", GimmeUUID()),
+	// 		Name:     fmt.Sprintf("Acct: %v %v", thisUser.Firstname, thisUser.Lastname),
+	// 		Nickname: "Default",
+	// 		Kind:     "Digital Asset Trust",
+	// 		Users:    []*pb.User{thisUser},
+	// 	})
+	// 	log.Printf("New Account %+v\n", thisAccount)
+	// }
 
 }

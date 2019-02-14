@@ -20,7 +20,7 @@ func main() {
 		log.Fatal("unable to read template file ")
 	}
 	Ops := []string{"Create", "Read", "Update", "Delete", "List"}
-	Typees := []string{"Account", "User", "Folio", "Archive", "Tag", "Note", "Asset", "Share"}
+	Typees := []string{"User", "Folio", "Tag", "Note", "Asset", "Share"} // "Account", "Archive",
 	//.Op
 	//.Typee
 	buf := bytes.NewBuffer([]byte{})
@@ -31,7 +31,7 @@ import (
 	"context"
 	"log"
 	
-	pb "../../pb"
+	pb "../server/pb"
 )
 
 type FolioSvc struct {

@@ -67,18 +67,6 @@ func (fc *FolioClient) CreateUser(owner *pb.User) (*pb.User, error) {
 	return userResp.GetResult(), err
 }
 
-// CreateAccount ...
-func (fc *FolioClient) CreateAccount(nacct *pb.Account) (*pb.Account, error) {
-	acct, err := fc.client.CreateAccount(fc.ctx, &pb.CreateAccountRequest{
-		Payload: nacct,
-	}, &grpc.EmptyCallOption{})
-	if err != nil {
-		log.Fatalf("Failed Create Account call %v", err)
-	}
-	log.Printf("Create Account Response %+v\n", acct)
-	return acct.GetResult(), nil
-}
-
 // GimmeUUID ...
 func GimmeUUID() uuid.UUID {
 	u, _ := uuid.NewV4()
@@ -105,3 +93,60 @@ func (fc *FolioClient) GetUser(email string) (*pb.User, error) {
 	}
 	return nil, errors.New("unable to find the account")
 }
+
+func (fc *FolioClient) SaveUser(user *pb.User) error {
+
+	_, err := fc.client.UpdateUser(fc.ctx, &pb.UpdateUserRequest{
+		Payload: user,
+	})
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// // CreateAccount ...
+// func (fc *FolioClient) CreateAccount(nacct *pb.Account) (*pb.Account, error) {
+// 	acct, err := fc.client.CreateAccount(fc.ctx, &pb.CreateAccountRequest{
+// 		Payload: nacct,
+// 	}, &grpc.EmptyCallOption{})
+// 	if err != nil {
+// 		log.Fatalf("Failed Create Account call %v", err)
+// 	}
+// 	log.Printf("Create Account Response %+v\n", acct)
+// 	return acct.GetResult(), nil
+// }
+
+// func (fc *FolioClient) SaveAccount(nacct *pb.Account) error {
+
+// 	_, err := fc.client.UpdateAccount(fc.ctx, &pb.UpdateAccountRequest{
+// 		Payload: nacct,
+// 	})
+// 	if err != nil {
+// 		return err
+// 	}
+// 	return nil
+// }
+
+// // CreateAccount ...
+// func (fc *FolioClient) CreateArchive(arg *pb.Archive) (*pb.Archive, error) {
+// 	acct, err := fc.client.CreateArchive(fc.ctx, &pb.CreateArchiveRequest{
+// 		Payload: arg,
+// 	}, &grpc.EmptyCallOption{})
+// 	if err != nil {
+// 		log.Fatalf("Failed CreateArchive call %v", err)
+// 	}
+// 	log.Printf("CreateArchive Response %+v\n", acct)
+// 	return acct.GetResult(), nil
+// }
+
+// func (fc *FolioClient) SaveArchive(arg *pb.Archive) error {
+
+// 	_, err := fc.client.UpdateArchive(fc.ctx, &pb.UpdateArchiveRequest{
+// 		Payload: arg,
+// 	})
+// 	if err != nil {
+// 		return err
+// 	}
+// 	return nil
+// }
