@@ -109,13 +109,11 @@ func NewAccountSvc(db *gorm.DB) *AccountSvc {
 	log.Printf("db: %+v\n", db)
 	if !db.HasTable(&pb.AccountORM{}) {
 		db.CreateTable(&pb.AccountORM{}, &pb.UserORM{}, &pb.ArchiveORM{}, &pb.FolioORM{},
-			&pb.TagORM{}, &pb.ShareORM{}, &pb.AssetORM{}, &pb.NoteORM{},
-			&pb.VersionORM{}, &pb.AttributeORM{})
+			&pb.TagORM{}, &pb.ShareORM{}, &pb.AssetORM{}, &pb.NoteORM{})
 		log.Printf("created tables: %+v\n", db)
 	}
 	db.AutoMigrate(&pb.AccountORM{}, &pb.UserORM{}, &pb.ArchiveORM{}, &pb.FolioORM{},
-		&pb.TagORM{}, &pb.ShareORM{}, &pb.AssetORM{}, &pb.NoteORM{},
-		&pb.VersionORM{}, &pb.AttributeORM{})
+		&pb.TagORM{}, &pb.ShareORM{}, &pb.AssetORM{}, &pb.NoteORM{})
 	rt := &AccountSvcTioga{}
 	rt.DB = db
 	return &AccountSvc{
