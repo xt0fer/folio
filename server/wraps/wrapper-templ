@@ -1,0 +1,12 @@
+// {{.Op}}{{.Typee}} ...
+func (m *FolioSvc) {{.Op}}{{.Typee}}(ctx context.Context, in *pb.{{.Op}}{{.Typee}}Request) (*pb.{{.Op}}{{.Typee}}Response, error) {
+	log.Println("(m *FolioSvc) {{.Op}}{{.Typee}}")
+	{{.Kind}}
+	if err != nil {
+		return nil, err
+	}
+	return &pb.{{.Op}}{{.Typee}}Response{
+		{{.Back}}
+	}, nil
+}
+

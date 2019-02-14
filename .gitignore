@@ -1,7 +1,7 @@
 # project executables.
-wraps
-server
-cltest
+server/wraps/wraps
+server/cmd/server
+cltest/cltest
 
 # Binaries for programs and plugins
 *.exe
@@ -15,6 +15,9 @@ cltest
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+# emacs backups
+*~
 
 # Miscellaneous
 *.class
