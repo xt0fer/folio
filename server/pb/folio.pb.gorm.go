@@ -47,7 +47,29 @@ It has these top-level messages:
 	ListArchiveResponse
 	ListArchiveRequest
 	Share
+	CreateShareRequest
+	CreateShareResponse
+	ReadShareRequest
+	ReadShareResponse
+	UpdateShareRequest
+	UpdateShareResponse
+	DeleteShareRequest
+	DeleteSharesRequest
+	DeleteShareResponse
+	ListShareResponse
+	ListShareRequest
 	Tag
+	CreateTagRequest
+	CreateTagResponse
+	ReadTagRequest
+	ReadTagResponse
+	UpdateTagRequest
+	UpdateTagResponse
+	DeleteTagRequest
+	DeleteTagsRequest
+	DeleteTagResponse
+	ListTagResponse
+	ListTagRequest
 	Folio
 	CreateFolioRequest
 	CreateFolioResponse
@@ -4229,209 +4251,359 @@ type NoteORMWithBeforeListFind interface {
 type NoteORMWithAfterListFind interface {
 	AfterListFind(context.Context, *gorm1.DB, *[]NoteORM) error
 }
-type AccountServiceDefaultServer struct {
+type FolioServiceDefaultServer struct {
 	DB *gorm1.DB
 }
 
 // CreateUser ...
-func (m *AccountServiceDefaultServer) CreateUser(ctx context.Context, in *CreateUserRequest) (*CreateUserResponse, error) {
+func (m *FolioServiceDefaultServer) CreateUser(ctx context.Context, in *CreateUserRequest) (*CreateUserResponse, error) {
 	return &CreateUserResponse{}, nil
 }
 
 // ReadUser ...
-func (m *AccountServiceDefaultServer) ReadUser(ctx context.Context, in *ReadUserRequest) (*ReadUserResponse, error) {
+func (m *FolioServiceDefaultServer) ReadUser(ctx context.Context, in *ReadUserRequest) (*ReadUserResponse, error) {
 	return &ReadUserResponse{}, nil
 }
 
 // UpdateUser ...
-func (m *AccountServiceDefaultServer) UpdateUser(ctx context.Context, in *UpdateUserRequest) (*UpdateUserResponse, error) {
+func (m *FolioServiceDefaultServer) UpdateUser(ctx context.Context, in *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return &UpdateUserResponse{}, nil
 }
 
 // ListUser ...
-func (m *AccountServiceDefaultServer) ListUser(ctx context.Context, in *ListUserRequest) (*ListUserResponse, error) {
+func (m *FolioServiceDefaultServer) ListUser(ctx context.Context, in *ListUserRequest) (*ListUserResponse, error) {
 	return &ListUserResponse{}, nil
 }
 
 // DeleteUser ...
-func (m *AccountServiceDefaultServer) DeleteUser(ctx context.Context, in *DeleteUserRequest) (*DeleteUserResponse, error) {
+func (m *FolioServiceDefaultServer) DeleteUser(ctx context.Context, in *DeleteUserRequest) (*DeleteUserResponse, error) {
 	return &DeleteUserResponse{}, nil
 }
 
 // CreateAccount ...
-func (m *AccountServiceDefaultServer) CreateAccount(ctx context.Context, in *CreateAccountRequest) (*CreateAccountResponse, error) {
+func (m *FolioServiceDefaultServer) CreateAccount(ctx context.Context, in *CreateAccountRequest) (*CreateAccountResponse, error) {
 	return &CreateAccountResponse{}, nil
 }
 
 // ReadAccount ...
-func (m *AccountServiceDefaultServer) ReadAccount(ctx context.Context, in *ReadAccountRequest) (*ReadAccountResponse, error) {
+func (m *FolioServiceDefaultServer) ReadAccount(ctx context.Context, in *ReadAccountRequest) (*ReadAccountResponse, error) {
 	return &ReadAccountResponse{}, nil
 }
 
 // UpdateAccount ...
-func (m *AccountServiceDefaultServer) UpdateAccount(ctx context.Context, in *UpdateAccountRequest) (*UpdateAccountResponse, error) {
+func (m *FolioServiceDefaultServer) UpdateAccount(ctx context.Context, in *UpdateAccountRequest) (*UpdateAccountResponse, error) {
 	return &UpdateAccountResponse{}, nil
 }
 
 // ListAccount ...
-func (m *AccountServiceDefaultServer) ListAccount(ctx context.Context, in *ListAccountRequest) (*ListAccountResponse, error) {
+func (m *FolioServiceDefaultServer) ListAccount(ctx context.Context, in *ListAccountRequest) (*ListAccountResponse, error) {
 	return &ListAccountResponse{}, nil
 }
 
 // DeleteAccount ...
-func (m *AccountServiceDefaultServer) DeleteAccount(ctx context.Context, in *DeleteAccountRequest) (*DeleteAccountResponse, error) {
+func (m *FolioServiceDefaultServer) DeleteAccount(ctx context.Context, in *DeleteAccountRequest) (*DeleteAccountResponse, error) {
 	return &DeleteAccountResponse{}, nil
 }
 
 // CreateArchive ...
-func (m *AccountServiceDefaultServer) CreateArchive(ctx context.Context, in *CreateArchiveRequest) (*CreateArchiveResponse, error) {
+func (m *FolioServiceDefaultServer) CreateArchive(ctx context.Context, in *CreateArchiveRequest) (*CreateArchiveResponse, error) {
 	return &CreateArchiveResponse{}, nil
 }
 
 // ReadArchive ...
-func (m *AccountServiceDefaultServer) ReadArchive(ctx context.Context, in *ReadArchiveRequest) (*ReadArchiveResponse, error) {
+func (m *FolioServiceDefaultServer) ReadArchive(ctx context.Context, in *ReadArchiveRequest) (*ReadArchiveResponse, error) {
 	return &ReadArchiveResponse{}, nil
 }
 
 // UpdateArchive ...
-func (m *AccountServiceDefaultServer) UpdateArchive(ctx context.Context, in *UpdateArchiveRequest) (*UpdateArchiveResponse, error) {
+func (m *FolioServiceDefaultServer) UpdateArchive(ctx context.Context, in *UpdateArchiveRequest) (*UpdateArchiveResponse, error) {
 	return &UpdateArchiveResponse{}, nil
 }
 
 // ListArchive ...
-func (m *AccountServiceDefaultServer) ListArchive(ctx context.Context, in *ListArchiveRequest) (*ListArchiveResponse, error) {
+func (m *FolioServiceDefaultServer) ListArchive(ctx context.Context, in *ListArchiveRequest) (*ListArchiveResponse, error) {
 	return &ListArchiveResponse{}, nil
 }
 
 // DeleteArchive ...
-func (m *AccountServiceDefaultServer) DeleteArchive(ctx context.Context, in *DeleteArchiveRequest) (*DeleteArchiveResponse, error) {
+func (m *FolioServiceDefaultServer) DeleteArchive(ctx context.Context, in *DeleteArchiveRequest) (*DeleteArchiveResponse, error) {
 	return &DeleteArchiveResponse{}, nil
 }
 
 // CreateFolio ...
-func (m *AccountServiceDefaultServer) CreateFolio(ctx context.Context, in *CreateFolioRequest) (*CreateFolioResponse, error) {
+func (m *FolioServiceDefaultServer) CreateFolio(ctx context.Context, in *CreateFolioRequest) (*CreateFolioResponse, error) {
 	return &CreateFolioResponse{}, nil
 }
 
 // ReadFolio ...
-func (m *AccountServiceDefaultServer) ReadFolio(ctx context.Context, in *ReadFolioRequest) (*ReadFolioResponse, error) {
+func (m *FolioServiceDefaultServer) ReadFolio(ctx context.Context, in *ReadFolioRequest) (*ReadFolioResponse, error) {
 	return &ReadFolioResponse{}, nil
 }
 
 // UpdateFolio ...
-func (m *AccountServiceDefaultServer) UpdateFolio(ctx context.Context, in *UpdateFolioRequest) (*UpdateFolioResponse, error) {
+func (m *FolioServiceDefaultServer) UpdateFolio(ctx context.Context, in *UpdateFolioRequest) (*UpdateFolioResponse, error) {
 	return &UpdateFolioResponse{}, nil
 }
 
 // ListFolio ...
-func (m *AccountServiceDefaultServer) ListFolio(ctx context.Context, in *ListFolioRequest) (*ListFolioResponse, error) {
+func (m *FolioServiceDefaultServer) ListFolio(ctx context.Context, in *ListFolioRequest) (*ListFolioResponse, error) {
 	return &ListFolioResponse{}, nil
 }
 
 // DeleteFolio ...
-func (m *AccountServiceDefaultServer) DeleteFolio(ctx context.Context, in *DeleteFolioRequest) (*DeleteFolioResponse, error) {
+func (m *FolioServiceDefaultServer) DeleteFolio(ctx context.Context, in *DeleteFolioRequest) (*DeleteFolioResponse, error) {
 	return &DeleteFolioResponse{}, nil
 }
 
-type AccountTxnDefaultServer struct {
+// CreateTag ...
+func (m *FolioServiceDefaultServer) CreateTag(ctx context.Context, in *CreateTagRequest) (*CreateTagResponse, error) {
+	return &CreateTagResponse{}, nil
+}
+
+// ReadTag ...
+func (m *FolioServiceDefaultServer) ReadTag(ctx context.Context, in *ReadTagRequest) (*ReadTagResponse, error) {
+	return &ReadTagResponse{}, nil
+}
+
+// UpdateTag ...
+func (m *FolioServiceDefaultServer) UpdateTag(ctx context.Context, in *UpdateTagRequest) (*UpdateTagResponse, error) {
+	return &UpdateTagResponse{}, nil
+}
+
+// ListTag ...
+func (m *FolioServiceDefaultServer) ListTag(ctx context.Context, in *ListTagRequest) (*ListTagResponse, error) {
+	return &ListTagResponse{}, nil
+}
+
+// DeleteTag ...
+func (m *FolioServiceDefaultServer) DeleteTag(ctx context.Context, in *DeleteTagRequest) (*DeleteTagResponse, error) {
+	return &DeleteTagResponse{}, nil
+}
+
+// CreateNote ...
+func (m *FolioServiceDefaultServer) CreateNote(ctx context.Context, in *CreateNoteRequest) (*CreateNoteResponse, error) {
+	return &CreateNoteResponse{}, nil
+}
+
+// ReadNote ...
+func (m *FolioServiceDefaultServer) ReadNote(ctx context.Context, in *ReadNoteRequest) (*ReadNoteResponse, error) {
+	return &ReadNoteResponse{}, nil
+}
+
+// UpdateNote ...
+func (m *FolioServiceDefaultServer) UpdateNote(ctx context.Context, in *UpdateNoteRequest) (*UpdateNoteResponse, error) {
+	return &UpdateNoteResponse{}, nil
+}
+
+// ListNote ...
+func (m *FolioServiceDefaultServer) ListNote(ctx context.Context, in *ListNoteRequest) (*ListNoteResponse, error) {
+	return &ListNoteResponse{}, nil
+}
+
+// DeleteNote ...
+func (m *FolioServiceDefaultServer) DeleteNote(ctx context.Context, in *DeleteNoteRequest) (*DeleteNoteResponse, error) {
+	return &DeleteNoteResponse{}, nil
+}
+
+type FolioTxnDefaultServer struct {
 }
 
 // CreateAccount ...
-func (m *AccountTxnDefaultServer) CreateAccount(ctx context.Context, in *CreateAccountRequest) (*CreateAccountResponse, error) {
+func (m *FolioTxnDefaultServer) CreateAccount(ctx context.Context, in *CreateAccountRequest) (*CreateAccountResponse, error) {
 	return &CreateAccountResponse{}, nil
 }
 
 // ReadAccount ...
-func (m *AccountTxnDefaultServer) ReadAccount(ctx context.Context, in *ReadAccountRequest) (*ReadAccountResponse, error) {
+func (m *FolioTxnDefaultServer) ReadAccount(ctx context.Context, in *ReadAccountRequest) (*ReadAccountResponse, error) {
 	return &ReadAccountResponse{}, nil
 }
 
 // UpdateAccount ...
-func (m *AccountTxnDefaultServer) UpdateAccount(ctx context.Context, in *UpdateAccountRequest) (*UpdateAccountResponse, error) {
+func (m *FolioTxnDefaultServer) UpdateAccount(ctx context.Context, in *UpdateAccountRequest) (*UpdateAccountResponse, error) {
 	return &UpdateAccountResponse{}, nil
 }
 
 // ListAccount ...
-func (m *AccountTxnDefaultServer) ListAccount(ctx context.Context, in *ListAccountRequest) (*ListAccountResponse, error) {
+func (m *FolioTxnDefaultServer) ListAccount(ctx context.Context, in *ListAccountRequest) (*ListAccountResponse, error) {
 	return &ListAccountResponse{}, nil
 }
 
 // DeleteAccount ...
-func (m *AccountTxnDefaultServer) DeleteAccount(ctx context.Context, in *DeleteAccountRequest) (*DeleteAccountResponse, error) {
+func (m *FolioTxnDefaultServer) DeleteAccount(ctx context.Context, in *DeleteAccountRequest) (*DeleteAccountResponse, error) {
 	return &DeleteAccountResponse{}, nil
 }
 
 // CreateUser ...
-func (m *AccountTxnDefaultServer) CreateUser(ctx context.Context, in *CreateUserRequest) (*CreateUserResponse, error) {
+func (m *FolioTxnDefaultServer) CreateUser(ctx context.Context, in *CreateUserRequest) (*CreateUserResponse, error) {
 	return &CreateUserResponse{}, nil
 }
 
 // ReadUser ...
-func (m *AccountTxnDefaultServer) ReadUser(ctx context.Context, in *ReadUserRequest) (*ReadUserResponse, error) {
+func (m *FolioTxnDefaultServer) ReadUser(ctx context.Context, in *ReadUserRequest) (*ReadUserResponse, error) {
 	return &ReadUserResponse{}, nil
 }
 
 // UpdateUser ...
-func (m *AccountTxnDefaultServer) UpdateUser(ctx context.Context, in *UpdateUserRequest) (*UpdateUserResponse, error) {
+func (m *FolioTxnDefaultServer) UpdateUser(ctx context.Context, in *UpdateUserRequest) (*UpdateUserResponse, error) {
 	return &UpdateUserResponse{}, nil
 }
 
 // ListUser ...
-func (m *AccountTxnDefaultServer) ListUser(ctx context.Context, in *ListUserRequest) (*ListUserResponse, error) {
+func (m *FolioTxnDefaultServer) ListUser(ctx context.Context, in *ListUserRequest) (*ListUserResponse, error) {
 	return &ListUserResponse{}, nil
 }
 
 // DeleteUser ...
-func (m *AccountTxnDefaultServer) DeleteUser(ctx context.Context, in *DeleteUserRequest) (*DeleteUserResponse, error) {
+func (m *FolioTxnDefaultServer) DeleteUser(ctx context.Context, in *DeleteUserRequest) (*DeleteUserResponse, error) {
 	return &DeleteUserResponse{}, nil
 }
 
 // CreateArchive ...
-func (m *AccountTxnDefaultServer) CreateArchive(ctx context.Context, in *CreateArchiveRequest) (*CreateArchiveResponse, error) {
+func (m *FolioTxnDefaultServer) CreateArchive(ctx context.Context, in *CreateArchiveRequest) (*CreateArchiveResponse, error) {
 	return &CreateArchiveResponse{}, nil
 }
 
 // ReadArchive ...
-func (m *AccountTxnDefaultServer) ReadArchive(ctx context.Context, in *ReadArchiveRequest) (*ReadArchiveResponse, error) {
+func (m *FolioTxnDefaultServer) ReadArchive(ctx context.Context, in *ReadArchiveRequest) (*ReadArchiveResponse, error) {
 	return &ReadArchiveResponse{}, nil
 }
 
 // UpdateArchive ...
-func (m *AccountTxnDefaultServer) UpdateArchive(ctx context.Context, in *UpdateArchiveRequest) (*UpdateArchiveResponse, error) {
+func (m *FolioTxnDefaultServer) UpdateArchive(ctx context.Context, in *UpdateArchiveRequest) (*UpdateArchiveResponse, error) {
 	return &UpdateArchiveResponse{}, nil
 }
 
 // ListArchive ...
-func (m *AccountTxnDefaultServer) ListArchive(ctx context.Context, in *ListArchiveRequest) (*ListArchiveResponse, error) {
+func (m *FolioTxnDefaultServer) ListArchive(ctx context.Context, in *ListArchiveRequest) (*ListArchiveResponse, error) {
 	return &ListArchiveResponse{}, nil
 }
 
 // DeleteArchive ...
-func (m *AccountTxnDefaultServer) DeleteArchive(ctx context.Context, in *DeleteArchiveRequest) (*DeleteArchiveResponse, error) {
+func (m *FolioTxnDefaultServer) DeleteArchive(ctx context.Context, in *DeleteArchiveRequest) (*DeleteArchiveResponse, error) {
 	return &DeleteArchiveResponse{}, nil
 }
 
 // CreateFolio ...
-func (m *AccountTxnDefaultServer) CreateFolio(ctx context.Context, in *CreateFolioRequest) (*CreateFolioResponse, error) {
+func (m *FolioTxnDefaultServer) CreateFolio(ctx context.Context, in *CreateFolioRequest) (*CreateFolioResponse, error) {
 	return &CreateFolioResponse{}, nil
 }
 
 // ReadFolio ...
-func (m *AccountTxnDefaultServer) ReadFolio(ctx context.Context, in *ReadFolioRequest) (*ReadFolioResponse, error) {
+func (m *FolioTxnDefaultServer) ReadFolio(ctx context.Context, in *ReadFolioRequest) (*ReadFolioResponse, error) {
 	return &ReadFolioResponse{}, nil
 }
 
 // UpdateFolio ...
-func (m *AccountTxnDefaultServer) UpdateFolio(ctx context.Context, in *UpdateFolioRequest) (*UpdateFolioResponse, error) {
+func (m *FolioTxnDefaultServer) UpdateFolio(ctx context.Context, in *UpdateFolioRequest) (*UpdateFolioResponse, error) {
 	return &UpdateFolioResponse{}, nil
 }
 
 // ListFolio ...
-func (m *AccountTxnDefaultServer) ListFolio(ctx context.Context, in *ListFolioRequest) (*ListFolioResponse, error) {
+func (m *FolioTxnDefaultServer) ListFolio(ctx context.Context, in *ListFolioRequest) (*ListFolioResponse, error) {
 	return &ListFolioResponse{}, nil
 }
 
 // DeleteFolio ...
-func (m *AccountTxnDefaultServer) DeleteFolio(ctx context.Context, in *DeleteFolioRequest) (*DeleteFolioResponse, error) {
+func (m *FolioTxnDefaultServer) DeleteFolio(ctx context.Context, in *DeleteFolioRequest) (*DeleteFolioResponse, error) {
 	return &DeleteFolioResponse{}, nil
+}
+
+// CreateTag ...
+func (m *FolioTxnDefaultServer) CreateTag(ctx context.Context, in *CreateTagRequest) (*CreateTagResponse, error) {
+	return &CreateTagResponse{}, nil
+}
+
+// ReadTag ...
+func (m *FolioTxnDefaultServer) ReadTag(ctx context.Context, in *ReadTagRequest) (*ReadTagResponse, error) {
+	return &ReadTagResponse{}, nil
+}
+
+// UpdateTag ...
+func (m *FolioTxnDefaultServer) UpdateTag(ctx context.Context, in *UpdateTagRequest) (*UpdateTagResponse, error) {
+	return &UpdateTagResponse{}, nil
+}
+
+// ListTag ...
+func (m *FolioTxnDefaultServer) ListTag(ctx context.Context, in *ListTagRequest) (*ListTagResponse, error) {
+	return &ListTagResponse{}, nil
+}
+
+// DeleteTag ...
+func (m *FolioTxnDefaultServer) DeleteTag(ctx context.Context, in *DeleteTagRequest) (*DeleteTagResponse, error) {
+	return &DeleteTagResponse{}, nil
+}
+
+// CreateNote ...
+func (m *FolioTxnDefaultServer) CreateNote(ctx context.Context, in *CreateNoteRequest) (*CreateNoteResponse, error) {
+	return &CreateNoteResponse{}, nil
+}
+
+// ReadNote ...
+func (m *FolioTxnDefaultServer) ReadNote(ctx context.Context, in *ReadNoteRequest) (*ReadNoteResponse, error) {
+	return &ReadNoteResponse{}, nil
+}
+
+// UpdateNote ...
+func (m *FolioTxnDefaultServer) UpdateNote(ctx context.Context, in *UpdateNoteRequest) (*UpdateNoteResponse, error) {
+	return &UpdateNoteResponse{}, nil
+}
+
+// ListNote ...
+func (m *FolioTxnDefaultServer) ListNote(ctx context.Context, in *ListNoteRequest) (*ListNoteResponse, error) {
+	return &ListNoteResponse{}, nil
+}
+
+// DeleteNote ...
+func (m *FolioTxnDefaultServer) DeleteNote(ctx context.Context, in *DeleteNoteRequest) (*DeleteNoteResponse, error) {
+	return &DeleteNoteResponse{}, nil
+}
+
+// CreateAsset ...
+func (m *FolioTxnDefaultServer) CreateAsset(ctx context.Context, in *CreateAssetRequest) (*CreateAssetResponse, error) {
+	return &CreateAssetResponse{}, nil
+}
+
+// ReadAsset ...
+func (m *FolioTxnDefaultServer) ReadAsset(ctx context.Context, in *ReadAssetRequest) (*ReadAssetResponse, error) {
+	return &ReadAssetResponse{}, nil
+}
+
+// UpdateAsset ...
+func (m *FolioTxnDefaultServer) UpdateAsset(ctx context.Context, in *UpdateAssetRequest) (*UpdateAssetResponse, error) {
+	return &UpdateAssetResponse{}, nil
+}
+
+// ListAsset ...
+func (m *FolioTxnDefaultServer) ListAsset(ctx context.Context, in *ListAssetRequest) (*ListAssetResponse, error) {
+	return &ListAssetResponse{}, nil
+}
+
+// DeleteAsset ...
+func (m *FolioTxnDefaultServer) DeleteAsset(ctx context.Context, in *DeleteAssetRequest) (*DeleteAssetResponse, error) {
+	return &DeleteAssetResponse{}, nil
+}
+
+// CreateShare ...
+func (m *FolioTxnDefaultServer) CreateShare(ctx context.Context, in *CreateShareRequest) (*CreateShareResponse, error) {
+	return &CreateShareResponse{}, nil
+}
+
+// ReadShare ...
+func (m *FolioTxnDefaultServer) ReadShare(ctx context.Context, in *ReadShareRequest) (*ReadShareResponse, error) {
+	return &ReadShareResponse{}, nil
+}
+
+// UpdateShare ...
+func (m *FolioTxnDefaultServer) UpdateShare(ctx context.Context, in *UpdateShareRequest) (*UpdateShareResponse, error) {
+	return &UpdateShareResponse{}, nil
+}
+
+// ListShare ...
+func (m *FolioTxnDefaultServer) ListShare(ctx context.Context, in *ListShareRequest) (*ListShareResponse, error) {
+	return &ListShareResponse{}, nil
+}
+
+// DeleteShare ...
+func (m *FolioTxnDefaultServer) DeleteShare(ctx context.Context, in *DeleteShareRequest) (*DeleteShareResponse, error) {
+	return &DeleteShareResponse{}, nil
 }

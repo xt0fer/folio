@@ -4,12 +4,11 @@ import (
 	"context"
 	"log"
 	
-	pb "../../pb"
+	pb "./pb"
 )
 
-
 type FolioSvc struct {
-	pb.AccountServiceDefaultServer
+	pb.FolioServiceDefaultServer
 }
 
 // CreateAccount ...

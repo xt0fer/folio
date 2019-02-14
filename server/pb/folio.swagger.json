@@ -461,11 +461,47 @@
         }
       }
     },
+    "folioCreateAssetResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioAsset",
+          "title": "Convention also requires that the return type be the same and named 'result'"
+        }
+      }
+    },
     "folioCreateFolioResponse": {
       "type": "object",
       "properties": {
         "result": {
           "$ref": "#/definitions/folioFolio",
+          "title": "Convention also requires that the return type be the same and named 'result'"
+        }
+      }
+    },
+    "folioCreateNoteResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioNote",
+          "title": "Convention also requires that the return type be the same and named 'result'"
+        }
+      }
+    },
+    "folioCreateShareResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioShare",
+          "title": "Convention also requires that the return type be the same and named 'result'"
+        }
+      }
+    },
+    "folioCreateTagResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioTag",
           "title": "Convention also requires that the return type be the same and named 'result'"
         }
       }
@@ -487,7 +523,23 @@
       "type": "object",
       "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
     },
+    "folioDeleteAssetResponse": {
+      "type": "object",
+      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
+    },
     "folioDeleteFolioResponse": {
+      "type": "object",
+      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
+    },
+    "folioDeleteNoteResponse": {
+      "type": "object",
+      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
+    },
+    "folioDeleteShareResponse": {
+      "type": "object",
+      "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
+    },
+    "folioDeleteTagResponse": {
       "type": "object",
       "title": "By convention, on DELETE no response data is given, so either a\ngoogle.protobuf.empty, or an empty struct is sufficient"
     },
@@ -573,6 +625,21 @@
         }
       }
     },
+    "folioListAssetResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioAsset"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
     "folioListFolioResponse": {
       "type": "object",
       "properties": {
@@ -582,6 +649,51 @@
             "$ref": "#/definitions/folioFolio"
           },
           "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListNoteResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioNote"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListShareResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioShare"
+          },
+          "title": "Share repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListTagResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioTag"
+          },
+          "title": "Tag repeated field and plural name 'results'"
         },
         "page_info": {
           "$ref": "#/definitions/apiPageInfo"
@@ -640,11 +752,47 @@
         }
       }
     },
+    "folioReadAssetResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioAsset",
+          "title": "Again the type with 'result' name"
+        }
+      }
+    },
     "folioReadFolioResponse": {
       "type": "object",
       "properties": {
         "result": {
           "$ref": "#/definitions/folioFolio",
+          "title": "Again the type with 'result' name"
+        }
+      }
+    },
+    "folioReadNoteResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioNote",
+          "title": "Again the type with 'result' name"
+        }
+      }
+    },
+    "folioReadShareResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioShare",
+          "title": "Again the type with 'result' name"
+        }
+      }
+    },
+    "folioReadTagResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioTag",
           "title": "Again the type with 'result' name"
         }
       }
@@ -720,11 +868,43 @@
         }
       }
     },
+    "folioUpdateAssetResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioAsset"
+        }
+      }
+    },
     "folioUpdateFolioResponse": {
       "type": "object",
       "properties": {
         "result": {
           "$ref": "#/definitions/folioFolio"
+        }
+      }
+    },
+    "folioUpdateNoteResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioNote"
+        }
+      }
+    },
+    "folioUpdateShareResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioShare"
+        }
+      }
+    },
+    "folioUpdateTagResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "$ref": "#/definitions/folioTag"
         }
       }
     },

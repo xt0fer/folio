@@ -103,7 +103,8 @@ message ListAccountRequest {
     infoblox.api.Pagination paging = 4;
 }
 
-service AccountService {
+// FolioService
+service FolioService {
   // This option tells protoc-gen-gorm to generate the calls and stubs
   option (gorm.server).autogen = true;
   // The convention requires the rpc names have Create/Read/Update/List/Delete
@@ -123,6 +124,7 @@ service AccountService {
   
   rpc CreateAccount ( CreateAccountRequest ) returns ( CreateAccountResponse ) {}
   rpc ReadAccount ( ReadAccountRequest ) returns ( ReadAccountResponse ) {}
+  //rpc ReadAccountByEmail ( ReadAccountRequest ) returns ( ReadAccountResponse ) {}
   rpc UpdateAccount ( UpdateAccountRequest ) returns ( UpdateAccountResponse ) {}
   rpc ListAccount ( ListAccountRequest ) returns ( ListAccountResponse ) {}
   rpc DeleteAccount ( DeleteAccountRequest ) returns  ( DeleteAccountResponse ) {
@@ -156,9 +158,31 @@ service AccountService {
       // by the return type
       option (gorm.method).object_type = "Folio";
   }
+
+  rpc CreateTag ( CreateTagRequest ) returns ( CreateTagResponse ) {}
+  rpc ReadTag ( ReadTagRequest ) returns ( ReadTagResponse ) {}
+  rpc UpdateTag ( UpdateTagRequest ) returns ( UpdateTagResponse ) {}
+  rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
+  //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+  rpc DeleteTag ( DeleteTagRequest ) returns  ( DeleteTagResponse ) {
+      // This option is required because the type/table can't be inferred
+      // by the return type
+      option (gorm.method).object_type = "Tag";
+  }
+
+  rpc CreateNote ( CreateNoteRequest ) returns ( CreateNoteResponse ) {}
+  rpc ReadNote ( ReadNoteRequest ) returns ( ReadNoteResponse ) {}
+  rpc UpdateNote ( UpdateNoteRequest ) returns ( UpdateNoteResponse ) {}
+  rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
+  //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+  rpc DeleteNote ( DeleteNoteRequest ) returns  ( DeleteNoteResponse ) {
+      // This option is required because the type/table can't be inferred
+      // by the return type
+      option (gorm.method).object_type = "Note";
+  }
 }
 
-service AccountTxn {
+service FolioTxn {
   // This option tells protoc-gen-gorm to generate the calls and stubs, and
   // the transaction middleware will be used
   option (gorm.server) = {autogen: true, txn_middleware: true};
@@ -208,6 +232,51 @@ service AccountTxn {
       // by the return type
       option (gorm.method).object_type = "Folio";
   }
+
+  rpc CreateTag ( CreateTagRequest ) returns ( CreateTagResponse ) {}
+  rpc ReadTag ( ReadTagRequest ) returns ( ReadTagResponse ) {}
+  rpc UpdateTag ( UpdateTagRequest ) returns ( UpdateTagResponse ) {}
+  rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
+  //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+  rpc DeleteTag ( DeleteTagRequest ) returns  ( DeleteTagResponse ) {
+      // This option is required because the type/table can't be inferred
+      // by the return type
+      option (gorm.method).object_type = "Tag";
+  }
+
+  rpc CreateNote ( CreateNoteRequest ) returns ( CreateNoteResponse ) {}
+  rpc ReadNote ( ReadNoteRequest ) returns ( ReadNoteResponse ) {}
+  rpc UpdateNote ( UpdateNoteRequest ) returns ( UpdateNoteResponse ) {}
+  rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
+  //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+  rpc DeleteNote ( DeleteNoteRequest ) returns  ( DeleteNoteResponse ) {
+      // This option is required because the type/table can't be inferred
+      // by the return type
+      option (gorm.method).object_type = "Note";
+  }
+
+  rpc CreateAsset ( CreateAssetRequest ) returns ( CreateAssetResponse ) {}
+  rpc ReadAsset ( ReadAssetRequest ) returns ( ReadAssetResponse ) {}
+  rpc UpdateAsset ( UpdateAssetRequest ) returns ( UpdateAssetResponse ) {}
+  rpc ListAsset ( ListAssetRequest ) returns ( ListAssetResponse ) {}
+  //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+  rpc DeleteAsset ( DeleteAssetRequest ) returns  ( DeleteAssetResponse ) {
+      // This option is required because the type/table can't be inferred
+      // by the return type
+      option (gorm.method).object_type = "Asset";
+  }
+
+  rpc CreateShare ( CreateShareRequest ) returns ( CreateShareResponse ) {}
+  rpc ReadShare ( ReadShareRequest ) returns ( ReadShareResponse ) {}
+  rpc UpdateShare ( UpdateShareRequest ) returns ( UpdateShareResponse ) {}
+  rpc ListShare ( ListShareRequest ) returns ( ListShareResponse ) {}
+  //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+  rpc DeleteShare ( DeleteShareRequest ) returns  ( DeleteShareResponse ) {
+      // This option is required because the type/table can't be inferred
+      // by the return type
+      option (gorm.method).object_type = "Share";
+  }
+
 }
 
 // User human message who owns the archive

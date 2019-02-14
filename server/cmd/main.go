@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
+	"../../server"
 	gorm "github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/kristofer/frpc/server"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -17,7 +17,7 @@ func main() {
 	}
 	//db.LogMode(true)
 
-	h := server.NewAccountSvc(db)
+	h := server.NewFolioServer(db)
 	// u := &pb.User{
 	// 	Email:     "test@test.com",
 	// 	Lastname:  "McTestface",

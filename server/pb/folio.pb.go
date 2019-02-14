@@ -5,7 +5,7 @@ package folio
 
 import (
 	context "context"
-	fmt "fmt" 
+	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
 	query "github.com/infobloxopen/atlas-app-toolkit/query"
 	_ "github.com/infobloxopen/protoc-gen-gorm/options"
@@ -1863,6 +1863,485 @@ func (m *Share) GetFolios() []*Folio {
 	return nil
 }
 
+type CreateShareRequest struct {
+	// Convention dictates that this field be of the given type, and be
+	// named 'payload' in order to autogenerate the handler
+	Payload              *Share   `protobuf:"bytes,1,opt,name=payload,proto3" json:"payload,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateShareRequest) Reset()         { *m = CreateShareRequest{} }
+func (m *CreateShareRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateShareRequest) ProtoMessage()    {}
+func (*CreateShareRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{39}
+}
+
+func (m *CreateShareRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateShareRequest.Unmarshal(m, b)
+}
+func (m *CreateShareRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateShareRequest.Marshal(b, m, deterministic)
+}
+func (m *CreateShareRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateShareRequest.Merge(m, src)
+}
+func (m *CreateShareRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateShareRequest.Size(m)
+}
+func (m *CreateShareRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateShareRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateShareRequest proto.InternalMessageInfo
+
+func (m *CreateShareRequest) GetPayload() *Share {
+	if m != nil {
+		return m.Payload
+	}
+	return nil
+}
+
+type CreateShareResponse struct {
+	// Convention also requires that the return type be the same and named 'result'
+	Result               *Share   `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateShareResponse) Reset()         { *m = CreateShareResponse{} }
+func (m *CreateShareResponse) String() string { return proto.CompactTextString(m) }
+func (*CreateShareResponse) ProtoMessage()    {}
+func (*CreateShareResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{40}
+}
+
+func (m *CreateShareResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateShareResponse.Unmarshal(m, b)
+}
+func (m *CreateShareResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateShareResponse.Marshal(b, m, deterministic)
+}
+func (m *CreateShareResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateShareResponse.Merge(m, src)
+}
+func (m *CreateShareResponse) XXX_Size() int {
+	return xxx_messageInfo_CreateShareResponse.Size(m)
+}
+func (m *CreateShareResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateShareResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateShareResponse proto.InternalMessageInfo
+
+func (m *CreateShareResponse) GetResult() *Share {
+	if m != nil {
+		return m.Result
+	}
+	return nil
+}
+
+type ReadShareRequest struct {
+	// For a read request, the id field is the only to be specified
+	Id                   uint32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Fields               *query.FieldSelection `protobuf:"bytes,2,opt,name=fields,proto3" json:"fields,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
+}
+
+func (m *ReadShareRequest) Reset()         { *m = ReadShareRequest{} }
+func (m *ReadShareRequest) String() string { return proto.CompactTextString(m) }
+func (*ReadShareRequest) ProtoMessage()    {}
+func (*ReadShareRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{41}
+}
+
+func (m *ReadShareRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ReadShareRequest.Unmarshal(m, b)
+}
+func (m *ReadShareRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ReadShareRequest.Marshal(b, m, deterministic)
+}
+func (m *ReadShareRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ReadShareRequest.Merge(m, src)
+}
+func (m *ReadShareRequest) XXX_Size() int {
+	return xxx_messageInfo_ReadShareRequest.Size(m)
+}
+func (m *ReadShareRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ReadShareRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ReadShareRequest proto.InternalMessageInfo
+
+func (m *ReadShareRequest) GetId() uint32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *ReadShareRequest) GetFields() *query.FieldSelection {
+	if m != nil {
+		return m.Fields
+	}
+	return nil
+}
+
+type ReadShareResponse struct {
+	// Again the type with 'result' name
+	Result               *Share   `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ReadShareResponse) Reset()         { *m = ReadShareResponse{} }
+func (m *ReadShareResponse) String() string { return proto.CompactTextString(m) }
+func (*ReadShareResponse) ProtoMessage()    {}
+func (*ReadShareResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{42}
+}
+
+func (m *ReadShareResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ReadShareResponse.Unmarshal(m, b)
+}
+func (m *ReadShareResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ReadShareResponse.Marshal(b, m, deterministic)
+}
+func (m *ReadShareResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ReadShareResponse.Merge(m, src)
+}
+func (m *ReadShareResponse) XXX_Size() int {
+	return xxx_messageInfo_ReadShareResponse.Size(m)
+}
+func (m *ReadShareResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ReadShareResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ReadShareResponse proto.InternalMessageInfo
+
+func (m *ReadShareResponse) GetResult() *Share {
+	if m != nil {
+		return m.Result
+	}
+	return nil
+}
+
+type UpdateShareRequest struct {
+	Payload              *Share                `protobuf:"bytes,1,opt,name=payload,proto3" json:"payload,omitempty"`
+	GerogeriGegege       *field_mask.FieldMask `protobuf:"bytes,2,opt,name=gerogeri_gegege,json=gerogeriGegege,proto3" json:"gerogeri_gegege,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
+}
+
+func (m *UpdateShareRequest) Reset()         { *m = UpdateShareRequest{} }
+func (m *UpdateShareRequest) String() string { return proto.CompactTextString(m) }
+func (*UpdateShareRequest) ProtoMessage()    {}
+func (*UpdateShareRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{43}
+}
+
+func (m *UpdateShareRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateShareRequest.Unmarshal(m, b)
+}
+func (m *UpdateShareRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateShareRequest.Marshal(b, m, deterministic)
+}
+func (m *UpdateShareRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateShareRequest.Merge(m, src)
+}
+func (m *UpdateShareRequest) XXX_Size() int {
+	return xxx_messageInfo_UpdateShareRequest.Size(m)
+}
+func (m *UpdateShareRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateShareRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateShareRequest proto.InternalMessageInfo
+
+func (m *UpdateShareRequest) GetPayload() *Share {
+	if m != nil {
+		return m.Payload
+	}
+	return nil
+}
+
+func (m *UpdateShareRequest) GetGerogeriGegege() *field_mask.FieldMask {
+	if m != nil {
+		return m.GerogeriGegege
+	}
+	return nil
+}
+
+type UpdateShareResponse struct {
+	Result               *Share   `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateShareResponse) Reset()         { *m = UpdateShareResponse{} }
+func (m *UpdateShareResponse) String() string { return proto.CompactTextString(m) }
+func (*UpdateShareResponse) ProtoMessage()    {}
+func (*UpdateShareResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{44}
+}
+
+func (m *UpdateShareResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateShareResponse.Unmarshal(m, b)
+}
+func (m *UpdateShareResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateShareResponse.Marshal(b, m, deterministic)
+}
+func (m *UpdateShareResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateShareResponse.Merge(m, src)
+}
+func (m *UpdateShareResponse) XXX_Size() int {
+	return xxx_messageInfo_UpdateShareResponse.Size(m)
+}
+func (m *UpdateShareResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateShareResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateShareResponse proto.InternalMessageInfo
+
+func (m *UpdateShareResponse) GetResult() *Share {
+	if m != nil {
+		return m.Result
+	}
+	return nil
+}
+
+type DeleteShareRequest struct {
+	// Only the id is needed for a delete request
+	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteShareRequest) Reset()         { *m = DeleteShareRequest{} }
+func (m *DeleteShareRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteShareRequest) ProtoMessage()    {}
+func (*DeleteShareRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{45}
+}
+
+func (m *DeleteShareRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteShareRequest.Unmarshal(m, b)
+}
+func (m *DeleteShareRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteShareRequest.Marshal(b, m, deterministic)
+}
+func (m *DeleteShareRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteShareRequest.Merge(m, src)
+}
+func (m *DeleteShareRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteShareRequest.Size(m)
+}
+func (m *DeleteShareRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteShareRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteShareRequest proto.InternalMessageInfo
+
+func (m *DeleteShareRequest) GetId() uint32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type DeleteSharesRequest struct {
+	// Only the id is needed for a delete request
+	Ids                  []uint32 `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteSharesRequest) Reset()         { *m = DeleteSharesRequest{} }
+func (m *DeleteSharesRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteSharesRequest) ProtoMessage()    {}
+func (*DeleteSharesRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{46}
+}
+
+func (m *DeleteSharesRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteSharesRequest.Unmarshal(m, b)
+}
+func (m *DeleteSharesRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteSharesRequest.Marshal(b, m, deterministic)
+}
+func (m *DeleteSharesRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteSharesRequest.Merge(m, src)
+}
+func (m *DeleteSharesRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteSharesRequest.Size(m)
+}
+func (m *DeleteSharesRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteSharesRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteSharesRequest proto.InternalMessageInfo
+
+func (m *DeleteSharesRequest) GetIds() []uint32 {
+	if m != nil {
+		return m.Ids
+	}
+	return nil
+}
+
+// By convention, on DELETE no response data is given, so either a
+// google.protobuf.empty, or an empty struct is sufficient
+type DeleteShareResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteShareResponse) Reset()         { *m = DeleteShareResponse{} }
+func (m *DeleteShareResponse) String() string { return proto.CompactTextString(m) }
+func (*DeleteShareResponse) ProtoMessage()    {}
+func (*DeleteShareResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{47}
+}
+
+func (m *DeleteShareResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteShareResponse.Unmarshal(m, b)
+}
+func (m *DeleteShareResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteShareResponse.Marshal(b, m, deterministic)
+}
+func (m *DeleteShareResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteShareResponse.Merge(m, src)
+}
+func (m *DeleteShareResponse) XXX_Size() int {
+	return xxx_messageInfo_DeleteShareResponse.Size(m)
+}
+func (m *DeleteShareResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteShareResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteShareResponse proto.InternalMessageInfo
+
+type ListShareResponse struct {
+	// Share repeated field and plural name 'results'
+	Results              []*Share        `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
+	PageInfo             *query.PageInfo `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
+}
+
+func (m *ListShareResponse) Reset()         { *m = ListShareResponse{} }
+func (m *ListShareResponse) String() string { return proto.CompactTextString(m) }
+func (*ListShareResponse) ProtoMessage()    {}
+func (*ListShareResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{48}
+}
+
+func (m *ListShareResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListShareResponse.Unmarshal(m, b)
+}
+func (m *ListShareResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListShareResponse.Marshal(b, m, deterministic)
+}
+func (m *ListShareResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListShareResponse.Merge(m, src)
+}
+func (m *ListShareResponse) XXX_Size() int {
+	return xxx_messageInfo_ListShareResponse.Size(m)
+}
+func (m *ListShareResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListShareResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListShareResponse proto.InternalMessageInfo
+
+func (m *ListShareResponse) GetResults() []*Share {
+	if m != nil {
+		return m.Results
+	}
+	return nil
+}
+
+func (m *ListShareResponse) GetPageInfo() *query.PageInfo {
+	if m != nil {
+		return m.PageInfo
+	}
+	return nil
+}
+
+type ListShareRequest struct {
+	Filter               *query.Filtering      `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
+	OrderBy              *query.Sorting        `protobuf:"bytes,2,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	Fields               *query.FieldSelection `protobuf:"bytes,3,opt,name=fields,proto3" json:"fields,omitempty"`
+	Paging               *query.Pagination     `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
+}
+
+func (m *ListShareRequest) Reset()         { *m = ListShareRequest{} }
+func (m *ListShareRequest) String() string { return proto.CompactTextString(m) }
+func (*ListShareRequest) ProtoMessage()    {}
+func (*ListShareRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{49}
+}
+
+func (m *ListShareRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListShareRequest.Unmarshal(m, b)
+}
+func (m *ListShareRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListShareRequest.Marshal(b, m, deterministic)
+}
+func (m *ListShareRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListShareRequest.Merge(m, src)
+}
+func (m *ListShareRequest) XXX_Size() int {
+	return xxx_messageInfo_ListShareRequest.Size(m)
+}
+func (m *ListShareRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListShareRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListShareRequest proto.InternalMessageInfo
+
+func (m *ListShareRequest) GetFilter() *query.Filtering {
+	if m != nil {
+		return m.Filter
+	}
+	return nil
+}
+
+func (m *ListShareRequest) GetOrderBy() *query.Sorting {
+	if m != nil {
+		return m.OrderBy
+	}
+	return nil
+}
+
+func (m *ListShareRequest) GetFields() *query.FieldSelection {
+	if m != nil {
+		return m.Fields
+	}
+	return nil
+}
+
+func (m *ListShareRequest) GetPaging() *query.Pagination {
+	if m != nil {
+		return m.Paging
+	}
+	return nil
+}
+
 // Tag is a attribute on something
 type Tag struct {
 	Id    uint32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1880,7 +2359,7 @@ func (m *Tag) Reset()         { *m = Tag{} }
 func (m *Tag) String() string { return proto.CompactTextString(m) }
 func (*Tag) ProtoMessage()    {}
 func (*Tag) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{39}
+	return fileDescriptor_31c400dfa9a52dc8, []int{50}
 }
 
 func (m *Tag) XXX_Unmarshal(b []byte) error {
@@ -1936,6 +2415,485 @@ func (m *Tag) GetFolios() []*Folio {
 	return nil
 }
 
+type CreateTagRequest struct {
+	// Convention dictates that this field be of the given type, and be
+	// named 'payload' in order to autogenerate the handler
+	Payload              *Tag     `protobuf:"bytes,1,opt,name=payload,proto3" json:"payload,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateTagRequest) Reset()         { *m = CreateTagRequest{} }
+func (m *CreateTagRequest) String() string { return proto.CompactTextString(m) }
+func (*CreateTagRequest) ProtoMessage()    {}
+func (*CreateTagRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{51}
+}
+
+func (m *CreateTagRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateTagRequest.Unmarshal(m, b)
+}
+func (m *CreateTagRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateTagRequest.Marshal(b, m, deterministic)
+}
+func (m *CreateTagRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateTagRequest.Merge(m, src)
+}
+func (m *CreateTagRequest) XXX_Size() int {
+	return xxx_messageInfo_CreateTagRequest.Size(m)
+}
+func (m *CreateTagRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateTagRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateTagRequest proto.InternalMessageInfo
+
+func (m *CreateTagRequest) GetPayload() *Tag {
+	if m != nil {
+		return m.Payload
+	}
+	return nil
+}
+
+type CreateTagResponse struct {
+	// Convention also requires that the return type be the same and named 'result'
+	Result               *Tag     `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateTagResponse) Reset()         { *m = CreateTagResponse{} }
+func (m *CreateTagResponse) String() string { return proto.CompactTextString(m) }
+func (*CreateTagResponse) ProtoMessage()    {}
+func (*CreateTagResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{52}
+}
+
+func (m *CreateTagResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateTagResponse.Unmarshal(m, b)
+}
+func (m *CreateTagResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateTagResponse.Marshal(b, m, deterministic)
+}
+func (m *CreateTagResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateTagResponse.Merge(m, src)
+}
+func (m *CreateTagResponse) XXX_Size() int {
+	return xxx_messageInfo_CreateTagResponse.Size(m)
+}
+func (m *CreateTagResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateTagResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateTagResponse proto.InternalMessageInfo
+
+func (m *CreateTagResponse) GetResult() *Tag {
+	if m != nil {
+		return m.Result
+	}
+	return nil
+}
+
+type ReadTagRequest struct {
+	// For a read request, the id field is the only to be specified
+	Id                   uint32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Fields               *query.FieldSelection `protobuf:"bytes,2,opt,name=fields,proto3" json:"fields,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
+}
+
+func (m *ReadTagRequest) Reset()         { *m = ReadTagRequest{} }
+func (m *ReadTagRequest) String() string { return proto.CompactTextString(m) }
+func (*ReadTagRequest) ProtoMessage()    {}
+func (*ReadTagRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{53}
+}
+
+func (m *ReadTagRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ReadTagRequest.Unmarshal(m, b)
+}
+func (m *ReadTagRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ReadTagRequest.Marshal(b, m, deterministic)
+}
+func (m *ReadTagRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ReadTagRequest.Merge(m, src)
+}
+func (m *ReadTagRequest) XXX_Size() int {
+	return xxx_messageInfo_ReadTagRequest.Size(m)
+}
+func (m *ReadTagRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ReadTagRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ReadTagRequest proto.InternalMessageInfo
+
+func (m *ReadTagRequest) GetId() uint32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *ReadTagRequest) GetFields() *query.FieldSelection {
+	if m != nil {
+		return m.Fields
+	}
+	return nil
+}
+
+type ReadTagResponse struct {
+	// Again the type with 'result' name
+	Result               *Tag     `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *ReadTagResponse) Reset()         { *m = ReadTagResponse{} }
+func (m *ReadTagResponse) String() string { return proto.CompactTextString(m) }
+func (*ReadTagResponse) ProtoMessage()    {}
+func (*ReadTagResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{54}
+}
+
+func (m *ReadTagResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ReadTagResponse.Unmarshal(m, b)
+}
+func (m *ReadTagResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ReadTagResponse.Marshal(b, m, deterministic)
+}
+func (m *ReadTagResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ReadTagResponse.Merge(m, src)
+}
+func (m *ReadTagResponse) XXX_Size() int {
+	return xxx_messageInfo_ReadTagResponse.Size(m)
+}
+func (m *ReadTagResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ReadTagResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ReadTagResponse proto.InternalMessageInfo
+
+func (m *ReadTagResponse) GetResult() *Tag {
+	if m != nil {
+		return m.Result
+	}
+	return nil
+}
+
+type UpdateTagRequest struct {
+	Payload              *Tag                  `protobuf:"bytes,1,opt,name=payload,proto3" json:"payload,omitempty"`
+	GerogeriGegege       *field_mask.FieldMask `protobuf:"bytes,2,opt,name=gerogeri_gegege,json=gerogeriGegege,proto3" json:"gerogeri_gegege,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
+}
+
+func (m *UpdateTagRequest) Reset()         { *m = UpdateTagRequest{} }
+func (m *UpdateTagRequest) String() string { return proto.CompactTextString(m) }
+func (*UpdateTagRequest) ProtoMessage()    {}
+func (*UpdateTagRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{55}
+}
+
+func (m *UpdateTagRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateTagRequest.Unmarshal(m, b)
+}
+func (m *UpdateTagRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateTagRequest.Marshal(b, m, deterministic)
+}
+func (m *UpdateTagRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateTagRequest.Merge(m, src)
+}
+func (m *UpdateTagRequest) XXX_Size() int {
+	return xxx_messageInfo_UpdateTagRequest.Size(m)
+}
+func (m *UpdateTagRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateTagRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateTagRequest proto.InternalMessageInfo
+
+func (m *UpdateTagRequest) GetPayload() *Tag {
+	if m != nil {
+		return m.Payload
+	}
+	return nil
+}
+
+func (m *UpdateTagRequest) GetGerogeriGegege() *field_mask.FieldMask {
+	if m != nil {
+		return m.GerogeriGegege
+	}
+	return nil
+}
+
+type UpdateTagResponse struct {
+	Result               *Tag     `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *UpdateTagResponse) Reset()         { *m = UpdateTagResponse{} }
+func (m *UpdateTagResponse) String() string { return proto.CompactTextString(m) }
+func (*UpdateTagResponse) ProtoMessage()    {}
+func (*UpdateTagResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{56}
+}
+
+func (m *UpdateTagResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_UpdateTagResponse.Unmarshal(m, b)
+}
+func (m *UpdateTagResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_UpdateTagResponse.Marshal(b, m, deterministic)
+}
+func (m *UpdateTagResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_UpdateTagResponse.Merge(m, src)
+}
+func (m *UpdateTagResponse) XXX_Size() int {
+	return xxx_messageInfo_UpdateTagResponse.Size(m)
+}
+func (m *UpdateTagResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_UpdateTagResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_UpdateTagResponse proto.InternalMessageInfo
+
+func (m *UpdateTagResponse) GetResult() *Tag {
+	if m != nil {
+		return m.Result
+	}
+	return nil
+}
+
+type DeleteTagRequest struct {
+	// Only the id is needed for a delete request
+	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteTagRequest) Reset()         { *m = DeleteTagRequest{} }
+func (m *DeleteTagRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteTagRequest) ProtoMessage()    {}
+func (*DeleteTagRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{57}
+}
+
+func (m *DeleteTagRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteTagRequest.Unmarshal(m, b)
+}
+func (m *DeleteTagRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteTagRequest.Marshal(b, m, deterministic)
+}
+func (m *DeleteTagRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteTagRequest.Merge(m, src)
+}
+func (m *DeleteTagRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteTagRequest.Size(m)
+}
+func (m *DeleteTagRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteTagRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteTagRequest proto.InternalMessageInfo
+
+func (m *DeleteTagRequest) GetId() uint32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type DeleteTagsRequest struct {
+	// Only the id is needed for a delete request
+	Ids                  []uint32 `protobuf:"varint,1,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteTagsRequest) Reset()         { *m = DeleteTagsRequest{} }
+func (m *DeleteTagsRequest) String() string { return proto.CompactTextString(m) }
+func (*DeleteTagsRequest) ProtoMessage()    {}
+func (*DeleteTagsRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{58}
+}
+
+func (m *DeleteTagsRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteTagsRequest.Unmarshal(m, b)
+}
+func (m *DeleteTagsRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteTagsRequest.Marshal(b, m, deterministic)
+}
+func (m *DeleteTagsRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteTagsRequest.Merge(m, src)
+}
+func (m *DeleteTagsRequest) XXX_Size() int {
+	return xxx_messageInfo_DeleteTagsRequest.Size(m)
+}
+func (m *DeleteTagsRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteTagsRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteTagsRequest proto.InternalMessageInfo
+
+func (m *DeleteTagsRequest) GetIds() []uint32 {
+	if m != nil {
+		return m.Ids
+	}
+	return nil
+}
+
+// By convention, on DELETE no response data is given, so either a
+// google.protobuf.empty, or an empty struct is sufficient
+type DeleteTagResponse struct {
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *DeleteTagResponse) Reset()         { *m = DeleteTagResponse{} }
+func (m *DeleteTagResponse) String() string { return proto.CompactTextString(m) }
+func (*DeleteTagResponse) ProtoMessage()    {}
+func (*DeleteTagResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{59}
+}
+
+func (m *DeleteTagResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_DeleteTagResponse.Unmarshal(m, b)
+}
+func (m *DeleteTagResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_DeleteTagResponse.Marshal(b, m, deterministic)
+}
+func (m *DeleteTagResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_DeleteTagResponse.Merge(m, src)
+}
+func (m *DeleteTagResponse) XXX_Size() int {
+	return xxx_messageInfo_DeleteTagResponse.Size(m)
+}
+func (m *DeleteTagResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_DeleteTagResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_DeleteTagResponse proto.InternalMessageInfo
+
+type ListTagResponse struct {
+	// Tag repeated field and plural name 'results'
+	Results              []*Tag          `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
+	PageInfo             *query.PageInfo `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
+	XXX_unrecognized     []byte          `json:"-"`
+	XXX_sizecache        int32           `json:"-"`
+}
+
+func (m *ListTagResponse) Reset()         { *m = ListTagResponse{} }
+func (m *ListTagResponse) String() string { return proto.CompactTextString(m) }
+func (*ListTagResponse) ProtoMessage()    {}
+func (*ListTagResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{60}
+}
+
+func (m *ListTagResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListTagResponse.Unmarshal(m, b)
+}
+func (m *ListTagResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListTagResponse.Marshal(b, m, deterministic)
+}
+func (m *ListTagResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTagResponse.Merge(m, src)
+}
+func (m *ListTagResponse) XXX_Size() int {
+	return xxx_messageInfo_ListTagResponse.Size(m)
+}
+func (m *ListTagResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTagResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTagResponse proto.InternalMessageInfo
+
+func (m *ListTagResponse) GetResults() []*Tag {
+	if m != nil {
+		return m.Results
+	}
+	return nil
+}
+
+func (m *ListTagResponse) GetPageInfo() *query.PageInfo {
+	if m != nil {
+		return m.PageInfo
+	}
+	return nil
+}
+
+type ListTagRequest struct {
+	Filter               *query.Filtering      `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
+	OrderBy              *query.Sorting        `protobuf:"bytes,2,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	Fields               *query.FieldSelection `protobuf:"bytes,3,opt,name=fields,proto3" json:"fields,omitempty"`
+	Paging               *query.Pagination     `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
+}
+
+func (m *ListTagRequest) Reset()         { *m = ListTagRequest{} }
+func (m *ListTagRequest) String() string { return proto.CompactTextString(m) }
+func (*ListTagRequest) ProtoMessage()    {}
+func (*ListTagRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31c400dfa9a52dc8, []int{61}
+}
+
+func (m *ListTagRequest) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_ListTagRequest.Unmarshal(m, b)
+}
+func (m *ListTagRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_ListTagRequest.Marshal(b, m, deterministic)
+}
+func (m *ListTagRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ListTagRequest.Merge(m, src)
+}
+func (m *ListTagRequest) XXX_Size() int {
+	return xxx_messageInfo_ListTagRequest.Size(m)
+}
+func (m *ListTagRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_ListTagRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ListTagRequest proto.InternalMessageInfo
+
+func (m *ListTagRequest) GetFilter() *query.Filtering {
+	if m != nil {
+		return m.Filter
+	}
+	return nil
+}
+
+func (m *ListTagRequest) GetOrderBy() *query.Sorting {
+	if m != nil {
+		return m.OrderBy
+	}
+	return nil
+}
+
+func (m *ListTagRequest) GetFields() *query.FieldSelection {
+	if m != nil {
+		return m.Fields
+	}
+	return nil
+}
+
+func (m *ListTagRequest) GetPaging() *query.Pagination {
+	if m != nil {
+		return m.Paging
+	}
+	return nil
+}
+
 // Folio center piece
 type Folio struct {
 	Id      uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1959,7 +2917,7 @@ func (m *Folio) Reset()         { *m = Folio{} }
 func (m *Folio) String() string { return proto.CompactTextString(m) }
 func (*Folio) ProtoMessage()    {}
 func (*Folio) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{40}
+	return fileDescriptor_31c400dfa9a52dc8, []int{62}
 }
 
 func (m *Folio) XXX_Unmarshal(b []byte) error {
@@ -2056,7 +3014,7 @@ func (m *CreateFolioRequest) Reset()         { *m = CreateFolioRequest{} }
 func (m *CreateFolioRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateFolioRequest) ProtoMessage()    {}
 func (*CreateFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{41}
+	return fileDescriptor_31c400dfa9a52dc8, []int{63}
 }
 
 func (m *CreateFolioRequest) XXX_Unmarshal(b []byte) error {
@@ -2096,7 +3054,7 @@ func (m *CreateFolioResponse) Reset()         { *m = CreateFolioResponse{} }
 func (m *CreateFolioResponse) String() string { return proto.CompactTextString(m) }
 func (*CreateFolioResponse) ProtoMessage()    {}
 func (*CreateFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{42}
+	return fileDescriptor_31c400dfa9a52dc8, []int{64}
 }
 
 func (m *CreateFolioResponse) XXX_Unmarshal(b []byte) error {
@@ -2137,7 +3095,7 @@ func (m *ReadFolioRequest) Reset()         { *m = ReadFolioRequest{} }
 func (m *ReadFolioRequest) String() string { return proto.CompactTextString(m) }
 func (*ReadFolioRequest) ProtoMessage()    {}
 func (*ReadFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{43}
+	return fileDescriptor_31c400dfa9a52dc8, []int{65}
 }
 
 func (m *ReadFolioRequest) XXX_Unmarshal(b []byte) error {
@@ -2184,7 +3142,7 @@ func (m *ReadFolioResponse) Reset()         { *m = ReadFolioResponse{} }
 func (m *ReadFolioResponse) String() string { return proto.CompactTextString(m) }
 func (*ReadFolioResponse) ProtoMessage()    {}
 func (*ReadFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{44}
+	return fileDescriptor_31c400dfa9a52dc8, []int{66}
 }
 
 func (m *ReadFolioResponse) XXX_Unmarshal(b []byte) error {
@@ -2224,7 +3182,7 @@ func (m *UpdateFolioRequest) Reset()         { *m = UpdateFolioRequest{} }
 func (m *UpdateFolioRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateFolioRequest) ProtoMessage()    {}
 func (*UpdateFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{45}
+	return fileDescriptor_31c400dfa9a52dc8, []int{67}
 }
 
 func (m *UpdateFolioRequest) XXX_Unmarshal(b []byte) error {
@@ -2270,7 +3228,7 @@ func (m *UpdateFolioResponse) Reset()         { *m = UpdateFolioResponse{} }
 func (m *UpdateFolioResponse) String() string { return proto.CompactTextString(m) }
 func (*UpdateFolioResponse) ProtoMessage()    {}
 func (*UpdateFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{46}
+	return fileDescriptor_31c400dfa9a52dc8, []int{68}
 }
 
 func (m *UpdateFolioResponse) XXX_Unmarshal(b []byte) error {
@@ -2310,7 +3268,7 @@ func (m *DeleteFolioRequest) Reset()         { *m = DeleteFolioRequest{} }
 func (m *DeleteFolioRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteFolioRequest) ProtoMessage()    {}
 func (*DeleteFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{47}
+	return fileDescriptor_31c400dfa9a52dc8, []int{69}
 }
 
 func (m *DeleteFolioRequest) XXX_Unmarshal(b []byte) error {
@@ -2350,7 +3308,7 @@ func (m *DeleteFoliosRequest) Reset()         { *m = DeleteFoliosRequest{} }
 func (m *DeleteFoliosRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteFoliosRequest) ProtoMessage()    {}
 func (*DeleteFoliosRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{48}
+	return fileDescriptor_31c400dfa9a52dc8, []int{70}
 }
 
 func (m *DeleteFoliosRequest) XXX_Unmarshal(b []byte) error {
@@ -2390,7 +3348,7 @@ func (m *DeleteFolioResponse) Reset()         { *m = DeleteFolioResponse{} }
 func (m *DeleteFolioResponse) String() string { return proto.CompactTextString(m) }
 func (*DeleteFolioResponse) ProtoMessage()    {}
 func (*DeleteFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{49}
+	return fileDescriptor_31c400dfa9a52dc8, []int{71}
 }
 
 func (m *DeleteFolioResponse) XXX_Unmarshal(b []byte) error {
@@ -2424,7 +3382,7 @@ func (m *ListFolioResponse) Reset()         { *m = ListFolioResponse{} }
 func (m *ListFolioResponse) String() string { return proto.CompactTextString(m) }
 func (*ListFolioResponse) ProtoMessage()    {}
 func (*ListFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{50}
+	return fileDescriptor_31c400dfa9a52dc8, []int{72}
 }
 
 func (m *ListFolioResponse) XXX_Unmarshal(b []byte) error {
@@ -2473,7 +3431,7 @@ func (m *ListFolioRequest) Reset()         { *m = ListFolioRequest{} }
 func (m *ListFolioRequest) String() string { return proto.CompactTextString(m) }
 func (*ListFolioRequest) ProtoMessage()    {}
 func (*ListFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{51}
+	return fileDescriptor_31c400dfa9a52dc8, []int{73}
 }
 
 func (m *ListFolioRequest) XXX_Unmarshal(b []byte) error {
@@ -2540,7 +3498,7 @@ func (m *Asset) Reset()         { *m = Asset{} }
 func (m *Asset) String() string { return proto.CompactTextString(m) }
 func (*Asset) ProtoMessage()    {}
 func (*Asset) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{52}
+	return fileDescriptor_31c400dfa9a52dc8, []int{74}
 }
 
 func (m *Asset) XXX_Unmarshal(b []byte) error {
@@ -2623,7 +3581,7 @@ func (m *CreateAssetRequest) Reset()         { *m = CreateAssetRequest{} }
 func (m *CreateAssetRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateAssetRequest) ProtoMessage()    {}
 func (*CreateAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{53}
+	return fileDescriptor_31c400dfa9a52dc8, []int{75}
 }
 
 func (m *CreateAssetRequest) XXX_Unmarshal(b []byte) error {
@@ -2663,7 +3621,7 @@ func (m *CreateAssetResponse) Reset()         { *m = CreateAssetResponse{} }
 func (m *CreateAssetResponse) String() string { return proto.CompactTextString(m) }
 func (*CreateAssetResponse) ProtoMessage()    {}
 func (*CreateAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{54}
+	return fileDescriptor_31c400dfa9a52dc8, []int{76}
 }
 
 func (m *CreateAssetResponse) XXX_Unmarshal(b []byte) error {
@@ -2704,7 +3662,7 @@ func (m *ReadAssetRequest) Reset()         { *m = ReadAssetRequest{} }
 func (m *ReadAssetRequest) String() string { return proto.CompactTextString(m) }
 func (*ReadAssetRequest) ProtoMessage()    {}
 func (*ReadAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{55}
+	return fileDescriptor_31c400dfa9a52dc8, []int{77}
 }
 
 func (m *ReadAssetRequest) XXX_Unmarshal(b []byte) error {
@@ -2751,7 +3709,7 @@ func (m *ReadAssetResponse) Reset()         { *m = ReadAssetResponse{} }
 func (m *ReadAssetResponse) String() string { return proto.CompactTextString(m) }
 func (*ReadAssetResponse) ProtoMessage()    {}
 func (*ReadAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{56}
+	return fileDescriptor_31c400dfa9a52dc8, []int{78}
 }
 
 func (m *ReadAssetResponse) XXX_Unmarshal(b []byte) error {
@@ -2791,7 +3749,7 @@ func (m *UpdateAssetRequest) Reset()         { *m = UpdateAssetRequest{} }
 func (m *UpdateAssetRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateAssetRequest) ProtoMessage()    {}
 func (*UpdateAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{57}
+	return fileDescriptor_31c400dfa9a52dc8, []int{79}
 }
 
 func (m *UpdateAssetRequest) XXX_Unmarshal(b []byte) error {
@@ -2837,7 +3795,7 @@ func (m *UpdateAssetResponse) Reset()         { *m = UpdateAssetResponse{} }
 func (m *UpdateAssetResponse) String() string { return proto.CompactTextString(m) }
 func (*UpdateAssetResponse) ProtoMessage()    {}
 func (*UpdateAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{58}
+	return fileDescriptor_31c400dfa9a52dc8, []int{80}
 }
 
 func (m *UpdateAssetResponse) XXX_Unmarshal(b []byte) error {
@@ -2877,7 +3835,7 @@ func (m *DeleteAssetRequest) Reset()         { *m = DeleteAssetRequest{} }
 func (m *DeleteAssetRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteAssetRequest) ProtoMessage()    {}
 func (*DeleteAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{59}
+	return fileDescriptor_31c400dfa9a52dc8, []int{81}
 }
 
 func (m *DeleteAssetRequest) XXX_Unmarshal(b []byte) error {
@@ -2917,7 +3875,7 @@ func (m *DeleteAssetsRequest) Reset()         { *m = DeleteAssetsRequest{} }
 func (m *DeleteAssetsRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteAssetsRequest) ProtoMessage()    {}
 func (*DeleteAssetsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{60}
+	return fileDescriptor_31c400dfa9a52dc8, []int{82}
 }
 
 func (m *DeleteAssetsRequest) XXX_Unmarshal(b []byte) error {
@@ -2957,7 +3915,7 @@ func (m *DeleteAssetResponse) Reset()         { *m = DeleteAssetResponse{} }
 func (m *DeleteAssetResponse) String() string { return proto.CompactTextString(m) }
 func (*DeleteAssetResponse) ProtoMessage()    {}
 func (*DeleteAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{61}
+	return fileDescriptor_31c400dfa9a52dc8, []int{83}
 }
 
 func (m *DeleteAssetResponse) XXX_Unmarshal(b []byte) error {
@@ -2991,7 +3949,7 @@ func (m *ListAssetResponse) Reset()         { *m = ListAssetResponse{} }
 func (m *ListAssetResponse) String() string { return proto.CompactTextString(m) }
 func (*ListAssetResponse) ProtoMessage()    {}
 func (*ListAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{62}
+	return fileDescriptor_31c400dfa9a52dc8, []int{84}
 }
 
 func (m *ListAssetResponse) XXX_Unmarshal(b []byte) error {
@@ -3040,7 +3998,7 @@ func (m *ListAssetRequest) Reset()         { *m = ListAssetRequest{} }
 func (m *ListAssetRequest) String() string { return proto.CompactTextString(m) }
 func (*ListAssetRequest) ProtoMessage()    {}
 func (*ListAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{63}
+	return fileDescriptor_31c400dfa9a52dc8, []int{85}
 }
 
 func (m *ListAssetRequest) XXX_Unmarshal(b []byte) error {
@@ -3104,7 +4062,7 @@ func (m *Note) Reset()         { *m = Note{} }
 func (m *Note) String() string { return proto.CompactTextString(m) }
 func (*Note) ProtoMessage()    {}
 func (*Note) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{64}
+	return fileDescriptor_31c400dfa9a52dc8, []int{86}
 }
 
 func (m *Note) XXX_Unmarshal(b []byte) error {
@@ -3166,7 +4124,7 @@ func (m *CreateNoteRequest) Reset()         { *m = CreateNoteRequest{} }
 func (m *CreateNoteRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateNoteRequest) ProtoMessage()    {}
 func (*CreateNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{65}
+	return fileDescriptor_31c400dfa9a52dc8, []int{87}
 }
 
 func (m *CreateNoteRequest) XXX_Unmarshal(b []byte) error {
@@ -3206,7 +4164,7 @@ func (m *CreateNoteResponse) Reset()         { *m = CreateNoteResponse{} }
 func (m *CreateNoteResponse) String() string { return proto.CompactTextString(m) }
 func (*CreateNoteResponse) ProtoMessage()    {}
 func (*CreateNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{66}
+	return fileDescriptor_31c400dfa9a52dc8, []int{88}
 }
 
 func (m *CreateNoteResponse) XXX_Unmarshal(b []byte) error {
@@ -3247,7 +4205,7 @@ func (m *ReadNoteRequest) Reset()         { *m = ReadNoteRequest{} }
 func (m *ReadNoteRequest) String() string { return proto.CompactTextString(m) }
 func (*ReadNoteRequest) ProtoMessage()    {}
 func (*ReadNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{67}
+	return fileDescriptor_31c400dfa9a52dc8, []int{89}
 }
 
 func (m *ReadNoteRequest) XXX_Unmarshal(b []byte) error {
@@ -3294,7 +4252,7 @@ func (m *ReadNoteResponse) Reset()         { *m = ReadNoteResponse{} }
 func (m *ReadNoteResponse) String() string { return proto.CompactTextString(m) }
 func (*ReadNoteResponse) ProtoMessage()    {}
 func (*ReadNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{68}
+	return fileDescriptor_31c400dfa9a52dc8, []int{90}
 }
 
 func (m *ReadNoteResponse) XXX_Unmarshal(b []byte) error {
@@ -3334,7 +4292,7 @@ func (m *UpdateNoteRequest) Reset()         { *m = UpdateNoteRequest{} }
 func (m *UpdateNoteRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateNoteRequest) ProtoMessage()    {}
 func (*UpdateNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{69}
+	return fileDescriptor_31c400dfa9a52dc8, []int{91}
 }
 
 func (m *UpdateNoteRequest) XXX_Unmarshal(b []byte) error {
@@ -3380,7 +4338,7 @@ func (m *UpdateNoteResponse) Reset()         { *m = UpdateNoteResponse{} }
 func (m *UpdateNoteResponse) String() string { return proto.CompactTextString(m) }
 func (*UpdateNoteResponse) ProtoMessage()    {}
 func (*UpdateNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{70}
+	return fileDescriptor_31c400dfa9a52dc8, []int{92}
 }
 
 func (m *UpdateNoteResponse) XXX_Unmarshal(b []byte) error {
@@ -3420,7 +4378,7 @@ func (m *DeleteNoteRequest) Reset()         { *m = DeleteNoteRequest{} }
 func (m *DeleteNoteRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteNoteRequest) ProtoMessage()    {}
 func (*DeleteNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{71}
+	return fileDescriptor_31c400dfa9a52dc8, []int{93}
 }
 
 func (m *DeleteNoteRequest) XXX_Unmarshal(b []byte) error {
@@ -3460,7 +4418,7 @@ func (m *DeleteNotesRequest) Reset()         { *m = DeleteNotesRequest{} }
 func (m *DeleteNotesRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteNotesRequest) ProtoMessage()    {}
 func (*DeleteNotesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{72}
+	return fileDescriptor_31c400dfa9a52dc8, []int{94}
 }
 
 func (m *DeleteNotesRequest) XXX_Unmarshal(b []byte) error {
@@ -3500,7 +4458,7 @@ func (m *DeleteNoteResponse) Reset()         { *m = DeleteNoteResponse{} }
 func (m *DeleteNoteResponse) String() string { return proto.CompactTextString(m) }
 func (*DeleteNoteResponse) ProtoMessage()    {}
 func (*DeleteNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{73}
+	return fileDescriptor_31c400dfa9a52dc8, []int{95}
 }
 
 func (m *DeleteNoteResponse) XXX_Unmarshal(b []byte) error {
@@ -3534,7 +4492,7 @@ func (m *ListNoteResponse) Reset()         { *m = ListNoteResponse{} }
 func (m *ListNoteResponse) String() string { return proto.CompactTextString(m) }
 func (*ListNoteResponse) ProtoMessage()    {}
 func (*ListNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{74}
+	return fileDescriptor_31c400dfa9a52dc8, []int{96}
 }
 
 func (m *ListNoteResponse) XXX_Unmarshal(b []byte) error {
@@ -3583,7 +4541,7 @@ func (m *ListNoteRequest) Reset()         { *m = ListNoteRequest{} }
 func (m *ListNoteRequest) String() string { return proto.CompactTextString(m) }
 func (*ListNoteRequest) ProtoMessage()    {}
 func (*ListNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{75}
+	return fileDescriptor_31c400dfa9a52dc8, []int{97}
 }
 
 func (m *ListNoteRequest) XXX_Unmarshal(b []byte) error {
@@ -3672,7 +4630,29 @@ func init() {
 	proto.RegisterType((*ListArchiveResponse)(nil), "folio.ListArchiveResponse")
 	proto.RegisterType((*ListArchiveRequest)(nil), "folio.ListArchiveRequest")
 	proto.RegisterType((*Share)(nil), "folio.Share")
+	proto.RegisterType((*CreateShareRequest)(nil), "folio.CreateShareRequest")
+	proto.RegisterType((*CreateShareResponse)(nil), "folio.CreateShareResponse")
+	proto.RegisterType((*ReadShareRequest)(nil), "folio.ReadShareRequest")
+	proto.RegisterType((*ReadShareResponse)(nil), "folio.ReadShareResponse")
+	proto.RegisterType((*UpdateShareRequest)(nil), "folio.UpdateShareRequest")
+	proto.RegisterType((*UpdateShareResponse)(nil), "folio.UpdateShareResponse")
+	proto.RegisterType((*DeleteShareRequest)(nil), "folio.DeleteShareRequest")
+	proto.RegisterType((*DeleteSharesRequest)(nil), "folio.DeleteSharesRequest")
+	proto.RegisterType((*DeleteShareResponse)(nil), "folio.DeleteShareResponse")
+	proto.RegisterType((*ListShareResponse)(nil), "folio.ListShareResponse")
+	proto.RegisterType((*ListShareRequest)(nil), "folio.ListShareRequest")
 	proto.RegisterType((*Tag)(nil), "folio.Tag")
+	proto.RegisterType((*CreateTagRequest)(nil), "folio.CreateTagRequest")
+	proto.RegisterType((*CreateTagResponse)(nil), "folio.CreateTagResponse")
+	proto.RegisterType((*ReadTagRequest)(nil), "folio.ReadTagRequest")
+	proto.RegisterType((*ReadTagResponse)(nil), "folio.ReadTagResponse")
+	proto.RegisterType((*UpdateTagRequest)(nil), "folio.UpdateTagRequest")
+	proto.RegisterType((*UpdateTagResponse)(nil), "folio.UpdateTagResponse")
+	proto.RegisterType((*DeleteTagRequest)(nil), "folio.DeleteTagRequest")
+	proto.RegisterType((*DeleteTagsRequest)(nil), "folio.DeleteTagsRequest")
+	proto.RegisterType((*DeleteTagResponse)(nil), "folio.DeleteTagResponse")
+	proto.RegisterType((*ListTagResponse)(nil), "folio.ListTagResponse")
+	proto.RegisterType((*ListTagRequest)(nil), "folio.ListTagRequest")
 	proto.RegisterType((*Folio)(nil), "folio.Folio")
 	proto.RegisterType((*CreateFolioRequest)(nil), "folio.CreateFolioRequest")
 	proto.RegisterType((*CreateFolioResponse)(nil), "folio.CreateFolioResponse")
@@ -3714,124 +4694,153 @@ func init() {
 func init() { proto.RegisterFile("folio.proto", fileDescriptor_31c400dfa9a52dc8) }
 
 var fileDescriptor_31c400dfa9a52dc8 = []byte{
-	// 1866 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x59, 0xdd, 0x6e, 0xdb, 0xc8,
-	0x15, 0x36, 0x6d, 0x49, 0x96, 0x8f, 0x62, 0xc7, 0x1e, 0xcb, 0x31, 0xad, 0xfa, 0xc2, 0x65, 0x12,
-	0x57, 0x29, 0x6a, 0x29, 0x70, 0x0a, 0x14, 0x49, 0x1a, 0x34, 0x89, 0x53, 0x17, 0x69, 0x9d, 0x20,
-	0xa5, 0x63, 0xf4, 0xe7, 0xc6, 0x18, 0x49, 0x63, 0x99, 0x35, 0x4d, 0x2a, 0x24, 0x9d, 0xc6, 0x57,
-	0x45, 0x2f, 0xf6, 0x62, 0xdf, 0x60, 0x1f, 0x60, 0xdf, 0x61, 0x61, 0x3f, 0xc0, 0x5e, 0xef, 0x03,
-	0xec, 0x62, 0x81, 0xc5, 0x3e, 0xc8, 0x62, 0x7e, 0x38, 0xe4, 0x0c, 0x29, 0xd9, 0x92, 0xb5, 0xc0,
-	0xc2, 0x30, 0x74, 0x43, 0xcd, 0x39, 0x33, 0xf3, 0xcd, 0x39, 0x9c, 0x8f, 0x67, 0xbe, 0x81, 0xca,
-	0x81, 0xef, 0x3a, 0x7e, 0xa3, 0x17, 0xf8, 0x91, 0x8f, 0x8a, 0xec, 0x4f, 0x6d, 0xb5, 0xeb, 0xfb,
-	0x5d, 0x97, 0x34, 0x71, 0xcf, 0x69, 0x62, 0xcf, 0xf3, 0x23, 0x1c, 0x39, 0xbe, 0x17, 0x72, 0xa7,
-	0xda, 0xf2, 0x47, 0xec, 0x3a, 0x1d, 0x1c, 0x91, 0x66, 0xfc, 0x20, 0x0c, 0x4f, 0xba, 0x4e, 0x74,
-	0x78, 0xd2, 0x6a, 0xb4, 0xfd, 0xe3, 0xa6, 0xe3, 0x1d, 0xf8, 0x2d, 0xd7, 0xff, 0xe4, 0xf7, 0x88,
-	0xd7, 0x64, 0xe6, 0xf6, 0x46, 0x97, 0x78, 0x1b, 0x5d, 0x3f, 0x38, 0x6e, 0xfa, 0x3d, 0x36, 0x5e,
-	0x93, 0xfe, 0x11, 0x7d, 0xd7, 0xc4, 0x94, 0xec, 0x5f, 0xeb, 0xe4, 0xa0, 0x79, 0xe0, 0x10, 0xb7,
-	0xb3, 0x7f, 0x8c, 0xc3, 0x23, 0xe1, 0xf1, 0xd7, 0x7e, 0xa3, 0xe3, 0xc8, 0xc5, 0xe1, 0x06, 0xee,
-	0xf5, 0x36, 0x22, 0xdf, 0x77, 0x8f, 0x9c, 0xa8, 0xf9, 0xe1, 0x84, 0x04, 0xa7, 0xcd, 0xb6, 0xef,
-	0xba, 0xa4, 0x4d, 0x67, 0xda, 0xf7, 0x7b, 0x24, 0xc0, 0x91, 0x1f, 0x88, 0x25, 0x58, 0x5f, 0x1b,
-	0x30, 0xfd, 0xa2, 0xdd, 0xf6, 0x4f, 0xbc, 0x08, 0xcd, 0xc1, 0xa4, 0xd3, 0x31, 0x8d, 0x35, 0xa3,
-	0x3e, 0x6b, 0x4f, 0x3a, 0x1d, 0x84, 0xa0, 0xb0, 0xb7, 0xf7, 0xfa, 0x95, 0x39, 0xb9, 0x66, 0xd4,
-	0x67, 0x6c, 0xf6, 0x4c, 0xdb, 0xde, 0xe2, 0x63, 0x62, 0x4e, 0xf1, 0x36, 0xfa, 0x8c, 0x6a, 0x50,
-	0x7e, 0xeb, 0xb4, 0x8f, 0x3c, 0xda, 0x5e, 0x60, 0xed, 0xf2, 0x3f, 0xf5, 0xff, 0x9b, 0xe3, 0x75,
-	0xcc, 0x22, 0xf7, 0xa7, 0xcf, 0xa8, 0x0e, 0xd3, 0x2f, 0x82, 0xf6, 0xa1, 0xf3, 0x91, 0x98, 0x95,
-	0x35, 0xa3, 0x5e, 0xd9, 0x9c, 0x6b, 0xf0, 0xd0, 0x8b, 0x56, 0x3b, 0x36, 0xa3, 0x5f, 0x43, 0x71,
-	0x2f, 0x24, 0x41, 0x68, 0xde, 0x5a, 0x9b, 0xaa, 0x57, 0x36, 0x2b, 0xc2, 0x8f, 0xb6, 0xd9, 0xdc,
-	0xf2, 0xa4, 0x74, 0x7e, 0xb6, 0x32, 0x59, 0x36, 0xac, 0xe7, 0x50, 0xdd, 0x0a, 0x08, 0x8e, 0x88,
-	0x58, 0x8d, 0x4d, 0x3e, 0x9c, 0x90, 0x30, 0xa2, 0x93, 0xf5, 0xf0, 0xa9, 0xeb, 0x63, 0xbe, 0xb2,
-	0xd4, 0x64, 0xc2, 0x2f, 0x36, 0x5b, 0x7f, 0x82, 0x25, 0x6d, 0x84, 0xb0, 0xe7, 0x7b, 0x21, 0x41,
-	0xeb, 0x50, 0x0a, 0x48, 0x78, 0xe2, 0x46, 0x7d, 0x46, 0x10, 0x56, 0xeb, 0xdf, 0x80, 0x6c, 0x82,
-	0x3b, 0x1a, 0x00, 0x3d, 0xaa, 0xbf, 0x87, 0x12, 0xcb, 0x68, 0xc8, 0xe2, 0x5a, 0xd9, 0x5c, 0x6d,
-	0xc4, 0x39, 0x6c, 0xe0, 0x9e, 0xd3, 0xd8, 0xa6, 0xb6, 0x5d, 0x22, 0xf2, 0x65, 0x0b, 0x5f, 0xeb,
-	0x19, 0x2c, 0x2a, 0x63, 0x0f, 0x09, 0xed, 0x33, 0x03, 0xaa, 0x7b, 0xbd, 0xce, 0x15, 0xc2, 0x83,
-	0xb6, 0xe0, 0x76, 0x97, 0x04, 0x7e, 0x97, 0x04, 0xce, 0x7e, 0x97, 0xd0, 0x9f, 0x58, 0x40, 0xad,
-	0xc1, 0xdf, 0xd8, 0x46, 0xfc, 0xc6, 0xf2, 0x35, 0xbc, 0xc1, 0xe1, 0x91, 0x3d, 0x17, 0x77, 0xf9,
-	0x0b, 0xeb, 0x41, 0x63, 0xac, 0xc1, 0x18, 0x72, 0x21, 0xeb, 0x50, 0x7d, 0x45, 0x5c, 0x92, 0x59,
-	0x87, 0x16, 0x65, 0xeb, 0x01, 0x2c, 0x29, 0x7e, 0x61, 0xec, 0x38, 0x0f, 0x53, 0x4e, 0x27, 0x34,
-	0x8d, 0xb5, 0xa9, 0xfa, 0xac, 0x4d, 0x1f, 0xad, 0x65, 0xcd, 0x35, 0xc6, 0x64, 0x45, 0xb0, 0xb8,
-	0xe3, 0x84, 0x91, 0x0e, 0xb5, 0x0e, 0xd3, 0x1c, 0x0c, 0x1f, 0x25, 0x27, 0x64, 0xc2, 0x8c, 0x1e,
-	0xc1, 0x4c, 0x0f, 0x77, 0xc9, 0x3e, 0x4d, 0xb0, 0x08, 0xd6, 0x1d, 0x35, 0xdb, 0xef, 0x70, 0x97,
-	0xbc, 0xf6, 0x0e, 0x7c, 0xbb, 0xdc, 0x13, 0x4f, 0xd6, 0x27, 0x58, 0xa2, 0xb3, 0xee, 0xfa, 0xc7,
-	0x24, 0x3a, 0x74, 0xbc, 0xae, 0x9c, 0xf7, 0xb7, 0xfa, 0xbc, 0xf3, 0x62, 0xde, 0xc4, 0xf5, 0x6a,
-	0x33, 0x3f, 0x80, 0x19, 0x39, 0x14, 0xaa, 0x42, 0x91, 0xbd, 0x7a, 0x2c, 0xa6, 0x33, 0x36, 0xff,
-	0x23, 0x77, 0xdb, 0xf7, 0x06, 0x20, 0x25, 0x36, 0x3c, 0xb8, 0x4d, 0xfa, 0x6e, 0xbb, 0x11, 0x09,
-	0x44, 0x16, 0x97, 0xf5, 0x77, 0x9b, 0xda, 0x28, 0x50, 0xe1, 0x86, 0x1e, 0x42, 0xd9, 0x0f, 0x3a,
-	0x24, 0xd8, 0x6f, 0x9d, 0x0a, 0x98, 0x4b, 0x6a, 0x97, 0x5d, 0x3f, 0x88, 0xd8, 0xca, 0x98, 0xdb,
-	0xcb, 0xd3, 0xd4, 0xf6, 0x99, 0xba, 0xfc, 0xf6, 0x41, 0x0f, 0xa1, 0xd4, 0xc3, 0x5d, 0xc7, 0xeb,
-	0x32, 0x82, 0xaa, 0x6c, 0x9a, 0x99, 0x60, 0x38, 0x1e, 0xe6, 0x3d, 0xb8, 0x9f, 0xf5, 0x85, 0x01,
-	0x05, 0xca, 0x30, 0x99, 0xfd, 0x5b, 0x85, 0xe2, 0x9f, 0x8f, 0xb1, 0xe3, 0x0a, 0x5a, 0xe4, 0x7f,
-	0xd0, 0x2a, 0xcc, 0x6c, 0x3b, 0x41, 0x18, 0x79, 0x09, 0x39, 0x26, 0x0d, 0x94, 0x21, 0x77, 0xb0,
-	0x30, 0x0a, 0x86, 0x8c, 0xff, 0xd3, 0xd7, 0x09, 0xf3, 0x28, 0x9a, 0xa5, 0xfc, 0x1d, 0x28, 0xcc,
-	0x32, 0xf8, 0x4f, 0x60, 0x81, 0x13, 0x15, 0xe3, 0x41, 0x11, 0xfa, 0xfb, 0xfa, 0x46, 0x56, 0xc8,
-	0x52, 0x92, 0xdc, 0x63, 0x40, 0xe9, 0xbe, 0xe2, 0xd5, 0xba, 0xab, 0xed, 0x3e, 0xa5, 0x6f, 0xbc,
-	0xf5, 0xfe, 0x01, 0xb7, 0x29, 0x05, 0xa5, 0x27, 0x1d, 0x0f, 0xb7, 0xfd, 0x01, 0xe6, 0x93, 0x81,
-	0x87, 0x41, 0xf4, 0x3f, 0x58, 0xe0, 0x6c, 0x32, 0x7c, 0x20, 0xc6, 0x43, 0x67, 0x8f, 0x01, 0xa5,
-	0x01, 0x0c, 0x83, 0xfd, 0x2e, 0x2c, 0x70, 0xd6, 0x19, 0x10, 0x4f, 0x6b, 0x1d, 0x50, 0xe2, 0x34,
-	0x80, 0xc2, 0xaa, 0x69, 0x3f, 0xc9, 0x5f, 0x1e, 0xcc, 0xd3, 0x3d, 0xaa, 0x60, 0xbb, 0xaf, 0x93,
-	0x88, 0x1a, 0x9d, 0x2b, 0xf1, 0xc7, 0xb7, 0x06, 0xdc, 0x4e, 0x26, 0xbc, 0x76, 0x8c, 0xf0, 0x8d,
-	0x21, 0xeb, 0x96, 0x91, 0x4b, 0x25, 0x04, 0x85, 0x57, 0x24, 0x6c, 0x0b, 0x12, 0x60, 0xcf, 0xe8,
-	0x1e, 0x94, 0xb6, 0x69, 0x0a, 0x42, 0xb3, 0xc4, 0x32, 0x72, 0x4b, 0x64, 0x84, 0x35, 0xda, 0xc2,
-	0x96, 0xa6, 0x89, 0xe9, 0x81, 0x34, 0x41, 0x8b, 0x26, 0xff, 0xbf, 0x1e, 0x09, 0xcc, 0x72, 0xf6,
-	0xed, 0xe3, 0x96, 0x9c, 0xa2, 0x49, 0x54, 0x5e, 0x17, 0x56, 0x05, 0x71, 0x85, 0x96, 0x2d, 0x9a,
-	0xe2, 0x11, 0x2e, 0xfa, 0xa0, 0x0b, 0x3f, 0xbd, 0x68, 0x52, 0x01, 0x8c, 0xb7, 0x68, 0x1a, 0x11,
-	0x5a, 0xaa, 0x68, 0x1a, 0x31, 0x3c, 0xe3, 0x2e, 0x9a, 0x46, 0x5c, 0x48, 0x52, 0x34, 0x0d, 0x8c,
-	0x72, 0xaa, 0x68, 0xe2, 0x7e, 0x97, 0x2a, 0x9a, 0x54, 0x4c, 0xb2, 0x68, 0xd2, 0xa0, 0xf6, 0x2f,
-	0x9a, 0xe2, 0x90, 0x5d, 0x89, 0x7a, 0x64, 0x3d, 0xa2, 0x2e, 0xf0, 0x1a, 0xb1, 0xcf, 0x07, 0x28,
-	0xee, 0x1e, 0xe2, 0x20, 0x4b, 0x3d, 0x16, 0x94, 0x0e, 0x02, 0x87, 0x78, 0x1d, 0x01, 0x18, 0x44,
-	0x60, 0xdf, 0x63, 0xba, 0x2c, 0x66, 0x41, 0xbf, 0x83, 0xd2, 0x41, 0x5f, 0x8a, 0x79, 0xc9, 0xd8,
-	0x60, 0x73, 0xc2, 0x16, 0x3e, 0x92, 0x1d, 0x3e, 0x37, 0x60, 0xea, 0x3d, 0xee, 0xe6, 0x91, 0x1d,
-	0x3b, 0xd3, 0x4d, 0xb2, 0x16, 0x7e, 0xa6, 0xab, 0x42, 0x71, 0x07, 0xb7, 0x88, 0x2b, 0xd8, 0x8e,
-	0xff, 0xc9, 0xa5, 0xbb, 0xd1, 0xb0, 0x7c, 0x39, 0x09, 0x45, 0xe6, 0x31, 0x56, 0xea, 0xa5, 0xa4,
-	0x2a, 0x4e, 0xa2, 0xc5, 0xfc, 0x8d, 0x2c, 0xcc, 0x94, 0xa4, 0x5f, 0x84, 0x21, 0x89, 0x74, 0xd4,
-	0xac, 0xd1, 0x16, 0x36, 0x4a, 0xbd, 0x6f, 0xfd, 0x88, 0x84, 0xe6, 0xb4, 0xf2, 0x6d, 0xa5, 0x6d,
-	0x36, 0xb7, 0xa0, 0x75, 0x28, 0x44, 0xb8, 0x1b, 0x9a, 0xc0, 0x3c, 0x52, 0xc9, 0x92, 0x4b, 0x67,
-	0x76, 0x1a, 0xa6, 0x90, 0xe6, 0x3b, 0x34, 0x2b, 0xca, 0x84, 0xec, 0x25, 0x48, 0xc2, 0xc4, 0x7d,
-	0x64, 0x98, 0xfe, 0x18, 0x97, 0x77, 0xfc, 0xe3, 0x21, 0xb6, 0xc1, 0xba, 0xce, 0x57, 0xea, 0x27,
-	0x46, 0x92, 0xf9, 0x53, 0x58, 0x54, 0x7a, 0x8b, 0xbd, 0x7b, 0x4f, 0xa3, 0x19, 0xed, 0x03, 0x25,
-	0x48, 0xe6, 0x9f, 0xbc, 0x8a, 0x53, 0x26, 0x1e, 0x0f, 0x8d, 0x3f, 0x86, 0x85, 0xd4, 0xc8, 0x43,
-	0x81, 0xfa, 0xbf, 0x11, 0x57, 0x68, 0xa3, 0x04, 0x64, 0x3c, 0xf4, 0xfd, 0x14, 0x16, 0x15, 0x08,
-	0x43, 0x2d, 0xe0, 0x5e, 0x5c, 0xd9, 0x0d, 0x8a, 0xab, 0xf5, 0x1b, 0x58, 0x4c, 0x79, 0x0d, 0xa0,
-	0xed, 0x25, 0xc5, 0x51, 0x92, 0x76, 0x0f, 0x16, 0x28, 0x7b, 0xaa, 0x00, 0xd7, 0x75, 0xca, 0xd6,
-	0x82, 0x74, 0x25, 0xc2, 0xfe, 0xce, 0xe0, 0xc5, 0xa9, 0xb2, 0xac, 0x6b, 0x44, 0xd7, 0x5f, 0x19,
-	0x50, 0x64, 0xa4, 0x90, 0xc7, 0x57, 0x8c, 0x9b, 0x26, 0x53, 0xdc, 0x64, 0x01, 0xd7, 0x1b, 0x05,
-	0x28, 0x35, 0xd0, 0xdc, 0x24, 0x79, 0xae, 0xa0, 0xf2, 0xdc, 0x3b, 0x1c, 0x1d, 0xc6, 0xea, 0x1a,
-	0x7d, 0xa6, 0x63, 0x61, 0x3a, 0xb1, 0x38, 0x4d, 0xaa, 0x44, 0xc5, 0x4d, 0xb4, 0x5f, 0xcb, 0xf5,
-	0x5b, 0x66, 0x75, 0xcd, 0xa8, 0xdf, 0xb2, 0xd9, 0x73, 0x96, 0x42, 0x78, 0x8f, 0x8b, 0x76, 0x0c,
-	0xf7, 0xca, 0x52, 0x88, 0xe8, 0x7d, 0xc1, 0xcb, 0x2e, 0xe8, 0x53, 0xa5, 0x10, 0x65, 0xe2, 0xb1,
-	0x52, 0xc8, 0x28, 0xa0, 0x12, 0x0a, 0x19, 0x25, 0x20, 0x63, 0xa6, 0x90, 0x51, 0x16, 0x20, 0x29,
-	0x64, 0x50, 0x5c, 0x13, 0x0a, 0xe1, 0x9f, 0xb2, 0x4b, 0x50, 0x88, 0x82, 0x25, 0xa6, 0x10, 0x15,
-	0x60, 0x5f, 0x0a, 0x11, 0x41, 0x1a, 0x0b, 0x85, 0x28, 0xcb, 0xba, 0x46, 0x14, 0xf2, 0x1f, 0x28,
-	0xd0, 0x92, 0xa1, 0x2f, 0x81, 0x68, 0xc5, 0x0d, 0xf5, 0x8d, 0xc9, 0x81, 0xf5, 0x93, 0xa4, 0x52,
-	0xea, 0x4b, 0x2a, 0x59, 0x49, 0x89, 0x95, 0x2a, 0x17, 0x29, 0x29, 0xcc, 0x29, 0x2b, 0x29, 0xf1,
-	0xbe, 0x17, 0x88, 0x20, 0xcc, 0x49, 0x93, 0x94, 0xd2, 0x93, 0x8e, 0x55, 0x52, 0x1a, 0x1e, 0x91,
-	0x94, 0x94, 0x86, 0x0f, 0xc4, 0x98, 0x25, 0xa5, 0xe1, 0xb1, 0x4b, 0x49, 0x69, 0x40, 0x3c, 0x13,
-	0x49, 0x89, 0x95, 0xa3, 0x97, 0x90, 0x94, 0xd2, 0x38, 0x62, 0x49, 0x49, 0xc1, 0xd6, 0x57, 0x52,
-	0xe2, 0xd1, 0x19, 0x8b, 0xa4, 0x94, 0x5e, 0xd1, 0xf5, 0xd9, 0xe2, 0x9b, 0x3f, 0x56, 0x60, 0x4e,
-	0xe8, 0x37, 0xbb, 0x24, 0xf8, 0xe8, 0xb4, 0x09, 0xda, 0x02, 0x48, 0x04, 0x5a, 0x64, 0x8a, 0x50,
-	0x66, 0xf4, 0xde, 0xda, 0x4a, 0x8e, 0x45, 0x24, 0x69, 0x02, 0x3d, 0x83, 0x72, 0xac, 0xa8, 0xa2,
-	0x3b, 0xc2, 0x51, 0xd3, 0x6e, 0x6b, 0xcb, 0x99, 0x76, 0xd9, 0x7d, 0x0b, 0x20, 0x91, 0x35, 0x25,
-	0x86, 0x8c, 0xd4, 0x2a, 0x31, 0x64, 0x35, 0x50, 0x8e, 0x21, 0x16, 0x03, 0x25, 0x06, 0x4d, 0x1d,
-	0x94, 0x18, 0x74, 0x99, 0xd2, 0x9a, 0x40, 0x6f, 0x00, 0x12, 0x49, 0x53, 0x62, 0xc8, 0x48, 0xa6,
-	0x12, 0x43, 0x8e, 0xfe, 0x09, 0xe7, 0x67, 0x2b, 0x25, 0xa1, 0xe2, 0xef, 0xc0, 0xac, 0x72, 0xb9,
-	0x87, 0x7e, 0xa5, 0xc4, 0x4f, 0xbd, 0xc7, 0xa8, 0xad, 0xe6, 0x1b, 0x25, 0xb8, 0x6d, 0xa8, 0xa4,
-	0x6e, 0xe3, 0xd0, 0x4a, 0x2a, 0x94, 0xda, 0x48, 0xb5, 0x3c, 0x93, 0x1c, 0x67, 0x07, 0x66, 0x95,
-	0xeb, 0x30, 0x89, 0x2a, 0xef, 0xae, 0x4e, 0xa2, 0xca, 0xbd, 0x41, 0xe3, 0xa8, 0x52, 0x77, 0x32,
-	0x12, 0x55, 0xf6, 0x9e, 0x46, 0xa2, 0xca, 0xb9, 0xde, 0xb2, 0x26, 0xd0, 0xbf, 0x60, 0x56, 0xb9,
-	0x10, 0x93, 0xa8, 0xf2, 0x6e, 0xde, 0x24, 0xaa, 0xfc, 0x3b, 0xb4, 0xd9, 0xf3, 0xb3, 0x95, 0x99,
-	0xe4, 0x8a, 0x39, 0x49, 0x83, 0x38, 0x57, 0x6b, 0x69, 0x50, 0xe4, 0x1b, 0x3d, 0x0d, 0x9a, 0xd2,
-	0x94, 0xa4, 0x41, 0x8c, 0xa5, 0xa4, 0x41, 0x1d, 0xa9, 0x96, 0x67, 0xca, 0x49, 0x83, 0x86, 0x2a,
-	0x4f, 0xfd, 0xd3, 0xd3, 0x90, 0x87, 0x2a, 0x25, 0x45, 0xa9, 0x69, 0xc8, 0x47, 0x95, 0x23, 0x98,
-	0x29, 0x69, 0xd0, 0x50, 0xe5, 0x69, 0x79, 0x7a, 0x1a, 0xb4, 0xd1, 0xe2, 0x34, 0x88, 0x91, 0xb6,
-	0xa1, 0x92, 0x3a, 0xe8, 0x23, 0x95, 0x4b, 0xd2, 0x47, 0x32, 0x09, 0x31, 0x47, 0x17, 0xb0, 0x26,
-	0xd0, 0x73, 0x98, 0x91, 0x27, 0x73, 0x94, 0x26, 0x14, 0x65, 0x0c, 0x33, 0x6b, 0x48, 0x07, 0x2b,
-	0x75, 0x38, 0x46, 0x2a, 0xa3, 0xe4, 0x22, 0xc9, 0x39, 0x4b, 0x73, 0x24, 0xf2, 0x38, 0x89, 0xd2,
-	0xb4, 0x92, 0x8b, 0x24, 0x73, 0xd8, 0xb5, 0x26, 0xd0, 0xdf, 0xa1, 0x92, 0x3a, 0x1a, 0x23, 0x95,
-	0x57, 0x72, 0x91, 0xe4, 0x9d, 0xa4, 0x2b, 0xe7, 0x67, 0x2b, 0xd3, 0x42, 0xaa, 0xaa, 0x89, 0xea,
-	0x6a, 0xf3, 0x87, 0x0a, 0x80, 0xd8, 0x01, 0xef, 0x3f, 0x79, 0x37, 0x5c, 0xf4, 0xcb, 0xe0, 0xa2,
-	0x9b, 0x2f, 0xed, 0xcf, 0xfc, 0xa5, 0xbd, 0xa1, 0xf8, 0x1b, 0x8a, 0xbf, 0xee, 0x14, 0x5f, 0x3e,
-	0x3f, 0x5b, 0x29, 0x94, 0x8d, 0x79, 0xa3, 0x55, 0x62, 0x87, 0xbb, 0x47, 0x3f, 0x05, 0x00, 0x00,
-	0xff, 0xff, 0x5c, 0x66, 0xc6, 0x69, 0x47, 0x28, 0x00, 0x00,
+	// 2325 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x5a, 0xcd, 0x72, 0x1b, 0x4b,
+	0x15, 0xf6, 0xd8, 0x96, 0x6c, 0x1d, 0xc5, 0x8e, 0xdd, 0xfe, 0x1b, 0x8b, 0x2c, 0xcc, 0x5c, 0xc7,
+	0xf8, 0x52, 0xc4, 0xba, 0xe5, 0x0b, 0x15, 0x92, 0xcb, 0x2d, 0x92, 0x9b, 0x60, 0x2a, 0xe0, 0x9b,
+	0xba, 0xc8, 0x09, 0x7f, 0x1b, 0xd7, 0x58, 0x6a, 0xcb, 0x43, 0xe4, 0x19, 0x65, 0x66, 0x1c, 0x92,
+	0x05, 0x05, 0x2c, 0x58, 0xf0, 0x06, 0x3c, 0x00, 0xef, 0x40, 0xd9, 0x0f, 0xc0, 0x8a, 0x05, 0x7b,
+	0xa0, 0x78, 0x15, 0xaa, 0x7f, 0xa6, 0xa7, 0x4f, 0xf7, 0x48, 0xb6, 0xe4, 0xa1, 0xa0, 0x5c, 0x2e,
+	0x6d, 0x46, 0xfd, 0x73, 0xfa, 0xeb, 0xaf, 0xbb, 0xbf, 0x3e, 0xdd, 0xa7, 0xa1, 0x7e, 0x1c, 0xf5,
+	0x82, 0x68, 0xa7, 0x1f, 0x47, 0x69, 0x44, 0x2a, 0xfc, 0x4f, 0xe3, 0x5e, 0x37, 0x8a, 0xba, 0x3d,
+	0xda, 0xf4, 0xfb, 0x41, 0xd3, 0x0f, 0xc3, 0x28, 0xf5, 0xd3, 0x20, 0x0a, 0x13, 0x51, 0xa8, 0xb1,
+	0xf6, 0xce, 0xef, 0x05, 0x1d, 0x3f, 0xa5, 0xcd, 0xec, 0x43, 0x66, 0x3c, 0xee, 0x06, 0xe9, 0xc9,
+	0xd9, 0xd1, 0x4e, 0x3b, 0x3a, 0x6d, 0x06, 0xe1, 0x71, 0x74, 0xd4, 0x8b, 0xde, 0x47, 0x7d, 0x1a,
+	0x36, 0x79, 0x76, 0xfb, 0x41, 0x97, 0x86, 0x0f, 0xba, 0x51, 0x7c, 0xda, 0x8c, 0xfa, 0xdc, 0x5e,
+	0x93, 0xfd, 0x91, 0x75, 0x37, 0x64, 0x93, 0xfc, 0xdf, 0xd1, 0xd9, 0x71, 0xf3, 0x38, 0xa0, 0xbd,
+	0xce, 0xe1, 0xa9, 0x9f, 0xbc, 0x91, 0x25, 0x7e, 0x34, 0xc8, 0xba, 0x9f, 0xf6, 0xfc, 0xe4, 0x81,
+	0xdf, 0xef, 0x3f, 0x48, 0xa3, 0xa8, 0xf7, 0x26, 0x48, 0x9b, 0x6f, 0xcf, 0x68, 0xfc, 0xa1, 0xd9,
+	0x8e, 0x7a, 0x3d, 0xda, 0x66, 0x2d, 0x1d, 0x46, 0x7d, 0x1a, 0xfb, 0x69, 0x14, 0xcb, 0x2e, 0x78,
+	0x7f, 0x75, 0x60, 0xe6, 0x69, 0xbb, 0x1d, 0x9d, 0x85, 0x29, 0x99, 0x87, 0xc9, 0xa0, 0xe3, 0x3a,
+	0x1b, 0xce, 0xf6, 0x5c, 0x6b, 0x32, 0xe8, 0x10, 0x02, 0xd3, 0xaf, 0x5f, 0xbf, 0x78, 0xee, 0x4e,
+	0x6e, 0x38, 0xdb, 0xb5, 0x16, 0xff, 0x66, 0x69, 0x2f, 0xfd, 0x53, 0xea, 0x4e, 0x89, 0x34, 0xf6,
+	0x4d, 0x1a, 0x30, 0xfb, 0x32, 0x68, 0xbf, 0x09, 0x59, 0xfa, 0x34, 0x4f, 0x57, 0xff, 0x59, 0xf9,
+	0x1f, 0x07, 0x61, 0xc7, 0xad, 0x88, 0xf2, 0xec, 0x9b, 0x6c, 0xc3, 0xcc, 0xd3, 0xb8, 0x7d, 0x12,
+	0xbc, 0xa3, 0x6e, 0x7d, 0xc3, 0xd9, 0xae, 0xef, 0xce, 0xef, 0x08, 0xea, 0x65, 0x6a, 0x2b, 0xcb,
+	0x26, 0x5f, 0x87, 0xca, 0xeb, 0x84, 0xc6, 0x89, 0x7b, 0x67, 0x63, 0x6a, 0xbb, 0xbe, 0x5b, 0x97,
+	0xe5, 0x58, 0x5a, 0x4b, 0xe4, 0x3c, 0xae, 0x5e, 0x9c, 0xaf, 0x4f, 0xce, 0x3a, 0xde, 0x13, 0x58,
+	0x7e, 0x16, 0x53, 0x3f, 0xa5, 0xb2, 0x37, 0x2d, 0xfa, 0xf6, 0x8c, 0x26, 0x29, 0x6b, 0xac, 0xef,
+	0x7f, 0xe8, 0x45, 0xbe, 0xe8, 0x99, 0xd6, 0x98, 0x2c, 0x97, 0x65, 0x7b, 0xdf, 0x87, 0x15, 0xc3,
+	0x42, 0xd2, 0x8f, 0xc2, 0x84, 0x92, 0x2d, 0xa8, 0xc6, 0x34, 0x39, 0xeb, 0xa5, 0x03, 0x2c, 0xc8,
+	0x5c, 0xef, 0x97, 0x40, 0x5a, 0xd4, 0xef, 0x18, 0x00, 0x4c, 0x56, 0xbf, 0x0d, 0x55, 0x3e, 0xa2,
+	0x09, 0xe7, 0xb5, 0xbe, 0x7b, 0x6f, 0x27, 0x1b, 0xc3, 0x1d, 0xbf, 0x1f, 0xec, 0xec, 0xb1, 0xbc,
+	0x03, 0x2a, 0xc7, 0xab, 0x25, 0xcb, 0x7a, 0x9f, 0xc3, 0x12, 0xb2, 0x3d, 0x22, 0xb4, 0x3f, 0x38,
+	0xb0, 0xfc, 0xba, 0xdf, 0xb9, 0x06, 0x3d, 0xe4, 0x19, 0xdc, 0xed, 0xd2, 0x38, 0xea, 0xd2, 0x38,
+	0x38, 0xec, 0x52, 0xf6, 0x93, 0x1d, 0x68, 0xec, 0x88, 0x19, 0xbb, 0x93, 0xcd, 0x58, 0xd1, 0x87,
+	0x2f, 0xfd, 0xe4, 0x4d, 0x6b, 0x3e, 0xab, 0xf2, 0x43, 0x5e, 0x83, 0x71, 0x6c, 0xc0, 0x18, 0xb1,
+	0x23, 0x5b, 0xb0, 0xfc, 0x9c, 0xf6, 0xa8, 0xd5, 0x0f, 0x83, 0x65, 0xef, 0x63, 0x58, 0x41, 0xe5,
+	0x92, 0xac, 0xe0, 0x02, 0x4c, 0x05, 0x9d, 0xc4, 0x75, 0x36, 0xa6, 0xb6, 0xe7, 0x5a, 0xec, 0xd3,
+	0x5b, 0x33, 0x8a, 0x66, 0x98, 0xbc, 0x14, 0x96, 0xf6, 0x83, 0x24, 0x35, 0xa1, 0x6e, 0xc3, 0x8c,
+	0x00, 0x23, 0xac, 0x14, 0x50, 0x26, 0xb3, 0xc9, 0xa7, 0x50, 0xeb, 0xfb, 0x5d, 0x7a, 0xc8, 0x06,
+	0x58, 0x92, 0xb5, 0x8a, 0x47, 0xfb, 0x2b, 0xbf, 0x4b, 0x5f, 0x84, 0xc7, 0x51, 0x6b, 0xb6, 0x2f,
+	0xbf, 0xbc, 0xf7, 0xb0, 0xc2, 0x5a, 0x3d, 0x88, 0x4e, 0x69, 0x7a, 0x12, 0x84, 0x5d, 0xd5, 0xee,
+	0x37, 0xcd, 0x76, 0x17, 0x64, 0xbb, 0x79, 0xd1, 0xeb, 0xb5, 0xfc, 0x31, 0xd4, 0x94, 0x29, 0xb2,
+	0x0c, 0x15, 0x3e, 0xf5, 0x38, 0xa7, 0xb5, 0x96, 0xf8, 0xa3, 0x56, 0xdb, 0xbf, 0x1d, 0x20, 0x88,
+	0x1b, 0x41, 0x6e, 0x93, 0xcd, 0xed, 0x5e, 0x4a, 0x63, 0x39, 0x8a, 0x6b, 0xe6, 0xdc, 0x66, 0x79,
+	0x0c, 0xa8, 0x2c, 0x46, 0x3e, 0x81, 0xd9, 0x28, 0xee, 0xd0, 0xf8, 0xf0, 0xe8, 0x83, 0x84, 0xb9,
+	0x82, 0xab, 0x1c, 0x44, 0x71, 0xca, 0x7b, 0xc6, 0x8b, 0x7d, 0xf1, 0x41, 0x5b, 0x3e, 0x53, 0x57,
+	0x5f, 0x3e, 0xe4, 0x13, 0xa8, 0xf6, 0xfd, 0x6e, 0x10, 0x76, 0xb9, 0x40, 0xd5, 0x77, 0x5d, 0x8b,
+	0x8c, 0x20, 0xf4, 0x45, 0x0d, 0x51, 0xce, 0xfb, 0x93, 0x03, 0xd3, 0x4c, 0x61, 0xac, 0xf5, 0xbb,
+	0x0c, 0x95, 0x1f, 0x9c, 0xfa, 0x41, 0x4f, 0xca, 0xa2, 0xf8, 0x43, 0xee, 0x41, 0x6d, 0x2f, 0x88,
+	0x93, 0x34, 0xcc, 0xc5, 0x31, 0x4f, 0x60, 0x0a, 0xb9, 0xef, 0xcb, 0x4c, 0xa9, 0x90, 0xd9, 0x7f,
+	0x36, 0x9d, 0x7c, 0xc1, 0xa2, 0x5b, 0x2d, 0x5e, 0x81, 0x32, 0x5b, 0x91, 0xff, 0x18, 0x16, 0x85,
+	0x50, 0x71, 0x1d, 0x94, 0xd4, 0xdf, 0x37, 0x17, 0x32, 0x12, 0x4b, 0x25, 0x72, 0x8f, 0x80, 0xe8,
+	0x75, 0xe5, 0xd4, 0xfa, 0xc8, 0x58, 0x7d, 0xa8, 0x6e, 0xb6, 0xf4, 0x7e, 0x06, 0x77, 0x99, 0x04,
+	0xe9, 0x8d, 0x96, 0xa3, 0x6d, 0x0f, 0x61, 0x21, 0x37, 0x3c, 0x0a, 0xa2, 0xdf, 0xc2, 0xa2, 0x50,
+	0x93, 0xd1, 0x89, 0x28, 0x47, 0xce, 0x1e, 0x01, 0xd1, 0x01, 0x8c, 0x82, 0xfd, 0x23, 0x58, 0x14,
+	0xaa, 0x33, 0x84, 0x4f, 0x6f, 0x0b, 0x48, 0x5e, 0x68, 0x88, 0x84, 0x2d, 0xeb, 0xe5, 0x94, 0x7e,
+	0x85, 0xb0, 0xc0, 0xd6, 0x28, 0xc2, 0x76, 0xdf, 0x14, 0x11, 0xcc, 0xce, 0xb5, 0xf4, 0xe3, 0x9f,
+	0x0e, 0xdc, 0xcd, 0x1b, 0xbc, 0x71, 0x8a, 0xf0, 0x77, 0x47, 0xf9, 0x2d, 0x63, 0xbb, 0x4a, 0x04,
+	0xa6, 0x9f, 0xd3, 0xa4, 0x2d, 0x45, 0x80, 0x7f, 0x93, 0x4d, 0xa8, 0xee, 0xb1, 0x21, 0x48, 0xdc,
+	0x2a, 0x1f, 0x91, 0x3b, 0x72, 0x44, 0x78, 0x62, 0x4b, 0xe6, 0xe9, 0x32, 0x31, 0x33, 0x54, 0x26,
+	0x98, 0xd3, 0x14, 0xfd, 0x3a, 0xa4, 0xb1, 0x3b, 0x6b, 0xcf, 0x3e, 0x91, 0x53, 0xe0, 0x34, 0x49,
+	0xcf, 0xeb, 0x52, 0xaf, 0x20, 0xf3, 0xd0, 0x6c, 0xa7, 0x29, 0xb3, 0x70, 0xd9, 0x86, 0x2e, 0xcb,
+	0x99, 0x4e, 0x13, 0x06, 0x50, 0xae, 0xd3, 0x34, 0x26, 0x34, 0xcd, 0x69, 0x1a, 0x93, 0x9e, 0xb2,
+	0x9d, 0xa6, 0x31, 0x3b, 0x92, 0x3b, 0x4d, 0x43, 0x59, 0xd6, 0x9c, 0x26, 0x51, 0xee, 0x4a, 0x4e,
+	0x13, 0xc6, 0xa4, 0x9c, 0x26, 0x03, 0xea, 0x60, 0xa7, 0x29, 0xa3, 0xec, 0x5a, 0xd2, 0xa3, 0xfc,
+	0x11, 0xdc, 0xc1, 0x1b, 0xa4, 0x3e, 0x6f, 0xa1, 0x72, 0x70, 0xe2, 0xc7, 0xb6, 0xf4, 0x78, 0x50,
+	0x3d, 0x8e, 0x03, 0x1a, 0x76, 0x24, 0x60, 0x90, 0xc4, 0xbe, 0xf2, 0x59, 0xb7, 0x78, 0x0e, 0xf9,
+	0x16, 0x54, 0x8f, 0x07, 0x4a, 0xcc, 0x17, 0x5c, 0x0d, 0x76, 0x27, 0x5a, 0xb2, 0x8c, 0x52, 0x87,
+	0xef, 0x65, 0xbe, 0x02, 0x6f, 0x38, 0xe3, 0x74, 0xcb, 0x9c, 0xfc, 0x99, 0x31, 0x51, 0x4a, 0x29,
+	0xc3, 0x67, 0xb0, 0x84, 0x6a, 0xcb, 0x89, 0xb0, 0x69, 0xcc, 0x59, 0x5c, 0x3b, 0x9b, 0xb1, 0x3f,
+	0x17, 0x2e, 0x01, 0x6a, 0xb8, 0x1c, 0x4d, 0x78, 0x04, 0x8b, 0x9a, 0xe5, 0x91, 0x40, 0xfd, 0xde,
+	0xc9, 0xb6, 0xfb, 0x71, 0x08, 0x29, 0x47, 0x0b, 0x3e, 0x83, 0x25, 0x04, 0x61, 0xa4, 0x0e, 0x6c,
+	0x66, 0x6e, 0xc2, 0x30, 0x5e, 0xbd, 0x6f, 0xc0, 0x92, 0x56, 0x6a, 0x88, 0x06, 0xac, 0xa0, 0x82,
+	0x4a, 0x01, 0xfa, 0xb0, 0xc8, 0x0f, 0x30, 0x08, 0xe0, 0x96, 0xb9, 0xfe, 0x0d, 0x92, 0xae, 0xb5,
+	0xfa, 0xff, 0xe5, 0x08, 0x4f, 0x07, 0x75, 0xeb, 0x06, 0xad, 0xfd, 0x3f, 0x3a, 0x30, 0xf5, 0xca,
+	0xef, 0x16, 0x79, 0x1d, 0xfc, 0x72, 0x65, 0x92, 0xa7, 0x88, 0xcb, 0x95, 0x65, 0xa8, 0xec, 0xfb,
+	0x47, 0xb4, 0x27, 0xdd, 0x0e, 0xf1, 0xa7, 0xd0, 0xef, 0x18, 0x4f, 0x14, 0xbe, 0x0b, 0x0b, 0x62,
+	0x59, 0x33, 0x7d, 0x91, 0x54, 0x6f, 0x9a, 0x2b, 0x40, 0xd7, 0x20, 0x25, 0x08, 0x0f, 0xb3, 0x63,
+	0x0b, 0xaf, 0x29, 0xe7, 0x85, 0x67, 0x4c, 0x5c, 0xa4, 0x5e, 0x72, 0xda, 0xfe, 0x14, 0xe6, 0xd9,
+	0x92, 0xd5, 0x1a, 0x2c, 0x47, 0x0a, 0xbe, 0x23, 0x0e, 0x34, 0xa3, 0xc2, 0xf9, 0x0d, 0x2c, 0x88,
+	0x25, 0x38, 0x2a, 0x03, 0xe5, 0x28, 0xc0, 0xc3, 0xec, 0xd0, 0x33, 0x2a, 0x6e, 0x0f, 0x16, 0xc4,
+	0x72, 0x1d, 0x4c, 0xa4, 0x77, 0x3f, 0x3b, 0x95, 0xbc, 0xf2, 0xbb, 0x43, 0x56, 0xfe, 0x92, 0x56,
+	0x4c, 0xad, 0xfb, 0x9e, 0xf0, 0xfe, 0x75, 0x58, 0x9b, 0xe6, 0xaa, 0x47, 0xb4, 0x5c, 0x6b, 0xcd,
+	0xff, 0xc3, 0x81, 0x79, 0xd5, 0xdc, 0x8d, 0x5b, 0xf1, 0x7f, 0x9e, 0x84, 0x0a, 0x5f, 0x87, 0xa5,
+	0x9e, 0x34, 0xd8, 0x19, 0x42, 0x5e, 0xbc, 0x56, 0x8a, 0xfd, 0x56, 0x99, 0xcd, 0xf6, 0x93, 0xa7,
+	0x49, 0x42, 0x53, 0x53, 0x1b, 0x78, 0x62, 0x4b, 0xe6, 0xb1, 0x93, 0xc6, 0xcb, 0x28, 0xa5, 0x89,
+	0x3b, 0x83, 0x8e, 0x92, 0x2c, 0xad, 0x25, 0x72, 0xc8, 0x16, 0x4c, 0xa7, 0x7e, 0x37, 0x71, 0xc1,
+	0x1c, 0x7e, 0x25, 0x30, 0x3c, 0x9f, 0x89, 0x51, 0xc2, 0xb7, 0x1b, 0xb7, 0x6e, 0x6f, 0x0f, 0xb9,
+	0x18, 0x89, 0x32, 0xb6, 0x87, 0x22, 0xce, 0x4a, 0x97, 0x6d, 0xc8, 0xa2, 0x94, 0xed, 0xa1, 0xc8,
+	0xda, 0x97, 0xec, 0xa5, 0xf2, 0x3c, 0x86, 0x3d, 0x14, 0xd4, 0x70, 0xa9, 0x1e, 0xca, 0x38, 0xa0,
+	0x72, 0x0f, 0x65, 0x1c, 0x42, 0x4a, 0xf6, 0x50, 0xc6, 0xe9, 0x80, 0xf2, 0x50, 0x86, 0xf1, 0x9a,
+	0x7b, 0x28, 0xe2, 0x6c, 0x7c, 0x05, 0x0f, 0x05, 0x61, 0xc9, 0x3c, 0x14, 0x0c, 0x70, 0xa0, 0x87,
+	0x22, 0x49, 0x2a, 0xc5, 0x43, 0x41, 0xdd, 0xba, 0x41, 0x7a, 0xf5, 0x17, 0x07, 0x2a, 0x5c, 0x14,
+	0x8a, 0xf4, 0x8a, 0x6b, 0xd3, 0xa4, 0xa6, 0x4d, 0x1e, 0x88, 0xf0, 0x9a, 0x04, 0x85, 0x89, 0x16,
+	0x59, 0x4a, 0xe7, 0xa6, 0xb1, 0xce, 0x7d, 0xe5, 0xa7, 0x27, 0x59, 0x30, 0x89, 0x7d, 0x33, 0x5b,
+	0x3e, 0x6b, 0x58, 0x5e, 0x9e, 0x62, 0xa1, 0x12, 0x59, 0xac, 0xde, 0x51, 0x2f, 0x3a, 0x72, 0x97,
+	0x37, 0x9c, 0xed, 0x3b, 0x2d, 0xfe, 0x6d, 0x4b, 0x88, 0xa8, 0x71, 0xd9, 0x8a, 0x11, 0xa5, 0x6c,
+	0x09, 0x91, 0xb5, 0x2f, 0x99, 0xec, 0x52, 0x3e, 0xb1, 0x84, 0xa0, 0x86, 0x4b, 0x95, 0x90, 0x71,
+	0x40, 0xe5, 0x12, 0x32, 0x0e, 0x21, 0x25, 0x4b, 0xc8, 0x38, 0x1d, 0x50, 0x12, 0x32, 0x8c, 0xd7,
+	0x5c, 0x42, 0xc4, 0x56, 0x76, 0x05, 0x09, 0x41, 0x58, 0x32, 0x09, 0xc1, 0x00, 0x07, 0x4a, 0x88,
+	0x24, 0xa9, 0x14, 0x09, 0x41, 0xdd, 0xba, 0x41, 0x12, 0xf2, 0x2b, 0x98, 0x66, 0x2e, 0xc3, 0x40,
+	0x01, 0x31, 0x9c, 0x1b, 0x56, 0x36, 0x13, 0x07, 0x5e, 0x4f, 0x89, 0x4a, 0x75, 0xa0, 0xa8, 0xd8,
+	0x11, 0x14, 0xee, 0xaa, 0x5c, 0x16, 0x38, 0xe0, 0x85, 0xec, 0x08, 0x8a, 0xa8, 0x7b, 0xc9, 0x9d,
+	0x3f, 0x2f, 0x64, 0x44, 0x50, 0xf4, 0x46, 0x4b, 0x8d, 0xa0, 0x8c, 0x8e, 0x48, 0x45, 0x50, 0x46,
+	0x27, 0xa2, 0xe4, 0x08, 0xca, 0xe8, 0xd8, 0x55, 0x04, 0x65, 0x08, 0x9f, 0x79, 0x04, 0x85, 0xbb,
+	0xa3, 0x57, 0x88, 0xa0, 0xe8, 0x38, 0xb2, 0x08, 0x0a, 0xc2, 0x36, 0x30, 0x82, 0x22, 0xd8, 0x29,
+	0x25, 0x82, 0xa2, 0xf7, 0xe8, 0xe6, 0x2c, 0xf1, 0xdd, 0xdf, 0x2d, 0xc2, 0x1d, 0xbe, 0x1e, 0x0f,
+	0x68, 0xfc, 0x2e, 0x68, 0x53, 0xf2, 0x0c, 0x20, 0x8f, 0x46, 0x12, 0x57, 0x12, 0x69, 0x05, 0x37,
+	0x1b, 0xeb, 0x05, 0x39, 0x72, 0x88, 0x26, 0xc8, 0xe7, 0x30, 0x9b, 0x85, 0x0f, 0xc9, 0xaa, 0x2c,
+	0x68, 0x04, 0x2a, 0x1b, 0x6b, 0x56, 0xba, 0xaa, 0xfe, 0x0c, 0x20, 0x8f, 0xe1, 0x29, 0x0c, 0x56,
+	0x5c, 0x51, 0x61, 0xb0, 0x03, 0x7e, 0x02, 0x43, 0x16, 0xf9, 0x52, 0x18, 0x8c, 0x50, 0x98, 0xc2,
+	0x60, 0xc6, 0xe4, 0xbc, 0x09, 0xf2, 0x25, 0x40, 0x1e, 0xbf, 0x53, 0x18, 0xac, 0xf8, 0xa0, 0xc2,
+	0x50, 0x10, 0xec, 0x83, 0x8b, 0xf3, 0xf5, 0xaa, 0x0c, 0x59, 0xef, 0xc3, 0x1c, 0x7a, 0xc9, 0x42,
+	0xbe, 0x86, 0xf8, 0xc3, 0x41, 0xfb, 0xc6, 0xbd, 0xe2, 0x4c, 0x05, 0x6e, 0x0f, 0xea, 0xda, 0xd3,
+	0x13, 0xb2, 0xae, 0x51, 0x69, 0x58, 0x6a, 0x14, 0x65, 0x29, 0x3b, 0xfb, 0x30, 0x87, 0xde, 0x7e,
+	0x28, 0x54, 0x45, 0x0f, 0x53, 0x14, 0xaa, 0xc2, 0xe7, 0x22, 0x02, 0x95, 0xf6, 0x00, 0x41, 0xa1,
+	0xb2, 0x1f, 0x25, 0x28, 0x54, 0x05, 0x6f, 0x39, 0xbc, 0x09, 0xf2, 0x0b, 0x98, 0x43, 0xaf, 0x3f,
+	0x14, 0xaa, 0xa2, 0x67, 0x26, 0x0a, 0x55, 0xf1, 0x83, 0x91, 0xb9, 0x8b, 0xf3, 0xf5, 0x5a, 0xfe,
+	0x9e, 0x2a, 0x1f, 0x06, 0x79, 0xaa, 0x36, 0x86, 0x01, 0xc5, 0x2a, 0xcc, 0x61, 0x30, 0xc2, 0x2a,
+	0xf9, 0x30, 0x48, 0x5b, 0x68, 0x18, 0xb0, 0xa5, 0x46, 0x51, 0x56, 0xc1, 0x30, 0x18, 0xa8, 0x8a,
+	0x42, 0x5d, 0xe6, 0x30, 0x14, 0xa1, 0xd2, 0xe2, 0x2e, 0x78, 0x18, 0x8a, 0x51, 0x15, 0x44, 0x87,
+	0xd0, 0x30, 0x18, 0xa8, 0x8a, 0x02, 0x57, 0xe6, 0x30, 0x18, 0xd6, 0xb2, 0x61, 0x90, 0x96, 0xf6,
+	0xa0, 0xae, 0x1d, 0xf3, 0x09, 0xd6, 0x12, 0xfd, 0x40, 0xa6, 0x20, 0x16, 0xdc, 0x0a, 0x78, 0x13,
+	0xe4, 0x09, 0xd4, 0xd4, 0xb9, 0x9c, 0xe8, 0x82, 0x82, 0x6c, 0xb8, 0x76, 0x86, 0x4e, 0x96, 0x76,
+	0x34, 0x26, 0x58, 0x51, 0x0a, 0x91, 0x14, 0x9c, 0xa4, 0x05, 0x12, 0x75, 0x98, 0x24, 0xba, 0xac,
+	0x14, 0x22, 0xb1, 0x8e, 0xba, 0xde, 0x04, 0xf9, 0x09, 0xd4, 0xb5, 0x83, 0x31, 0xc1, 0xba, 0x52,
+	0x88, 0xa4, 0xe8, 0x1c, 0x5d, 0xbf, 0x38, 0x5f, 0x9f, 0xc9, 0x2e, 0xaa, 0x9e, 0x40, 0x4d, 0x5d,
+	0xef, 0x2a, 0x50, 0xe6, 0x55, 0x71, 0xc3, 0xb5, 0x33, 0x14, 0xa8, 0xc7, 0x30, 0x23, 0xef, 0x63,
+	0xc9, 0x8a, 0xc6, 0xa2, 0x56, 0x7b, 0xd5, 0x4c, 0xd6, 0x29, 0x51, 0xb7, 0xa2, 0xaa, 0x75, 0xf3,
+	0x9a, 0xb6, 0xe1, 0xda, 0x19, 0x7a, 0xeb, 0xf2, 0x3e, 0x51, 0xb5, 0x8e, 0xef, 0x17, 0x1b, 0xab,
+	0x66, 0xb2, 0xaa, 0xfb, 0x02, 0x6a, 0xea, 0x3e, 0x54, 0xb5, 0x6e, 0x5e, 0xb6, 0x36, 0x5c, 0x3b,
+	0x43, 0x5a, 0xa8, 0x5d, 0x9c, 0xaf, 0x57, 0xc4, 0x1d, 0xbf, 0xda, 0x12, 0xb9, 0x53, 0x8b, 0xe9,
+	0xd2, 0xdc, 0x02, 0x63, 0x4b, 0x44, 0x5e, 0x8b, 0xda, 0x12, 0xb9, 0x09, 0x9d, 0x33, 0xdd, 0xc0,
+	0x9a, 0x95, 0x6e, 0x6f, 0x89, 0x08, 0x83, 0xe5, 0x28, 0x1a, 0x5b, 0xa2, 0x8d, 0x21, 0x73, 0x65,
+	0xd0, 0x96, 0x58, 0x84, 0xc1, 0x74, 0xb2, 0xf4, 0x2d, 0x11, 0x61, 0xb0, 0x1c, 0x3e, 0x63, 0x4b,
+	0x44, 0x46, 0xe4, 0x96, 0xc8, 0xd2, 0x1a, 0xd2, 0xf3, 0xdf, 0xfd, 0xdb, 0x2a, 0xcc, 0xf2, 0xf9,
+	0xfa, 0xea, 0x7d, 0x78, 0xbb, 0x4f, 0xfe, 0x7f, 0xec, 0x93, 0xb7, 0x5e, 0xe0, 0x7f, 0xd9, 0x0b,
+	0xbc, 0x75, 0x3f, 0x6e, 0xdd, 0x8f, 0x5b, 0xf7, 0xe3, 0xd6, 0xfd, 0xb8, 0x75, 0x3f, 0xfe, 0x47,
+	0xee, 0x47, 0x2e, 0x02, 0x22, 0x48, 0x82, 0xd9, 0xd3, 0x6f, 0x74, 0x0d, 0x11, 0xc0, 0x97, 0xce,
+	0x4a, 0x04, 0x84, 0x15, 0x9d, 0x42, 0x64, 0xc3, 0xb5, 0x33, 0x6c, 0x11, 0xc0, 0x48, 0xec, 0x2b,
+	0x7f, 0x43, 0x04, 0x0a, 0x90, 0xa8, 0xdb, 0x68, 0x24, 0x02, 0x85, 0x48, 0xac, 0xbb, 0x72, 0x5d,
+	0x04, 0x30, 0x12, 0xfb, 0xf2, 0xde, 0x10, 0x01, 0x6c, 0x47, 0x8a, 0x80, 0xb0, 0xa1, 0x68, 0x16,
+	0x4f, 0xe5, 0x30, 0xcd, 0xfa, 0xeb, 0x20, 0x83, 0x66, 0xfc, 0x80, 0x49, 0xd1, 0x2c, 0xac, 0xe8,
+	0x34, 0x23, 0x1b, 0xae, 0x9d, 0x61, 0xd3, 0x8c, 0x91, 0xd8, 0xcf, 0xc7, 0x0c, 0x9a, 0x0b, 0x90,
+	0xa8, 0x97, 0x4d, 0x88, 0xe6, 0x42, 0x24, 0xd6, 0xbb, 0x2b, 0x9d, 0x66, 0x8c, 0xc4, 0x7e, 0x08,
+	0x66, 0xd0, 0x8c, 0xed, 0x48, 0x9a, 0x79, 0x62, 0x63, 0xf6, 0xe2, 0x7c, 0x7d, 0x7a, 0xd6, 0x59,
+	0x70, 0x8e, 0xaa, 0xfc, 0x8a, 0xf7, 0xd3, 0xff, 0x04, 0x00, 0x00, 0xff, 0xff, 0xe0, 0x33, 0x1e,
+	0x50, 0x3c, 0x37, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -3842,10 +4851,10 @@ var _ grpc.ClientConn
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
-// AccountServiceClient is the client API for AccountService service.
+// FolioServiceClient is the client API for FolioService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type AccountServiceClient interface {
+type FolioServiceClient interface {
 	// The convention requires the rpc names have Create/Read/Update/List/Delete
 	// as a prefix. The type is inferred from the response (except for delete),
 	// so multiple objects can have CURDL handlers in the same service, provided
@@ -3858,6 +4867,7 @@ type AccountServiceClient interface {
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
 	ReadAccount(ctx context.Context, in *ReadAccountRequest, opts ...grpc.CallOption) (*ReadAccountResponse, error)
+	//rpc ReadAccountByEmail ( ReadAccountRequest ) returns ( ReadAccountResponse ) {}
 	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error)
 	ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error)
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error)
@@ -3872,198 +4882,300 @@ type AccountServiceClient interface {
 	ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error)
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error)
+	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
+	ReadTag(ctx context.Context, in *ReadTagRequest, opts ...grpc.CallOption) (*ReadTagResponse, error)
+	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error)
+	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
+	CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*CreateNoteResponse, error)
+	ReadNote(ctx context.Context, in *ReadNoteRequest, opts ...grpc.CallOption) (*ReadNoteResponse, error)
+	UpdateNote(ctx context.Context, in *UpdateNoteRequest, opts ...grpc.CallOption) (*UpdateNoteResponse, error)
+	ListNote(ctx context.Context, in *ListNoteRequest, opts ...grpc.CallOption) (*ListNoteResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*DeleteNoteResponse, error)
 }
 
-type accountServiceClient struct {
+type folioServiceClient struct {
 	cc *grpc.ClientConn
 }
 
-func NewAccountServiceClient(cc *grpc.ClientConn) AccountServiceClient {
-	return &accountServiceClient{cc}
+func NewFolioServiceClient(cc *grpc.ClientConn) FolioServiceClient {
+	return &folioServiceClient{cc}
 }
 
-func (c *accountServiceClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
+func (c *folioServiceClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
 	out := new(CreateUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/CreateUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/CreateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) ReadUser(ctx context.Context, in *ReadUserRequest, opts ...grpc.CallOption) (*ReadUserResponse, error) {
+func (c *folioServiceClient) ReadUser(ctx context.Context, in *ReadUserRequest, opts ...grpc.CallOption) (*ReadUserResponse, error) {
 	out := new(ReadUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/ReadUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ReadUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
+func (c *folioServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	out := new(UpdateUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/UpdateUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/UpdateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) ListUser(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*ListUserResponse, error) {
+func (c *folioServiceClient) ListUser(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*ListUserResponse, error) {
 	out := new(ListUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/ListUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ListUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error) {
+func (c *folioServiceClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error) {
 	out := new(DeleteUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/DeleteUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/DeleteUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
+func (c *folioServiceClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
 	out := new(CreateAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/CreateAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/CreateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) ReadAccount(ctx context.Context, in *ReadAccountRequest, opts ...grpc.CallOption) (*ReadAccountResponse, error) {
+func (c *folioServiceClient) ReadAccount(ctx context.Context, in *ReadAccountRequest, opts ...grpc.CallOption) (*ReadAccountResponse, error) {
 	out := new(ReadAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/ReadAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ReadAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error) {
+func (c *folioServiceClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error) {
 	out := new(UpdateAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/UpdateAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/UpdateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error) {
+func (c *folioServiceClient) ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error) {
 	out := new(ListAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/ListAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ListAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error) {
+func (c *folioServiceClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error) {
 	out := new(DeleteAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/DeleteAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/DeleteAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) CreateArchive(ctx context.Context, in *CreateArchiveRequest, opts ...grpc.CallOption) (*CreateArchiveResponse, error) {
+func (c *folioServiceClient) CreateArchive(ctx context.Context, in *CreateArchiveRequest, opts ...grpc.CallOption) (*CreateArchiveResponse, error) {
 	out := new(CreateArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/CreateArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/CreateArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) ReadArchive(ctx context.Context, in *ReadArchiveRequest, opts ...grpc.CallOption) (*ReadArchiveResponse, error) {
+func (c *folioServiceClient) ReadArchive(ctx context.Context, in *ReadArchiveRequest, opts ...grpc.CallOption) (*ReadArchiveResponse, error) {
 	out := new(ReadArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/ReadArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ReadArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) UpdateArchive(ctx context.Context, in *UpdateArchiveRequest, opts ...grpc.CallOption) (*UpdateArchiveResponse, error) {
+func (c *folioServiceClient) UpdateArchive(ctx context.Context, in *UpdateArchiveRequest, opts ...grpc.CallOption) (*UpdateArchiveResponse, error) {
 	out := new(UpdateArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/UpdateArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/UpdateArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) ListArchive(ctx context.Context, in *ListArchiveRequest, opts ...grpc.CallOption) (*ListArchiveResponse, error) {
+func (c *folioServiceClient) ListArchive(ctx context.Context, in *ListArchiveRequest, opts ...grpc.CallOption) (*ListArchiveResponse, error) {
 	out := new(ListArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/ListArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ListArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) DeleteArchive(ctx context.Context, in *DeleteArchiveRequest, opts ...grpc.CallOption) (*DeleteArchiveResponse, error) {
+func (c *folioServiceClient) DeleteArchive(ctx context.Context, in *DeleteArchiveRequest, opts ...grpc.CallOption) (*DeleteArchiveResponse, error) {
 	out := new(DeleteArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/DeleteArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/DeleteArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) CreateFolio(ctx context.Context, in *CreateFolioRequest, opts ...grpc.CallOption) (*CreateFolioResponse, error) {
+func (c *folioServiceClient) CreateFolio(ctx context.Context, in *CreateFolioRequest, opts ...grpc.CallOption) (*CreateFolioResponse, error) {
 	out := new(CreateFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/CreateFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/CreateFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) ReadFolio(ctx context.Context, in *ReadFolioRequest, opts ...grpc.CallOption) (*ReadFolioResponse, error) {
+func (c *folioServiceClient) ReadFolio(ctx context.Context, in *ReadFolioRequest, opts ...grpc.CallOption) (*ReadFolioResponse, error) {
 	out := new(ReadFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/ReadFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ReadFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) UpdateFolio(ctx context.Context, in *UpdateFolioRequest, opts ...grpc.CallOption) (*UpdateFolioResponse, error) {
+func (c *folioServiceClient) UpdateFolio(ctx context.Context, in *UpdateFolioRequest, opts ...grpc.CallOption) (*UpdateFolioResponse, error) {
 	out := new(UpdateFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/UpdateFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/UpdateFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error) {
+func (c *folioServiceClient) ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error) {
 	out := new(ListFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/ListFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ListFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountServiceClient) DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error) {
+func (c *folioServiceClient) DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error) {
 	out := new(DeleteFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountService/DeleteFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/DeleteFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AccountServiceServer is the server API for AccountService service.
-type AccountServiceServer interface {
+func (c *folioServiceClient) CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error) {
+	out := new(CreateTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/CreateTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioServiceClient) ReadTag(ctx context.Context, in *ReadTagRequest, opts ...grpc.CallOption) (*ReadTagResponse, error) {
+	out := new(ReadTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ReadTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioServiceClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error) {
+	out := new(UpdateTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/UpdateTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioServiceClient) ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagResponse, error) {
+	out := new(ListTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ListTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioServiceClient) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error) {
+	out := new(DeleteTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/DeleteTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioServiceClient) CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*CreateNoteResponse, error) {
+	out := new(CreateNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/CreateNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioServiceClient) ReadNote(ctx context.Context, in *ReadNoteRequest, opts ...grpc.CallOption) (*ReadNoteResponse, error) {
+	out := new(ReadNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ReadNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioServiceClient) UpdateNote(ctx context.Context, in *UpdateNoteRequest, opts ...grpc.CallOption) (*UpdateNoteResponse, error) {
+	out := new(UpdateNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/UpdateNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioServiceClient) ListNote(ctx context.Context, in *ListNoteRequest, opts ...grpc.CallOption) (*ListNoteResponse, error) {
+	out := new(ListNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/ListNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioServiceClient) DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*DeleteNoteResponse, error) {
+	out := new(DeleteNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioService/DeleteNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FolioServiceServer is the server API for FolioService service.
+type FolioServiceServer interface {
 	// The convention requires the rpc names have Create/Read/Update/List/Delete
 	// as a prefix. The type is inferred from the response (except for delete),
 	// so multiple objects can have CURDL handlers in the same service, provided
@@ -4076,6 +5188,7 @@ type AccountServiceServer interface {
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
 	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
 	ReadAccount(context.Context, *ReadAccountRequest) (*ReadAccountResponse, error)
+	//rpc ReadAccountByEmail ( ReadAccountRequest ) returns ( ReadAccountResponse ) {}
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)
 	ListAccount(context.Context, *ListAccountRequest) (*ListAccountResponse, error)
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*DeleteAccountResponse, error)
@@ -4090,465 +5203,697 @@ type AccountServiceServer interface {
 	ListFolio(context.Context, *ListFolioRequest) (*ListFolioResponse, error)
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteFolio(context.Context, *DeleteFolioRequest) (*DeleteFolioResponse, error)
+	CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
+	ReadTag(context.Context, *ReadTagRequest) (*ReadTagResponse, error)
+	UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error)
+	ListTag(context.Context, *ListTagRequest) (*ListTagResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
+	CreateNote(context.Context, *CreateNoteRequest) (*CreateNoteResponse, error)
+	ReadNote(context.Context, *ReadNoteRequest) (*ReadNoteResponse, error)
+	UpdateNote(context.Context, *UpdateNoteRequest) (*UpdateNoteResponse, error)
+	ListNote(context.Context, *ListNoteRequest) (*ListNoteResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteNote(context.Context, *DeleteNoteRequest) (*DeleteNoteResponse, error)
 }
 
-func RegisterAccountServiceServer(s *grpc.Server, srv AccountServiceServer) {
-	s.RegisterService(&_AccountService_serviceDesc, srv)
+func RegisterFolioServiceServer(s *grpc.Server, srv FolioServiceServer) {
+	s.RegisterService(&_FolioService_serviceDesc, srv)
 }
 
-func _AccountService_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).CreateUser(ctx, in)
+		return srv.(FolioServiceServer).CreateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/CreateUser",
+		FullMethod: "/folio.FolioService/CreateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).CreateUser(ctx, req.(*CreateUserRequest))
+		return srv.(FolioServiceServer).CreateUser(ctx, req.(*CreateUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ReadUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_ReadUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).ReadUser(ctx, in)
+		return srv.(FolioServiceServer).ReadUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/ReadUser",
+		FullMethod: "/folio.FolioService/ReadUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ReadUser(ctx, req.(*ReadUserRequest))
+		return srv.(FolioServiceServer).ReadUser(ctx, req.(*ReadUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).UpdateUser(ctx, in)
+		return srv.(FolioServiceServer).UpdateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/UpdateUser",
+		FullMethod: "/folio.FolioService/UpdateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+		return srv.(FolioServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ListUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_ListUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).ListUser(ctx, in)
+		return srv.(FolioServiceServer).ListUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/ListUser",
+		FullMethod: "/folio.FolioService/ListUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ListUser(ctx, req.(*ListUserRequest))
+		return srv.(FolioServiceServer).ListUser(ctx, req.(*ListUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).DeleteUser(ctx, in)
+		return srv.(FolioServiceServer).DeleteUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/DeleteUser",
+		FullMethod: "/folio.FolioService/DeleteUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).DeleteUser(ctx, req.(*DeleteUserRequest))
+		return srv.(FolioServiceServer).DeleteUser(ctx, req.(*DeleteUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).CreateAccount(ctx, in)
+		return srv.(FolioServiceServer).CreateAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/CreateAccount",
+		FullMethod: "/folio.FolioService/CreateAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).CreateAccount(ctx, req.(*CreateAccountRequest))
+		return srv.(FolioServiceServer).CreateAccount(ctx, req.(*CreateAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ReadAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_ReadAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).ReadAccount(ctx, in)
+		return srv.(FolioServiceServer).ReadAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/ReadAccount",
+		FullMethod: "/folio.FolioService/ReadAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ReadAccount(ctx, req.(*ReadAccountRequest))
+		return srv.(FolioServiceServer).ReadAccount(ctx, req.(*ReadAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).UpdateAccount(ctx, in)
+		return srv.(FolioServiceServer).UpdateAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/UpdateAccount",
+		FullMethod: "/folio.FolioService/UpdateAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).UpdateAccount(ctx, req.(*UpdateAccountRequest))
+		return srv.(FolioServiceServer).UpdateAccount(ctx, req.(*UpdateAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ListAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_ListAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).ListAccount(ctx, in)
+		return srv.(FolioServiceServer).ListAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/ListAccount",
+		FullMethod: "/folio.FolioService/ListAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ListAccount(ctx, req.(*ListAccountRequest))
+		return srv.(FolioServiceServer).ListAccount(ctx, req.(*ListAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).DeleteAccount(ctx, in)
+		return srv.(FolioServiceServer).DeleteAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/DeleteAccount",
+		FullMethod: "/folio.FolioService/DeleteAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+		return srv.(FolioServiceServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_CreateArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_CreateArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).CreateArchive(ctx, in)
+		return srv.(FolioServiceServer).CreateArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/CreateArchive",
+		FullMethod: "/folio.FolioService/CreateArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).CreateArchive(ctx, req.(*CreateArchiveRequest))
+		return srv.(FolioServiceServer).CreateArchive(ctx, req.(*CreateArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ReadArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_ReadArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).ReadArchive(ctx, in)
+		return srv.(FolioServiceServer).ReadArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/ReadArchive",
+		FullMethod: "/folio.FolioService/ReadArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ReadArchive(ctx, req.(*ReadArchiveRequest))
+		return srv.(FolioServiceServer).ReadArchive(ctx, req.(*ReadArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_UpdateArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_UpdateArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).UpdateArchive(ctx, in)
+		return srv.(FolioServiceServer).UpdateArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/UpdateArchive",
+		FullMethod: "/folio.FolioService/UpdateArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).UpdateArchive(ctx, req.(*UpdateArchiveRequest))
+		return srv.(FolioServiceServer).UpdateArchive(ctx, req.(*UpdateArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ListArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_ListArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).ListArchive(ctx, in)
+		return srv.(FolioServiceServer).ListArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/ListArchive",
+		FullMethod: "/folio.FolioService/ListArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ListArchive(ctx, req.(*ListArchiveRequest))
+		return srv.(FolioServiceServer).ListArchive(ctx, req.(*ListArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_DeleteArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_DeleteArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).DeleteArchive(ctx, in)
+		return srv.(FolioServiceServer).DeleteArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/DeleteArchive",
+		FullMethod: "/folio.FolioService/DeleteArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).DeleteArchive(ctx, req.(*DeleteArchiveRequest))
+		return srv.(FolioServiceServer).DeleteArchive(ctx, req.(*DeleteArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_CreateFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_CreateFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).CreateFolio(ctx, in)
+		return srv.(FolioServiceServer).CreateFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/CreateFolio",
+		FullMethod: "/folio.FolioService/CreateFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).CreateFolio(ctx, req.(*CreateFolioRequest))
+		return srv.(FolioServiceServer).CreateFolio(ctx, req.(*CreateFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ReadFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_ReadFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).ReadFolio(ctx, in)
+		return srv.(FolioServiceServer).ReadFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/ReadFolio",
+		FullMethod: "/folio.FolioService/ReadFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ReadFolio(ctx, req.(*ReadFolioRequest))
+		return srv.(FolioServiceServer).ReadFolio(ctx, req.(*ReadFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_UpdateFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_UpdateFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).UpdateFolio(ctx, in)
+		return srv.(FolioServiceServer).UpdateFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/UpdateFolio",
+		FullMethod: "/folio.FolioService/UpdateFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).UpdateFolio(ctx, req.(*UpdateFolioRequest))
+		return srv.(FolioServiceServer).UpdateFolio(ctx, req.(*UpdateFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_ListFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_ListFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).ListFolio(ctx, in)
+		return srv.(FolioServiceServer).ListFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/ListFolio",
+		FullMethod: "/folio.FolioService/ListFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).ListFolio(ctx, req.(*ListFolioRequest))
+		return srv.(FolioServiceServer).ListFolio(ctx, req.(*ListFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountService_DeleteFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioService_DeleteFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountServiceServer).DeleteFolio(ctx, in)
+		return srv.(FolioServiceServer).DeleteFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountService/DeleteFolio",
+		FullMethod: "/folio.FolioService/DeleteFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountServiceServer).DeleteFolio(ctx, req.(*DeleteFolioRequest))
+		return srv.(FolioServiceServer).DeleteFolio(ctx, req.(*DeleteFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _AccountService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "folio.AccountService",
-	HandlerType: (*AccountServiceServer)(nil),
+func _FolioService_CreateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).CreateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/CreateTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).CreateTag(ctx, req.(*CreateTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioService_ReadTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).ReadTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/ReadTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).ReadTag(ctx, req.(*ReadTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioService_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).UpdateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/UpdateTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).UpdateTag(ctx, req.(*UpdateTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioService_ListTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).ListTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/ListTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).ListTag(ctx, req.(*ListTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioService_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).DeleteTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/DeleteTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).DeleteTag(ctx, req.(*DeleteTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioService_CreateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).CreateNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/CreateNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).CreateNote(ctx, req.(*CreateNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioService_ReadNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).ReadNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/ReadNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).ReadNote(ctx, req.(*ReadNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioService_UpdateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).UpdateNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/UpdateNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).UpdateNote(ctx, req.(*UpdateNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioService_ListNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).ListNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/ListNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).ListNote(ctx, req.(*ListNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioService_DeleteNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioServiceServer).DeleteNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioService/DeleteNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioServiceServer).DeleteNote(ctx, req.(*DeleteNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _FolioService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "folio.FolioService",
+	HandlerType: (*FolioServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateUser",
-			Handler:    _AccountService_CreateUser_Handler,
+			Handler:    _FolioService_CreateUser_Handler,
 		},
 		{
 			MethodName: "ReadUser",
-			Handler:    _AccountService_ReadUser_Handler,
+			Handler:    _FolioService_ReadUser_Handler,
 		},
 		{
 			MethodName: "UpdateUser",
-			Handler:    _AccountService_UpdateUser_Handler,
+			Handler:    _FolioService_UpdateUser_Handler,
 		},
 		{
 			MethodName: "ListUser",
-			Handler:    _AccountService_ListUser_Handler,
+			Handler:    _FolioService_ListUser_Handler,
 		},
 		{
 			MethodName: "DeleteUser",
-			Handler:    _AccountService_DeleteUser_Handler,
+			Handler:    _FolioService_DeleteUser_Handler,
 		},
 		{
 			MethodName: "CreateAccount",
-			Handler:    _AccountService_CreateAccount_Handler,
+			Handler:    _FolioService_CreateAccount_Handler,
 		},
 		{
 			MethodName: "ReadAccount",
-			Handler:    _AccountService_ReadAccount_Handler,
+			Handler:    _FolioService_ReadAccount_Handler,
 		},
 		{
 			MethodName: "UpdateAccount",
-			Handler:    _AccountService_UpdateAccount_Handler,
+			Handler:    _FolioService_UpdateAccount_Handler,
 		},
 		{
 			MethodName: "ListAccount",
-			Handler:    _AccountService_ListAccount_Handler,
+			Handler:    _FolioService_ListAccount_Handler,
 		},
 		{
 			MethodName: "DeleteAccount",
-			Handler:    _AccountService_DeleteAccount_Handler,
+			Handler:    _FolioService_DeleteAccount_Handler,
 		},
 		{
 			MethodName: "CreateArchive",
-			Handler:    _AccountService_CreateArchive_Handler,
+			Handler:    _FolioService_CreateArchive_Handler,
 		},
 		{
 			MethodName: "ReadArchive",
-			Handler:    _AccountService_ReadArchive_Handler,
+			Handler:    _FolioService_ReadArchive_Handler,
 		},
 		{
 			MethodName: "UpdateArchive",
-			Handler:    _AccountService_UpdateArchive_Handler,
+			Handler:    _FolioService_UpdateArchive_Handler,
 		},
 		{
 			MethodName: "ListArchive",
-			Handler:    _AccountService_ListArchive_Handler,
+			Handler:    _FolioService_ListArchive_Handler,
 		},
 		{
 			MethodName: "DeleteArchive",
-			Handler:    _AccountService_DeleteArchive_Handler,
+			Handler:    _FolioService_DeleteArchive_Handler,
 		},
 		{
 			MethodName: "CreateFolio",
-			Handler:    _AccountService_CreateFolio_Handler,
+			Handler:    _FolioService_CreateFolio_Handler,
 		},
 		{
 			MethodName: "ReadFolio",
-			Handler:    _AccountService_ReadFolio_Handler,
+			Handler:    _FolioService_ReadFolio_Handler,
 		},
 		{
 			MethodName: "UpdateFolio",
-			Handler:    _AccountService_UpdateFolio_Handler,
+			Handler:    _FolioService_UpdateFolio_Handler,
 		},
 		{
 			MethodName: "ListFolio",
-			Handler:    _AccountService_ListFolio_Handler,
+			Handler:    _FolioService_ListFolio_Handler,
 		},
 		{
 			MethodName: "DeleteFolio",
-			Handler:    _AccountService_DeleteFolio_Handler,
+			Handler:    _FolioService_DeleteFolio_Handler,
+		},
+		{
+			MethodName: "CreateTag",
+			Handler:    _FolioService_CreateTag_Handler,
+		},
+		{
+			MethodName: "ReadTag",
+			Handler:    _FolioService_ReadTag_Handler,
+		},
+		{
+			MethodName: "UpdateTag",
+			Handler:    _FolioService_UpdateTag_Handler,
+		},
+		{
+			MethodName: "ListTag",
+			Handler:    _FolioService_ListTag_Handler,
+		},
+		{
+			MethodName: "DeleteTag",
+			Handler:    _FolioService_DeleteTag_Handler,
+		},
+		{
+			MethodName: "CreateNote",
+			Handler:    _FolioService_CreateNote_Handler,
+		},
+		{
+			MethodName: "ReadNote",
+			Handler:    _FolioService_ReadNote_Handler,
+		},
+		{
+			MethodName: "UpdateNote",
+			Handler:    _FolioService_UpdateNote_Handler,
+		},
+		{
+			MethodName: "ListNote",
+			Handler:    _FolioService_ListNote_Handler,
+		},
+		{
+			MethodName: "DeleteNote",
+			Handler:    _FolioService_DeleteNote_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "folio.proto",
 }
 
-// AccountTxnClient is the client API for AccountTxn service.
+// FolioTxnClient is the client API for FolioTxn service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type AccountTxnClient interface {
+type FolioTxnClient interface {
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
 	ReadAccount(ctx context.Context, in *ReadAccountRequest, opts ...grpc.CallOption) (*ReadAccountResponse, error)
 	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error)
@@ -4571,198 +5916,402 @@ type AccountTxnClient interface {
 	ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error)
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error)
+	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
+	ReadTag(ctx context.Context, in *ReadTagRequest, opts ...grpc.CallOption) (*ReadTagResponse, error)
+	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error)
+	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
+	CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*CreateNoteResponse, error)
+	ReadNote(ctx context.Context, in *ReadNoteRequest, opts ...grpc.CallOption) (*ReadNoteResponse, error)
+	UpdateNote(ctx context.Context, in *UpdateNoteRequest, opts ...grpc.CallOption) (*UpdateNoteResponse, error)
+	ListNote(ctx context.Context, in *ListNoteRequest, opts ...grpc.CallOption) (*ListNoteResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*DeleteNoteResponse, error)
+	CreateAsset(ctx context.Context, in *CreateAssetRequest, opts ...grpc.CallOption) (*CreateAssetResponse, error)
+	ReadAsset(ctx context.Context, in *ReadAssetRequest, opts ...grpc.CallOption) (*ReadAssetResponse, error)
+	UpdateAsset(ctx context.Context, in *UpdateAssetRequest, opts ...grpc.CallOption) (*UpdateAssetResponse, error)
+	ListAsset(ctx context.Context, in *ListAssetRequest, opts ...grpc.CallOption) (*ListAssetResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteAsset(ctx context.Context, in *DeleteAssetRequest, opts ...grpc.CallOption) (*DeleteAssetResponse, error)
+	CreateShare(ctx context.Context, in *CreateShareRequest, opts ...grpc.CallOption) (*CreateShareResponse, error)
+	ReadShare(ctx context.Context, in *ReadShareRequest, opts ...grpc.CallOption) (*ReadShareResponse, error)
+	UpdateShare(ctx context.Context, in *UpdateShareRequest, opts ...grpc.CallOption) (*UpdateShareResponse, error)
+	ListShare(ctx context.Context, in *ListShareRequest, opts ...grpc.CallOption) (*ListShareResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteShare(ctx context.Context, in *DeleteShareRequest, opts ...grpc.CallOption) (*DeleteShareResponse, error)
 }
 
-type accountTxnClient struct {
+type folioTxnClient struct {
 	cc *grpc.ClientConn
 }
 
-func NewAccountTxnClient(cc *grpc.ClientConn) AccountTxnClient {
-	return &accountTxnClient{cc}
+func NewFolioTxnClient(cc *grpc.ClientConn) FolioTxnClient {
+	return &folioTxnClient{cc}
 }
 
-func (c *accountTxnClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
+func (c *folioTxnClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
 	out := new(CreateAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/CreateAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/CreateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) ReadAccount(ctx context.Context, in *ReadAccountRequest, opts ...grpc.CallOption) (*ReadAccountResponse, error) {
+func (c *folioTxnClient) ReadAccount(ctx context.Context, in *ReadAccountRequest, opts ...grpc.CallOption) (*ReadAccountResponse, error) {
 	out := new(ReadAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/ReadAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ReadAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error) {
+func (c *folioTxnClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*UpdateAccountResponse, error) {
 	out := new(UpdateAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/UpdateAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error) {
+func (c *folioTxnClient) ListAccount(ctx context.Context, in *ListAccountRequest, opts ...grpc.CallOption) (*ListAccountResponse, error) {
 	out := new(ListAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/ListAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error) {
+func (c *folioTxnClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*DeleteAccountResponse, error) {
 	out := new(DeleteAccountResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/DeleteAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
+func (c *folioTxnClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error) {
 	out := new(CreateUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/CreateUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/CreateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) ReadUser(ctx context.Context, in *ReadUserRequest, opts ...grpc.CallOption) (*ReadUserResponse, error) {
+func (c *folioTxnClient) ReadUser(ctx context.Context, in *ReadUserRequest, opts ...grpc.CallOption) (*ReadUserResponse, error) {
 	out := new(ReadUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/ReadUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ReadUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
+func (c *folioTxnClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	out := new(UpdateUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/UpdateUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) ListUser(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*ListUserResponse, error) {
+func (c *folioTxnClient) ListUser(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*ListUserResponse, error) {
 	out := new(ListUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/ListUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error) {
+func (c *folioTxnClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error) {
 	out := new(DeleteUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/DeleteUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) CreateArchive(ctx context.Context, in *CreateArchiveRequest, opts ...grpc.CallOption) (*CreateArchiveResponse, error) {
+func (c *folioTxnClient) CreateArchive(ctx context.Context, in *CreateArchiveRequest, opts ...grpc.CallOption) (*CreateArchiveResponse, error) {
 	out := new(CreateArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/CreateArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/CreateArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) ReadArchive(ctx context.Context, in *ReadArchiveRequest, opts ...grpc.CallOption) (*ReadArchiveResponse, error) {
+func (c *folioTxnClient) ReadArchive(ctx context.Context, in *ReadArchiveRequest, opts ...grpc.CallOption) (*ReadArchiveResponse, error) {
 	out := new(ReadArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/ReadArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ReadArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) UpdateArchive(ctx context.Context, in *UpdateArchiveRequest, opts ...grpc.CallOption) (*UpdateArchiveResponse, error) {
+func (c *folioTxnClient) UpdateArchive(ctx context.Context, in *UpdateArchiveRequest, opts ...grpc.CallOption) (*UpdateArchiveResponse, error) {
 	out := new(UpdateArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/UpdateArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) ListArchive(ctx context.Context, in *ListArchiveRequest, opts ...grpc.CallOption) (*ListArchiveResponse, error) {
+func (c *folioTxnClient) ListArchive(ctx context.Context, in *ListArchiveRequest, opts ...grpc.CallOption) (*ListArchiveResponse, error) {
 	out := new(ListArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/ListArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) DeleteArchive(ctx context.Context, in *DeleteArchiveRequest, opts ...grpc.CallOption) (*DeleteArchiveResponse, error) {
+func (c *folioTxnClient) DeleteArchive(ctx context.Context, in *DeleteArchiveRequest, opts ...grpc.CallOption) (*DeleteArchiveResponse, error) {
 	out := new(DeleteArchiveResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/DeleteArchive", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteArchive", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) CreateFolio(ctx context.Context, in *CreateFolioRequest, opts ...grpc.CallOption) (*CreateFolioResponse, error) {
+func (c *folioTxnClient) CreateFolio(ctx context.Context, in *CreateFolioRequest, opts ...grpc.CallOption) (*CreateFolioResponse, error) {
 	out := new(CreateFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/CreateFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/CreateFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) ReadFolio(ctx context.Context, in *ReadFolioRequest, opts ...grpc.CallOption) (*ReadFolioResponse, error) {
+func (c *folioTxnClient) ReadFolio(ctx context.Context, in *ReadFolioRequest, opts ...grpc.CallOption) (*ReadFolioResponse, error) {
 	out := new(ReadFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/ReadFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ReadFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) UpdateFolio(ctx context.Context, in *UpdateFolioRequest, opts ...grpc.CallOption) (*UpdateFolioResponse, error) {
+func (c *folioTxnClient) UpdateFolio(ctx context.Context, in *UpdateFolioRequest, opts ...grpc.CallOption) (*UpdateFolioResponse, error) {
 	out := new(UpdateFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/UpdateFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error) {
+func (c *folioTxnClient) ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error) {
 	out := new(ListFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/ListFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *accountTxnClient) DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error) {
+func (c *folioTxnClient) DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error) {
 	out := new(DeleteFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.AccountTxn/DeleteFolio", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteFolio", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AccountTxnServer is the server API for AccountTxn service.
-type AccountTxnServer interface {
+func (c *folioTxnClient) CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error) {
+	out := new(CreateTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/CreateTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) ReadTag(ctx context.Context, in *ReadTagRequest, opts ...grpc.CallOption) (*ReadTagResponse, error) {
+	out := new(ReadTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ReadTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error) {
+	out := new(UpdateTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagResponse, error) {
+	out := new(ListTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error) {
+	out := new(DeleteTagResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteTag", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*CreateNoteResponse, error) {
+	out := new(CreateNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/CreateNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) ReadNote(ctx context.Context, in *ReadNoteRequest, opts ...grpc.CallOption) (*ReadNoteResponse, error) {
+	out := new(ReadNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ReadNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) UpdateNote(ctx context.Context, in *UpdateNoteRequest, opts ...grpc.CallOption) (*UpdateNoteResponse, error) {
+	out := new(UpdateNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) ListNote(ctx context.Context, in *ListNoteRequest, opts ...grpc.CallOption) (*ListNoteResponse, error) {
+	out := new(ListNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*DeleteNoteResponse, error) {
+	out := new(DeleteNoteResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteNote", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) CreateAsset(ctx context.Context, in *CreateAssetRequest, opts ...grpc.CallOption) (*CreateAssetResponse, error) {
+	out := new(CreateAssetResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/CreateAsset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) ReadAsset(ctx context.Context, in *ReadAssetRequest, opts ...grpc.CallOption) (*ReadAssetResponse, error) {
+	out := new(ReadAssetResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ReadAsset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) UpdateAsset(ctx context.Context, in *UpdateAssetRequest, opts ...grpc.CallOption) (*UpdateAssetResponse, error) {
+	out := new(UpdateAssetResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateAsset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) ListAsset(ctx context.Context, in *ListAssetRequest, opts ...grpc.CallOption) (*ListAssetResponse, error) {
+	out := new(ListAssetResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListAsset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) DeleteAsset(ctx context.Context, in *DeleteAssetRequest, opts ...grpc.CallOption) (*DeleteAssetResponse, error) {
+	out := new(DeleteAssetResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteAsset", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) CreateShare(ctx context.Context, in *CreateShareRequest, opts ...grpc.CallOption) (*CreateShareResponse, error) {
+	out := new(CreateShareResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/CreateShare", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) ReadShare(ctx context.Context, in *ReadShareRequest, opts ...grpc.CallOption) (*ReadShareResponse, error) {
+	out := new(ReadShareResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ReadShare", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) UpdateShare(ctx context.Context, in *UpdateShareRequest, opts ...grpc.CallOption) (*UpdateShareResponse, error) {
+	out := new(UpdateShareResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateShare", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) ListShare(ctx context.Context, in *ListShareRequest, opts ...grpc.CallOption) (*ListShareResponse, error) {
+	out := new(ListShareResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListShare", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *folioTxnClient) DeleteShare(ctx context.Context, in *DeleteShareRequest, opts ...grpc.CallOption) (*DeleteShareResponse, error) {
+	out := new(DeleteShareResponse)
+	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteShare", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// FolioTxnServer is the server API for FolioTxn service.
+type FolioTxnServer interface {
 	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
 	ReadAccount(context.Context, *ReadAccountRequest) (*ReadAccountResponse, error)
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*UpdateAccountResponse, error)
@@ -4785,455 +6334,919 @@ type AccountTxnServer interface {
 	ListFolio(context.Context, *ListFolioRequest) (*ListFolioResponse, error)
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteFolio(context.Context, *DeleteFolioRequest) (*DeleteFolioResponse, error)
+	CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
+	ReadTag(context.Context, *ReadTagRequest) (*ReadTagResponse, error)
+	UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error)
+	ListTag(context.Context, *ListTagRequest) (*ListTagResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
+	CreateNote(context.Context, *CreateNoteRequest) (*CreateNoteResponse, error)
+	ReadNote(context.Context, *ReadNoteRequest) (*ReadNoteResponse, error)
+	UpdateNote(context.Context, *UpdateNoteRequest) (*UpdateNoteResponse, error)
+	ListNote(context.Context, *ListNoteRequest) (*ListNoteResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteNote(context.Context, *DeleteNoteRequest) (*DeleteNoteResponse, error)
+	CreateAsset(context.Context, *CreateAssetRequest) (*CreateAssetResponse, error)
+	ReadAsset(context.Context, *ReadAssetRequest) (*ReadAssetResponse, error)
+	UpdateAsset(context.Context, *UpdateAssetRequest) (*UpdateAssetResponse, error)
+	ListAsset(context.Context, *ListAssetRequest) (*ListAssetResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteAsset(context.Context, *DeleteAssetRequest) (*DeleteAssetResponse, error)
+	CreateShare(context.Context, *CreateShareRequest) (*CreateShareResponse, error)
+	ReadShare(context.Context, *ReadShareRequest) (*ReadShareResponse, error)
+	UpdateShare(context.Context, *UpdateShareRequest) (*UpdateShareResponse, error)
+	ListShare(context.Context, *ListShareRequest) (*ListShareResponse, error)
+	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
+	DeleteShare(context.Context, *DeleteShareRequest) (*DeleteShareResponse, error)
 }
 
-func RegisterAccountTxnServer(s *grpc.Server, srv AccountTxnServer) {
-	s.RegisterService(&_AccountTxn_serviceDesc, srv)
+func RegisterFolioTxnServer(s *grpc.Server, srv FolioTxnServer) {
+	s.RegisterService(&_FolioTxn_serviceDesc, srv)
 }
 
-func _AccountTxn_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).CreateAccount(ctx, in)
+		return srv.(FolioTxnServer).CreateAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/CreateAccount",
+		FullMethod: "/folio.FolioTxn/CreateAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).CreateAccount(ctx, req.(*CreateAccountRequest))
+		return srv.(FolioTxnServer).CreateAccount(ctx, req.(*CreateAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_ReadAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_ReadAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).ReadAccount(ctx, in)
+		return srv.(FolioTxnServer).ReadAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/ReadAccount",
+		FullMethod: "/folio.FolioTxn/ReadAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).ReadAccount(ctx, req.(*ReadAccountRequest))
+		return srv.(FolioTxnServer).ReadAccount(ctx, req.(*ReadAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).UpdateAccount(ctx, in)
+		return srv.(FolioTxnServer).UpdateAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/UpdateAccount",
+		FullMethod: "/folio.FolioTxn/UpdateAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).UpdateAccount(ctx, req.(*UpdateAccountRequest))
+		return srv.(FolioTxnServer).UpdateAccount(ctx, req.(*UpdateAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_ListAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_ListAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).ListAccount(ctx, in)
+		return srv.(FolioTxnServer).ListAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/ListAccount",
+		FullMethod: "/folio.FolioTxn/ListAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).ListAccount(ctx, req.(*ListAccountRequest))
+		return srv.(FolioTxnServer).ListAccount(ctx, req.(*ListAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).DeleteAccount(ctx, in)
+		return srv.(FolioTxnServer).DeleteAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/DeleteAccount",
+		FullMethod: "/folio.FolioTxn/DeleteAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+		return srv.(FolioTxnServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).CreateUser(ctx, in)
+		return srv.(FolioTxnServer).CreateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/CreateUser",
+		FullMethod: "/folio.FolioTxn/CreateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).CreateUser(ctx, req.(*CreateUserRequest))
+		return srv.(FolioTxnServer).CreateUser(ctx, req.(*CreateUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_ReadUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_ReadUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).ReadUser(ctx, in)
+		return srv.(FolioTxnServer).ReadUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/ReadUser",
+		FullMethod: "/folio.FolioTxn/ReadUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).ReadUser(ctx, req.(*ReadUserRequest))
+		return srv.(FolioTxnServer).ReadUser(ctx, req.(*ReadUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).UpdateUser(ctx, in)
+		return srv.(FolioTxnServer).UpdateUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/UpdateUser",
+		FullMethod: "/folio.FolioTxn/UpdateUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+		return srv.(FolioTxnServer).UpdateUser(ctx, req.(*UpdateUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_ListUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_ListUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).ListUser(ctx, in)
+		return srv.(FolioTxnServer).ListUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/ListUser",
+		FullMethod: "/folio.FolioTxn/ListUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).ListUser(ctx, req.(*ListUserRequest))
+		return srv.(FolioTxnServer).ListUser(ctx, req.(*ListUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteUserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).DeleteUser(ctx, in)
+		return srv.(FolioTxnServer).DeleteUser(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/DeleteUser",
+		FullMethod: "/folio.FolioTxn/DeleteUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).DeleteUser(ctx, req.(*DeleteUserRequest))
+		return srv.(FolioTxnServer).DeleteUser(ctx, req.(*DeleteUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_CreateArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_CreateArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).CreateArchive(ctx, in)
+		return srv.(FolioTxnServer).CreateArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/CreateArchive",
+		FullMethod: "/folio.FolioTxn/CreateArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).CreateArchive(ctx, req.(*CreateArchiveRequest))
+		return srv.(FolioTxnServer).CreateArchive(ctx, req.(*CreateArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_ReadArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_ReadArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).ReadArchive(ctx, in)
+		return srv.(FolioTxnServer).ReadArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/ReadArchive",
+		FullMethod: "/folio.FolioTxn/ReadArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).ReadArchive(ctx, req.(*ReadArchiveRequest))
+		return srv.(FolioTxnServer).ReadArchive(ctx, req.(*ReadArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_UpdateArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_UpdateArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).UpdateArchive(ctx, in)
+		return srv.(FolioTxnServer).UpdateArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/UpdateArchive",
+		FullMethod: "/folio.FolioTxn/UpdateArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).UpdateArchive(ctx, req.(*UpdateArchiveRequest))
+		return srv.(FolioTxnServer).UpdateArchive(ctx, req.(*UpdateArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_ListArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_ListArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).ListArchive(ctx, in)
+		return srv.(FolioTxnServer).ListArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/ListArchive",
+		FullMethod: "/folio.FolioTxn/ListArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).ListArchive(ctx, req.(*ListArchiveRequest))
+		return srv.(FolioTxnServer).ListArchive(ctx, req.(*ListArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_DeleteArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_DeleteArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteArchiveRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).DeleteArchive(ctx, in)
+		return srv.(FolioTxnServer).DeleteArchive(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/DeleteArchive",
+		FullMethod: "/folio.FolioTxn/DeleteArchive",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).DeleteArchive(ctx, req.(*DeleteArchiveRequest))
+		return srv.(FolioTxnServer).DeleteArchive(ctx, req.(*DeleteArchiveRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_CreateFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_CreateFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).CreateFolio(ctx, in)
+		return srv.(FolioTxnServer).CreateFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/CreateFolio",
+		FullMethod: "/folio.FolioTxn/CreateFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).CreateFolio(ctx, req.(*CreateFolioRequest))
+		return srv.(FolioTxnServer).CreateFolio(ctx, req.(*CreateFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_ReadFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_ReadFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).ReadFolio(ctx, in)
+		return srv.(FolioTxnServer).ReadFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/ReadFolio",
+		FullMethod: "/folio.FolioTxn/ReadFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).ReadFolio(ctx, req.(*ReadFolioRequest))
+		return srv.(FolioTxnServer).ReadFolio(ctx, req.(*ReadFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_UpdateFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_UpdateFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).UpdateFolio(ctx, in)
+		return srv.(FolioTxnServer).UpdateFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/UpdateFolio",
+		FullMethod: "/folio.FolioTxn/UpdateFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).UpdateFolio(ctx, req.(*UpdateFolioRequest))
+		return srv.(FolioTxnServer).UpdateFolio(ctx, req.(*UpdateFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_ListFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_ListFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).ListFolio(ctx, in)
+		return srv.(FolioTxnServer).ListFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/ListFolio",
+		FullMethod: "/folio.FolioTxn/ListFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).ListFolio(ctx, req.(*ListFolioRequest))
+		return srv.(FolioTxnServer).ListFolio(ctx, req.(*ListFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _AccountTxn_DeleteFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _FolioTxn_DeleteFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteFolioRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AccountTxnServer).DeleteFolio(ctx, in)
+		return srv.(FolioTxnServer).DeleteFolio(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/folio.AccountTxn/DeleteFolio",
+		FullMethod: "/folio.FolioTxn/DeleteFolio",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AccountTxnServer).DeleteFolio(ctx, req.(*DeleteFolioRequest))
+		return srv.(FolioTxnServer).DeleteFolio(ctx, req.(*DeleteFolioRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-var _AccountTxn_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "folio.AccountTxn",
-	HandlerType: (*AccountTxnServer)(nil),
+func _FolioTxn_CreateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).CreateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/CreateTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).CreateTag(ctx, req.(*CreateTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_ReadTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).ReadTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/ReadTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).ReadTag(ctx, req.(*ReadTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).UpdateTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/UpdateTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).UpdateTag(ctx, req.(*UpdateTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_ListTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).ListTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/ListTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).ListTag(ctx, req.(*ListTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_DeleteTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).DeleteTag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/DeleteTag",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).DeleteTag(ctx, req.(*DeleteTagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_CreateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).CreateNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/CreateNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).CreateNote(ctx, req.(*CreateNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_ReadNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).ReadNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/ReadNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).ReadNote(ctx, req.(*ReadNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_UpdateNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).UpdateNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/UpdateNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).UpdateNote(ctx, req.(*UpdateNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_ListNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).ListNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/ListNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).ListNote(ctx, req.(*ListNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_DeleteNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteNoteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).DeleteNote(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/DeleteNote",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).DeleteNote(ctx, req.(*DeleteNoteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_CreateAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).CreateAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/CreateAsset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).CreateAsset(ctx, req.(*CreateAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_ReadAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadAssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).ReadAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/ReadAsset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).ReadAsset(ctx, req.(*ReadAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_UpdateAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).UpdateAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/UpdateAsset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).UpdateAsset(ctx, req.(*UpdateAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_ListAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).ListAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/ListAsset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).ListAsset(ctx, req.(*ListAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_DeleteAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAssetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).DeleteAsset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/DeleteAsset",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).DeleteAsset(ctx, req.(*DeleteAssetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_CreateShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateShareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).CreateShare(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/CreateShare",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).CreateShare(ctx, req.(*CreateShareRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_ReadShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadShareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).ReadShare(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/ReadShare",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).ReadShare(ctx, req.(*ReadShareRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_UpdateShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateShareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).UpdateShare(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/UpdateShare",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).UpdateShare(ctx, req.(*UpdateShareRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_ListShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListShareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).ListShare(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/ListShare",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).ListShare(ctx, req.(*ListShareRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FolioTxn_DeleteShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteShareRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FolioTxnServer).DeleteShare(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/folio.FolioTxn/DeleteShare",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FolioTxnServer).DeleteShare(ctx, req.(*DeleteShareRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _FolioTxn_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "folio.FolioTxn",
+	HandlerType: (*FolioTxnServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateAccount",
-			Handler:    _AccountTxn_CreateAccount_Handler,
+			Handler:    _FolioTxn_CreateAccount_Handler,
 		},
 		{
 			MethodName: "ReadAccount",
-			Handler:    _AccountTxn_ReadAccount_Handler,
+			Handler:    _FolioTxn_ReadAccount_Handler,
 		},
 		{
 			MethodName: "UpdateAccount",
-			Handler:    _AccountTxn_UpdateAccount_Handler,
+			Handler:    _FolioTxn_UpdateAccount_Handler,
 		},
 		{
 			MethodName: "ListAccount",
-			Handler:    _AccountTxn_ListAccount_Handler,
+			Handler:    _FolioTxn_ListAccount_Handler,
 		},
 		{
 			MethodName: "DeleteAccount",
-			Handler:    _AccountTxn_DeleteAccount_Handler,
+			Handler:    _FolioTxn_DeleteAccount_Handler,
 		},
 		{
 			MethodName: "CreateUser",
-			Handler:    _AccountTxn_CreateUser_Handler,
+			Handler:    _FolioTxn_CreateUser_Handler,
 		},
 		{
 			MethodName: "ReadUser",
-			Handler:    _AccountTxn_ReadUser_Handler,
+			Handler:    _FolioTxn_ReadUser_Handler,
 		},
 		{
 			MethodName: "UpdateUser",
-			Handler:    _AccountTxn_UpdateUser_Handler,
+			Handler:    _FolioTxn_UpdateUser_Handler,
 		},
 		{
 			MethodName: "ListUser",
-			Handler:    _AccountTxn_ListUser_Handler,
+			Handler:    _FolioTxn_ListUser_Handler,
 		},
 		{
 			MethodName: "DeleteUser",
-			Handler:    _AccountTxn_DeleteUser_Handler,
+			Handler:    _FolioTxn_DeleteUser_Handler,
 		},
 		{
 			MethodName: "CreateArchive",
-			Handler:    _AccountTxn_CreateArchive_Handler,
+			Handler:    _FolioTxn_CreateArchive_Handler,
 		},
 		{
 			MethodName: "ReadArchive",
-			Handler:    _AccountTxn_ReadArchive_Handler,
+			Handler:    _FolioTxn_ReadArchive_Handler,
 		},
 		{
 			MethodName: "UpdateArchive",
-			Handler:    _AccountTxn_UpdateArchive_Handler,
+			Handler:    _FolioTxn_UpdateArchive_Handler,
 		},
 		{
 			MethodName: "ListArchive",
-			Handler:    _AccountTxn_ListArchive_Handler,
+			Handler:    _FolioTxn_ListArchive_Handler,
 		},
 		{
 			MethodName: "DeleteArchive",
-			Handler:    _AccountTxn_DeleteArchive_Handler,
+			Handler:    _FolioTxn_DeleteArchive_Handler,
 		},
 		{
 			MethodName: "CreateFolio",
-			Handler:    _AccountTxn_CreateFolio_Handler,
+			Handler:    _FolioTxn_CreateFolio_Handler,
 		},
 		{
 			MethodName: "ReadFolio",
-			Handler:    _AccountTxn_ReadFolio_Handler,
+			Handler:    _FolioTxn_ReadFolio_Handler,
 		},
 		{
 			MethodName: "UpdateFolio",
-			Handler:    _AccountTxn_UpdateFolio_Handler,
+			Handler:    _FolioTxn_UpdateFolio_Handler,
 		},
 		{
 			MethodName: "ListFolio",
-			Handler:    _AccountTxn_ListFolio_Handler,
+			Handler:    _FolioTxn_ListFolio_Handler,
 		},
 		{
 			MethodName: "DeleteFolio",
-			Handler:    _AccountTxn_DeleteFolio_Handler,
+			Handler:    _FolioTxn_DeleteFolio_Handler,
+		},
+		{
+			MethodName: "CreateTag",
+			Handler:    _FolioTxn_CreateTag_Handler,
+		},
+		{
+			MethodName: "ReadTag",
+			Handler:    _FolioTxn_ReadTag_Handler,
+		},
+		{
+			MethodName: "UpdateTag",
+			Handler:    _FolioTxn_UpdateTag_Handler,
+		},
+		{
+			MethodName: "ListTag",
+			Handler:    _FolioTxn_ListTag_Handler,
+		},
+		{
+			MethodName: "DeleteTag",
+			Handler:    _FolioTxn_DeleteTag_Handler,
+		},
+		{
+			MethodName: "CreateNote",
+			Handler:    _FolioTxn_CreateNote_Handler,
+		},
+		{
+			MethodName: "ReadNote",
+			Handler:    _FolioTxn_ReadNote_Handler,
+		},
+		{
+			MethodName: "UpdateNote",
+			Handler:    _FolioTxn_UpdateNote_Handler,
+		},
+		{
+			MethodName: "ListNote",
+			Handler:    _FolioTxn_ListNote_Handler,
+		},
+		{
+			MethodName: "DeleteNote",
+			Handler:    _FolioTxn_DeleteNote_Handler,
+		},
+		{
+			MethodName: "CreateAsset",
+			Handler:    _FolioTxn_CreateAsset_Handler,
+		},
+		{
+			MethodName: "ReadAsset",
+			Handler:    _FolioTxn_ReadAsset_Handler,
+		},
+		{
+			MethodName: "UpdateAsset",
+			Handler:    _FolioTxn_UpdateAsset_Handler,
+		},
+		{
+			MethodName: "ListAsset",
+			Handler:    _FolioTxn_ListAsset_Handler,
+		},
+		{
+			MethodName: "DeleteAsset",
+			Handler:    _FolioTxn_DeleteAsset_Handler,
+		},
+		{
+			MethodName: "CreateShare",
+			Handler:    _FolioTxn_CreateShare_Handler,
+		},
+		{
+			MethodName: "ReadShare",
+			Handler:    _FolioTxn_ReadShare_Handler,
+		},
+		{
+			MethodName: "UpdateShare",
+			Handler:    _FolioTxn_UpdateShare_Handler,
+		},
+		{
+			MethodName: "ListShare",
+			Handler:    _FolioTxn_ListShare_Handler,
+		},
+		{
+			MethodName: "DeleteShare",
+			Handler:    _FolioTxn_DeleteShare_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
