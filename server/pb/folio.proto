@@ -6,6 +6,7 @@ import "validate/validate.proto";
 import "github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto";
 import "google/protobuf/field_mask.proto";
 //import "github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto";
+import "infoblox/api/collection_operators.proto";
 
 package folio;
 
@@ -111,7 +112,7 @@ service FolioService {
   rpc CreateUser ( CreateUserRequest ) returns ( CreateUserResponse ) {}
   rpc ReadUser ( ReadUserRequest ) returns ( ReadUserResponse ) {}
   rpc UpdateUser ( UpdateUserRequest ) returns ( UpdateUserResponse ) {}
-  //rpc ListUser ( ListUserRequest ) returns ( ListUserResponse ) {}
+  rpc ListUser ( ListUserRequest ) returns ( ListUserResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteUser ( DeleteUserRequest ) returns  ( DeleteUserResponse ) {
 	  // This option is required because the type/table can't be inferred
@@ -190,7 +191,7 @@ service FolioTxn {
   rpc CreateUser ( CreateUserRequest ) returns ( CreateUserResponse ) {}
   rpc ReadUser ( ReadUserRequest ) returns ( ReadUserResponse ) {}
   rpc UpdateUser ( UpdateUserRequest ) returns ( UpdateUserResponse ) {}
-  //rpc ListUser ( ListUserRequest ) returns ( ListUserResponse ) {}
+  rpc ListUser ( ListUserRequest ) returns ( ListUserResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteUser ( DeleteUserRequest ) returns  ( DeleteUserResponse ) {
       // This option is required because the type/table can't be inferred
@@ -286,7 +287,7 @@ message User  {
 	string Email = 2;     //string `gorm:"unique;not null"`
 	string Firstname = 3; //string
     string Lastname = 4;  //string
-    Asset Thumbnail = 29;
+    Asset Thumbnail = 14;
 	//links
 	// Account account = 6 ; //[(gorm.field).belongs_to = {}];
 }
@@ -348,18 +349,18 @@ message DeleteUsersRequest {
 message DeleteUserResponse {
 }
 
-// message ListUserResponse {
-//     // Note repeated field and plural name 'results'
-//     repeated User results = 1;
-//     infoblox.api.PageInfo page_info = 2;
-// }
+message ListUserResponse {
+    // Note repeated field and plural name 'results'
+    repeated User results = 1;
+    infoblox.api.PageInfo page_info = 2;
+}
 
-// message ListUserRequest {
-//     infoblox.api.Filtering filter = 1;
-//     infoblox.api.Sorting order_by = 2;
-//     infoblox.api.FieldSelection fields = 3;
-//     infoblox.api.Pagination paging = 4;
-// }
+message ListUserRequest {
+    infoblox.api.Filtering filter = 1;
+    infoblox.api.Sorting order_by = 2;
+    infoblox.api.FieldSelection fields = 3;
+    infoblox.api.Pagination paging = 4;
+}
 
 
 // // Archive is the container for a bunch of Folios
@@ -444,6 +445,7 @@ message Share  {
 	option (gorm.opts).ormable = true;
 	uint32 id = 1;
 	User friend = 2;    // needs to be a PersonTag
+    Asset Thumbnail = 14;
 	repeated Folio folios  = 6 [(gorm.field).many_to_many = {}]; //Folios []*Folio `gorm:"many2many:folio_shares;"`
 }
 
@@ -521,7 +523,7 @@ message Tag  {
 	string Desc = 4;
 	// links
 	repeated Folio folios  = 6 [(gorm.field).many_to_many = {}]; //`gorm:"many2many:folio_tags;"`
-    Asset Thumbnail = 29;
+    Asset Thumbnail = 14;
 }
 
 
@@ -615,7 +617,7 @@ message Folio  {
 	repeated Tag tags = 10 [(gorm.field).many_to_many = {}];
 	//Shares    []*Share `gorm:"many2many:folio_shares;"`
 	repeated Share shares = 11 [(gorm.field).many_to_many = {}];
-    Asset Thumbnail = 29;
+    Asset Thumbnail = 14;
 }
 
 
@@ -693,7 +695,7 @@ message Asset  {
 	string Path = 5;  //string
 	Asset asset = 6;
 	bytes blob = 20;
-    Asset Thumbnail = 29;
+    Asset Thumbnail = 14;
 }
 
 
@@ -768,7 +770,7 @@ message Note  {
 	string Name = 3;  //string
 	string Note = 4;  //string
 	Folio folio = 6;
-    Asset Thumbnail = 29;
+    Asset Thumbnail = 14;
 }
 
 

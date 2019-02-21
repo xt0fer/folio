@@ -65,6 +65,12 @@ dart:
 		--dart_out=grpc:../../client/folios/lib \
 		/usr/local/include/google/protobuf/*.proto
 	protoc -I/usr/local/include -I. \
+		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
+		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+		-I${GOPATH}/src/github.com/lyft/protoc-gen-validate \
+		--dart_out=grpc:../../client/folios/lib \
+		infoblox/api/*.proto
+	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
 		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \

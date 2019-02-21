@@ -16,6 +16,339 @@
   ],
   "paths": {},
   "definitions": {
+    "SortCriteriaOrder": {
+      "type": "string",
+      "enum": [
+        "ASC",
+        "DESC"
+      ],
+      "default": "ASC",
+      "description": "Order is a sort order.\n\n - ASC: ascending sort order\n - DESC: descending sort order"
+    },
+    "apiField": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "subs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiField"
+          }
+        }
+      },
+      "description": "Field represents a single field for an object.\nIt contains fields name and also may contain a group of sub-fields for cases\nwhen a fields represents some structure."
+    },
+    "apiFieldSelection": {
+      "type": "object",
+      "properties": {
+        "fields": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiField"
+          }
+        }
+      },
+      "description": "atlas.api.field_selection",
+      "title": "FieldSelection represents a group of fields for some object.\nMain use case for if is to store information about object fields that\nneed to be ratained prior to sending object as a response"
+    },
+    "apiFiltering": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "$ref": "#/definitions/apiLogicalOperator"
+        },
+        "string_condition": {
+          "$ref": "#/definitions/apiStringCondition"
+        },
+        "number_condition": {
+          "$ref": "#/definitions/apiNumberCondition"
+        },
+        "null_condition": {
+          "$ref": "#/definitions/apiNullCondition"
+        },
+        "string_array_condition": {
+          "$ref": "#/definitions/apiStringArrayCondition"
+        },
+        "number_array_condition": {
+          "$ref": "#/definitions/apiNumberArrayCondition"
+        }
+      },
+      "description": "atlas.api.filtering"
+    },
+    "apiLogicalOperator": {
+      "type": "object",
+      "properties": {
+        "left_operator": {
+          "$ref": "#/definitions/apiLogicalOperator"
+        },
+        "left_string_condition": {
+          "$ref": "#/definitions/apiStringCondition"
+        },
+        "left_number_condition": {
+          "$ref": "#/definitions/apiNumberCondition"
+        },
+        "left_null_condition": {
+          "$ref": "#/definitions/apiNullCondition"
+        },
+        "left_string_array_condition": {
+          "$ref": "#/definitions/apiStringArrayCondition"
+        },
+        "left_number_array_condition": {
+          "$ref": "#/definitions/apiNumberArrayCondition"
+        },
+        "right_operator": {
+          "$ref": "#/definitions/apiLogicalOperator"
+        },
+        "right_string_condition": {
+          "$ref": "#/definitions/apiStringCondition"
+        },
+        "right_number_condition": {
+          "$ref": "#/definitions/apiNumberCondition"
+        },
+        "right_null_condition": {
+          "$ref": "#/definitions/apiNullCondition"
+        },
+        "right_string_array_condition": {
+          "$ref": "#/definitions/apiStringArrayCondition"
+        },
+        "right_number_array_condition": {
+          "$ref": "#/definitions/apiNumberArrayCondition"
+        },
+        "type": {
+          "$ref": "#/definitions/apiLogicalOperatorType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "description": "LogicalOperator represents binary logical operator, either AND or OR depending on type.\nleft and right are respectively left and right operands of the operator, could be\neither LogicalOperator or one of the supported conditions.\nis_negative is set to true if the operator is negated."
+    },
+    "apiLogicalOperatorType": {
+      "type": "string",
+      "enum": [
+        "AND",
+        "OR"
+      ],
+      "default": "AND"
+    },
+    "apiNullCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "description": "NullCondition represents a condition with a null literal, e.g. field == null.\nfield_path is a reference to a value of a resource.\nis_negative is set to true if the condition is negated."
+    },
+    "apiNumberArrayCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/apiNumberArrayConditionType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "NumberArrayCondition represents a condition with string arrays, e.g. field in [1, 5, 7]\nfield_path is a reference to a value of a resource.\nis_negative is set to true if the condition is negated"
+    },
+    "apiNumberArrayConditionType": {
+      "type": "string",
+      "enum": [
+        "IN"
+      ],
+      "default": "IN"
+    },
+    "apiNumberCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "value": {
+          "type": "number",
+          "format": "double"
+        },
+        "type": {
+          "$ref": "#/definitions/apiNumberConditionType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "description": "NumberCondition represents a condition with a number literal, e.g. field \u003e 3.\nfield_path is a reference to a value of a resource.\nvalue is the number literal.\ntype is a type of the condition.\nis_negative is set to true if the condition is negated."
+    },
+    "apiNumberConditionType": {
+      "type": "string",
+      "enum": [
+        "EQ",
+        "GT",
+        "GE",
+        "LT",
+        "LE"
+      ],
+      "default": "EQ"
+    },
+    "apiPageInfo": {
+      "type": "object",
+      "properties": {
+        "page_token": {
+          "type": "string",
+          "description": "The service response should contain a string to indicate\nthe next page of resources.\nA null value indicates no more pages."
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The service may optionally include the total number of resources being paged."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The service may optionally include the offset of the next page of resources.\nA null value indicates no more pages."
+        }
+      },
+      "description": "PageInfo represents both server-driven and client-driven pagination response.\nServer-driven pagination is a model in which the server returns some\namount of data along with an token indicating there is more data\nand where subsequent queries can get the next page of data.\nClient-driven pagination is a model in which rows are addressable by\noffset and page size (limit)."
+    },
+    "apiPagination": {
+      "type": "object",
+      "properties": {
+        "page_token": {
+          "type": "string",
+          "description": "The service-defined string used to identify a page of resources.\nA null value indicates the first page."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The integer index of the offset into a collection of resources.\nIf omitted or null the value is assumed to be \"0\"."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The integer number of resources to be returned in the response.\nThe service may impose maximum value.\nIf omitted the service may impose a default value."
+        }
+      },
+      "description": "atlas.api.paging"
+    },
+    "apiSortCriteria": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "Tag is a JSON tag."
+        },
+        "order": {
+          "$ref": "#/definitions/SortCriteriaOrder"
+        }
+      },
+      "title": "SortCriteria represents sort criteria"
+    },
+    "apiSorting": {
+      "type": "object",
+      "properties": {
+        "criterias": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiSortCriteria"
+          }
+        }
+      },
+      "description": "atlas.api.sorting"
+    },
+    "apiStringArrayCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/apiStringArrayConditionType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "title": "StringArrayCondition represents a condition with string arrays, e.g. field in ['hello','world']\nfield_path is a reference to a value of a resource.\nis_negative is set to true if the condition is negated"
+    },
+    "apiStringArrayConditionType": {
+      "type": "string",
+      "enum": [
+        "IN"
+      ],
+      "default": "IN"
+    },
+    "apiStringCondition": {
+      "type": "object",
+      "properties": {
+        "field_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "value": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/apiStringConditionType"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      },
+      "description": "StringCondition represents a condition with a string literal, e.g. field == 'string'.\nfield_path is a reference to a value of a resource.\nvalue is the string literal.\ntype is a type of the condition.\nis_negative is set to true if the condition is negated."
+    },
+    "apiStringConditionType": {
+      "type": "string",
+      "enum": [
+        "EQ",
+        "MATCH",
+        "GT",
+        "GE",
+        "LT",
+        "LE",
+        "IEQ"
+      ],
+      "default": "EQ"
+    },
     "folioAsset": {
       "type": "object",
       "properties": {
@@ -178,6 +511,21 @@
       },
       "title": "Folio center piece"
     },
+    "folioListUserResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioUser"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
     "folioNote": {
       "type": "object",
       "properties": {
@@ -263,6 +611,9 @@
         },
         "friend": {
           "$ref": "#/definitions/folioUser"
+        },
+        "Thumbnail": {
+          "$ref": "#/definitions/folioAsset"
         },
         "folios": {
           "type": "array",
