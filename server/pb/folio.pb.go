@@ -7,7 +7,6 @@ import (
 	context "context"
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	query "github.com/infobloxopen/atlas-app-toolkit/query"
 	_ "github.com/infobloxopen/protoc-gen-gorm/options"
 	_ "github.com/lyft/protoc-gen-validate/validate"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -182,11 +181,10 @@ func (m *CreateUserResponse) GetResult() *User {
 
 type ReadUserRequest struct {
 	// For a read request, the id field is the only to be specified
-	Id                   uint32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,2,opt,name=fields,proto3" json:"fields,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ReadUserRequest) Reset()         { *m = ReadUserRequest{} }
@@ -219,13 +217,6 @@ func (m *ReadUserRequest) GetId() uint32 {
 		return m.Id
 	}
 	return 0
-}
-
-func (m *ReadUserRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
 }
 
 type ReadUserResponse struct {
@@ -467,117 +458,6 @@ func (m *DeleteUserResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_DeleteUserResponse proto.InternalMessageInfo
 
-type ListUserResponse struct {
-	// Note repeated field and plural name 'results'
-	Results              []*User         `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
-	PageInfo             *query.PageInfo `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ListUserResponse) Reset()         { *m = ListUserResponse{} }
-func (m *ListUserResponse) String() string { return proto.CompactTextString(m) }
-func (*ListUserResponse) ProtoMessage()    {}
-func (*ListUserResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{10}
-}
-
-func (m *ListUserResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListUserResponse.Unmarshal(m, b)
-}
-func (m *ListUserResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListUserResponse.Marshal(b, m, deterministic)
-}
-func (m *ListUserResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListUserResponse.Merge(m, src)
-}
-func (m *ListUserResponse) XXX_Size() int {
-	return xxx_messageInfo_ListUserResponse.Size(m)
-}
-func (m *ListUserResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListUserResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListUserResponse proto.InternalMessageInfo
-
-func (m *ListUserResponse) GetResults() []*User {
-	if m != nil {
-		return m.Results
-	}
-	return nil
-}
-
-func (m *ListUserResponse) GetPageInfo() *query.PageInfo {
-	if m != nil {
-		return m.PageInfo
-	}
-	return nil
-}
-
-type ListUserRequest struct {
-	Filter               *query.Filtering      `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy              *query.Sorting        `protobuf:"bytes,2,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,3,opt,name=fields,proto3" json:"fields,omitempty"`
-	Paging               *query.Pagination     `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
-}
-
-func (m *ListUserRequest) Reset()         { *m = ListUserRequest{} }
-func (m *ListUserRequest) String() string { return proto.CompactTextString(m) }
-func (*ListUserRequest) ProtoMessage()    {}
-func (*ListUserRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{11}
-}
-
-func (m *ListUserRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListUserRequest.Unmarshal(m, b)
-}
-func (m *ListUserRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListUserRequest.Marshal(b, m, deterministic)
-}
-func (m *ListUserRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListUserRequest.Merge(m, src)
-}
-func (m *ListUserRequest) XXX_Size() int {
-	return xxx_messageInfo_ListUserRequest.Size(m)
-}
-func (m *ListUserRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListUserRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListUserRequest proto.InternalMessageInfo
-
-func (m *ListUserRequest) GetFilter() *query.Filtering {
-	if m != nil {
-		return m.Filter
-	}
-	return nil
-}
-
-func (m *ListUserRequest) GetOrderBy() *query.Sorting {
-	if m != nil {
-		return m.OrderBy
-	}
-	return nil
-}
-
-func (m *ListUserRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
-func (m *ListUserRequest) GetPaging() *query.Pagination {
-	if m != nil {
-		return m.Paging
-	}
-	return nil
-}
-
 // Share is a linkage allowing someone to work with the contents of a folio
 type Share struct {
 	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -592,7 +472,7 @@ func (m *Share) Reset()         { *m = Share{} }
 func (m *Share) String() string { return proto.CompactTextString(m) }
 func (*Share) ProtoMessage()    {}
 func (*Share) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{12}
+	return fileDescriptor_31c400dfa9a52dc8, []int{10}
 }
 
 func (m *Share) XXX_Unmarshal(b []byte) error {
@@ -647,7 +527,7 @@ func (m *CreateShareRequest) Reset()         { *m = CreateShareRequest{} }
 func (m *CreateShareRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateShareRequest) ProtoMessage()    {}
 func (*CreateShareRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{13}
+	return fileDescriptor_31c400dfa9a52dc8, []int{11}
 }
 
 func (m *CreateShareRequest) XXX_Unmarshal(b []byte) error {
@@ -687,7 +567,7 @@ func (m *CreateShareResponse) Reset()         { *m = CreateShareResponse{} }
 func (m *CreateShareResponse) String() string { return proto.CompactTextString(m) }
 func (*CreateShareResponse) ProtoMessage()    {}
 func (*CreateShareResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{14}
+	return fileDescriptor_31c400dfa9a52dc8, []int{12}
 }
 
 func (m *CreateShareResponse) XXX_Unmarshal(b []byte) error {
@@ -717,18 +597,17 @@ func (m *CreateShareResponse) GetResult() *Share {
 
 type ReadShareRequest struct {
 	// For a read request, the id field is the only to be specified
-	Id                   uint32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,2,opt,name=fields,proto3" json:"fields,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ReadShareRequest) Reset()         { *m = ReadShareRequest{} }
 func (m *ReadShareRequest) String() string { return proto.CompactTextString(m) }
 func (*ReadShareRequest) ProtoMessage()    {}
 func (*ReadShareRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{15}
+	return fileDescriptor_31c400dfa9a52dc8, []int{13}
 }
 
 func (m *ReadShareRequest) XXX_Unmarshal(b []byte) error {
@@ -756,13 +635,6 @@ func (m *ReadShareRequest) GetId() uint32 {
 	return 0
 }
 
-func (m *ReadShareRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
 type ReadShareResponse struct {
 	// Again the type with 'result' name
 	Result               *Share   `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
@@ -775,7 +647,7 @@ func (m *ReadShareResponse) Reset()         { *m = ReadShareResponse{} }
 func (m *ReadShareResponse) String() string { return proto.CompactTextString(m) }
 func (*ReadShareResponse) ProtoMessage()    {}
 func (*ReadShareResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{16}
+	return fileDescriptor_31c400dfa9a52dc8, []int{14}
 }
 
 func (m *ReadShareResponse) XXX_Unmarshal(b []byte) error {
@@ -815,7 +687,7 @@ func (m *UpdateShareRequest) Reset()         { *m = UpdateShareRequest{} }
 func (m *UpdateShareRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateShareRequest) ProtoMessage()    {}
 func (*UpdateShareRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{17}
+	return fileDescriptor_31c400dfa9a52dc8, []int{15}
 }
 
 func (m *UpdateShareRequest) XXX_Unmarshal(b []byte) error {
@@ -861,7 +733,7 @@ func (m *UpdateShareResponse) Reset()         { *m = UpdateShareResponse{} }
 func (m *UpdateShareResponse) String() string { return proto.CompactTextString(m) }
 func (*UpdateShareResponse) ProtoMessage()    {}
 func (*UpdateShareResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{18}
+	return fileDescriptor_31c400dfa9a52dc8, []int{16}
 }
 
 func (m *UpdateShareResponse) XXX_Unmarshal(b []byte) error {
@@ -901,7 +773,7 @@ func (m *DeleteShareRequest) Reset()         { *m = DeleteShareRequest{} }
 func (m *DeleteShareRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteShareRequest) ProtoMessage()    {}
 func (*DeleteShareRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{19}
+	return fileDescriptor_31c400dfa9a52dc8, []int{17}
 }
 
 func (m *DeleteShareRequest) XXX_Unmarshal(b []byte) error {
@@ -941,7 +813,7 @@ func (m *DeleteSharesRequest) Reset()         { *m = DeleteSharesRequest{} }
 func (m *DeleteSharesRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteSharesRequest) ProtoMessage()    {}
 func (*DeleteSharesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{20}
+	return fileDescriptor_31c400dfa9a52dc8, []int{18}
 }
 
 func (m *DeleteSharesRequest) XXX_Unmarshal(b []byte) error {
@@ -981,7 +853,7 @@ func (m *DeleteShareResponse) Reset()         { *m = DeleteShareResponse{} }
 func (m *DeleteShareResponse) String() string { return proto.CompactTextString(m) }
 func (*DeleteShareResponse) ProtoMessage()    {}
 func (*DeleteShareResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{21}
+	return fileDescriptor_31c400dfa9a52dc8, []int{19}
 }
 
 func (m *DeleteShareResponse) XXX_Unmarshal(b []byte) error {
@@ -1002,117 +874,6 @@ func (m *DeleteShareResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_DeleteShareResponse proto.InternalMessageInfo
 
-type ListShareResponse struct {
-	// Share repeated field and plural name 'results'
-	Results              []*Share        `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
-	PageInfo             *query.PageInfo `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ListShareResponse) Reset()         { *m = ListShareResponse{} }
-func (m *ListShareResponse) String() string { return proto.CompactTextString(m) }
-func (*ListShareResponse) ProtoMessage()    {}
-func (*ListShareResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{22}
-}
-
-func (m *ListShareResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListShareResponse.Unmarshal(m, b)
-}
-func (m *ListShareResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListShareResponse.Marshal(b, m, deterministic)
-}
-func (m *ListShareResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListShareResponse.Merge(m, src)
-}
-func (m *ListShareResponse) XXX_Size() int {
-	return xxx_messageInfo_ListShareResponse.Size(m)
-}
-func (m *ListShareResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListShareResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListShareResponse proto.InternalMessageInfo
-
-func (m *ListShareResponse) GetResults() []*Share {
-	if m != nil {
-		return m.Results
-	}
-	return nil
-}
-
-func (m *ListShareResponse) GetPageInfo() *query.PageInfo {
-	if m != nil {
-		return m.PageInfo
-	}
-	return nil
-}
-
-type ListShareRequest struct {
-	Filter               *query.Filtering      `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy              *query.Sorting        `protobuf:"bytes,2,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,3,opt,name=fields,proto3" json:"fields,omitempty"`
-	Paging               *query.Pagination     `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
-}
-
-func (m *ListShareRequest) Reset()         { *m = ListShareRequest{} }
-func (m *ListShareRequest) String() string { return proto.CompactTextString(m) }
-func (*ListShareRequest) ProtoMessage()    {}
-func (*ListShareRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{23}
-}
-
-func (m *ListShareRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListShareRequest.Unmarshal(m, b)
-}
-func (m *ListShareRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListShareRequest.Marshal(b, m, deterministic)
-}
-func (m *ListShareRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListShareRequest.Merge(m, src)
-}
-func (m *ListShareRequest) XXX_Size() int {
-	return xxx_messageInfo_ListShareRequest.Size(m)
-}
-func (m *ListShareRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListShareRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListShareRequest proto.InternalMessageInfo
-
-func (m *ListShareRequest) GetFilter() *query.Filtering {
-	if m != nil {
-		return m.Filter
-	}
-	return nil
-}
-
-func (m *ListShareRequest) GetOrderBy() *query.Sorting {
-	if m != nil {
-		return m.OrderBy
-	}
-	return nil
-}
-
-func (m *ListShareRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
-func (m *ListShareRequest) GetPaging() *query.Pagination {
-	if m != nil {
-		return m.Paging
-	}
-	return nil
-}
-
 // Tag is a attribute on something
 type Tag struct {
 	Id    uint32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -1131,7 +892,7 @@ func (m *Tag) Reset()         { *m = Tag{} }
 func (m *Tag) String() string { return proto.CompactTextString(m) }
 func (*Tag) ProtoMessage()    {}
 func (*Tag) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{24}
+	return fileDescriptor_31c400dfa9a52dc8, []int{20}
 }
 
 func (m *Tag) XXX_Unmarshal(b []byte) error {
@@ -1207,7 +968,7 @@ func (m *CreateTagRequest) Reset()         { *m = CreateTagRequest{} }
 func (m *CreateTagRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateTagRequest) ProtoMessage()    {}
 func (*CreateTagRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{25}
+	return fileDescriptor_31c400dfa9a52dc8, []int{21}
 }
 
 func (m *CreateTagRequest) XXX_Unmarshal(b []byte) error {
@@ -1247,7 +1008,7 @@ func (m *CreateTagResponse) Reset()         { *m = CreateTagResponse{} }
 func (m *CreateTagResponse) String() string { return proto.CompactTextString(m) }
 func (*CreateTagResponse) ProtoMessage()    {}
 func (*CreateTagResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{26}
+	return fileDescriptor_31c400dfa9a52dc8, []int{22}
 }
 
 func (m *CreateTagResponse) XXX_Unmarshal(b []byte) error {
@@ -1277,18 +1038,17 @@ func (m *CreateTagResponse) GetResult() *Tag {
 
 type ReadTagRequest struct {
 	// For a read request, the id field is the only to be specified
-	Id                   uint32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,2,opt,name=fields,proto3" json:"fields,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ReadTagRequest) Reset()         { *m = ReadTagRequest{} }
 func (m *ReadTagRequest) String() string { return proto.CompactTextString(m) }
 func (*ReadTagRequest) ProtoMessage()    {}
 func (*ReadTagRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{27}
+	return fileDescriptor_31c400dfa9a52dc8, []int{23}
 }
 
 func (m *ReadTagRequest) XXX_Unmarshal(b []byte) error {
@@ -1316,13 +1076,6 @@ func (m *ReadTagRequest) GetId() uint32 {
 	return 0
 }
 
-func (m *ReadTagRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
 type ReadTagResponse struct {
 	// Again the type with 'result' name
 	Result               *Tag     `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
@@ -1335,7 +1088,7 @@ func (m *ReadTagResponse) Reset()         { *m = ReadTagResponse{} }
 func (m *ReadTagResponse) String() string { return proto.CompactTextString(m) }
 func (*ReadTagResponse) ProtoMessage()    {}
 func (*ReadTagResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{28}
+	return fileDescriptor_31c400dfa9a52dc8, []int{24}
 }
 
 func (m *ReadTagResponse) XXX_Unmarshal(b []byte) error {
@@ -1375,7 +1128,7 @@ func (m *UpdateTagRequest) Reset()         { *m = UpdateTagRequest{} }
 func (m *UpdateTagRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateTagRequest) ProtoMessage()    {}
 func (*UpdateTagRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{29}
+	return fileDescriptor_31c400dfa9a52dc8, []int{25}
 }
 
 func (m *UpdateTagRequest) XXX_Unmarshal(b []byte) error {
@@ -1421,7 +1174,7 @@ func (m *UpdateTagResponse) Reset()         { *m = UpdateTagResponse{} }
 func (m *UpdateTagResponse) String() string { return proto.CompactTextString(m) }
 func (*UpdateTagResponse) ProtoMessage()    {}
 func (*UpdateTagResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{30}
+	return fileDescriptor_31c400dfa9a52dc8, []int{26}
 }
 
 func (m *UpdateTagResponse) XXX_Unmarshal(b []byte) error {
@@ -1461,7 +1214,7 @@ func (m *DeleteTagRequest) Reset()         { *m = DeleteTagRequest{} }
 func (m *DeleteTagRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteTagRequest) ProtoMessage()    {}
 func (*DeleteTagRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{31}
+	return fileDescriptor_31c400dfa9a52dc8, []int{27}
 }
 
 func (m *DeleteTagRequest) XXX_Unmarshal(b []byte) error {
@@ -1501,7 +1254,7 @@ func (m *DeleteTagsRequest) Reset()         { *m = DeleteTagsRequest{} }
 func (m *DeleteTagsRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteTagsRequest) ProtoMessage()    {}
 func (*DeleteTagsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{32}
+	return fileDescriptor_31c400dfa9a52dc8, []int{28}
 }
 
 func (m *DeleteTagsRequest) XXX_Unmarshal(b []byte) error {
@@ -1541,7 +1294,7 @@ func (m *DeleteTagResponse) Reset()         { *m = DeleteTagResponse{} }
 func (m *DeleteTagResponse) String() string { return proto.CompactTextString(m) }
 func (*DeleteTagResponse) ProtoMessage()    {}
 func (*DeleteTagResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{33}
+	return fileDescriptor_31c400dfa9a52dc8, []int{29}
 }
 
 func (m *DeleteTagResponse) XXX_Unmarshal(b []byte) error {
@@ -1561,117 +1314,6 @@ func (m *DeleteTagResponse) XXX_DiscardUnknown() {
 }
 
 var xxx_messageInfo_DeleteTagResponse proto.InternalMessageInfo
-
-type ListTagResponse struct {
-	// Tag repeated field and plural name 'results'
-	Results              []*Tag          `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
-	PageInfo             *query.PageInfo `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ListTagResponse) Reset()         { *m = ListTagResponse{} }
-func (m *ListTagResponse) String() string { return proto.CompactTextString(m) }
-func (*ListTagResponse) ProtoMessage()    {}
-func (*ListTagResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{34}
-}
-
-func (m *ListTagResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListTagResponse.Unmarshal(m, b)
-}
-func (m *ListTagResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListTagResponse.Marshal(b, m, deterministic)
-}
-func (m *ListTagResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListTagResponse.Merge(m, src)
-}
-func (m *ListTagResponse) XXX_Size() int {
-	return xxx_messageInfo_ListTagResponse.Size(m)
-}
-func (m *ListTagResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListTagResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListTagResponse proto.InternalMessageInfo
-
-func (m *ListTagResponse) GetResults() []*Tag {
-	if m != nil {
-		return m.Results
-	}
-	return nil
-}
-
-func (m *ListTagResponse) GetPageInfo() *query.PageInfo {
-	if m != nil {
-		return m.PageInfo
-	}
-	return nil
-}
-
-type ListTagRequest struct {
-	Filter               *query.Filtering      `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy              *query.Sorting        `protobuf:"bytes,2,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,3,opt,name=fields,proto3" json:"fields,omitempty"`
-	Paging               *query.Pagination     `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
-}
-
-func (m *ListTagRequest) Reset()         { *m = ListTagRequest{} }
-func (m *ListTagRequest) String() string { return proto.CompactTextString(m) }
-func (*ListTagRequest) ProtoMessage()    {}
-func (*ListTagRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{35}
-}
-
-func (m *ListTagRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListTagRequest.Unmarshal(m, b)
-}
-func (m *ListTagRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListTagRequest.Marshal(b, m, deterministic)
-}
-func (m *ListTagRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListTagRequest.Merge(m, src)
-}
-func (m *ListTagRequest) XXX_Size() int {
-	return xxx_messageInfo_ListTagRequest.Size(m)
-}
-func (m *ListTagRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListTagRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListTagRequest proto.InternalMessageInfo
-
-func (m *ListTagRequest) GetFilter() *query.Filtering {
-	if m != nil {
-		return m.Filter
-	}
-	return nil
-}
-
-func (m *ListTagRequest) GetOrderBy() *query.Sorting {
-	if m != nil {
-		return m.OrderBy
-	}
-	return nil
-}
-
-func (m *ListTagRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
-func (m *ListTagRequest) GetPaging() *query.Pagination {
-	if m != nil {
-		return m.Paging
-	}
-	return nil
-}
 
 // Folio center piece
 type Folio struct {
@@ -1698,7 +1340,7 @@ func (m *Folio) Reset()         { *m = Folio{} }
 func (m *Folio) String() string { return proto.CompactTextString(m) }
 func (*Folio) ProtoMessage()    {}
 func (*Folio) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{36}
+	return fileDescriptor_31c400dfa9a52dc8, []int{30}
 }
 
 func (m *Folio) XXX_Unmarshal(b []byte) error {
@@ -1802,7 +1444,7 @@ func (m *CreateFolioRequest) Reset()         { *m = CreateFolioRequest{} }
 func (m *CreateFolioRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateFolioRequest) ProtoMessage()    {}
 func (*CreateFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{37}
+	return fileDescriptor_31c400dfa9a52dc8, []int{31}
 }
 
 func (m *CreateFolioRequest) XXX_Unmarshal(b []byte) error {
@@ -1842,7 +1484,7 @@ func (m *CreateFolioResponse) Reset()         { *m = CreateFolioResponse{} }
 func (m *CreateFolioResponse) String() string { return proto.CompactTextString(m) }
 func (*CreateFolioResponse) ProtoMessage()    {}
 func (*CreateFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{38}
+	return fileDescriptor_31c400dfa9a52dc8, []int{32}
 }
 
 func (m *CreateFolioResponse) XXX_Unmarshal(b []byte) error {
@@ -1872,18 +1514,17 @@ func (m *CreateFolioResponse) GetResult() *Folio {
 
 type ReadFolioRequest struct {
 	// For a read request, the id field is the only to be specified
-	Id                   uint32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,2,opt,name=fields,proto3" json:"fields,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ReadFolioRequest) Reset()         { *m = ReadFolioRequest{} }
 func (m *ReadFolioRequest) String() string { return proto.CompactTextString(m) }
 func (*ReadFolioRequest) ProtoMessage()    {}
 func (*ReadFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{39}
+	return fileDescriptor_31c400dfa9a52dc8, []int{33}
 }
 
 func (m *ReadFolioRequest) XXX_Unmarshal(b []byte) error {
@@ -1911,13 +1552,6 @@ func (m *ReadFolioRequest) GetId() uint32 {
 	return 0
 }
 
-func (m *ReadFolioRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
 type ReadFolioResponse struct {
 	// Again the type with 'result' name
 	Result               *Folio   `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
@@ -1930,7 +1564,7 @@ func (m *ReadFolioResponse) Reset()         { *m = ReadFolioResponse{} }
 func (m *ReadFolioResponse) String() string { return proto.CompactTextString(m) }
 func (*ReadFolioResponse) ProtoMessage()    {}
 func (*ReadFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{40}
+	return fileDescriptor_31c400dfa9a52dc8, []int{34}
 }
 
 func (m *ReadFolioResponse) XXX_Unmarshal(b []byte) error {
@@ -1970,7 +1604,7 @@ func (m *UpdateFolioRequest) Reset()         { *m = UpdateFolioRequest{} }
 func (m *UpdateFolioRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateFolioRequest) ProtoMessage()    {}
 func (*UpdateFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{41}
+	return fileDescriptor_31c400dfa9a52dc8, []int{35}
 }
 
 func (m *UpdateFolioRequest) XXX_Unmarshal(b []byte) error {
@@ -2016,7 +1650,7 @@ func (m *UpdateFolioResponse) Reset()         { *m = UpdateFolioResponse{} }
 func (m *UpdateFolioResponse) String() string { return proto.CompactTextString(m) }
 func (*UpdateFolioResponse) ProtoMessage()    {}
 func (*UpdateFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{42}
+	return fileDescriptor_31c400dfa9a52dc8, []int{36}
 }
 
 func (m *UpdateFolioResponse) XXX_Unmarshal(b []byte) error {
@@ -2056,7 +1690,7 @@ func (m *DeleteFolioRequest) Reset()         { *m = DeleteFolioRequest{} }
 func (m *DeleteFolioRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteFolioRequest) ProtoMessage()    {}
 func (*DeleteFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{43}
+	return fileDescriptor_31c400dfa9a52dc8, []int{37}
 }
 
 func (m *DeleteFolioRequest) XXX_Unmarshal(b []byte) error {
@@ -2096,7 +1730,7 @@ func (m *DeleteFoliosRequest) Reset()         { *m = DeleteFoliosRequest{} }
 func (m *DeleteFoliosRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteFoliosRequest) ProtoMessage()    {}
 func (*DeleteFoliosRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{44}
+	return fileDescriptor_31c400dfa9a52dc8, []int{38}
 }
 
 func (m *DeleteFoliosRequest) XXX_Unmarshal(b []byte) error {
@@ -2136,7 +1770,7 @@ func (m *DeleteFolioResponse) Reset()         { *m = DeleteFolioResponse{} }
 func (m *DeleteFolioResponse) String() string { return proto.CompactTextString(m) }
 func (*DeleteFolioResponse) ProtoMessage()    {}
 func (*DeleteFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{45}
+	return fileDescriptor_31c400dfa9a52dc8, []int{39}
 }
 
 func (m *DeleteFolioResponse) XXX_Unmarshal(b []byte) error {
@@ -2157,117 +1791,6 @@ func (m *DeleteFolioResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_DeleteFolioResponse proto.InternalMessageInfo
 
-type ListFolioResponse struct {
-	// Note repeated field and plural name 'results'
-	Results              []*Folio        `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
-	PageInfo             *query.PageInfo `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ListFolioResponse) Reset()         { *m = ListFolioResponse{} }
-func (m *ListFolioResponse) String() string { return proto.CompactTextString(m) }
-func (*ListFolioResponse) ProtoMessage()    {}
-func (*ListFolioResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{46}
-}
-
-func (m *ListFolioResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListFolioResponse.Unmarshal(m, b)
-}
-func (m *ListFolioResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListFolioResponse.Marshal(b, m, deterministic)
-}
-func (m *ListFolioResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListFolioResponse.Merge(m, src)
-}
-func (m *ListFolioResponse) XXX_Size() int {
-	return xxx_messageInfo_ListFolioResponse.Size(m)
-}
-func (m *ListFolioResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListFolioResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListFolioResponse proto.InternalMessageInfo
-
-func (m *ListFolioResponse) GetResults() []*Folio {
-	if m != nil {
-		return m.Results
-	}
-	return nil
-}
-
-func (m *ListFolioResponse) GetPageInfo() *query.PageInfo {
-	if m != nil {
-		return m.PageInfo
-	}
-	return nil
-}
-
-type ListFolioRequest struct {
-	Filter               *query.Filtering      `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy              *query.Sorting        `protobuf:"bytes,2,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,3,opt,name=fields,proto3" json:"fields,omitempty"`
-	Paging               *query.Pagination     `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
-}
-
-func (m *ListFolioRequest) Reset()         { *m = ListFolioRequest{} }
-func (m *ListFolioRequest) String() string { return proto.CompactTextString(m) }
-func (*ListFolioRequest) ProtoMessage()    {}
-func (*ListFolioRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{47}
-}
-
-func (m *ListFolioRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListFolioRequest.Unmarshal(m, b)
-}
-func (m *ListFolioRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListFolioRequest.Marshal(b, m, deterministic)
-}
-func (m *ListFolioRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListFolioRequest.Merge(m, src)
-}
-func (m *ListFolioRequest) XXX_Size() int {
-	return xxx_messageInfo_ListFolioRequest.Size(m)
-}
-func (m *ListFolioRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListFolioRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListFolioRequest proto.InternalMessageInfo
-
-func (m *ListFolioRequest) GetFilter() *query.Filtering {
-	if m != nil {
-		return m.Filter
-	}
-	return nil
-}
-
-func (m *ListFolioRequest) GetOrderBy() *query.Sorting {
-	if m != nil {
-		return m.OrderBy
-	}
-	return nil
-}
-
-func (m *ListFolioRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
-func (m *ListFolioRequest) GetPaging() *query.Pagination {
-	if m != nil {
-		return m.Paging
-	}
-	return nil
-}
-
 // Asset main doc
 type Asset struct {
 	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -2287,7 +1810,7 @@ func (m *Asset) Reset()         { *m = Asset{} }
 func (m *Asset) String() string { return proto.CompactTextString(m) }
 func (*Asset) ProtoMessage()    {}
 func (*Asset) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{48}
+	return fileDescriptor_31c400dfa9a52dc8, []int{40}
 }
 
 func (m *Asset) XXX_Unmarshal(b []byte) error {
@@ -2377,7 +1900,7 @@ func (m *CreateAssetRequest) Reset()         { *m = CreateAssetRequest{} }
 func (m *CreateAssetRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateAssetRequest) ProtoMessage()    {}
 func (*CreateAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{49}
+	return fileDescriptor_31c400dfa9a52dc8, []int{41}
 }
 
 func (m *CreateAssetRequest) XXX_Unmarshal(b []byte) error {
@@ -2417,7 +1940,7 @@ func (m *CreateAssetResponse) Reset()         { *m = CreateAssetResponse{} }
 func (m *CreateAssetResponse) String() string { return proto.CompactTextString(m) }
 func (*CreateAssetResponse) ProtoMessage()    {}
 func (*CreateAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{50}
+	return fileDescriptor_31c400dfa9a52dc8, []int{42}
 }
 
 func (m *CreateAssetResponse) XXX_Unmarshal(b []byte) error {
@@ -2447,18 +1970,17 @@ func (m *CreateAssetResponse) GetResult() *Asset {
 
 type ReadAssetRequest struct {
 	// For a read request, the id field is the only to be specified
-	Id                   uint32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,2,opt,name=fields,proto3" json:"fields,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ReadAssetRequest) Reset()         { *m = ReadAssetRequest{} }
 func (m *ReadAssetRequest) String() string { return proto.CompactTextString(m) }
 func (*ReadAssetRequest) ProtoMessage()    {}
 func (*ReadAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{51}
+	return fileDescriptor_31c400dfa9a52dc8, []int{43}
 }
 
 func (m *ReadAssetRequest) XXX_Unmarshal(b []byte) error {
@@ -2486,13 +2008,6 @@ func (m *ReadAssetRequest) GetId() uint32 {
 	return 0
 }
 
-func (m *ReadAssetRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
 type ReadAssetResponse struct {
 	// Again the type with 'result' name
 	Result               *Asset   `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
@@ -2505,7 +2020,7 @@ func (m *ReadAssetResponse) Reset()         { *m = ReadAssetResponse{} }
 func (m *ReadAssetResponse) String() string { return proto.CompactTextString(m) }
 func (*ReadAssetResponse) ProtoMessage()    {}
 func (*ReadAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{52}
+	return fileDescriptor_31c400dfa9a52dc8, []int{44}
 }
 
 func (m *ReadAssetResponse) XXX_Unmarshal(b []byte) error {
@@ -2545,7 +2060,7 @@ func (m *UpdateAssetRequest) Reset()         { *m = UpdateAssetRequest{} }
 func (m *UpdateAssetRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateAssetRequest) ProtoMessage()    {}
 func (*UpdateAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{53}
+	return fileDescriptor_31c400dfa9a52dc8, []int{45}
 }
 
 func (m *UpdateAssetRequest) XXX_Unmarshal(b []byte) error {
@@ -2591,7 +2106,7 @@ func (m *UpdateAssetResponse) Reset()         { *m = UpdateAssetResponse{} }
 func (m *UpdateAssetResponse) String() string { return proto.CompactTextString(m) }
 func (*UpdateAssetResponse) ProtoMessage()    {}
 func (*UpdateAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{54}
+	return fileDescriptor_31c400dfa9a52dc8, []int{46}
 }
 
 func (m *UpdateAssetResponse) XXX_Unmarshal(b []byte) error {
@@ -2631,7 +2146,7 @@ func (m *DeleteAssetRequest) Reset()         { *m = DeleteAssetRequest{} }
 func (m *DeleteAssetRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteAssetRequest) ProtoMessage()    {}
 func (*DeleteAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{55}
+	return fileDescriptor_31c400dfa9a52dc8, []int{47}
 }
 
 func (m *DeleteAssetRequest) XXX_Unmarshal(b []byte) error {
@@ -2671,7 +2186,7 @@ func (m *DeleteAssetsRequest) Reset()         { *m = DeleteAssetsRequest{} }
 func (m *DeleteAssetsRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteAssetsRequest) ProtoMessage()    {}
 func (*DeleteAssetsRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{56}
+	return fileDescriptor_31c400dfa9a52dc8, []int{48}
 }
 
 func (m *DeleteAssetsRequest) XXX_Unmarshal(b []byte) error {
@@ -2711,7 +2226,7 @@ func (m *DeleteAssetResponse) Reset()         { *m = DeleteAssetResponse{} }
 func (m *DeleteAssetResponse) String() string { return proto.CompactTextString(m) }
 func (*DeleteAssetResponse) ProtoMessage()    {}
 func (*DeleteAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{57}
+	return fileDescriptor_31c400dfa9a52dc8, []int{49}
 }
 
 func (m *DeleteAssetResponse) XXX_Unmarshal(b []byte) error {
@@ -2732,117 +2247,6 @@ func (m *DeleteAssetResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_DeleteAssetResponse proto.InternalMessageInfo
 
-type ListAssetResponse struct {
-	// Note repeated field and plural name 'results'
-	Results              []*Asset        `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
-	PageInfo             *query.PageInfo `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ListAssetResponse) Reset()         { *m = ListAssetResponse{} }
-func (m *ListAssetResponse) String() string { return proto.CompactTextString(m) }
-func (*ListAssetResponse) ProtoMessage()    {}
-func (*ListAssetResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{58}
-}
-
-func (m *ListAssetResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListAssetResponse.Unmarshal(m, b)
-}
-func (m *ListAssetResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListAssetResponse.Marshal(b, m, deterministic)
-}
-func (m *ListAssetResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListAssetResponse.Merge(m, src)
-}
-func (m *ListAssetResponse) XXX_Size() int {
-	return xxx_messageInfo_ListAssetResponse.Size(m)
-}
-func (m *ListAssetResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListAssetResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListAssetResponse proto.InternalMessageInfo
-
-func (m *ListAssetResponse) GetResults() []*Asset {
-	if m != nil {
-		return m.Results
-	}
-	return nil
-}
-
-func (m *ListAssetResponse) GetPageInfo() *query.PageInfo {
-	if m != nil {
-		return m.PageInfo
-	}
-	return nil
-}
-
-type ListAssetRequest struct {
-	Filter               *query.Filtering      `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy              *query.Sorting        `protobuf:"bytes,2,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,3,opt,name=fields,proto3" json:"fields,omitempty"`
-	Paging               *query.Pagination     `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
-}
-
-func (m *ListAssetRequest) Reset()         { *m = ListAssetRequest{} }
-func (m *ListAssetRequest) String() string { return proto.CompactTextString(m) }
-func (*ListAssetRequest) ProtoMessage()    {}
-func (*ListAssetRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{59}
-}
-
-func (m *ListAssetRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListAssetRequest.Unmarshal(m, b)
-}
-func (m *ListAssetRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListAssetRequest.Marshal(b, m, deterministic)
-}
-func (m *ListAssetRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListAssetRequest.Merge(m, src)
-}
-func (m *ListAssetRequest) XXX_Size() int {
-	return xxx_messageInfo_ListAssetRequest.Size(m)
-}
-func (m *ListAssetRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListAssetRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListAssetRequest proto.InternalMessageInfo
-
-func (m *ListAssetRequest) GetFilter() *query.Filtering {
-	if m != nil {
-		return m.Filter
-	}
-	return nil
-}
-
-func (m *ListAssetRequest) GetOrderBy() *query.Sorting {
-	if m != nil {
-		return m.OrderBy
-	}
-	return nil
-}
-
-func (m *ListAssetRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
-func (m *ListAssetRequest) GetPaging() *query.Pagination {
-	if m != nil {
-		return m.Paging
-	}
-	return nil
-}
-
 // Note text junk
 type Note struct {
 	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -2859,7 +2263,7 @@ func (m *Note) Reset()         { *m = Note{} }
 func (m *Note) String() string { return proto.CompactTextString(m) }
 func (*Note) ProtoMessage()    {}
 func (*Note) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{60}
+	return fileDescriptor_31c400dfa9a52dc8, []int{50}
 }
 
 func (m *Note) XXX_Unmarshal(b []byte) error {
@@ -2928,7 +2332,7 @@ func (m *CreateNoteRequest) Reset()         { *m = CreateNoteRequest{} }
 func (m *CreateNoteRequest) String() string { return proto.CompactTextString(m) }
 func (*CreateNoteRequest) ProtoMessage()    {}
 func (*CreateNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{61}
+	return fileDescriptor_31c400dfa9a52dc8, []int{51}
 }
 
 func (m *CreateNoteRequest) XXX_Unmarshal(b []byte) error {
@@ -2968,7 +2372,7 @@ func (m *CreateNoteResponse) Reset()         { *m = CreateNoteResponse{} }
 func (m *CreateNoteResponse) String() string { return proto.CompactTextString(m) }
 func (*CreateNoteResponse) ProtoMessage()    {}
 func (*CreateNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{62}
+	return fileDescriptor_31c400dfa9a52dc8, []int{52}
 }
 
 func (m *CreateNoteResponse) XXX_Unmarshal(b []byte) error {
@@ -2998,18 +2402,17 @@ func (m *CreateNoteResponse) GetResult() *Note {
 
 type ReadNoteRequest struct {
 	// For a read request, the id field is the only to be specified
-	Id                   uint32                `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,2,opt,name=fields,proto3" json:"fields,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
+	Id                   uint32   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
 }
 
 func (m *ReadNoteRequest) Reset()         { *m = ReadNoteRequest{} }
 func (m *ReadNoteRequest) String() string { return proto.CompactTextString(m) }
 func (*ReadNoteRequest) ProtoMessage()    {}
 func (*ReadNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{63}
+	return fileDescriptor_31c400dfa9a52dc8, []int{53}
 }
 
 func (m *ReadNoteRequest) XXX_Unmarshal(b []byte) error {
@@ -3037,13 +2440,6 @@ func (m *ReadNoteRequest) GetId() uint32 {
 	return 0
 }
 
-func (m *ReadNoteRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
 type ReadNoteResponse struct {
 	// Again the type with 'result' name
 	Result               *Note    `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
@@ -3056,7 +2452,7 @@ func (m *ReadNoteResponse) Reset()         { *m = ReadNoteResponse{} }
 func (m *ReadNoteResponse) String() string { return proto.CompactTextString(m) }
 func (*ReadNoteResponse) ProtoMessage()    {}
 func (*ReadNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{64}
+	return fileDescriptor_31c400dfa9a52dc8, []int{54}
 }
 
 func (m *ReadNoteResponse) XXX_Unmarshal(b []byte) error {
@@ -3096,7 +2492,7 @@ func (m *UpdateNoteRequest) Reset()         { *m = UpdateNoteRequest{} }
 func (m *UpdateNoteRequest) String() string { return proto.CompactTextString(m) }
 func (*UpdateNoteRequest) ProtoMessage()    {}
 func (*UpdateNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{65}
+	return fileDescriptor_31c400dfa9a52dc8, []int{55}
 }
 
 func (m *UpdateNoteRequest) XXX_Unmarshal(b []byte) error {
@@ -3142,7 +2538,7 @@ func (m *UpdateNoteResponse) Reset()         { *m = UpdateNoteResponse{} }
 func (m *UpdateNoteResponse) String() string { return proto.CompactTextString(m) }
 func (*UpdateNoteResponse) ProtoMessage()    {}
 func (*UpdateNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{66}
+	return fileDescriptor_31c400dfa9a52dc8, []int{56}
 }
 
 func (m *UpdateNoteResponse) XXX_Unmarshal(b []byte) error {
@@ -3182,7 +2578,7 @@ func (m *DeleteNoteRequest) Reset()         { *m = DeleteNoteRequest{} }
 func (m *DeleteNoteRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteNoteRequest) ProtoMessage()    {}
 func (*DeleteNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{67}
+	return fileDescriptor_31c400dfa9a52dc8, []int{57}
 }
 
 func (m *DeleteNoteRequest) XXX_Unmarshal(b []byte) error {
@@ -3222,7 +2618,7 @@ func (m *DeleteNotesRequest) Reset()         { *m = DeleteNotesRequest{} }
 func (m *DeleteNotesRequest) String() string { return proto.CompactTextString(m) }
 func (*DeleteNotesRequest) ProtoMessage()    {}
 func (*DeleteNotesRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{68}
+	return fileDescriptor_31c400dfa9a52dc8, []int{58}
 }
 
 func (m *DeleteNotesRequest) XXX_Unmarshal(b []byte) error {
@@ -3262,7 +2658,7 @@ func (m *DeleteNoteResponse) Reset()         { *m = DeleteNoteResponse{} }
 func (m *DeleteNoteResponse) String() string { return proto.CompactTextString(m) }
 func (*DeleteNoteResponse) ProtoMessage()    {}
 func (*DeleteNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{69}
+	return fileDescriptor_31c400dfa9a52dc8, []int{59}
 }
 
 func (m *DeleteNoteResponse) XXX_Unmarshal(b []byte) error {
@@ -3283,117 +2679,6 @@ func (m *DeleteNoteResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_DeleteNoteResponse proto.InternalMessageInfo
 
-type ListNoteResponse struct {
-	// Note repeated field and plural name 'results'
-	Results              []*Note         `protobuf:"bytes,1,rep,name=results,proto3" json:"results,omitempty"`
-	PageInfo             *query.PageInfo `protobuf:"bytes,2,opt,name=page_info,json=pageInfo,proto3" json:"page_info,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
-	XXX_unrecognized     []byte          `json:"-"`
-	XXX_sizecache        int32           `json:"-"`
-}
-
-func (m *ListNoteResponse) Reset()         { *m = ListNoteResponse{} }
-func (m *ListNoteResponse) String() string { return proto.CompactTextString(m) }
-func (*ListNoteResponse) ProtoMessage()    {}
-func (*ListNoteResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{70}
-}
-
-func (m *ListNoteResponse) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListNoteResponse.Unmarshal(m, b)
-}
-func (m *ListNoteResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListNoteResponse.Marshal(b, m, deterministic)
-}
-func (m *ListNoteResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListNoteResponse.Merge(m, src)
-}
-func (m *ListNoteResponse) XXX_Size() int {
-	return xxx_messageInfo_ListNoteResponse.Size(m)
-}
-func (m *ListNoteResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListNoteResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListNoteResponse proto.InternalMessageInfo
-
-func (m *ListNoteResponse) GetResults() []*Note {
-	if m != nil {
-		return m.Results
-	}
-	return nil
-}
-
-func (m *ListNoteResponse) GetPageInfo() *query.PageInfo {
-	if m != nil {
-		return m.PageInfo
-	}
-	return nil
-}
-
-type ListNoteRequest struct {
-	Filter               *query.Filtering      `protobuf:"bytes,1,opt,name=filter,proto3" json:"filter,omitempty"`
-	OrderBy              *query.Sorting        `protobuf:"bytes,2,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
-	Fields               *query.FieldSelection `protobuf:"bytes,3,opt,name=fields,proto3" json:"fields,omitempty"`
-	Paging               *query.Pagination     `protobuf:"bytes,4,opt,name=paging,proto3" json:"paging,omitempty"`
-	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
-	XXX_unrecognized     []byte                `json:"-"`
-	XXX_sizecache        int32                 `json:"-"`
-}
-
-func (m *ListNoteRequest) Reset()         { *m = ListNoteRequest{} }
-func (m *ListNoteRequest) String() string { return proto.CompactTextString(m) }
-func (*ListNoteRequest) ProtoMessage()    {}
-func (*ListNoteRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_31c400dfa9a52dc8, []int{71}
-}
-
-func (m *ListNoteRequest) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_ListNoteRequest.Unmarshal(m, b)
-}
-func (m *ListNoteRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_ListNoteRequest.Marshal(b, m, deterministic)
-}
-func (m *ListNoteRequest) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_ListNoteRequest.Merge(m, src)
-}
-func (m *ListNoteRequest) XXX_Size() int {
-	return xxx_messageInfo_ListNoteRequest.Size(m)
-}
-func (m *ListNoteRequest) XXX_DiscardUnknown() {
-	xxx_messageInfo_ListNoteRequest.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_ListNoteRequest proto.InternalMessageInfo
-
-func (m *ListNoteRequest) GetFilter() *query.Filtering {
-	if m != nil {
-		return m.Filter
-	}
-	return nil
-}
-
-func (m *ListNoteRequest) GetOrderBy() *query.Sorting {
-	if m != nil {
-		return m.OrderBy
-	}
-	return nil
-}
-
-func (m *ListNoteRequest) GetFields() *query.FieldSelection {
-	if m != nil {
-		return m.Fields
-	}
-	return nil
-}
-
-func (m *ListNoteRequest) GetPaging() *query.Pagination {
-	if m != nil {
-		return m.Paging
-	}
-	return nil
-}
-
 func init() {
 	proto.RegisterType((*User)(nil), "folio.User")
 	proto.RegisterType((*CreateUserRequest)(nil), "folio.CreateUserRequest")
@@ -3405,8 +2690,6 @@ func init() {
 	proto.RegisterType((*DeleteUserRequest)(nil), "folio.DeleteUserRequest")
 	proto.RegisterType((*DeleteUsersRequest)(nil), "folio.DeleteUsersRequest")
 	proto.RegisterType((*DeleteUserResponse)(nil), "folio.DeleteUserResponse")
-	proto.RegisterType((*ListUserResponse)(nil), "folio.ListUserResponse")
-	proto.RegisterType((*ListUserRequest)(nil), "folio.ListUserRequest")
 	proto.RegisterType((*Share)(nil), "folio.Share")
 	proto.RegisterType((*CreateShareRequest)(nil), "folio.CreateShareRequest")
 	proto.RegisterType((*CreateShareResponse)(nil), "folio.CreateShareResponse")
@@ -3417,8 +2700,6 @@ func init() {
 	proto.RegisterType((*DeleteShareRequest)(nil), "folio.DeleteShareRequest")
 	proto.RegisterType((*DeleteSharesRequest)(nil), "folio.DeleteSharesRequest")
 	proto.RegisterType((*DeleteShareResponse)(nil), "folio.DeleteShareResponse")
-	proto.RegisterType((*ListShareResponse)(nil), "folio.ListShareResponse")
-	proto.RegisterType((*ListShareRequest)(nil), "folio.ListShareRequest")
 	proto.RegisterType((*Tag)(nil), "folio.Tag")
 	proto.RegisterType((*CreateTagRequest)(nil), "folio.CreateTagRequest")
 	proto.RegisterType((*CreateTagResponse)(nil), "folio.CreateTagResponse")
@@ -3429,8 +2710,6 @@ func init() {
 	proto.RegisterType((*DeleteTagRequest)(nil), "folio.DeleteTagRequest")
 	proto.RegisterType((*DeleteTagsRequest)(nil), "folio.DeleteTagsRequest")
 	proto.RegisterType((*DeleteTagResponse)(nil), "folio.DeleteTagResponse")
-	proto.RegisterType((*ListTagResponse)(nil), "folio.ListTagResponse")
-	proto.RegisterType((*ListTagRequest)(nil), "folio.ListTagRequest")
 	proto.RegisterType((*Folio)(nil), "folio.Folio")
 	proto.RegisterType((*CreateFolioRequest)(nil), "folio.CreateFolioRequest")
 	proto.RegisterType((*CreateFolioResponse)(nil), "folio.CreateFolioResponse")
@@ -3441,8 +2720,6 @@ func init() {
 	proto.RegisterType((*DeleteFolioRequest)(nil), "folio.DeleteFolioRequest")
 	proto.RegisterType((*DeleteFoliosRequest)(nil), "folio.DeleteFoliosRequest")
 	proto.RegisterType((*DeleteFolioResponse)(nil), "folio.DeleteFolioResponse")
-	proto.RegisterType((*ListFolioResponse)(nil), "folio.ListFolioResponse")
-	proto.RegisterType((*ListFolioRequest)(nil), "folio.ListFolioRequest")
 	proto.RegisterType((*Asset)(nil), "folio.Asset")
 	proto.RegisterType((*CreateAssetRequest)(nil), "folio.CreateAssetRequest")
 	proto.RegisterType((*CreateAssetResponse)(nil), "folio.CreateAssetResponse")
@@ -3453,8 +2730,6 @@ func init() {
 	proto.RegisterType((*DeleteAssetRequest)(nil), "folio.DeleteAssetRequest")
 	proto.RegisterType((*DeleteAssetsRequest)(nil), "folio.DeleteAssetsRequest")
 	proto.RegisterType((*DeleteAssetResponse)(nil), "folio.DeleteAssetResponse")
-	proto.RegisterType((*ListAssetResponse)(nil), "folio.ListAssetResponse")
-	proto.RegisterType((*ListAssetRequest)(nil), "folio.ListAssetRequest")
 	proto.RegisterType((*Note)(nil), "folio.Note")
 	proto.RegisterType((*CreateNoteRequest)(nil), "folio.CreateNoteRequest")
 	proto.RegisterType((*CreateNoteResponse)(nil), "folio.CreateNoteResponse")
@@ -3465,129 +2740,103 @@ func init() {
 	proto.RegisterType((*DeleteNoteRequest)(nil), "folio.DeleteNoteRequest")
 	proto.RegisterType((*DeleteNotesRequest)(nil), "folio.DeleteNotesRequest")
 	proto.RegisterType((*DeleteNoteResponse)(nil), "folio.DeleteNoteResponse")
-	proto.RegisterType((*ListNoteResponse)(nil), "folio.ListNoteResponse")
-	proto.RegisterType((*ListNoteRequest)(nil), "folio.ListNoteRequest")
 }
 
 func init() { proto.RegisterFile("folio.proto", fileDescriptor_31c400dfa9a52dc8) }
 
 var fileDescriptor_31c400dfa9a52dc8 = []byte{
-	// 1828 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x5a, 0xdf, 0x4e, 0xdc, 0xc6,
-	0x17, 0xc6, 0xc0, 0x2e, 0xbb, 0x67, 0x13, 0xb2, 0x0c, 0x09, 0x98, 0x55, 0x7e, 0x12, 0x3f, 0x87,
-	0x50, 0x54, 0x95, 0xdd, 0x88, 0xb4, 0x4a, 0x43, 0x5a, 0x29, 0x0d, 0x29, 0x55, 0xda, 0x24, 0x4d,
-	0x17, 0x68, 0x7b, 0x87, 0x66, 0xd9, 0xc1, 0x58, 0x31, 0xf6, 0xc6, 0x36, 0x69, 0xb8, 0xa8, 0xaa,
-	0xbe, 0x44, 0x2f, 0xfa, 0x1e, 0xbd, 0x80, 0x8b, 0xde, 0xf7, 0x19, 0xda, 0x5e, 0xf5, 0x0d, 0xfa,
-	0x04, 0x95, 0x67, 0xc6, 0xe3, 0xf9, 0x63, 0xfe, 0xec, 0xb2, 0x57, 0x08, 0x21, 0x21, 0xdb, 0xe7,
-	0xcc, 0x99, 0xcf, 0x9f, 0xe7, 0x7c, 0x3e, 0x3e, 0xb3, 0x50, 0xdb, 0x0d, 0x7d, 0x2f, 0x6c, 0xf6,
-	0xa2, 0x30, 0x09, 0x51, 0x89, 0x9e, 0x34, 0x6e, 0xbb, 0x61, 0xe8, 0xfa, 0xa4, 0x85, 0x7b, 0x5e,
-	0x0b, 0x07, 0x41, 0x98, 0xe0, 0xc4, 0x0b, 0x83, 0x98, 0x39, 0x35, 0x66, 0xdf, 0x62, 0xdf, 0xeb,
-	0xe2, 0x84, 0xb4, 0xb2, 0x03, 0x6e, 0x58, 0x75, 0xbd, 0x64, 0xef, 0xa0, 0xd3, 0xdc, 0x09, 0xf7,
-	0x5b, 0x5e, 0xb0, 0x1b, 0x76, 0xfc, 0xf0, 0x5d, 0xd8, 0x23, 0x41, 0x8b, 0x9a, 0x77, 0x96, 0x5d,
-	0x12, 0x2c, 0xbb, 0x61, 0xb4, 0xdf, 0x0a, 0x7b, 0x34, 0x5e, 0x2b, 0x3d, 0xe1, 0x63, 0xe7, 0xf9,
-	0x94, 0xf4, 0xac, 0x73, 0xb0, 0xdb, 0xda, 0xf5, 0x88, 0xdf, 0xdd, 0xde, 0xc7, 0xf1, 0x6b, 0xee,
-	0xf1, 0xe5, 0x49, 0xd1, 0x71, 0xe2, 0xe3, 0x78, 0x19, 0xf7, 0x7a, 0xcb, 0x49, 0x18, 0xfa, 0xaf,
-	0xbd, 0xa4, 0xf5, 0xe6, 0x80, 0x44, 0x87, 0xad, 0x9d, 0xd0, 0xf7, 0xc9, 0x4e, 0x3a, 0xd3, 0x76,
-	0xd8, 0x23, 0x11, 0x4e, 0xc2, 0x88, 0xdf, 0x82, 0xf3, 0xab, 0x05, 0xe3, 0x5b, 0x31, 0x89, 0xd0,
-	0x24, 0x8c, 0x7a, 0x5d, 0xdb, 0x9a, 0xb7, 0x96, 0xae, 0xb7, 0x47, 0xbd, 0x2e, 0xba, 0x09, 0xa5,
-	0xcf, 0xf7, 0xb1, 0xe7, 0xdb, 0xa3, 0xf3, 0xd6, 0x52, 0xb5, 0xcd, 0x4e, 0xd0, 0x6d, 0xa8, 0xae,
-	0x7b, 0x51, 0x9c, 0x04, 0x78, 0x9f, 0xd8, 0x63, 0xd4, 0x92, 0x5f, 0x40, 0x0d, 0xa8, 0x3c, 0xc7,
-	0xdc, 0x38, 0x4e, 0x8d, 0xe2, 0x1c, 0xbd, 0x0f, 0xd5, 0xcd, 0xbd, 0x83, 0xfd, 0x4e, 0x90, 0xc6,
-	0xfc, 0xdf, 0xbc, 0xb5, 0x54, 0x5b, 0xb9, 0xd6, 0x64, 0x8c, 0x7f, 0x16, 0xc7, 0x24, 0x69, 0xe7,
-	0xe6, 0xd5, 0xf2, 0xf1, 0xd1, 0xdc, 0x68, 0xc5, 0x72, 0x56, 0x61, 0x6a, 0x2d, 0x22, 0x38, 0x21,
-	0x29, 0xc2, 0x36, 0x79, 0x73, 0x40, 0xe2, 0x04, 0xdd, 0x85, 0x89, 0x1e, 0x3e, 0xf4, 0x43, 0xcc,
-	0xd0, 0xd6, 0x56, 0x6a, 0x3c, 0x0c, 0x75, 0xca, 0x6c, 0xce, 0x43, 0x40, 0xf2, 0xd8, 0xb8, 0x17,
-	0x06, 0x31, 0x41, 0x77, 0xa0, 0x1c, 0x91, 0xf8, 0xc0, 0x4f, 0x8a, 0xc6, 0x72, 0x93, 0xf3, 0x1d,
-	0xdc, 0x68, 0x13, 0xdc, 0x95, 0x27, 0xd5, 0xd9, 0xf9, 0x10, 0xca, 0xf4, 0xb1, 0xc4, 0x94, 0x9e,
-	0xda, 0xca, 0xed, 0x66, 0xf6, 0x20, 0x9a, 0xb8, 0xe7, 0x35, 0xd7, 0x53, 0xdb, 0x06, 0xe1, 0xa4,
-	0xb7, 0xb9, 0xaf, 0xf3, 0x00, 0xea, 0x79, 0xe0, 0x7e, 0x10, 0xfd, 0x04, 0x53, 0x5b, 0xbd, 0xee,
-	0x40, 0x44, 0xa0, 0x35, 0xb8, 0xe1, 0x92, 0x28, 0x74, 0x49, 0xe4, 0x6d, 0xbb, 0x24, 0xfd, 0xe3,
-	0x98, 0x1b, 0x4d, 0xb6, 0xd2, 0x9a, 0xd9, 0x4a, 0x63, 0xb0, 0x5f, 0xe0, 0xf8, 0x75, 0x7b, 0x32,
-	0x1b, 0xf2, 0x05, 0x1d, 0x91, 0xb2, 0x29, 0x03, 0xe8, 0x07, 0xfb, 0x1d, 0x98, 0x7a, 0x4a, 0x7c,
-	0xa2, 0x62, 0xd7, 0xf8, 0x74, 0x16, 0x01, 0xe5, 0x4e, 0x71, 0xe6, 0x55, 0x87, 0x31, 0xaf, 0x1b,
-	0xdb, 0xd6, 0xfc, 0xd8, 0xd2, 0xf5, 0x76, 0x7a, 0xe8, 0xdc, 0x94, 0xfd, 0x32, 0x1c, 0x4e, 0x00,
-	0xf5, 0xe7, 0x5e, 0x9c, 0x28, 0xd8, 0xee, 0xc2, 0x04, 0x03, 0xc0, 0xc6, 0xeb, 0xec, 0x70, 0x1b,
-	0xba, 0x0f, 0xd5, 0x1e, 0x76, 0xc9, 0x76, 0xfa, 0xf8, 0x38, 0x2f, 0x33, 0xea, 0xb3, 0x7c, 0x85,
-	0x5d, 0xf2, 0x2c, 0xd8, 0x0d, 0xdb, 0x95, 0x1e, 0x3f, 0x72, 0xfe, 0xb2, 0xe0, 0x46, 0x3e, 0x21,
-	0xc3, 0xda, 0x4a, 0x57, 0x84, 0x9f, 0x90, 0x88, 0x73, 0x31, 0xab, 0xaf, 0x88, 0xd4, 0xe6, 0x05,
-	0x6e, 0x9b, 0xbb, 0xa1, 0x7b, 0x50, 0x09, 0xa3, 0x2e, 0x89, 0xb6, 0x3b, 0x87, 0x7c, 0xe2, 0x5b,
-	0xea, 0x90, 0x8d, 0x30, 0x4a, 0xd2, 0x01, 0x13, 0xd4, 0xed, 0xc9, 0xa1, 0xb4, 0xe8, 0xc6, 0xce,
-	0xbf, 0xe8, 0xd0, 0x3d, 0x28, 0xf7, 0xb0, 0xeb, 0x05, 0x2e, 0x4d, 0xc9, 0xda, 0x8a, 0x6d, 0xdc,
-	0x9e, 0x17, 0x60, 0x36, 0x82, 0xf9, 0x39, 0x11, 0x94, 0x36, 0xf6, 0x70, 0x44, 0x8c, 0x55, 0x7f,
-	0x07, 0xca, 0xbb, 0x91, 0x47, 0x82, 0x2e, 0x07, 0xac, 0x3e, 0x6f, 0x66, 0x42, 0x1f, 0x40, 0x99,
-	0x5e, 0x8d, 0xed, 0x32, 0xe5, 0x3d, 0xcb, 0xf2, 0xf5, 0xf4, 0xff, 0x13, 0x9a, 0xda, 0x2b, 0x23,
-	0x6d, 0xee, 0x23, 0x52, 0xfd, 0x93, 0x2c, 0x5d, 0xe9, 0xcc, 0x19, 0xa9, 0x8b, 0xfa, 0x12, 0xcf,
-	0x82, 0x31, 0x2f, 0x91, 0xec, 0x8f, 0x60, 0x5a, 0x19, 0xcd, 0xd7, 0xc0, 0x82, 0xb6, 0x3e, 0xd5,
-	0xd1, 0xd9, 0x02, 0xfd, 0x9e, 0x65, 0xa5, 0x32, 0xf1, 0x70, 0xf2, 0xfd, 0x21, 0x4c, 0x49, 0x91,
-	0xfb, 0x02, 0xf5, 0xb3, 0x95, 0x65, 0xdc, 0x20, 0x84, 0x0c, 0x27, 0xe9, 0x1f, 0xc1, 0xb4, 0x02,
-	0xa1, 0xaf, 0x1b, 0x58, 0xc8, 0x32, 0xf5, 0x34, 0x5e, 0x9d, 0xf7, 0x60, 0x5a, 0xf2, 0x3a, 0x25,
-	0xf1, 0x6f, 0x29, 0x8e, 0x22, 0xf3, 0x7b, 0x30, 0x95, 0x26, 0xa2, 0x0a, 0x70, 0x51, 0x4f, 0x7d,
-	0x8d, 0xa4, 0x0b, 0xe5, 0xfe, 0xdf, 0x16, 0x13, 0x1b, 0xe5, 0xb6, 0x2e, 0x51, 0xf2, 0xff, 0x66,
-	0xc1, 0xd8, 0x26, 0x76, 0x8d, 0x0c, 0x40, 0x30, 0xfe, 0x95, 0xc7, 0x33, 0xff, 0x7a, 0x9b, 0x1e,
-	0xa7, 0x35, 0xc2, 0x73, 0xdc, 0x21, 0x3e, 0xaf, 0x04, 0xd8, 0x49, 0xea, 0xf9, 0x94, 0xc4, 0x3b,
-	0xbc, 0x02, 0xa0, 0xc7, 0xfd, 0x89, 0xc2, 0x40, 0xb5, 0xc2, 0xc7, 0x50, 0x67, 0x12, 0xb0, 0x89,
-	0xdd, 0xec, 0xb1, 0x2c, 0xe8, 0xd9, 0x02, 0x3c, 0x4a, 0xea, 0x23, 0xc4, 0xe3, 0x41, 0x56, 0x65,
-	0xd0, 0x91, 0x7c, 0x0d, 0x39, 0xda, 0x22, 0x97, 0x47, 0x66, 0x4b, 0xfc, 0x5b, 0x98, 0x4c, 0xd3,
-	0x5b, 0x9a, 0x70, 0x38, 0xb2, 0xf1, 0x11, 0xab, 0x3f, 0xfa, 0x85, 0xf3, 0x23, 0xd4, 0x59, 0xba,
-	0xf6, 0xcb, 0xc0, 0x70, 0xd4, 0xe2, 0x41, 0x56, 0xa3, 0xf4, 0x8b, 0xdb, 0x81, 0x3a, 0x4b, 0xed,
-	0x93, 0x89, 0x74, 0xee, 0x66, 0x45, 0xc4, 0x26, 0x76, 0x4f, 0x51, 0x89, 0x69, 0xc9, 0x4d, 0x68,
-	0x84, 0xcf, 0x5e, 0xd6, 0x32, 0xac, 0x05, 0x5d, 0x21, 0x14, 0x5a, 0x2e, 0xa4, 0x0f, 0x7f, 0x5a,
-	0x30, 0x29, 0xa6, 0xbb, 0x74, 0xea, 0xf0, 0xc7, 0x28, 0x94, 0x68, 0xce, 0x16, 0xe9, 0xc3, 0xd6,
-	0xd6, 0xb3, 0xa7, 0xfc, 0x73, 0x81, 0x1e, 0xa7, 0xd7, 0x5e, 0xe6, 0x1f, 0x0a, 0xf4, 0xb8, 0x50,
-	0x1d, 0x16, 0xa0, 0x4c, 0xf3, 0x5a, 0x57, 0x07, 0x96, 0xec, 0xdc, 0x86, 0xfe, 0x0f, 0xa5, 0x97,
-	0x61, 0x42, 0x62, 0x7b, 0x42, 0xa9, 0xe7, 0xd2, 0x6b, 0x6d, 0x66, 0x49, 0x5d, 0xbe, 0xfe, 0x21,
-	0x20, 0x91, 0x5d, 0x31, 0xeb, 0x13, 0x66, 0x41, 0x8b, 0x30, 0x9e, 0x60, 0x37, 0xb6, 0x41, 0x7f,
-	0xee, 0x42, 0x85, 0xa8, 0x3d, 0x55, 0xac, 0x98, 0xbe, 0x93, 0xec, 0x9a, 0xf9, 0x0e, 0xc9, 0x15,
-	0x8b, 0xf9, 0x0c, 0xa4, 0x58, 0xa2, 0xe4, 0xa1, 0x84, 0x9e, 0xf9, 0x86, 0x67, 0x5e, 0x66, 0xc9,
-	0xc3, 0x47, 0x9f, 0xf1, 0x72, 0x66, 0x5e, 0x5a, 0xc9, 0xa3, 0x4c, 0x3c, 0xd4, 0x92, 0x67, 0x10,
-	0x50, 0x79, 0xc9, 0x33, 0x08, 0x21, 0x43, 0x2e, 0x79, 0x06, 0xb9, 0x01, 0x51, 0xf2, 0x9c, 0xc6,
-	0x6b, 0x5e, 0xf2, 0x50, 0xaf, 0xf3, 0x94, 0x3c, 0x0a, 0x96, 0xac, 0xe4, 0x51, 0x01, 0x9e, 0x58,
-	0xf2, 0x70, 0x92, 0x86, 0x52, 0xf2, 0x28, 0xb7, 0x75, 0x89, 0x44, 0xed, 0x1f, 0x0b, 0x4a, 0x34,
-	0x4b, 0x8b, 0x44, 0x8d, 0x0a, 0xd8, 0xa8, 0x24, 0x60, 0x0e, 0xb0, 0xde, 0x10, 0x07, 0xa5, 0x12,
-	0xcd, 0x4c, 0x42, 0x0c, 0xc7, 0x55, 0x31, 0x7c, 0x85, 0x93, 0x3d, 0xbb, 0xc4, 0xae, 0xa5, 0xc7,
-	0x69, 0x2c, 0x9c, 0x4e, 0x6c, 0x97, 0x0b, 0x24, 0x83, 0x99, 0xd2, 0x71, 0x1d, 0x3f, 0xec, 0xd8,
-	0x37, 0xe7, 0xad, 0xa5, 0x6b, 0x6d, 0x7a, 0x7c, 0x31, 0xb9, 0x61, 0x1e, 0x67, 0x65, 0x17, 0xf3,
-	0x32, 0xe5, 0x86, 0x8f, 0x3e, 0x23, 0x31, 0xb8, 0x72, 0xab, 0x72, 0xa3, 0x4c, 0x3c, 0x54, 0xb9,
-	0x19, 0x04, 0x54, 0x2e, 0x37, 0x83, 0x10, 0x32, 0x64, 0xb9, 0x19, 0xe4, 0x06, 0x84, 0xdc, 0x9c,
-	0xc6, 0x6b, 0x2e, 0x37, 0xec, 0x2d, 0x7a, 0x0e, 0xb9, 0x51, 0xb0, 0x64, 0x72, 0xa3, 0x02, 0x3c,
-	0x51, 0x6e, 0x38, 0x49, 0x43, 0x91, 0x1b, 0xe5, 0xb6, 0x2e, 0x91, 0xdc, 0xfc, 0x62, 0xc1, 0x78,
-	0x5a, 0xae, 0x9c, 0xa8, 0x36, 0x5a, 0xb9, 0x94, 0xfa, 0x66, 0x4a, 0x42, 0xc7, 0x09, 0x05, 0x2a,
-	0x9f, 0xac, 0x40, 0x17, 0x6a, 0xb7, 0xd2, 0x92, 0xea, 0xac, 0x2e, 0x23, 0x75, 0x32, 0xdb, 0xad,
-	0x6c, 0xec, 0x19, 0x0d, 0x42, 0xea, 0xa4, 0xb5, 0x5b, 0xe5, 0x49, 0x87, 0xda, 0x6e, 0xed, 0x1f,
-	0x91, 0x68, 0xb7, 0xf6, 0x4f, 0xc4, 0x90, 0xdb, 0xad, 0xfd, 0x63, 0x17, 0xed, 0xd6, 0x53, 0xf8,
-	0xcc, 0xdb, 0xad, 0xb4, 0x6c, 0x3e, 0x47, 0xbb, 0x55, 0xc6, 0x91, 0xb5, 0x5b, 0x15, 0x6c, 0x27,
-	0xb6, 0x5b, 0x19, 0x3b, 0x43, 0x69, 0xb7, 0xca, 0x77, 0x74, 0x79, 0xf4, 0x60, 0xe5, 0x5f, 0x80,
-	0x6b, 0x34, 0x77, 0x37, 0x48, 0xf4, 0xd6, 0xdb, 0x21, 0x68, 0x0d, 0x20, 0xdf, 0xba, 0x40, 0x36,
-	0x27, 0xd2, 0xd8, 0x09, 0x69, 0xcc, 0x15, 0x58, 0xf8, 0x23, 0x1a, 0x41, 0x9f, 0x42, 0x25, 0xdb,
-	0x6b, 0x40, 0x33, 0xdc, 0x51, 0xdb, 0xd5, 0x68, 0xcc, 0x1a, 0xd7, 0xc5, 0xf0, 0x35, 0x80, 0xbc,
-	0xe1, 0x2f, 0x30, 0x18, 0x9b, 0x10, 0x02, 0x83, 0xb9, 0x3b, 0xc0, 0x30, 0x64, 0x6d, 0x72, 0x81,
-	0x41, 0xeb, 0x9b, 0x0b, 0x0c, 0x7a, 0x03, 0xdf, 0x19, 0x41, 0x2f, 0x00, 0xf2, 0x66, 0xbf, 0xc0,
-	0x60, 0x6c, 0x26, 0x08, 0x0c, 0x05, 0x3b, 0x03, 0x70, 0x7c, 0x34, 0x57, 0xe6, 0x3b, 0x5c, 0xeb,
-	0x50, 0x93, 0xbe, 0x98, 0x90, 0xca, 0x9e, 0x5c, 0xdb, 0x36, 0x1a, 0x45, 0x26, 0x01, 0xeb, 0x31,
-	0x54, 0xc5, 0x27, 0x0e, 0x92, 0x29, 0x54, 0x62, 0xd8, 0xa6, 0x41, 0x44, 0x58, 0x87, 0x9a, 0xf4,
-	0x95, 0x81, 0x54, 0x0e, 0x0b, 0x91, 0x14, 0x7c, 0x94, 0x30, 0x24, 0xa2, 0x2e, 0x47, 0x32, 0x91,
-	0x85, 0x48, 0x8c, 0xaf, 0x06, 0x67, 0x04, 0x7d, 0x03, 0x35, 0xe9, 0x1b, 0x03, 0xa9, 0x4c, 0x16,
-	0x22, 0x29, 0xfa, 0x24, 0xa9, 0x1d, 0x1f, 0xcd, 0x4d, 0x64, 0x8d, 0x81, 0xc7, 0x50, 0x15, 0xed,
-	0x34, 0x01, 0x4a, 0x6f, 0xcd, 0x35, 0x6c, 0xd3, 0x20, 0x40, 0xad, 0xc2, 0x04, 0xef, 0x7f, 0xa1,
-	0x5b, 0x12, 0x8b, 0xd2, 0xe8, 0x19, 0xfd, 0xb2, 0x4c, 0x89, 0xe8, 0x42, 0x89, 0xd9, 0xf5, 0xb6,
-	0x58, 0xc3, 0x36, 0x0d, 0xf2, 0xec, 0xbc, 0x7f, 0x23, 0x66, 0x57, 0xfb, 0x39, 0x8d, 0x19, 0xfd,
-	0xb2, 0x18, 0xfb, 0x0c, 0xaa, 0xa2, 0xff, 0x24, 0x66, 0xd7, 0x9b, 0x5b, 0x0d, 0xdb, 0x34, 0xf0,
-	0x08, 0xd5, 0xe3, 0xa3, 0xb9, 0x12, 0xeb, 0xbf, 0x0a, 0x11, 0xa0, 0xaf, 0x7c, 0x95, 0x2e, 0x49,
-	0x08, 0x35, 0x11, 0x50, 0x74, 0x5a, 0x88, 0x00, 0x0d, 0x21, 0x73, 0x26, 0x07, 0x98, 0x35, 0xae,
-	0x9b, 0x22, 0xa0, 0x60, 0x30, 0x5e, 0x8d, 0x9a, 0x08, 0x98, 0x18, 0x32, 0xf1, 0x56, 0x44, 0xa0,
-	0x08, 0x83, 0xfe, 0x5a, 0x91, 0x45, 0x40, 0xc1, 0x60, 0xbc, 0xe2, 0x34, 0x11, 0x50, 0x82, 0x70,
-	0x11, 0x48, 0xaf, 0x35, 0x78, 0xad, 0xb3, 0xf2, 0x7b, 0x1d, 0x2a, 0x74, 0xbd, 0x6e, 0xbe, 0x0b,
-	0xae, 0x04, 0xf7, 0x4a, 0x70, 0xaf, 0x04, 0xf7, 0x4a, 0x70, 0xaf, 0x04, 0x77, 0xf8, 0x82, 0x9b,
-	0x8b, 0x00, 0xeb, 0xb0, 0xa9, 0xec, 0xc9, 0x9f, 0xf8, 0x9a, 0x08, 0xa8, 0x5d, 0x08, 0x21, 0x02,
-	0x2c, 0x8a, 0x4c, 0xa1, 0x12, 0xc3, 0x36, 0x0d, 0xa6, 0x08, 0xa8, 0x48, 0xcc, 0x1e, 0x90, 0x26,
-	0x02, 0x05, 0x48, 0x44, 0x7b, 0x42, 0x11, 0x81, 0x42, 0x24, 0x46, 0xf3, 0x44, 0x16, 0x01, 0x15,
-	0x89, 0xd9, 0xcd, 0xd1, 0x44, 0x40, 0x8d, 0xc3, 0x45, 0x80, 0xc5, 0x10, 0x34, 0xb3, 0x5f, 0x6e,
-	0xa8, 0x34, 0xcb, 0x7b, 0xd5, 0x1a, 0xcd, 0xea, 0x76, 0xba, 0xa0, 0x99, 0x45, 0x91, 0x69, 0x56,
-	0x62, 0xd8, 0xa6, 0xc1, 0xa4, 0x59, 0x45, 0x62, 0xfe, 0x98, 0x41, 0xa3, 0xb9, 0x00, 0x89, 0xd8,
-	0x67, 0x57, 0x68, 0x2e, 0x44, 0x62, 0xfc, 0x0a, 0x40, 0xa6, 0x59, 0x45, 0x62, 0xfe, 0x2c, 0x41,
-	0xa3, 0x59, 0x8d, 0xc3, 0x69, 0xa6, 0x17, 0x1b, 0x95, 0xe3, 0xa3, 0xb9, 0xf1, 0x8a, 0x55, 0xb7,
-	0x3a, 0x65, 0xfa, 0x19, 0x7f, 0xff, 0xbf, 0x00, 0x00, 0x00, 0xff, 0xff, 0x59, 0x83, 0x1a, 0xd5,
-	0x36, 0x28, 0x00, 0x00,
+	// 1450 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x58, 0xcd, 0x6e, 0xdb, 0x46,
+	0x10, 0x36, 0x65, 0x49, 0x96, 0x46, 0x71, 0x22, 0xaf, 0xf3, 0x43, 0x11, 0x29, 0xa0, 0x30, 0x4e,
+	0x6a, 0x14, 0x8d, 0x04, 0xa8, 0x28, 0xdc, 0x38, 0x2d, 0x90, 0xd6, 0xae, 0x8b, 0xa0, 0x49, 0xda,
+	0x2a, 0xf6, 0x39, 0xa0, 0xac, 0x35, 0x4d, 0x44, 0x22, 0x55, 0x92, 0x4e, 0xd3, 0x43, 0x51, 0xf4,
+	0x25, 0x7a, 0xe8, 0x7b, 0xf4, 0x60, 0x1f, 0x7a, 0xef, 0x73, 0xf4, 0x1d, 0x7a, 0x2e, 0xf6, 0x87,
+	0xcb, 0xfd, 0xa1, 0x25, 0x4b, 0x71, 0x6f, 0x86, 0x01, 0x83, 0xda, 0x99, 0xfd, 0x76, 0x76, 0xf6,
+	0x9b, 0x6f, 0x39, 0x84, 0xc6, 0x51, 0x34, 0x0a, 0xa2, 0xce, 0x24, 0x8e, 0xd2, 0x08, 0x55, 0xe8,
+	0x0f, 0xe7, 0xae, 0x1f, 0x45, 0xfe, 0x08, 0x77, 0xbd, 0x49, 0xd0, 0xf5, 0xc2, 0x30, 0x4a, 0xbd,
+	0x34, 0x88, 0xc2, 0x84, 0x39, 0x39, 0x77, 0xde, 0x7a, 0xa3, 0x60, 0xe8, 0xa5, 0xb8, 0x9b, 0x3d,
+	0x70, 0xc3, 0xb6, 0x1f, 0xa4, 0xc7, 0x27, 0x83, 0xce, 0x61, 0x34, 0xee, 0x06, 0xe1, 0x51, 0x34,
+	0x18, 0x45, 0xef, 0xa2, 0x09, 0x0e, 0xbb, 0xd4, 0x7c, 0xf8, 0xc8, 0xc7, 0xe1, 0x23, 0x3f, 0x8a,
+	0xc7, 0xdd, 0x68, 0x42, 0xf1, 0xba, 0xe4, 0x07, 0x9f, 0xdb, 0xe6, 0x4b, 0xd2, 0x5f, 0x83, 0x93,
+	0xa3, 0xee, 0x51, 0x80, 0x47, 0xc3, 0xd7, 0x63, 0x2f, 0x79, 0xc3, 0x3c, 0xdc, 0x3f, 0x2c, 0x28,
+	0x1f, 0x24, 0x38, 0x46, 0xd7, 0xa1, 0x14, 0x0c, 0x6d, 0xab, 0x6d, 0x6d, 0xae, 0xf6, 0x4b, 0xc1,
+	0x10, 0xdd, 0x84, 0xca, 0xd7, 0x63, 0x2f, 0x18, 0xd9, 0xa5, 0xb6, 0xb5, 0x59, 0xef, 0xb3, 0x1f,
+	0xe8, 0x2e, 0xd4, 0xf7, 0x82, 0x38, 0x49, 0x43, 0x6f, 0x8c, 0xed, 0x65, 0x6a, 0xc9, 0x07, 0x90,
+	0x03, 0xb5, 0xe7, 0x1e, 0x37, 0x96, 0xa9, 0x51, 0xfc, 0x46, 0x1f, 0x41, 0x7d, 0xff, 0xf8, 0x64,
+	0x3c, 0x08, 0x09, 0xe6, 0x07, 0x6d, 0x6b, 0xb3, 0xd1, 0xbb, 0xd6, 0x61, 0x59, 0xfa, 0x32, 0x49,
+	0x70, 0xda, 0xcf, 0xcd, 0xdb, 0xd5, 0xb3, 0xd3, 0x56, 0xa9, 0x66, 0xb9, 0xdb, 0xb0, 0xb6, 0x13,
+	0x63, 0x2f, 0xc5, 0x24, 0xc2, 0x3e, 0xfe, 0xf1, 0x04, 0x27, 0x29, 0x7a, 0x00, 0x2b, 0x13, 0xef,
+	0xe7, 0x51, 0xe4, 0xb1, 0x68, 0x1b, 0xbd, 0x06, 0x87, 0xa1, 0x4e, 0x99, 0xcd, 0x7d, 0x0c, 0x48,
+	0x9e, 0x9b, 0x4c, 0xa2, 0x30, 0xc1, 0xe8, 0x3e, 0x54, 0x63, 0x9c, 0x9c, 0x8c, 0xd2, 0xa2, 0xb9,
+	0xdc, 0xe4, 0xde, 0x83, 0x1b, 0x7d, 0xec, 0x0d, 0xe5, 0x45, 0xb5, 0xec, 0xb8, 0x5b, 0xd0, 0xcc,
+	0x5d, 0xe6, 0xc1, 0xfe, 0x15, 0xd6, 0x0e, 0x26, 0xc3, 0x85, 0xb6, 0x84, 0x76, 0xe0, 0x86, 0x8f,
+	0xe3, 0xc8, 0xc7, 0x71, 0xf0, 0xda, 0xc7, 0xe4, 0x8f, 0x1e, 0x4e, 0xa3, 0xe7, 0x74, 0xd8, 0x39,
+	0x77, 0xb2, 0x73, 0xee, 0xec, 0x91, 0x73, 0x7e, 0xe1, 0x25, 0x6f, 0xfa, 0xd7, 0xb3, 0x29, 0xdf,
+	0xd0, 0x19, 0x24, 0x2f, 0x72, 0x00, 0xf3, 0xc4, 0x7e, 0x1f, 0xd6, 0x76, 0xf1, 0x08, 0xab, 0xb1,
+	0xeb, 0x99, 0x79, 0x08, 0x28, 0x77, 0x4a, 0x32, 0xaf, 0x26, 0x2c, 0x07, 0xc3, 0xc4, 0xb6, 0xda,
+	0xcb, 0x9b, 0xab, 0x7d, 0xf2, 0xe8, 0xde, 0x94, 0xfd, 0xb2, 0x38, 0xdc, 0x18, 0x2a, 0xaf, 0x8e,
+	0xbd, 0x18, 0x1b, 0x74, 0xbc, 0x0f, 0xd5, 0xa3, 0x38, 0xc0, 0xe1, 0x90, 0x6f, 0x59, 0x0d, 0x90,
+	0x99, 0xd0, 0xc7, 0x50, 0xa5, 0xa3, 0x89, 0x5d, 0x6d, 0x2f, 0x4b, 0x04, 0xdb, 0x23, 0xff, 0xbf,
+	0xa2, 0xac, 0xea, 0x2d, 0xf5, 0xb9, 0x8f, 0x60, 0xd9, 0xe7, 0x19, 0x53, 0xe8, 0xca, 0x59, 0xc4,
+	0x0f, 0xf5, 0x33, 0xc9, 0xc0, 0x98, 0x97, 0xe0, 0xd9, 0x13, 0x58, 0x57, 0x66, 0xf3, 0x84, 0x6e,
+	0x68, 0x09, 0x55, 0x67, 0x67, 0x19, 0x75, 0x19, 0x8d, 0x94, 0x85, 0xf5, 0x84, 0x3e, 0x86, 0x35,
+	0xc9, 0x67, 0x2e, 0xf8, 0xdf, 0xac, 0xec, 0xb0, 0x17, 0xd9, 0xda, 0xe5, 0xf0, 0xed, 0x09, 0xac,
+	0x2b, 0x21, 0xcc, 0xb5, 0x81, 0x8d, 0x8c, 0x24, 0x53, 0x33, 0xf4, 0x21, 0xac, 0x4b, 0x5e, 0x53,
+	0x38, 0x77, 0x4b, 0x71, 0x14, 0xa4, 0xfb, 0xd3, 0x82, 0xe5, 0x7d, 0xcf, 0x37, 0x38, 0x87, 0xa0,
+	0xfc, 0x6d, 0xc0, 0x19, 0xb7, 0xda, 0xa7, 0xcf, 0x44, 0x16, 0x9f, 0x7b, 0x03, 0x3c, 0xe2, 0xe2,
+	0xc7, 0x7e, 0x10, 0xcf, 0x5d, 0x9c, 0x1c, 0x72, 0xd1, 0xa3, 0xcf, 0xf3, 0x91, 0x71, 0x21, 0x79,
+	0xfc, 0x0c, 0x9a, 0x8c, 0x7a, 0xfb, 0x9e, 0x9f, 0x6d, 0x7a, 0x43, 0x3f, 0x5b, 0xe0, 0x28, 0xc4,
+	0x47, 0x90, 0x76, 0x2b, 0x13, 0x56, 0x3a, 0x93, 0x1f, 0x89, 0xab, 0x1d, 0x89, 0x3c, 0x33, 0x3b,
+	0x90, 0x36, 0x5c, 0x27, 0x64, 0x94, 0x16, 0xd4, 0x0f, 0xe3, 0x53, 0x26, 0x9e, 0xf3, 0x02, 0xff,
+	0x02, 0x4d, 0x46, 0x93, 0x79, 0xf7, 0x72, 0x39, 0x2c, 0xdd, 0xca, 0x64, 0x79, 0xde, 0xb8, 0x5d,
+	0x68, 0x32, 0x4a, 0x4d, 0x49, 0xc9, 0x83, 0x4c, 0x37, 0xf7, 0x3d, 0x7f, 0x0a, 0x3b, 0xd7, 0x25,
+	0x37, 0xc1, 0xcd, 0xbf, 0x4b, 0x50, 0xa1, 0x8c, 0x29, 0x62, 0xe7, 0xc1, 0xc1, 0xb3, 0x5d, 0x7e,
+	0x3f, 0xd3, 0x67, 0x32, 0xf6, 0x32, 0xbf, 0x99, 0xe9, 0x73, 0x21, 0x37, 0x37, 0xa0, 0x4a, 0x59,
+	0xa5, 0x73, 0x93, 0x51, 0x8d, 0xdb, 0xd0, 0x3d, 0xa8, 0xbc, 0x8c, 0x52, 0x9c, 0xd8, 0x2b, 0xd4,
+	0x29, 0x93, 0x5c, 0x32, 0xd6, 0x67, 0x16, 0xe2, 0xf2, 0xdd, 0x4f, 0x21, 0x8e, 0xed, 0x9a, 0xa9,
+	0xca, 0xcc, 0x82, 0x1e, 0x42, 0x39, 0xf5, 0xfc, 0xc4, 0x06, 0x0a, 0x22, 0xe5, 0x50, 0xd4, 0x00,
+	0xb5, 0x93, 0x7a, 0x49, 0x68, 0xfd, 0xda, 0x0d, 0x25, 0x26, 0x5a, 0xab, 0x79, 0xbd, 0x30, 0x9f,
+	0x85, 0xea, 0x45, 0x08, 0x3d, 0x4d, 0xe8, 0x4c, 0x35, 0x64, 0x5e, 0xa6, 0xd0, 0xf3, 0xd9, 0x33,
+	0x84, 0x8c, 0x79, 0x69, 0x42, 0xaf, 0x2c, 0x7c, 0x8e, 0xd0, 0x2f, 0x02, 0x9f, 0x0b, 0xfd, 0x22,
+	0x5b, 0xbb, 0x64, 0xa1, 0x5f, 0x64, 0x03, 0x42, 0xe8, 0xa7, 0x66, 0x48, 0x08, 0x3d, 0xf5, 0xba,
+	0x88, 0xd0, 0x2b, 0xb1, 0xb8, 0xff, 0x58, 0x50, 0xa1, 0xec, 0x28, 0x2a, 0x26, 0x5a, 0x38, 0x25,
+	0xa9, 0x70, 0x5c, 0x60, 0x2f, 0xee, 0xb4, 0x9a, 0xf4, 0xc0, 0x99, 0x49, 0x14, 0x61, 0x59, 0x2d,
+	0xc2, 0xef, 0xbd, 0xf4, 0xd8, 0xae, 0xb0, 0x31, 0xf2, 0x4c, 0xb0, 0x3c, 0xb2, 0xb0, 0x5d, 0x2d,
+	0xa0, 0x2a, 0x33, 0x91, 0x79, 0x83, 0x51, 0x34, 0xb0, 0x6f, 0xb6, 0xad, 0xcd, 0x6b, 0x7d, 0xfa,
+	0xfc, 0x7e, 0x34, 0x67, 0x1e, 0xb3, 0xb8, 0xc0, 0xbc, 0x4c, 0x9a, 0xf3, 0xd9, 0x33, 0x8e, 0x91,
+	0x2b, 0x86, 0x4a, 0x73, 0x65, 0xe1, 0x73, 0x68, 0xbe, 0x08, 0x7c, 0x4e, 0xf3, 0x45, 0xb6, 0x76,
+	0xc9, 0x34, 0x5f, 0x64, 0x03, 0x82, 0xe6, 0x53, 0x33, 0x24, 0x68, 0xce, 0x74, 0xf8, 0x02, 0x34,
+	0x57, 0x62, 0x71, 0x7f, 0xb7, 0xa0, 0x4c, 0xe4, 0xf9, 0x5c, 0x96, 0x6b, 0xd7, 0x03, 0xf1, 0xcd,
+	0x18, 0x4c, 0xe7, 0x09, 0xe6, 0x57, 0xcf, 0x67, 0xfe, 0x7b, 0xf5, 0x73, 0xf4, 0x0a, 0x99, 0xd5,
+	0xfc, 0x50, 0x27, 0xb3, 0x9f, 0x63, 0x73, 0x67, 0xf4, 0x2d, 0xd4, 0x49, 0xeb, 0xe7, 0xe4, 0x45,
+	0xcf, 0xe9, 0xe7, 0xe6, 0xc7, 0x16, 0xfd, 0xdc, 0xfc, 0x5b, 0xba, 0xe4, 0x7e, 0x6e, 0xfe, 0xd8,
+	0x45, 0x3f, 0x37, 0x2d, 0x33, 0xa2, 0x9f, 0xa3, 0x17, 0xfe, 0x05, 0xfa, 0x39, 0x39, 0x8e, 0xde,
+	0xbf, 0x35, 0xb8, 0x46, 0x69, 0xf3, 0x0a, 0xc7, 0x6f, 0x83, 0x43, 0x8c, 0x76, 0x00, 0xf2, 0xb6,
+	0x1c, 0xd9, 0x3c, 0x2c, 0xa3, 0xcb, 0x77, 0x5a, 0x05, 0x16, 0x4e, 0xef, 0x25, 0xf4, 0x05, 0xd4,
+	0xb2, 0xee, 0x1b, 0xdd, 0xe6, 0x8e, 0x5a, 0xc7, 0xee, 0xdc, 0x31, 0xc6, 0xc5, 0xf4, 0x1d, 0x80,
+	0xbc, 0x05, 0x16, 0x31, 0x18, 0x6d, 0xb9, 0x88, 0xc1, 0xec, 0x97, 0xdd, 0x25, 0xf4, 0x02, 0x20,
+	0xef, 0x5f, 0x05, 0x88, 0xd1, 0x1f, 0x0b, 0x90, 0x82, 0x66, 0x17, 0xce, 0x4e, 0x5b, 0x55, 0xfe,
+	0xf9, 0x65, 0x0f, 0x1a, 0xd2, 0xdb, 0x05, 0x52, 0xb7, 0x2f, 0x5f, 0x8a, 0x8e, 0x53, 0x64, 0x12,
+	0x61, 0x3d, 0x85, 0xba, 0x78, 0x89, 0x40, 0x72, 0x0e, 0x14, 0x0c, 0xdb, 0x34, 0x08, 0x84, 0x3d,
+	0x68, 0x48, 0xf7, 0x38, 0x52, 0x93, 0x50, 0x18, 0x49, 0xc1, 0xb5, 0xef, 0x2e, 0xa1, 0x1f, 0xa0,
+	0x21, 0xdd, 0xc1, 0x48, 0xcd, 0x43, 0x21, 0x4e, 0xd1, 0x95, 0xdd, 0x38, 0x3b, 0x6d, 0xad, 0x64,
+	0xaf, 0xc0, 0x4f, 0xa1, 0x2e, 0xda, 0x16, 0xb1, 0x39, 0xbd, 0x05, 0x72, 0x6c, 0xd3, 0x20, 0x82,
+	0xda, 0x86, 0x15, 0xde, 0x9d, 0xa0, 0x5b, 0x52, 0x0e, 0xa4, 0xd9, 0xb7, 0xf5, 0x61, 0x39, 0xb5,
+	0xa2, 0x47, 0x10, 0xab, 0xeb, 0x4d, 0x8b, 0x63, 0x9b, 0x06, 0x81, 0xf0, 0x0c, 0xea, 0xe2, 0x0d,
+	0x5f, 0x20, 0xe8, 0xed, 0x83, 0x63, 0x9b, 0x06, 0x8e, 0x50, 0x3f, 0x3b, 0x6d, 0x55, 0x58, 0xaf,
+	0x2a, 0xea, 0x88, 0x0a, 0xb6, 0xba, 0x65, 0xa9, 0x9c, 0xb5, 0x3a, 0x92, 0x6b, 0x33, 0xaf, 0x23,
+	0x0a, 0x21, 0xef, 0x5b, 0x06, 0xb8, 0x63, 0x8c, 0x9b, 0x75, 0xa4, 0xc4, 0x60, 0xc8, 0xa1, 0x56,
+	0x47, 0x1a, 0x88, 0xa8, 0x23, 0x05, 0xc4, 0xd0, 0x25, 0xad, 0x8e, 0x14, 0x10, 0x5e, 0x47, 0x64,
+	0xcc, 0xe1, 0x57, 0x4d, 0xef, 0xaf, 0x55, 0xa8, 0x51, 0xd2, 0xec, 0xbf, 0x0b, 0xaf, 0x44, 0xe7,
+	0x4a, 0x74, 0xae, 0x44, 0xe7, 0x4a, 0x74, 0xfe, 0x2f, 0xd1, 0xc9, 0xeb, 0x88, 0x35, 0x97, 0xea,
+	0xf6, 0xe5, 0x57, 0x7d, 0xad, 0x8e, 0xd4, 0xd7, 0x76, 0x51, 0x47, 0x0c, 0x45, 0xce, 0x81, 0x82,
+	0x61, 0x9b, 0x06, 0xb3, 0x8e, 0xd4, 0x48, 0xcc, 0xa6, 0x49, 0xab, 0x23, 0x1d, 0x47, 0xd4, 0x91,
+	0x8a, 0x63, 0x36, 0x2f, 0x5a, 0x1d, 0xa9, 0x38, 0xbc, 0x8e, 0x18, 0x86, 0x48, 0x12, 0xfb, 0xc0,
+	0xaf, 0x26, 0x49, 0xfe, 0xbe, 0xab, 0x25, 0x49, 0xfd, 0x56, 0x2b, 0x92, 0xc4, 0x50, 0xe4, 0x24,
+	0x29, 0x18, 0xb6, 0x69, 0x30, 0x93, 0xa4, 0x46, 0x62, 0x7e, 0x29, 0xd7, 0x92, 0xa4, 0xe3, 0x88,
+	0x24, 0xa9, 0x38, 0xe6, 0x17, 0x6b, 0x2d, 0x49, 0x2a, 0x0e, 0x4f, 0x12, 0x1d, 0x74, 0x6a, 0x67,
+	0xa7, 0xad, 0x72, 0xcd, 0x6a, 0x5a, 0x83, 0x2a, 0x7d, 0xf7, 0xff, 0xe4, 0xbf, 0x00, 0x00, 0x00,
+	0xff, 0xff, 0x1d, 0xb9, 0x11, 0xfa, 0x4a, 0x1c, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -3605,25 +2854,25 @@ type FolioServiceClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	ReadUser(ctx context.Context, in *ReadUserRequest, opts ...grpc.CallOption) (*ReadUserResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
-	ListUser(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*ListUserResponse, error)
+	//rpc ListUser ( ListUserRequest ) returns ( ListUserResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
 	CreateFolio(ctx context.Context, in *CreateFolioRequest, opts ...grpc.CallOption) (*CreateFolioResponse, error)
 	ReadFolio(ctx context.Context, in *ReadFolioRequest, opts ...grpc.CallOption) (*ReadFolioResponse, error)
 	UpdateFolio(ctx context.Context, in *UpdateFolioRequest, opts ...grpc.CallOption) (*UpdateFolioResponse, error)
-	ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error)
+	//rpc ListFolio ( ListFolioRequest ) returns ( ListFolioResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
 	ReadTag(ctx context.Context, in *ReadTagRequest, opts ...grpc.CallOption) (*ReadTagResponse, error)
 	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error)
-	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagResponse, error)
+	//rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
 	CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*CreateNoteResponse, error)
 	ReadNote(ctx context.Context, in *ReadNoteRequest, opts ...grpc.CallOption) (*ReadNoteResponse, error)
 	UpdateNote(ctx context.Context, in *UpdateNoteRequest, opts ...grpc.CallOption) (*UpdateNoteResponse, error)
-	ListNote(ctx context.Context, in *ListNoteRequest, opts ...grpc.CallOption) (*ListNoteResponse, error)
+	//rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*DeleteNoteResponse, error)
 }
@@ -3657,15 +2906,6 @@ func (c *folioServiceClient) ReadUser(ctx context.Context, in *ReadUserRequest, 
 func (c *folioServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	out := new(UpdateUserResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioService/UpdateUser", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *folioServiceClient) ListUser(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*ListUserResponse, error) {
-	out := new(ListUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioService/ListUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3708,15 +2948,6 @@ func (c *folioServiceClient) UpdateFolio(ctx context.Context, in *UpdateFolioReq
 	return out, nil
 }
 
-func (c *folioServiceClient) ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error) {
-	out := new(ListFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioService/ListFolio", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *folioServiceClient) DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error) {
 	out := new(DeleteFolioResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioService/DeleteFolio", in, out, opts...)
@@ -3747,15 +2978,6 @@ func (c *folioServiceClient) ReadTag(ctx context.Context, in *ReadTagRequest, op
 func (c *folioServiceClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error) {
 	out := new(UpdateTagResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioService/UpdateTag", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *folioServiceClient) ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagResponse, error) {
-	out := new(ListTagResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioService/ListTag", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3798,15 +3020,6 @@ func (c *folioServiceClient) UpdateNote(ctx context.Context, in *UpdateNoteReque
 	return out, nil
 }
 
-func (c *folioServiceClient) ListNote(ctx context.Context, in *ListNoteRequest, opts ...grpc.CallOption) (*ListNoteResponse, error) {
-	out := new(ListNoteResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioService/ListNote", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *folioServiceClient) DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*DeleteNoteResponse, error) {
 	out := new(DeleteNoteResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioService/DeleteNote", in, out, opts...)
@@ -3821,25 +3034,25 @@ type FolioServiceServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	ReadUser(context.Context, *ReadUserRequest) (*ReadUserResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
-	ListUser(context.Context, *ListUserRequest) (*ListUserResponse, error)
+	//rpc ListUser ( ListUserRequest ) returns ( ListUserResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
 	CreateFolio(context.Context, *CreateFolioRequest) (*CreateFolioResponse, error)
 	ReadFolio(context.Context, *ReadFolioRequest) (*ReadFolioResponse, error)
 	UpdateFolio(context.Context, *UpdateFolioRequest) (*UpdateFolioResponse, error)
-	ListFolio(context.Context, *ListFolioRequest) (*ListFolioResponse, error)
+	//rpc ListFolio ( ListFolioRequest ) returns ( ListFolioResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteFolio(context.Context, *DeleteFolioRequest) (*DeleteFolioResponse, error)
 	CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
 	ReadTag(context.Context, *ReadTagRequest) (*ReadTagResponse, error)
 	UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error)
-	ListTag(context.Context, *ListTagRequest) (*ListTagResponse, error)
+	//rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
 	CreateNote(context.Context, *CreateNoteRequest) (*CreateNoteResponse, error)
 	ReadNote(context.Context, *ReadNoteRequest) (*ReadNoteResponse, error)
 	UpdateNote(context.Context, *UpdateNoteRequest) (*UpdateNoteResponse, error)
-	ListNote(context.Context, *ListNoteRequest) (*ListNoteResponse, error)
+	//rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteNote(context.Context, *DeleteNoteRequest) (*DeleteNoteResponse, error)
 }
@@ -3898,24 +3111,6 @@ func _FolioService_UpdateUser_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FolioServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FolioService_ListUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioServiceServer).ListUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioService/ListUser",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioServiceServer).ListUser(ctx, req.(*ListUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3992,24 +3187,6 @@ func _FolioService_UpdateFolio_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FolioService_ListFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListFolioRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioServiceServer).ListFolio(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioService/ListFolio",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioServiceServer).ListFolio(ctx, req.(*ListFolioRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _FolioService_DeleteFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteFolioRequest)
 	if err := dec(in); err != nil {
@@ -4078,24 +3255,6 @@ func _FolioService_UpdateTag_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FolioServiceServer).UpdateTag(ctx, req.(*UpdateTagRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FolioService_ListTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListTagRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioServiceServer).ListTag(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioService/ListTag",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioServiceServer).ListTag(ctx, req.(*ListTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4172,24 +3331,6 @@ func _FolioService_UpdateNote_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FolioService_ListNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListNoteRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioServiceServer).ListNote(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioService/ListNote",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioServiceServer).ListNote(ctx, req.(*ListNoteRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _FolioService_DeleteNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteNoteRequest)
 	if err := dec(in); err != nil {
@@ -4225,10 +3366,6 @@ var _FolioService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _FolioService_UpdateUser_Handler,
 		},
 		{
-			MethodName: "ListUser",
-			Handler:    _FolioService_ListUser_Handler,
-		},
-		{
 			MethodName: "DeleteUser",
 			Handler:    _FolioService_DeleteUser_Handler,
 		},
@@ -4243,10 +3380,6 @@ var _FolioService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateFolio",
 			Handler:    _FolioService_UpdateFolio_Handler,
-		},
-		{
-			MethodName: "ListFolio",
-			Handler:    _FolioService_ListFolio_Handler,
 		},
 		{
 			MethodName: "DeleteFolio",
@@ -4265,10 +3398,6 @@ var _FolioService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _FolioService_UpdateTag_Handler,
 		},
 		{
-			MethodName: "ListTag",
-			Handler:    _FolioService_ListTag_Handler,
-		},
-		{
 			MethodName: "DeleteTag",
 			Handler:    _FolioService_DeleteTag_Handler,
 		},
@@ -4283,10 +3412,6 @@ var _FolioService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateNote",
 			Handler:    _FolioService_UpdateNote_Handler,
-		},
-		{
-			MethodName: "ListNote",
-			Handler:    _FolioService_ListNote_Handler,
 		},
 		{
 			MethodName: "DeleteNote",
@@ -4304,37 +3429,37 @@ type FolioTxnClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	ReadUser(ctx context.Context, in *ReadUserRequest, opts ...grpc.CallOption) (*ReadUserResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
-	ListUser(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*ListUserResponse, error)
+	//rpc ListUser ( ListUserRequest ) returns ( ListUserResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
 	CreateFolio(ctx context.Context, in *CreateFolioRequest, opts ...grpc.CallOption) (*CreateFolioResponse, error)
 	ReadFolio(ctx context.Context, in *ReadFolioRequest, opts ...grpc.CallOption) (*ReadFolioResponse, error)
 	UpdateFolio(ctx context.Context, in *UpdateFolioRequest, opts ...grpc.CallOption) (*UpdateFolioResponse, error)
-	ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error)
+	//rpc ListFolio ( ListFolioRequest ) returns ( ListFolioResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error)
 	CreateTag(ctx context.Context, in *CreateTagRequest, opts ...grpc.CallOption) (*CreateTagResponse, error)
 	ReadTag(ctx context.Context, in *ReadTagRequest, opts ...grpc.CallOption) (*ReadTagResponse, error)
 	UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error)
-	ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagResponse, error)
+	//rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteTag(ctx context.Context, in *DeleteTagRequest, opts ...grpc.CallOption) (*DeleteTagResponse, error)
 	CreateNote(ctx context.Context, in *CreateNoteRequest, opts ...grpc.CallOption) (*CreateNoteResponse, error)
 	ReadNote(ctx context.Context, in *ReadNoteRequest, opts ...grpc.CallOption) (*ReadNoteResponse, error)
 	UpdateNote(ctx context.Context, in *UpdateNoteRequest, opts ...grpc.CallOption) (*UpdateNoteResponse, error)
-	ListNote(ctx context.Context, in *ListNoteRequest, opts ...grpc.CallOption) (*ListNoteResponse, error)
+	//rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*DeleteNoteResponse, error)
 	CreateAsset(ctx context.Context, in *CreateAssetRequest, opts ...grpc.CallOption) (*CreateAssetResponse, error)
 	ReadAsset(ctx context.Context, in *ReadAssetRequest, opts ...grpc.CallOption) (*ReadAssetResponse, error)
 	UpdateAsset(ctx context.Context, in *UpdateAssetRequest, opts ...grpc.CallOption) (*UpdateAssetResponse, error)
-	ListAsset(ctx context.Context, in *ListAssetRequest, opts ...grpc.CallOption) (*ListAssetResponse, error)
+	//rpc ListAsset ( ListAssetRequest ) returns ( ListAssetResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteAsset(ctx context.Context, in *DeleteAssetRequest, opts ...grpc.CallOption) (*DeleteAssetResponse, error)
 	CreateShare(ctx context.Context, in *CreateShareRequest, opts ...grpc.CallOption) (*CreateShareResponse, error)
 	ReadShare(ctx context.Context, in *ReadShareRequest, opts ...grpc.CallOption) (*ReadShareResponse, error)
 	UpdateShare(ctx context.Context, in *UpdateShareRequest, opts ...grpc.CallOption) (*UpdateShareResponse, error)
-	ListShare(ctx context.Context, in *ListShareRequest, opts ...grpc.CallOption) (*ListShareResponse, error)
+	//rpc ListShare ( ListShareRequest ) returns ( ListShareResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteShare(ctx context.Context, in *DeleteShareRequest, opts ...grpc.CallOption) (*DeleteShareResponse, error)
 }
@@ -4368,15 +3493,6 @@ func (c *folioTxnClient) ReadUser(ctx context.Context, in *ReadUserRequest, opts
 func (c *folioTxnClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	out := new(UpdateUserResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateUser", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *folioTxnClient) ListUser(ctx context.Context, in *ListUserRequest, opts ...grpc.CallOption) (*ListUserResponse, error) {
-	out := new(ListUserResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -4419,15 +3535,6 @@ func (c *folioTxnClient) UpdateFolio(ctx context.Context, in *UpdateFolioRequest
 	return out, nil
 }
 
-func (c *folioTxnClient) ListFolio(ctx context.Context, in *ListFolioRequest, opts ...grpc.CallOption) (*ListFolioResponse, error) {
-	out := new(ListFolioResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListFolio", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *folioTxnClient) DeleteFolio(ctx context.Context, in *DeleteFolioRequest, opts ...grpc.CallOption) (*DeleteFolioResponse, error) {
 	out := new(DeleteFolioResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteFolio", in, out, opts...)
@@ -4458,15 +3565,6 @@ func (c *folioTxnClient) ReadTag(ctx context.Context, in *ReadTagRequest, opts .
 func (c *folioTxnClient) UpdateTag(ctx context.Context, in *UpdateTagRequest, opts ...grpc.CallOption) (*UpdateTagResponse, error) {
 	out := new(UpdateTagResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateTag", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *folioTxnClient) ListTag(ctx context.Context, in *ListTagRequest, opts ...grpc.CallOption) (*ListTagResponse, error) {
-	out := new(ListTagResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListTag", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -4509,15 +3607,6 @@ func (c *folioTxnClient) UpdateNote(ctx context.Context, in *UpdateNoteRequest, 
 	return out, nil
 }
 
-func (c *folioTxnClient) ListNote(ctx context.Context, in *ListNoteRequest, opts ...grpc.CallOption) (*ListNoteResponse, error) {
-	out := new(ListNoteResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListNote", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *folioTxnClient) DeleteNote(ctx context.Context, in *DeleteNoteRequest, opts ...grpc.CallOption) (*DeleteNoteResponse, error) {
 	out := new(DeleteNoteResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteNote", in, out, opts...)
@@ -4548,15 +3637,6 @@ func (c *folioTxnClient) ReadAsset(ctx context.Context, in *ReadAssetRequest, op
 func (c *folioTxnClient) UpdateAsset(ctx context.Context, in *UpdateAssetRequest, opts ...grpc.CallOption) (*UpdateAssetResponse, error) {
 	out := new(UpdateAssetResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioTxn/UpdateAsset", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *folioTxnClient) ListAsset(ctx context.Context, in *ListAssetRequest, opts ...grpc.CallOption) (*ListAssetResponse, error) {
-	out := new(ListAssetResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListAsset", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -4599,15 +3679,6 @@ func (c *folioTxnClient) UpdateShare(ctx context.Context, in *UpdateShareRequest
 	return out, nil
 }
 
-func (c *folioTxnClient) ListShare(ctx context.Context, in *ListShareRequest, opts ...grpc.CallOption) (*ListShareResponse, error) {
-	out := new(ListShareResponse)
-	err := c.cc.Invoke(ctx, "/folio.FolioTxn/ListShare", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *folioTxnClient) DeleteShare(ctx context.Context, in *DeleteShareRequest, opts ...grpc.CallOption) (*DeleteShareResponse, error) {
 	out := new(DeleteShareResponse)
 	err := c.cc.Invoke(ctx, "/folio.FolioTxn/DeleteShare", in, out, opts...)
@@ -4622,37 +3693,37 @@ type FolioTxnServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	ReadUser(context.Context, *ReadUserRequest) (*ReadUserResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
-	ListUser(context.Context, *ListUserRequest) (*ListUserResponse, error)
+	//rpc ListUser ( ListUserRequest ) returns ( ListUserResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
 	CreateFolio(context.Context, *CreateFolioRequest) (*CreateFolioResponse, error)
 	ReadFolio(context.Context, *ReadFolioRequest) (*ReadFolioResponse, error)
 	UpdateFolio(context.Context, *UpdateFolioRequest) (*UpdateFolioResponse, error)
-	ListFolio(context.Context, *ListFolioRequest) (*ListFolioResponse, error)
+	//rpc ListFolio ( ListFolioRequest ) returns ( ListFolioResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteFolio(context.Context, *DeleteFolioRequest) (*DeleteFolioResponse, error)
 	CreateTag(context.Context, *CreateTagRequest) (*CreateTagResponse, error)
 	ReadTag(context.Context, *ReadTagRequest) (*ReadTagResponse, error)
 	UpdateTag(context.Context, *UpdateTagRequest) (*UpdateTagResponse, error)
-	ListTag(context.Context, *ListTagRequest) (*ListTagResponse, error)
+	//rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteTag(context.Context, *DeleteTagRequest) (*DeleteTagResponse, error)
 	CreateNote(context.Context, *CreateNoteRequest) (*CreateNoteResponse, error)
 	ReadNote(context.Context, *ReadNoteRequest) (*ReadNoteResponse, error)
 	UpdateNote(context.Context, *UpdateNoteRequest) (*UpdateNoteResponse, error)
-	ListNote(context.Context, *ListNoteRequest) (*ListNoteResponse, error)
+	//rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteNote(context.Context, *DeleteNoteRequest) (*DeleteNoteResponse, error)
 	CreateAsset(context.Context, *CreateAssetRequest) (*CreateAssetResponse, error)
 	ReadAsset(context.Context, *ReadAssetRequest) (*ReadAssetResponse, error)
 	UpdateAsset(context.Context, *UpdateAssetRequest) (*UpdateAssetResponse, error)
-	ListAsset(context.Context, *ListAssetRequest) (*ListAssetResponse, error)
+	//rpc ListAsset ( ListAssetRequest ) returns ( ListAssetResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteAsset(context.Context, *DeleteAssetRequest) (*DeleteAssetResponse, error)
 	CreateShare(context.Context, *CreateShareRequest) (*CreateShareResponse, error)
 	ReadShare(context.Context, *ReadShareRequest) (*ReadShareResponse, error)
 	UpdateShare(context.Context, *UpdateShareRequest) (*UpdateShareResponse, error)
-	ListShare(context.Context, *ListShareRequest) (*ListShareResponse, error)
+	//rpc ListShare ( ListShareRequest ) returns ( ListShareResponse ) {}
 	//rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
 	DeleteShare(context.Context, *DeleteShareRequest) (*DeleteShareResponse, error)
 }
@@ -4711,24 +3782,6 @@ func _FolioTxn_UpdateUser_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FolioTxnServer).UpdateUser(ctx, req.(*UpdateUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FolioTxn_ListUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListUserRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioTxnServer).ListUser(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioTxn/ListUser",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioTxnServer).ListUser(ctx, req.(*ListUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4805,24 +3858,6 @@ func _FolioTxn_UpdateFolio_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FolioTxn_ListFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListFolioRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioTxnServer).ListFolio(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioTxn/ListFolio",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioTxnServer).ListFolio(ctx, req.(*ListFolioRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _FolioTxn_DeleteFolio_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteFolioRequest)
 	if err := dec(in); err != nil {
@@ -4891,24 +3926,6 @@ func _FolioTxn_UpdateTag_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FolioTxnServer).UpdateTag(ctx, req.(*UpdateTagRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FolioTxn_ListTag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListTagRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioTxnServer).ListTag(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioTxn/ListTag",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioTxnServer).ListTag(ctx, req.(*ListTagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4985,24 +4002,6 @@ func _FolioTxn_UpdateNote_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FolioTxn_ListNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListNoteRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioTxnServer).ListNote(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioTxn/ListNote",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioTxnServer).ListNote(ctx, req.(*ListNoteRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _FolioTxn_DeleteNote_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteNoteRequest)
 	if err := dec(in); err != nil {
@@ -5071,24 +4070,6 @@ func _FolioTxn_UpdateAsset_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FolioTxnServer).UpdateAsset(ctx, req.(*UpdateAssetRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FolioTxn_ListAsset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAssetRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioTxnServer).ListAsset(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioTxn/ListAsset",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioTxnServer).ListAsset(ctx, req.(*ListAssetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5165,24 +4146,6 @@ func _FolioTxn_UpdateShare_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FolioTxn_ListShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListShareRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FolioTxnServer).ListShare(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/folio.FolioTxn/ListShare",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FolioTxnServer).ListShare(ctx, req.(*ListShareRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _FolioTxn_DeleteShare_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteShareRequest)
 	if err := dec(in); err != nil {
@@ -5218,10 +4181,6 @@ var _FolioTxn_serviceDesc = grpc.ServiceDesc{
 			Handler:    _FolioTxn_UpdateUser_Handler,
 		},
 		{
-			MethodName: "ListUser",
-			Handler:    _FolioTxn_ListUser_Handler,
-		},
-		{
 			MethodName: "DeleteUser",
 			Handler:    _FolioTxn_DeleteUser_Handler,
 		},
@@ -5236,10 +4195,6 @@ var _FolioTxn_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateFolio",
 			Handler:    _FolioTxn_UpdateFolio_Handler,
-		},
-		{
-			MethodName: "ListFolio",
-			Handler:    _FolioTxn_ListFolio_Handler,
 		},
 		{
 			MethodName: "DeleteFolio",
@@ -5258,10 +4213,6 @@ var _FolioTxn_serviceDesc = grpc.ServiceDesc{
 			Handler:    _FolioTxn_UpdateTag_Handler,
 		},
 		{
-			MethodName: "ListTag",
-			Handler:    _FolioTxn_ListTag_Handler,
-		},
-		{
 			MethodName: "DeleteTag",
 			Handler:    _FolioTxn_DeleteTag_Handler,
 		},
@@ -5276,10 +4227,6 @@ var _FolioTxn_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateNote",
 			Handler:    _FolioTxn_UpdateNote_Handler,
-		},
-		{
-			MethodName: "ListNote",
-			Handler:    _FolioTxn_ListNote_Handler,
 		},
 		{
 			MethodName: "DeleteNote",
@@ -5298,10 +4245,6 @@ var _FolioTxn_serviceDesc = grpc.ServiceDesc{
 			Handler:    _FolioTxn_UpdateAsset_Handler,
 		},
 		{
-			MethodName: "ListAsset",
-			Handler:    _FolioTxn_ListAsset_Handler,
-		},
-		{
 			MethodName: "DeleteAsset",
 			Handler:    _FolioTxn_DeleteAsset_Handler,
 		},
@@ -5316,10 +4259,6 @@ var _FolioTxn_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateShare",
 			Handler:    _FolioTxn_UpdateShare_Handler,
-		},
-		{
-			MethodName: "ListShare",
-			Handler:    _FolioTxn_ListShare_Handler,
 		},
 		{
 			MethodName: "DeleteShare",

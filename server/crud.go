@@ -59,18 +59,6 @@ func (m *FolioSvc) DeleteUser(ctx context.Context, in *pb.DeleteUserRequest) (*p
 	}, nil
 }
 
-// ListUser ...
-func (m *FolioSvc) ListUser(ctx context.Context, in *pb.ListUserRequest) (*pb.ListUserResponse, error) {
-	log.Println("(m *FolioSvc) ListUser")
-	nugget, err := pb.DefaultListUser(ctx, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ListUserResponse{
-		Results: nugget,
-	}, nil
-}
-
 // CreateFolio ...
 func (m *FolioSvc) CreateFolio(ctx context.Context, in *pb.CreateFolioRequest) (*pb.CreateFolioResponse, error) {
 	log.Println("(m *FolioSvc) CreateFolio")
@@ -116,18 +104,6 @@ func (m *FolioSvc) DeleteFolio(ctx context.Context, in *pb.DeleteFolioRequest) (
 	}
 	return &pb.DeleteFolioResponse{
 		
-	}, nil
-}
-
-// ListFolio ...
-func (m *FolioSvc) ListFolio(ctx context.Context, in *pb.ListFolioRequest) (*pb.ListFolioResponse, error) {
-	log.Println("(m *FolioSvc) ListFolio")
-	nugget, err := pb.DefaultListFolio(ctx, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ListFolioResponse{
-		Results: nugget,
 	}, nil
 }
 
@@ -179,18 +155,6 @@ func (m *FolioSvc) DeleteTag(ctx context.Context, in *pb.DeleteTagRequest) (*pb.
 	}, nil
 }
 
-// ListTag ...
-func (m *FolioSvc) ListTag(ctx context.Context, in *pb.ListTagRequest) (*pb.ListTagResponse, error) {
-	log.Println("(m *FolioSvc) ListTag")
-	nugget, err := pb.DefaultListTag(ctx, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ListTagResponse{
-		Results: nugget,
-	}, nil
-}
-
 // CreateNote ...
 func (m *FolioSvc) CreateNote(ctx context.Context, in *pb.CreateNoteRequest) (*pb.CreateNoteResponse, error) {
 	log.Println("(m *FolioSvc) CreateNote")
@@ -236,18 +200,6 @@ func (m *FolioSvc) DeleteNote(ctx context.Context, in *pb.DeleteNoteRequest) (*p
 	}
 	return &pb.DeleteNoteResponse{
 		
-	}, nil
-}
-
-// ListNote ...
-func (m *FolioSvc) ListNote(ctx context.Context, in *pb.ListNoteRequest) (*pb.ListNoteResponse, error) {
-	log.Println("(m *FolioSvc) ListNote")
-	nugget, err := pb.DefaultListNote(ctx, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ListNoteResponse{
-		Results: nugget,
 	}, nil
 }
 
@@ -299,18 +251,6 @@ func (m *FolioSvc) DeleteAsset(ctx context.Context, in *pb.DeleteAssetRequest) (
 	}, nil
 }
 
-// ListAsset ...
-func (m *FolioSvc) ListAsset(ctx context.Context, in *pb.ListAssetRequest) (*pb.ListAssetResponse, error) {
-	log.Println("(m *FolioSvc) ListAsset")
-	nugget, err := pb.DefaultListAsset(ctx, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ListAssetResponse{
-		Results: nugget,
-	}, nil
-}
-
 // CreateShare ...
 func (m *FolioSvc) CreateShare(ctx context.Context, in *pb.CreateShareRequest) (*pb.CreateShareResponse, error) {
 	log.Println("(m *FolioSvc) CreateShare")
@@ -356,18 +296,6 @@ func (m *FolioSvc) DeleteShare(ctx context.Context, in *pb.DeleteShareRequest) (
 	}
 	return &pb.DeleteShareResponse{
 		
-	}, nil
-}
-
-// ListShare ...
-func (m *FolioSvc) ListShare(ctx context.Context, in *pb.ListShareRequest) (*pb.ListShareResponse, error) {
-	log.Println("(m *FolioSvc) ListShare")
-	nugget, err := pb.DefaultListShare(ctx, m.DB)
-	if err != nil {
-		return nil, err
-	}
-	return &pb.ListShareResponse{
-		Results: nugget,
 	}, nil
 }
 

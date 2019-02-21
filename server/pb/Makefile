@@ -1,7 +1,12 @@
 
-proto:
+PROTO_ROOT_DIR = $(shell brew --prefix)/Cellar/protobuf/3.5.1_1/include
+
+proto: golang dart
+
+golang:
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
 		-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
@@ -11,6 +16,7 @@ proto:
 		folio.proto
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
 		-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
@@ -20,6 +26,7 @@ proto:
 		folio.proto
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
 		-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
@@ -29,6 +36,7 @@ proto:
 		folio.proto
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
 		-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
@@ -39,6 +47,7 @@ proto:
 	
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
 		-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
@@ -48,18 +57,28 @@ proto:
 		folio.proto
 
 # dart items
-	# protoc -I/usr/local/include -I. \
-	# 	-I${GOPATH}/src \
-	# 	-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
-	# 	-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
-	# 	-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
-	# 	-I${GOPATH}/src/github.com/lyft/protoc-gen-validate \
-	# 	--dart_out=grpc:../../client/folios/lib \
-	# 	folio.proto
+dart:
+	protoc -I/usr/local/include -I. \
+		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
+		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+		-I${GOPATH}/src/github.com/lyft/protoc-gen-validate \
+		--dart_out=grpc:../../client/folios/lib \
+		/usr/local/include/google/protobuf/*.proto
+	protoc -I/usr/local/include -I. \
+		-I${GOPATH}/src \
+		-I$(PROTO_ROOT_DIR) \
+		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
+		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+		-I${GOPATH}/src/github.com/lyft/protoc-gen-validate \
+		--dart_out=grpc:../../client/folios/lib \
+		folio.proto
 
 # 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
+# 		-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
 
-# some funky stuff on how to install various chunks of func when there is no golanf code in the repo?
+
+
+# some funky stuff on how to install various chunks of func when there is no golang code in the repo?
 # install:
 # 	go install \
 # 		./vendor/github.com/gogo/protobuf/protoc-gen-gogo \
