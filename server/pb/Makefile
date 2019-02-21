@@ -47,6 +47,18 @@ proto:
 		--validate_out="lang=go:." \
 		folio.proto
 
+# dart items
+	# protoc -I/usr/local/include -I. \
+	# 	-I${GOPATH}/src \
+	# 	-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
+	# 	-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
+	# 	-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+	# 	-I${GOPATH}/src/github.com/lyft/protoc-gen-validate \
+	# 	--dart_out=grpc:../../client/folios/lib \
+	# 	folio.proto
+
+# 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
+
 # some funky stuff on how to install various chunks of func when there is no golanf code in the repo?
 # install:
 # 	go install \
