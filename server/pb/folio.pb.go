@@ -3602,10 +3602,6 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type FolioServiceClient interface {
-	// The convention requires the rpc names have Create/Read/Update/List/Delete
-	// as a prefix. The type is inferred from the response (except for delete),
-	// so multiple objects can have CURDL handlers in the same service, provided
-	// they are given unique suffixes
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	ReadUser(ctx context.Context, in *ReadUserRequest, opts ...grpc.CallOption) (*ReadUserResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
@@ -3822,10 +3818,6 @@ func (c *folioServiceClient) DeleteNote(ctx context.Context, in *DeleteNoteReque
 
 // FolioServiceServer is the server API for FolioService service.
 type FolioServiceServer interface {
-	// The convention requires the rpc names have Create/Read/Update/List/Delete
-	// as a prefix. The type is inferred from the response (except for delete),
-	// so multiple objects can have CURDL handlers in the same service, provided
-	// they are given unique suffixes
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	ReadUser(context.Context, *ReadUserRequest) (*ReadUserResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
