@@ -30,6 +30,8 @@ It has these top-level messages:
 	DeleteShareRequest
 	DeleteSharesRequest
 	DeleteShareResponse
+	ListShareResponse
+	ListShareRequest
 	Tag
 	CreateTagRequest
 	CreateTagResponse
@@ -40,6 +42,8 @@ It has these top-level messages:
 	DeleteTagRequest
 	DeleteTagsRequest
 	DeleteTagResponse
+	ListTagResponse
+	ListTagRequest
 	Folio
 	CreateFolioRequest
 	CreateFolioResponse
@@ -50,6 +54,8 @@ It has these top-level messages:
 	DeleteFolioRequest
 	DeleteFoliosRequest
 	DeleteFolioResponse
+	ListFolioResponse
+	ListFolioRequest
 	Asset
 	CreateAssetRequest
 	CreateAssetResponse
@@ -60,6 +66,8 @@ It has these top-level messages:
 	DeleteAssetRequest
 	DeleteAssetsRequest
 	DeleteAssetResponse
+	ListAssetResponse
+	ListAssetRequest
 	Note
 	CreateNoteRequest
 	CreateNoteResponse
@@ -70,6 +78,8 @@ It has these top-level messages:
 	DeleteNoteRequest
 	DeleteNotesRequest
 	DeleteNoteResponse
+	ListNoteResponse
+	ListNoteRequest
 */
 package folio
 
@@ -3367,6 +3377,11 @@ func (m *FolioTxnDefaultServer) UpdateFolio(ctx context.Context, in *UpdateFolio
 	return &UpdateFolioResponse{}, nil
 }
 
+// ListFolio ...
+func (m *FolioTxnDefaultServer) ListFolio(ctx context.Context, in *ListFolioRequest) (*ListFolioResponse, error) {
+	return &ListFolioResponse{}, nil
+}
+
 // DeleteFolio ...
 func (m *FolioTxnDefaultServer) DeleteFolio(ctx context.Context, in *DeleteFolioRequest) (*DeleteFolioResponse, error) {
 	return &DeleteFolioResponse{}, nil
@@ -3385,6 +3400,11 @@ func (m *FolioTxnDefaultServer) ReadTag(ctx context.Context, in *ReadTagRequest)
 // UpdateTag ...
 func (m *FolioTxnDefaultServer) UpdateTag(ctx context.Context, in *UpdateTagRequest) (*UpdateTagResponse, error) {
 	return &UpdateTagResponse{}, nil
+}
+
+// ListTag ...
+func (m *FolioTxnDefaultServer) ListTag(ctx context.Context, in *ListTagRequest) (*ListTagResponse, error) {
+	return &ListTagResponse{}, nil
 }
 
 // DeleteTag ...
@@ -3407,6 +3427,11 @@ func (m *FolioTxnDefaultServer) UpdateNote(ctx context.Context, in *UpdateNoteRe
 	return &UpdateNoteResponse{}, nil
 }
 
+// ListNote ...
+func (m *FolioTxnDefaultServer) ListNote(ctx context.Context, in *ListNoteRequest) (*ListNoteResponse, error) {
+	return &ListNoteResponse{}, nil
+}
+
 // DeleteNote ...
 func (m *FolioTxnDefaultServer) DeleteNote(ctx context.Context, in *DeleteNoteRequest) (*DeleteNoteResponse, error) {
 	return &DeleteNoteResponse{}, nil
@@ -3427,6 +3452,11 @@ func (m *FolioTxnDefaultServer) UpdateAsset(ctx context.Context, in *UpdateAsset
 	return &UpdateAssetResponse{}, nil
 }
 
+// ListAsset ...
+func (m *FolioTxnDefaultServer) ListAsset(ctx context.Context, in *ListAssetRequest) (*ListAssetResponse, error) {
+	return &ListAssetResponse{}, nil
+}
+
 // DeleteAsset ...
 func (m *FolioTxnDefaultServer) DeleteAsset(ctx context.Context, in *DeleteAssetRequest) (*DeleteAssetResponse, error) {
 	return &DeleteAssetResponse{}, nil
@@ -3445,6 +3475,11 @@ func (m *FolioTxnDefaultServer) ReadShare(ctx context.Context, in *ReadShareRequ
 // UpdateShare ...
 func (m *FolioTxnDefaultServer) UpdateShare(ctx context.Context, in *UpdateShareRequest) (*UpdateShareResponse, error) {
 	return &UpdateShareResponse{}, nil
+}
+
+// ListShare ...
+func (m *FolioTxnDefaultServer) ListShare(ctx context.Context, in *ListShareRequest) (*ListShareResponse, error) {
+	return &ListShareResponse{}, nil
 }
 
 // DeleteShare ...

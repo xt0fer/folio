@@ -511,6 +511,81 @@
       },
       "title": "Folio center piece"
     },
+    "folioListAssetResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioAsset"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListFolioResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioFolio"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListNoteResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioNote"
+          },
+          "title": "Note repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListShareResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioShare"
+          },
+          "title": "Share repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
+    "folioListTagResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/folioTag"
+          },
+          "title": "Tag repeated field and plural name 'results'"
+        },
+        "page_info": {
+          "$ref": "#/definitions/apiPageInfo"
+        }
+      }
+    },
     "folioListUserResponse": {
       "type": "object",
       "properties": {

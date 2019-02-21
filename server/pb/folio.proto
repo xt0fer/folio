@@ -226,7 +226,7 @@ service FolioTxn {
   rpc CreateFolio ( CreateFolioRequest ) returns ( CreateFolioResponse ) {}
   rpc ReadFolio ( ReadFolioRequest ) returns ( ReadFolioResponse ) {}
   rpc UpdateFolio ( UpdateFolioRequest ) returns ( UpdateFolioResponse ) {}
-  //rpc ListFolio ( ListFolioRequest ) returns ( ListFolioResponse ) {}
+  rpc ListFolio ( ListFolioRequest ) returns ( ListFolioResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteFolio ( DeleteFolioRequest ) returns  ( DeleteFolioResponse ) {
       // This option is required because the type/table can't be inferred
@@ -237,7 +237,7 @@ service FolioTxn {
   rpc CreateTag ( CreateTagRequest ) returns ( CreateTagResponse ) {}
   rpc ReadTag ( ReadTagRequest ) returns ( ReadTagResponse ) {}
   rpc UpdateTag ( UpdateTagRequest ) returns ( UpdateTagResponse ) {}
-  //rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
+  rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteTag ( DeleteTagRequest ) returns  ( DeleteTagResponse ) {
       // This option is required because the type/table can't be inferred
@@ -248,7 +248,7 @@ service FolioTxn {
   rpc CreateNote ( CreateNoteRequest ) returns ( CreateNoteResponse ) {}
   rpc ReadNote ( ReadNoteRequest ) returns ( ReadNoteResponse ) {}
   rpc UpdateNote ( UpdateNoteRequest ) returns ( UpdateNoteResponse ) {}
-  //rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
+  rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteNote ( DeleteNoteRequest ) returns  ( DeleteNoteResponse ) {
       // This option is required because the type/table can't be inferred
@@ -259,7 +259,7 @@ service FolioTxn {
   rpc CreateAsset ( CreateAssetRequest ) returns ( CreateAssetResponse ) {}
   rpc ReadAsset ( ReadAssetRequest ) returns ( ReadAssetResponse ) {}
   rpc UpdateAsset ( UpdateAssetRequest ) returns ( UpdateAssetResponse ) {}
-  //rpc ListAsset ( ListAssetRequest ) returns ( ListAssetResponse ) {}
+  rpc ListAsset ( ListAssetRequest ) returns ( ListAssetResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteAsset ( DeleteAssetRequest ) returns  ( DeleteAssetResponse ) {
       // This option is required because the type/table can't be inferred
@@ -270,7 +270,7 @@ service FolioTxn {
   rpc CreateShare ( CreateShareRequest ) returns ( CreateShareResponse ) {}
   rpc ReadShare ( ReadShareRequest ) returns ( ReadShareResponse ) {}
   rpc UpdateShare ( UpdateShareRequest ) returns ( UpdateShareResponse ) {}
-  //rpc ListShare ( ListShareRequest ) returns ( ListShareResponse ) {}
+  rpc ListShare ( ListShareRequest ) returns ( ListShareResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteShare ( DeleteShareRequest ) returns  ( DeleteShareResponse ) {
       // This option is required because the type/table can't be inferred
@@ -500,19 +500,19 @@ message DeleteSharesRequest {
 message DeleteShareResponse {
 }
 
-// message ListShareResponse {
-//     // Share repeated field and plural name 'results'
-//     repeated Share results = 1;
-//     infoblox.api.PageInfo page_info = 2;
-// }
+message ListShareResponse {
+    // Share repeated field and plural name 'results'
+    repeated Share results = 1;
+    infoblox.api.PageInfo page_info = 2;
+}
 
 
-// message ListShareRequest {
-//     infoblox.api.Filtering filter = 1;
-//     infoblox.api.Sorting order_by = 2;
-//     infoblox.api.FieldSelection fields = 3;
-//     infoblox.api.Pagination paging = 4;
-// }
+message ListShareRequest {
+    infoblox.api.Filtering filter = 1;
+    infoblox.api.Sorting order_by = 2;
+    infoblox.api.FieldSelection fields = 3;
+    infoblox.api.Pagination paging = 4;
+}
 
 // Tag is a attribute on something
 message Tag  {
@@ -577,19 +577,19 @@ message DeleteTagsRequest {
 message DeleteTagResponse {
 }
 
-// message ListTagResponse {
-//     // Tag repeated field and plural name 'results'
-//     repeated Tag results = 1;
-//     infoblox.api.PageInfo page_info = 2;
-// }
+message ListTagResponse {
+    // Tag repeated field and plural name 'results'
+    repeated Tag results = 1;
+    infoblox.api.PageInfo page_info = 2;
+}
 
 
-// message ListTagRequest {
-//     infoblox.api.Filtering filter = 1;
-//     infoblox.api.Sorting order_by = 2;
-//     infoblox.api.FieldSelection fields = 3;
-//     infoblox.api.Pagination paging = 4;
-// }
+message ListTagRequest {
+    infoblox.api.Filtering filter = 1;
+    infoblox.api.Sorting order_by = 2;
+    infoblox.api.FieldSelection fields = 3;
+    infoblox.api.Pagination paging = 4;
+}
 // // Tagmessage used to make tags have kinds.
 // message Tagmessage int
 
@@ -671,19 +671,19 @@ message DeleteFoliosRequest {
 message DeleteFolioResponse {
 }
 
-// message ListFolioResponse {
-//     // Note repeated field and plural name 'results'
-//     repeated Folio results = 1;
-//     infoblox.api.PageInfo page_info = 2;
-// }
+message ListFolioResponse {
+    // Note repeated field and plural name 'results'
+    repeated Folio results = 1;
+    infoblox.api.PageInfo page_info = 2;
+}
 
 
-// message ListFolioRequest {
-//     infoblox.api.Filtering filter = 1;
-//     infoblox.api.Sorting order_by = 2;
-//     infoblox.api.FieldSelection fields = 3;
-//     infoblox.api.Pagination paging = 4;
-// }
+message ListFolioRequest {
+    infoblox.api.Filtering filter = 1;
+    infoblox.api.Sorting order_by = 2;
+    infoblox.api.FieldSelection fields = 3;
+    infoblox.api.Pagination paging = 4;
+}
 
 // Asset main doc
 message Asset  {
@@ -749,19 +749,19 @@ message DeleteAssetsRequest {
 message DeleteAssetResponse {
 }
 
-// message ListAssetResponse {
-//     // Note repeated field and plural name 'results'
-//     repeated Asset results = 1;
-//     infoblox.api.PageInfo page_info = 2;
-// }
+message ListAssetResponse {
+    // Note repeated field and plural name 'results'
+    repeated Asset results = 1;
+    infoblox.api.PageInfo page_info = 2;
+}
 
 
-// message ListAssetRequest {
-//     infoblox.api.Filtering filter = 1;
-//     infoblox.api.Sorting order_by = 2;
-//     infoblox.api.FieldSelection fields = 3;
-//     infoblox.api.Pagination paging = 4;
-// }
+message ListAssetRequest {
+    infoblox.api.Filtering filter = 1;
+    infoblox.api.Sorting order_by = 2;
+    infoblox.api.FieldSelection fields = 3;
+    infoblox.api.Pagination paging = 4;
+}
 
 // Note text junk
 message Note  {
@@ -824,16 +824,16 @@ message DeleteNotesRequest {
 message DeleteNoteResponse {
 }
 
-// message ListNoteResponse {
-//     // Note repeated field and plural name 'results'
-//     repeated Note results = 1;
-//     infoblox.api.PageInfo page_info = 2;
-// }
+message ListNoteResponse {
+    // Note repeated field and plural name 'results'
+    repeated Note results = 1;
+    infoblox.api.PageInfo page_info = 2;
+}
 
 
-// message ListNoteRequest {
-//     infoblox.api.Filtering filter = 1;
-//     infoblox.api.Sorting order_by = 2;
-//     infoblox.api.FieldSelection fields = 3;
-//     infoblox.api.Pagination paging = 4;
-// }
+message ListNoteRequest {
+    infoblox.api.Filtering filter = 1;
+    infoblox.api.Sorting order_by = 2;
+    infoblox.api.FieldSelection fields = 3;
+    infoblox.api.Pagination paging = 4;
+}
