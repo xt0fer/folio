@@ -10,6 +10,7 @@ import (
 	"log"
 
 	pb "../server/pb"
+	"google.golang.org/grpc"
 )
 
 var (
@@ -33,6 +34,7 @@ func main() {
 	if err == nil {
 		log.Printf("Get User %+v\n", thisUser)
 	} else {
+		log.Printf("error: %v", err)
 		thisUser, _ = fcl.CreateUser(&pb.User{
 			Email:     "test@test.com",
 			Lastname:  "McTestface",
@@ -41,14 +43,53 @@ func main() {
 		log.Printf("New User %+v\n", thisUser)
 	}
 
+	thisUser, err = fcl.GetUser("eat@joes.com")
+	if err == nil {
+		log.Printf("Get User %+v\n", thisUser)
+	} else {
+		log.Printf("error: %v", err)
+		thisUser, _ = fcl.CreateUser(&pb.User{
+			Email:     "eat@joes.com",
+			Lastname:  "Joes",
+			Firstname: "Eat",
+		})
+		log.Printf("New User %+v\n", thisUser)
+	}
+
+	thisUser, err = fcl.GetUser("kris@test.com")
+	if err == nil {
+		log.Printf("Get User %+v\n", thisUser)
+	} else {
+		log.Printf("error: %v", err)
+		thisUser, _ = fcl.CreateUser(&pb.User{
+			Email:     "kris@test.com",
+			Lastname:  "Younger",
+			Firstname: "Kris",
+		})
+		log.Printf("New User %+v\n", thisUser)
+	}
+
 	// create a test folio
 
-	err = fcl.SaveUser(thisUser)
-	if err == nil {
-		log.Printf("SavedUser %+v\n", thisUser)
-	} else {
-		log.Printf("Unable to Save User %+v -  %v\n", thisUser, err)
+	users, err := fcl.client.ListUser(fcl.ctx, &pb.ListUserRequest{}, &grpc.EmptyCallOption{})
+
+	if err != nil {
+		log.Fatalf("Failed List User call %v", err)
 	}
+
+	userList := users.GetResults()
+	log.Printf("list of users is %v long.", len(userList))
+
+	for l1 := range userList {
+		log.Println(l1)
+	}
+
+	// err = fcl.SaveUser(thisUser)
+	// if err == nil {
+	// 	log.Printf("SavedUser %+v\n", thisUser)
+	// } else {
+	// 	log.Printf("Unable to Save User %+v -  %v\n", thisUser, err)
+	// }
 
 	// accountResp, err := fcl.client.ReadAccount(fcl.ctx, &pb.ReadAccountRequest{Id: 1})
 

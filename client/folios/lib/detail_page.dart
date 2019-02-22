@@ -1,30 +1,31 @@
 import 'package:folios/model/lesson.dart';
 import 'package:flutter/material.dart';
+import 'package:folios/folio.pbgrpc.dart';
 
 class DetailPage extends StatelessWidget {
-  final Lesson lesson;
-  DetailPage({Key key, this.lesson}) : super(key: key);
+  final User user;
+  DetailPage({Key key, this.user}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final levelIndicator = Container(
-      child: Container(
-        child: LinearProgressIndicator(
-            backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
-            value: lesson.indicatorValue,
-            valueColor: AlwaysStoppedAnimation(Colors.green)),
-      ),
+      // child: Container(
+      //   child: LinearProgressIndicator(
+      //       backgroundColor: Color.fromRGBO(209, 224, 224, 0.2),
+      //       value: lesson.indicatorValue,
+      //       valueColor: AlwaysStoppedAnimation(Colors.green)),
+      // ),
     );
 
-    final coursePrice = Container(
-      padding: const EdgeInsets.all(4.0),
-      decoration: new BoxDecoration(
-          border: new Border.all(color: Colors.white),
-          borderRadius: BorderRadius.circular(5.0)),
-      child: new Text(
-        "\$" + lesson.price.toString(),
-        style: TextStyle(color: Colors.white),
-      ),
-    );
+    // final coursePrice = Container(
+    //   padding: const EdgeInsets.all(4.0),
+    //   decoration: new BoxDecoration(
+    //       border: new Border.all(color: Colors.white),
+    //       borderRadius: BorderRadius.circular(5.0)),
+    //   child: new Text(
+    //     "" + lesson.price.toString(),
+    //     style: TextStyle(color: Colors.white),
+    //   ),
+    // );
 
     final topContentText = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +42,7 @@ class DetailPage extends StatelessWidget {
         ),
         SizedBox(height: 5.0), //10
         Text(
-          lesson.title,
+          user.email,
           style: TextStyle(color: Colors.white, fontSize: 45.0),
         ),
         SizedBox(height: 30.0),
@@ -54,10 +55,10 @@ class DetailPage extends StatelessWidget {
                 child: Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child: Text(
-                      lesson.level,
+                      user.lastname,
                       style: TextStyle(color: Colors.white),
                     ))),
-            Expanded(flex: 1, child: coursePrice)
+            //Expanded(flex: 1, child: coursePrice)
           ],
         ),
       ],
@@ -97,7 +98,7 @@ class DetailPage extends StatelessWidget {
     );
 
     final bottomContentText = Text(
-      lesson.content,
+      user.email,
       style: TextStyle(fontSize: 18.0),
     );
     final readButton = Container(

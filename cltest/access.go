@@ -83,6 +83,7 @@ func (fc *FolioClient) GetUser(email string) (*pb.User, error) {
 	}
 
 	userList := users.GetResults()
+	log.Printf("list of users is %v long.", len(userList))
 	resultAccount := &pb.User{}
 	// search and find the user.
 	for _, a := range userList {
@@ -91,7 +92,19 @@ func (fc *FolioClient) GetUser(email string) (*pb.User, error) {
 			return resultAccount, nil
 		}
 	}
-	return nil, errors.New("unable to find the account")
+	return nil, errors.New("unable to find the user")
+}
+func (fc *FolioClient) GetUserList() ([]*pb.User, error) {
+
+	users, err := fc.client.ListUser(fc.ctx, &pb.ListUserRequest{}, &grpc.EmptyCallOption{})
+
+	if err != nil {
+		log.Fatalf("Failed List User call %v", err)
+	}
+
+	userList := users.GetResults()
+	log.Printf("list of users is %v long.", len(userList))
+	return userList, nil
 }
 
 func (fc *FolioClient) SaveUser(user *pb.User) error {

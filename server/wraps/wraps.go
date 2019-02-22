@@ -19,7 +19,7 @@ func main() {
 	if err != nil {
 		log.Fatal("unable to read template file ")
 	}
-	Ops := []string{"Create", "Read", "Update", "Delete"}                //, "List"}
+	Ops := []string{"Create", "Read", "Update", "Delete", "List"}
 	Typees := []string{"User", "Folio", "Tag", "Note", "Asset", "Share"} // "Account", "Archive",
 	//.Op
 	//.Typee
