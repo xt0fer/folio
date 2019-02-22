@@ -1,10 +1,9 @@
-import 'package:folios/model/lesson.dart';
 import 'package:flutter/material.dart';
 import 'package:folios/folio.pbgrpc.dart';
 
-class DetailPage extends StatelessWidget {
+class UserDetailPage extends StatelessWidget {
   final User user;
-  DetailPage({Key key, this.user}) : super(key: key);
+  UserDetailPage({Key key, this.user}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final levelIndicator = Container(
