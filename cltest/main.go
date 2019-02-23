@@ -104,10 +104,10 @@ func main() {
 	}
 
 	fs := folios.GetResults()
-	log.Printf("list of users is %v long.", len(fs))
+	log.Printf("list of folios is %v long.", len(fs))
 
-	for f1 := range fs {
-		log.Println(f1)
+	for _, f1 := range fs {
+		log.Printf("Folio %+v\n", f1)
 	}
 
 	// err = fcl.SaveUser(thisUser)

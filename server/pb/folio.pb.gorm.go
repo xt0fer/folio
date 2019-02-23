@@ -3301,6 +3301,11 @@ func (m *FolioServiceDefaultServer) UpdateFolio(ctx context.Context, in *UpdateF
 	return &UpdateFolioResponse{}, nil
 }
 
+// ListFolio ...
+func (m *FolioServiceDefaultServer) ListFolio(ctx context.Context, in *ListFolioRequest) (*ListFolioResponse, error) {
+	return &ListFolioResponse{}, nil
+}
+
 // DeleteFolio ...
 func (m *FolioServiceDefaultServer) DeleteFolio(ctx context.Context, in *DeleteFolioRequest) (*DeleteFolioResponse, error) {
 	return &DeleteFolioResponse{}, nil
@@ -3321,6 +3326,11 @@ func (m *FolioServiceDefaultServer) UpdateTag(ctx context.Context, in *UpdateTag
 	return &UpdateTagResponse{}, nil
 }
 
+// ListTag ...
+func (m *FolioServiceDefaultServer) ListTag(ctx context.Context, in *ListTagRequest) (*ListTagResponse, error) {
+	return &ListTagResponse{}, nil
+}
+
 // DeleteTag ...
 func (m *FolioServiceDefaultServer) DeleteTag(ctx context.Context, in *DeleteTagRequest) (*DeleteTagResponse, error) {
 	return &DeleteTagResponse{}, nil
@@ -3339,6 +3349,11 @@ func (m *FolioServiceDefaultServer) ReadNote(ctx context.Context, in *ReadNoteRe
 // UpdateNote ...
 func (m *FolioServiceDefaultServer) UpdateNote(ctx context.Context, in *UpdateNoteRequest) (*UpdateNoteResponse, error) {
 	return &UpdateNoteResponse{}, nil
+}
+
+// ListNote ...
+func (m *FolioServiceDefaultServer) ListNote(ctx context.Context, in *ListNoteRequest) (*ListNoteResponse, error) {
+	return &ListNoteResponse{}, nil
 }
 
 // DeleteNote ...

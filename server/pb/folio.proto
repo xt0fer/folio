@@ -123,7 +123,7 @@ service FolioService {
   rpc CreateFolio ( CreateFolioRequest ) returns ( CreateFolioResponse ) {}
   rpc ReadFolio ( ReadFolioRequest ) returns ( ReadFolioResponse ) {}
   rpc UpdateFolio ( UpdateFolioRequest ) returns ( UpdateFolioResponse ) {}
-  //rpc ListFolio ( ListFolioRequest ) returns ( ListFolioResponse ) {}
+  rpc ListFolio ( ListFolioRequest ) returns ( ListFolioResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteFolio ( DeleteFolioRequest ) returns  ( DeleteFolioResponse ) {
       // This option is required because the type/table can't be inferred
@@ -134,7 +134,7 @@ service FolioService {
   rpc CreateTag ( CreateTagRequest ) returns ( CreateTagResponse ) {}
   rpc ReadTag ( ReadTagRequest ) returns ( ReadTagResponse ) {}
   rpc UpdateTag ( UpdateTagRequest ) returns ( UpdateTagResponse ) {}
-  //rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
+  rpc ListTag ( ListTagRequest ) returns ( ListTagResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteTag ( DeleteTagRequest ) returns  ( DeleteTagResponse ) {
       // This option is required because the type/table can't be inferred
@@ -145,7 +145,7 @@ service FolioService {
   rpc CreateNote ( CreateNoteRequest ) returns ( CreateNoteResponse ) {}
   rpc ReadNote ( ReadNoteRequest ) returns ( ReadNoteResponse ) {}
   rpc UpdateNote ( UpdateNoteRequest ) returns ( UpdateNoteResponse ) {}
-  //rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
+  rpc ListNote ( ListNoteRequest ) returns ( ListNoteResponse ) {}
   //rpc ListSomething( google.protobuf.Empty ) returns ( ListSomethingResponse ) {}
   rpc DeleteNote ( DeleteNoteRequest ) returns  ( DeleteNoteResponse ) {
       // This option is required because the type/table can't be inferred
