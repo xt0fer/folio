@@ -1,22 +1,21 @@
 import 'package:folios/default_page.dart';
 import 'package:folios/folio.pbgrpc.dart';
 import 'package:flutter/material.dart';
-import 'package:folios/folio_list_page.dart';
-import 'package:folios/user_detail_page.dart';
+import 'package:folios/folio_detail_page.dart';
 import 'package:grpc/grpc.dart';
 
-class UserListPage extends StatefulWidget {
-  UserListPage({Key key, this.title}) : super(key: key);
+class FolioListPage extends StatefulWidget {
+  FolioListPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _UserListPageState createState() => _UserListPageState();
+  _FolioListPageState createState() => _FolioListPageState();
 }
 
-class _UserListPageState extends State<UserListPage> {
+class _FolioListPageState extends State<FolioListPage> {
   // List lessons;
-  List<User> users = new List<User>();
+  List<Folio> folios = new List<Folio>();
 
   @override
   void initState() {
@@ -29,23 +28,23 @@ class _UserListPageState extends State<UserListPage> {
           options: new CallOptions(timeout: new Duration(seconds: 30)));
       print("channel ${channel} ");
       print("client ${client} ");
-    final _ = client.listUser(new ListUserRequest()).then((dynamic res) async {
+    final _ = client.listFolio(new ListFolioRequest()).then((dynamic res) async {
       print("results: ${res.toString()} ");
       var lr = await res.results;
       // for (var i in lr) {
-      //   this.users.add(i);
+      //   this.folios.add(i);
       // }
-      print("list user worked. ${this.users.length} ");
-      setState(() => this.users = lr); 
+      print("list folio worked. ${this.folios.length} ");
+      setState(() => this.folios = lr); 
     });
     //print("foo: ${foo}");
-    // final f = new ReadUserRequest();
+    // final f = new ReadFolioRequest();
     // f.id = 1;
-    // final u1 = client.readUser(f).then((ReadUserResponse res) async {
+    // final u1 = client.readFolio(f).then((ReadFolioResponse res) async {
     //  print("results: ${res.toString()} ");
     //   var u = await res.result;
-    //   this.users.add(u);
-    //   print("read user worked. ${this.users.length} ${u} ");
+    //   this.folios.add(u);
+    //   print("read user worked. ${this.folios.length} ${u} ");
     // });
     super.initState();
   }
@@ -53,7 +52,7 @@ class _UserListPageState extends State<UserListPage> {
   @override
   Widget build(BuildContext context) {
 
-    ListTile makeListTile(User user) => ListTile(
+    ListTile makeListTile(Folio item) => ListTile(
           contentPadding:
               EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           leading: Container(
@@ -64,7 +63,7 @@ class _UserListPageState extends State<UserListPage> {
             child: Icon(Icons.folder_open, color: Colors.white),
           ),
           title: Text(
-            user.email,
+            item.name,
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
@@ -84,7 +83,7 @@ class _UserListPageState extends State<UserListPage> {
                 flex: 4,
                 child: Padding(
                     padding: EdgeInsets.only(left: 10.0),
-                    child: Text(user.firstname,
+                    child: Text(item.name,
                         style: TextStyle(color: Colors.white))),
               )
             ],
@@ -95,11 +94,11 @@ class _UserListPageState extends State<UserListPage> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => UserDetailPage(user: user)));
+                    builder: (context) => FolioDetailPage(item: item)));
           },
         );
 
-    Card makeCard(User user) => Card(
+    Card makeCard(Folio user) => Card(
           elevation: 8.0,
           margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
           child: Container(
@@ -113,9 +112,9 @@ class _UserListPageState extends State<UserListPage> {
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: users.length,
+        itemCount: folios.length,
         itemBuilder: (BuildContext context, int index) {
-          return makeCard(users[index]);
+          return makeCard(folios[index]);
         },
       ),
     );
@@ -138,12 +137,7 @@ class _UserListPageState extends State<UserListPage> {
             ),
             IconButton(
               icon: Icon(Icons.collections, color: Colors.white),
-              onPressed: () {
-                            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => FolioListPage(title: "Folios")));
-              },
+              onPressed: () {},
             ),
             IconButton(
               icon: Icon(Icons.people, color: Colors.white),
