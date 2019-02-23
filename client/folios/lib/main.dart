@@ -13,10 +13,10 @@ class MyApp extends StatelessWidget {
       title: 'Folios',
       theme: new ThemeData(
           primaryColor: Color.fromRGBO(58, 66, 86, 1.0), fontFamily: 'Raleway'),
-      initialRoute: '/users',
+      initialRoute: '/',
       routes: {
-        '/' : (context) => DefaultPage(),
-        '/users' :(context) => UserListPage(title: 'Users'),
+        '/' : (context) => UserListPage(title: 'Users'),
+        '/blank' : (context) => DefaultPage(),
       }
       // home: DetailPage(),
     );

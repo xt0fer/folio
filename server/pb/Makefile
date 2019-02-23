@@ -1,5 +1,7 @@
 
-PROTO_ROOT_DIR = $(shell brew --prefix)/Cellar/protobuf/3.5.1_1/include
+# PROTO_VER = 3.5.1_1
+PROTO_VER = 3.6.1.3_1
+PROTO_ROOT_DIR = $(shell brew --prefix)/Cellar/protobuf/$(PROTO_VER)/include
 
 proto: golang dart
 

@@ -7,6 +7,7 @@ package main
  */
 import (
 	"flag"
+	"fmt"
 	"log"
 
 	pb "../server/pb"
@@ -43,19 +44,6 @@ func main() {
 		log.Printf("New User %+v\n", thisUser)
 	}
 
-	thisUser, err = fcl.GetUser("eat@joes.com")
-	if err == nil {
-		log.Printf("Get User %+v\n", thisUser)
-	} else {
-		log.Printf("error: %v", err)
-		thisUser, _ = fcl.CreateUser(&pb.User{
-			Email:     "eat@joes.com",
-			Lastname:  "Joes",
-			Firstname: "Eat",
-		})
-		log.Printf("New User %+v\n", thisUser)
-	}
-
 	thisUser, err = fcl.GetUser("kris@test.com")
 	if err == nil {
 		log.Printf("Get User %+v\n", thisUser)
@@ -82,6 +70,44 @@ func main() {
 
 	for l1 := range userList {
 		log.Println(l1)
+	}
+
+	note, _ := fcl.CreateNote(&pb.Note{
+		Name: "simple note",
+		Note: "simple note",
+	})
+	n2, _ := fcl.CreateNote(&pb.Note{
+		Name: "another note",
+		Note: "another simple note. \n with stuff.",
+	})
+	f1, _ := fcl.CreateFolio(&pb.Folio{
+		UUID:  fmt.Sprintf("%v", GimmeUUID()),
+		Name:  "first folio",
+		Desc:  "a simple first folio",
+		Notes: []*pb.Note{note, n2},
+	})
+	log.Println(f1)
+
+	thisUser, err = fcl.GetUser("kris@test.com")
+	f1.Owner = thisUser
+	err = fcl.SaveFolio(f1)
+	if err == nil {
+		log.Printf("Saved Folio %+v\n", f1)
+	} else {
+		log.Printf("Unable to Save Folio %+v -  %v\n", f1, err)
+	}
+
+	folios, err := fcl.client.ListFolio(fcl.ctx, &pb.ListFolioRequest{}, &grpc.EmptyCallOption{})
+
+	if err != nil {
+		log.Fatalf("Failed List Folio call %v", err)
+	}
+
+	fs := folios.GetResults()
+	log.Printf("list of users is %v long.", len(fs))
+
+	for f1 := range fs {
+		log.Println(f1)
 	}
 
 	// err = fcl.SaveUser(thisUser)

@@ -868,16 +868,16 @@ func DefaultCreateUser(ctx context.Context, in *User, db *gorm1.DB) (*User, erro
 	if err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(UserORMWithBeforeCreate); ok {
-		if db, err = hook.BeforeCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(UserORMWithBeforeCreate_); ok {
+		if db, err = hook.BeforeCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
 	if err = db.Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(UserORMWithAfterCreate); ok {
-		if err = hook.AfterCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(UserORMWithAfterCreate_); ok {
+		if err = hook.AfterCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
@@ -885,11 +885,11 @@ func DefaultCreateUser(ctx context.Context, in *User, db *gorm1.DB) (*User, erro
 	return &pbResponse, err
 }
 
-type UserORMWithBeforeCreate interface {
-	BeforeCreate(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type UserORMWithBeforeCreate_ interface {
+	BeforeCreate_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type UserORMWithAfterCreate interface {
-	AfterCreate(context.Context, *gorm1.DB) error
+type UserORMWithAfterCreate_ interface {
+	AfterCreate_(context.Context, *gorm1.DB) error
 }
 
 // DefaultReadUser executes a basic gorm read call
@@ -951,8 +951,8 @@ func DefaultDeleteUser(ctx context.Context, in *User, db *gorm1.DB) error {
 	if ormObj.Id == 0 {
 		return errors.New("A non-zero ID value is required for a delete call")
 	}
-	if hook, ok := interface{}(&ormObj).(UserORMWithBeforeDelete); ok {
-		if db, err = hook.BeforeDelete(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(UserORMWithBeforeDelete_); ok {
+		if db, err = hook.BeforeDelete_(ctx, db); err != nil {
 			return err
 		}
 	}
@@ -960,17 +960,17 @@ func DefaultDeleteUser(ctx context.Context, in *User, db *gorm1.DB) error {
 	if err != nil {
 		return err
 	}
-	if hook, ok := interface{}(&ormObj).(UserORMWithAfterDelete); ok {
-		err = hook.AfterDelete(ctx, db)
+	if hook, ok := interface{}(&ormObj).(UserORMWithAfterDelete_); ok {
+		err = hook.AfterDelete_(ctx, db)
 	}
 	return err
 }
 
-type UserORMWithBeforeDelete interface {
-	BeforeDelete(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type UserORMWithBeforeDelete_ interface {
+	BeforeDelete_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type UserORMWithAfterDelete interface {
-	AfterDelete(context.Context, *gorm1.DB) error
+type UserORMWithAfterDelete_ interface {
+	AfterDelete_(context.Context, *gorm1.DB) error
 }
 
 func DefaultDeleteUserSet(ctx context.Context, in []*User, db *gorm1.DB) error {
@@ -1020,6 +1020,8 @@ func DefaultStrictUpdateUser(ctx context.Context, in *User, db *gorm1.DB) (*User
 	if err != nil {
 		return nil, err
 	}
+	lockedRow := &UserORM{}
+	db.Model(&ormObj).Set("gorm:query_option", "FOR UPDATE").Where("id=?", ormObj.Id).First(lockedRow)
 	if hook, ok := interface{}(&ormObj).(UserORMWithBeforeStrictUpdateCleanup); ok {
 		if db, err = hook.BeforeStrictUpdateCleanup(ctx, db); err != nil {
 			return nil, err
@@ -1145,7 +1147,7 @@ func DefaultApplyFieldMaskUser(ctx context.Context, patchee *User, patcher *User
 			patchee.Lastname = patcher.Lastname
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Thumbnail.") && !updatedThumbnail {
+		if !updatedThumbnail && strings.HasPrefix(f, prefix+"Thumbnail.") {
 			updatedThumbnail = true
 			if patcher.Thumbnail == nil {
 				patchee.Thumbnail = nil
@@ -1235,16 +1237,16 @@ func DefaultCreateShare(ctx context.Context, in *Share, db *gorm1.DB) (*Share, e
 	if err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(ShareORMWithBeforeCreate); ok {
-		if db, err = hook.BeforeCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(ShareORMWithBeforeCreate_); ok {
+		if db, err = hook.BeforeCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
 	if err = db.Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(ShareORMWithAfterCreate); ok {
-		if err = hook.AfterCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(ShareORMWithAfterCreate_); ok {
+		if err = hook.AfterCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
@@ -1252,11 +1254,11 @@ func DefaultCreateShare(ctx context.Context, in *Share, db *gorm1.DB) (*Share, e
 	return &pbResponse, err
 }
 
-type ShareORMWithBeforeCreate interface {
-	BeforeCreate(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type ShareORMWithBeforeCreate_ interface {
+	BeforeCreate_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type ShareORMWithAfterCreate interface {
-	AfterCreate(context.Context, *gorm1.DB) error
+type ShareORMWithAfterCreate_ interface {
+	AfterCreate_(context.Context, *gorm1.DB) error
 }
 
 // DefaultReadShare executes a basic gorm read call
@@ -1318,8 +1320,8 @@ func DefaultDeleteShare(ctx context.Context, in *Share, db *gorm1.DB) error {
 	if ormObj.Id == 0 {
 		return errors.New("A non-zero ID value is required for a delete call")
 	}
-	if hook, ok := interface{}(&ormObj).(ShareORMWithBeforeDelete); ok {
-		if db, err = hook.BeforeDelete(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(ShareORMWithBeforeDelete_); ok {
+		if db, err = hook.BeforeDelete_(ctx, db); err != nil {
 			return err
 		}
 	}
@@ -1327,17 +1329,17 @@ func DefaultDeleteShare(ctx context.Context, in *Share, db *gorm1.DB) error {
 	if err != nil {
 		return err
 	}
-	if hook, ok := interface{}(&ormObj).(ShareORMWithAfterDelete); ok {
-		err = hook.AfterDelete(ctx, db)
+	if hook, ok := interface{}(&ormObj).(ShareORMWithAfterDelete_); ok {
+		err = hook.AfterDelete_(ctx, db)
 	}
 	return err
 }
 
-type ShareORMWithBeforeDelete interface {
-	BeforeDelete(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type ShareORMWithBeforeDelete_ interface {
+	BeforeDelete_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type ShareORMWithAfterDelete interface {
-	AfterDelete(context.Context, *gorm1.DB) error
+type ShareORMWithAfterDelete_ interface {
+	AfterDelete_(context.Context, *gorm1.DB) error
 }
 
 func DefaultDeleteShareSet(ctx context.Context, in []*Share, db *gorm1.DB) error {
@@ -1387,6 +1389,8 @@ func DefaultStrictUpdateShare(ctx context.Context, in *Share, db *gorm1.DB) (*Sh
 	if err != nil {
 		return nil, err
 	}
+	lockedRow := &ShareORM{}
+	db.Model(&ormObj).Set("gorm:query_option", "FOR UPDATE").Where("id=?", ormObj.Id).First(lockedRow)
 	if hook, ok := interface{}(&ormObj).(ShareORMWithBeforeStrictUpdateCleanup); ok {
 		if db, err = hook.BeforeStrictUpdateCleanup(ctx, db); err != nil {
 			return nil, err
@@ -1510,7 +1514,7 @@ func DefaultApplyFieldMaskShare(ctx context.Context, patchee *Share, patcher *Sh
 			patchee.Id = patcher.Id
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Friend.") && !updatedFriend {
+		if !updatedFriend && strings.HasPrefix(f, prefix+"Friend.") {
 			updatedFriend = true
 			if patcher.Friend == nil {
 				patchee.Friend = nil
@@ -1531,7 +1535,7 @@ func DefaultApplyFieldMaskShare(ctx context.Context, patchee *Share, patcher *Sh
 			patchee.Friend = patcher.Friend
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Thumbnail.") && !updatedThumbnail {
+		if !updatedThumbnail && strings.HasPrefix(f, prefix+"Thumbnail.") {
 			updatedThumbnail = true
 			if patcher.Thumbnail == nil {
 				patchee.Thumbnail = nil
@@ -1625,16 +1629,16 @@ func DefaultCreateTag(ctx context.Context, in *Tag, db *gorm1.DB) (*Tag, error) 
 	if err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(TagORMWithBeforeCreate); ok {
-		if db, err = hook.BeforeCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(TagORMWithBeforeCreate_); ok {
+		if db, err = hook.BeforeCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
 	if err = db.Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(TagORMWithAfterCreate); ok {
-		if err = hook.AfterCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(TagORMWithAfterCreate_); ok {
+		if err = hook.AfterCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
@@ -1642,11 +1646,11 @@ func DefaultCreateTag(ctx context.Context, in *Tag, db *gorm1.DB) (*Tag, error) 
 	return &pbResponse, err
 }
 
-type TagORMWithBeforeCreate interface {
-	BeforeCreate(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type TagORMWithBeforeCreate_ interface {
+	BeforeCreate_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type TagORMWithAfterCreate interface {
-	AfterCreate(context.Context, *gorm1.DB) error
+type TagORMWithAfterCreate_ interface {
+	AfterCreate_(context.Context, *gorm1.DB) error
 }
 
 // DefaultReadTag executes a basic gorm read call
@@ -1708,8 +1712,8 @@ func DefaultDeleteTag(ctx context.Context, in *Tag, db *gorm1.DB) error {
 	if ormObj.Id == 0 {
 		return errors.New("A non-zero ID value is required for a delete call")
 	}
-	if hook, ok := interface{}(&ormObj).(TagORMWithBeforeDelete); ok {
-		if db, err = hook.BeforeDelete(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(TagORMWithBeforeDelete_); ok {
+		if db, err = hook.BeforeDelete_(ctx, db); err != nil {
 			return err
 		}
 	}
@@ -1717,17 +1721,17 @@ func DefaultDeleteTag(ctx context.Context, in *Tag, db *gorm1.DB) error {
 	if err != nil {
 		return err
 	}
-	if hook, ok := interface{}(&ormObj).(TagORMWithAfterDelete); ok {
-		err = hook.AfterDelete(ctx, db)
+	if hook, ok := interface{}(&ormObj).(TagORMWithAfterDelete_); ok {
+		err = hook.AfterDelete_(ctx, db)
 	}
 	return err
 }
 
-type TagORMWithBeforeDelete interface {
-	BeforeDelete(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type TagORMWithBeforeDelete_ interface {
+	BeforeDelete_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type TagORMWithAfterDelete interface {
-	AfterDelete(context.Context, *gorm1.DB) error
+type TagORMWithAfterDelete_ interface {
+	AfterDelete_(context.Context, *gorm1.DB) error
 }
 
 func DefaultDeleteTagSet(ctx context.Context, in []*Tag, db *gorm1.DB) error {
@@ -1777,6 +1781,8 @@ func DefaultStrictUpdateTag(ctx context.Context, in *Tag, db *gorm1.DB) (*Tag, e
 	if err != nil {
 		return nil, err
 	}
+	lockedRow := &TagORM{}
+	db.Model(&ormObj).Set("gorm:query_option", "FOR UPDATE").Where("id=?", ormObj.Id).First(lockedRow)
 	if hook, ok := interface{}(&ormObj).(TagORMWithBeforeStrictUpdateCleanup); ok {
 		if db, err = hook.BeforeStrictUpdateCleanup(ctx, db); err != nil {
 			return nil, err
@@ -1906,7 +1912,7 @@ func DefaultApplyFieldMaskTag(ctx context.Context, patchee *Tag, patcher *Tag, u
 			patchee.Folios = patcher.Folios
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Thumbnail.") && !updatedThumbnail {
+		if !updatedThumbnail && strings.HasPrefix(f, prefix+"Thumbnail.") {
 			updatedThumbnail = true
 			if patcher.Thumbnail == nil {
 				patchee.Thumbnail = nil
@@ -1996,16 +2002,16 @@ func DefaultCreateFolio(ctx context.Context, in *Folio, db *gorm1.DB) (*Folio, e
 	if err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(FolioORMWithBeforeCreate); ok {
-		if db, err = hook.BeforeCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(FolioORMWithBeforeCreate_); ok {
+		if db, err = hook.BeforeCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
 	if err = db.Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(FolioORMWithAfterCreate); ok {
-		if err = hook.AfterCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(FolioORMWithAfterCreate_); ok {
+		if err = hook.AfterCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
@@ -2013,11 +2019,11 @@ func DefaultCreateFolio(ctx context.Context, in *Folio, db *gorm1.DB) (*Folio, e
 	return &pbResponse, err
 }
 
-type FolioORMWithBeforeCreate interface {
-	BeforeCreate(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type FolioORMWithBeforeCreate_ interface {
+	BeforeCreate_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type FolioORMWithAfterCreate interface {
-	AfterCreate(context.Context, *gorm1.DB) error
+type FolioORMWithAfterCreate_ interface {
+	AfterCreate_(context.Context, *gorm1.DB) error
 }
 
 // DefaultReadFolio executes a basic gorm read call
@@ -2079,8 +2085,8 @@ func DefaultDeleteFolio(ctx context.Context, in *Folio, db *gorm1.DB) error {
 	if ormObj.Id == 0 {
 		return errors.New("A non-zero ID value is required for a delete call")
 	}
-	if hook, ok := interface{}(&ormObj).(FolioORMWithBeforeDelete); ok {
-		if db, err = hook.BeforeDelete(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(FolioORMWithBeforeDelete_); ok {
+		if db, err = hook.BeforeDelete_(ctx, db); err != nil {
 			return err
 		}
 	}
@@ -2088,17 +2094,17 @@ func DefaultDeleteFolio(ctx context.Context, in *Folio, db *gorm1.DB) error {
 	if err != nil {
 		return err
 	}
-	if hook, ok := interface{}(&ormObj).(FolioORMWithAfterDelete); ok {
-		err = hook.AfterDelete(ctx, db)
+	if hook, ok := interface{}(&ormObj).(FolioORMWithAfterDelete_); ok {
+		err = hook.AfterDelete_(ctx, db)
 	}
 	return err
 }
 
-type FolioORMWithBeforeDelete interface {
-	BeforeDelete(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type FolioORMWithBeforeDelete_ interface {
+	BeforeDelete_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type FolioORMWithAfterDelete interface {
-	AfterDelete(context.Context, *gorm1.DB) error
+type FolioORMWithAfterDelete_ interface {
+	AfterDelete_(context.Context, *gorm1.DB) error
 }
 
 func DefaultDeleteFolioSet(ctx context.Context, in []*Folio, db *gorm1.DB) error {
@@ -2148,6 +2154,8 @@ func DefaultStrictUpdateFolio(ctx context.Context, in *Folio, db *gorm1.DB) (*Fo
 	if err != nil {
 		return nil, err
 	}
+	lockedRow := &FolioORM{}
+	db.Model(&ormObj).Set("gorm:query_option", "FOR UPDATE").Where("id=?", ormObj.Id).First(lockedRow)
 	if hook, ok := interface{}(&ormObj).(FolioORMWithBeforeStrictUpdateCleanup); ok {
 		if db, err = hook.BeforeStrictUpdateCleanup(ctx, db); err != nil {
 			return nil, err
@@ -2309,7 +2317,7 @@ func DefaultApplyFieldMaskFolio(ctx context.Context, patchee *Folio, patcher *Fo
 			patchee.Notes = patcher.Notes
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Owner.") && !updatedOwner {
+		if !updatedOwner && strings.HasPrefix(f, prefix+"Owner.") {
 			updatedOwner = true
 			if patcher.Owner == nil {
 				patchee.Owner = nil
@@ -2338,7 +2346,7 @@ func DefaultApplyFieldMaskFolio(ctx context.Context, patchee *Folio, patcher *Fo
 			patchee.Shares = patcher.Shares
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Thumbnail.") && !updatedThumbnail {
+		if !updatedThumbnail && strings.HasPrefix(f, prefix+"Thumbnail.") {
 			updatedThumbnail = true
 			if patcher.Thumbnail == nil {
 				patchee.Thumbnail = nil
@@ -2428,16 +2436,16 @@ func DefaultCreateAsset(ctx context.Context, in *Asset, db *gorm1.DB) (*Asset, e
 	if err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(AssetORMWithBeforeCreate); ok {
-		if db, err = hook.BeforeCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(AssetORMWithBeforeCreate_); ok {
+		if db, err = hook.BeforeCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
 	if err = db.Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(AssetORMWithAfterCreate); ok {
-		if err = hook.AfterCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(AssetORMWithAfterCreate_); ok {
+		if err = hook.AfterCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
@@ -2445,11 +2453,11 @@ func DefaultCreateAsset(ctx context.Context, in *Asset, db *gorm1.DB) (*Asset, e
 	return &pbResponse, err
 }
 
-type AssetORMWithBeforeCreate interface {
-	BeforeCreate(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type AssetORMWithBeforeCreate_ interface {
+	BeforeCreate_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type AssetORMWithAfterCreate interface {
-	AfterCreate(context.Context, *gorm1.DB) error
+type AssetORMWithAfterCreate_ interface {
+	AfterCreate_(context.Context, *gorm1.DB) error
 }
 
 // DefaultReadAsset executes a basic gorm read call
@@ -2511,8 +2519,8 @@ func DefaultDeleteAsset(ctx context.Context, in *Asset, db *gorm1.DB) error {
 	if ormObj.Id == 0 {
 		return errors.New("A non-zero ID value is required for a delete call")
 	}
-	if hook, ok := interface{}(&ormObj).(AssetORMWithBeforeDelete); ok {
-		if db, err = hook.BeforeDelete(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(AssetORMWithBeforeDelete_); ok {
+		if db, err = hook.BeforeDelete_(ctx, db); err != nil {
 			return err
 		}
 	}
@@ -2520,17 +2528,17 @@ func DefaultDeleteAsset(ctx context.Context, in *Asset, db *gorm1.DB) error {
 	if err != nil {
 		return err
 	}
-	if hook, ok := interface{}(&ormObj).(AssetORMWithAfterDelete); ok {
-		err = hook.AfterDelete(ctx, db)
+	if hook, ok := interface{}(&ormObj).(AssetORMWithAfterDelete_); ok {
+		err = hook.AfterDelete_(ctx, db)
 	}
 	return err
 }
 
-type AssetORMWithBeforeDelete interface {
-	BeforeDelete(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type AssetORMWithBeforeDelete_ interface {
+	BeforeDelete_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type AssetORMWithAfterDelete interface {
-	AfterDelete(context.Context, *gorm1.DB) error
+type AssetORMWithAfterDelete_ interface {
+	AfterDelete_(context.Context, *gorm1.DB) error
 }
 
 func DefaultDeleteAssetSet(ctx context.Context, in []*Asset, db *gorm1.DB) error {
@@ -2580,6 +2588,8 @@ func DefaultStrictUpdateAsset(ctx context.Context, in *Asset, db *gorm1.DB) (*As
 	if err != nil {
 		return nil, err
 	}
+	lockedRow := &AssetORM{}
+	db.Model(&ormObj).Set("gorm:query_option", "FOR UPDATE").Where("id=?", ormObj.Id).First(lockedRow)
 	if hook, ok := interface{}(&ormObj).(AssetORMWithBeforeStrictUpdateCleanup); ok {
 		if db, err = hook.BeforeStrictUpdateCleanup(ctx, db); err != nil {
 			return nil, err
@@ -2717,7 +2727,7 @@ func DefaultApplyFieldMaskAsset(ctx context.Context, patchee *Asset, patcher *As
 			patchee.Name = patcher.Name
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Folio.") && !updatedFolio {
+		if !updatedFolio && strings.HasPrefix(f, prefix+"Folio.") {
 			updatedFolio = true
 			if patcher.Folio == nil {
 				patchee.Folio = nil
@@ -2746,7 +2756,7 @@ func DefaultApplyFieldMaskAsset(ctx context.Context, patchee *Asset, patcher *As
 			patchee.Path = patcher.Path
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Asset.") && !updatedAsset {
+		if !updatedAsset && strings.HasPrefix(f, prefix+"Asset.") {
 			updatedAsset = true
 			if patcher.Asset == nil {
 				patchee.Asset = nil
@@ -2771,7 +2781,7 @@ func DefaultApplyFieldMaskAsset(ctx context.Context, patchee *Asset, patcher *As
 			patchee.Blob = patcher.Blob
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Thumbnail.") && !updatedThumbnail {
+		if !updatedThumbnail && strings.HasPrefix(f, prefix+"Thumbnail.") {
 			updatedThumbnail = true
 			if patcher.Thumbnail == nil {
 				patchee.Thumbnail = nil
@@ -2861,16 +2871,16 @@ func DefaultCreateNote(ctx context.Context, in *Note, db *gorm1.DB) (*Note, erro
 	if err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(NoteORMWithBeforeCreate); ok {
-		if db, err = hook.BeforeCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(NoteORMWithBeforeCreate_); ok {
+		if db, err = hook.BeforeCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
 	if err = db.Create(&ormObj).Error; err != nil {
 		return nil, err
 	}
-	if hook, ok := interface{}(&ormObj).(NoteORMWithAfterCreate); ok {
-		if err = hook.AfterCreate(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(NoteORMWithAfterCreate_); ok {
+		if err = hook.AfterCreate_(ctx, db); err != nil {
 			return nil, err
 		}
 	}
@@ -2878,11 +2888,11 @@ func DefaultCreateNote(ctx context.Context, in *Note, db *gorm1.DB) (*Note, erro
 	return &pbResponse, err
 }
 
-type NoteORMWithBeforeCreate interface {
-	BeforeCreate(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type NoteORMWithBeforeCreate_ interface {
+	BeforeCreate_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type NoteORMWithAfterCreate interface {
-	AfterCreate(context.Context, *gorm1.DB) error
+type NoteORMWithAfterCreate_ interface {
+	AfterCreate_(context.Context, *gorm1.DB) error
 }
 
 // DefaultReadNote executes a basic gorm read call
@@ -2944,8 +2954,8 @@ func DefaultDeleteNote(ctx context.Context, in *Note, db *gorm1.DB) error {
 	if ormObj.Id == 0 {
 		return errors.New("A non-zero ID value is required for a delete call")
 	}
-	if hook, ok := interface{}(&ormObj).(NoteORMWithBeforeDelete); ok {
-		if db, err = hook.BeforeDelete(ctx, db); err != nil {
+	if hook, ok := interface{}(&ormObj).(NoteORMWithBeforeDelete_); ok {
+		if db, err = hook.BeforeDelete_(ctx, db); err != nil {
 			return err
 		}
 	}
@@ -2953,17 +2963,17 @@ func DefaultDeleteNote(ctx context.Context, in *Note, db *gorm1.DB) error {
 	if err != nil {
 		return err
 	}
-	if hook, ok := interface{}(&ormObj).(NoteORMWithAfterDelete); ok {
-		err = hook.AfterDelete(ctx, db)
+	if hook, ok := interface{}(&ormObj).(NoteORMWithAfterDelete_); ok {
+		err = hook.AfterDelete_(ctx, db)
 	}
 	return err
 }
 
-type NoteORMWithBeforeDelete interface {
-	BeforeDelete(context.Context, *gorm1.DB) (*gorm1.DB, error)
+type NoteORMWithBeforeDelete_ interface {
+	BeforeDelete_(context.Context, *gorm1.DB) (*gorm1.DB, error)
 }
-type NoteORMWithAfterDelete interface {
-	AfterDelete(context.Context, *gorm1.DB) error
+type NoteORMWithAfterDelete_ interface {
+	AfterDelete_(context.Context, *gorm1.DB) error
 }
 
 func DefaultDeleteNoteSet(ctx context.Context, in []*Note, db *gorm1.DB) error {
@@ -3013,6 +3023,8 @@ func DefaultStrictUpdateNote(ctx context.Context, in *Note, db *gorm1.DB) (*Note
 	if err != nil {
 		return nil, err
 	}
+	lockedRow := &NoteORM{}
+	db.Model(&ormObj).Set("gorm:query_option", "FOR UPDATE").Where("id=?", ormObj.Id).First(lockedRow)
 	if hook, ok := interface{}(&ormObj).(NoteORMWithBeforeStrictUpdateCleanup); ok {
 		if db, err = hook.BeforeStrictUpdateCleanup(ctx, db); err != nil {
 			return nil, err
@@ -3144,7 +3156,7 @@ func DefaultApplyFieldMaskNote(ctx context.Context, patchee *Note, patcher *Note
 			patchee.Note = patcher.Note
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Folio.") && !updatedFolio {
+		if !updatedFolio && strings.HasPrefix(f, prefix+"Folio.") {
 			updatedFolio = true
 			if patcher.Folio == nil {
 				patchee.Folio = nil
@@ -3165,7 +3177,7 @@ func DefaultApplyFieldMaskNote(ctx context.Context, patchee *Note, patcher *Note
 			patchee.Folio = patcher.Folio
 			continue
 		}
-		if strings.HasPrefix(f, prefix+"Thumbnail.") && !updatedThumbnail {
+		if !updatedThumbnail && strings.HasPrefix(f, prefix+"Thumbnail.") {
 			updatedThumbnail = true
 			if patcher.Thumbnail == nil {
 				patchee.Thumbnail = nil

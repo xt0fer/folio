@@ -1,3 +1,4 @@
+import 'package:folios/default_page.dart';
 import 'package:folios/folio.pbgrpc.dart';
 import 'package:flutter/material.dart';
 import 'package:folios/user_detail_page.dart';
@@ -18,8 +19,7 @@ class _UserListPageState extends State<UserListPage> {
 
   @override
   void initState() {
-    //lessons = getLessons();
-    //users = client.list
+
     final channel = new ClientChannel('127.0.0.1',
           port: 8081,
           options: const ChannelOptions(
@@ -128,7 +128,12 @@ class _UserListPageState extends State<UserListPage> {
           children: <Widget>[
             IconButton(
               icon: Icon(Icons.folder, color: Colors.white),
-              onPressed: () {},
+              onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => DefaultPage()));
+              },
             ),
             IconButton(
               icon: Icon(Icons.collections, color: Colors.white),

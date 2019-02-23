@@ -163,3 +163,36 @@ func (fc *FolioClient) SaveUser(user *pb.User) error {
 // 	}
 // 	return nil
 // }
+
+// CreateNote ...
+func (fc *FolioClient) CreateNote(n *pb.Note) (*pb.Note, error) {
+	resp, err := fc.client.CreateNote(fc.ctx, &pb.CreateNoteRequest{
+		Payload: n,
+	}, &grpc.EmptyCallOption{})
+	if resp == nil {
+		log.Fatalf("Failed Create note call resp nil %v", err)
+	}
+	return resp.GetResult(), err
+}
+
+// CreateFolio ...
+func (fc *FolioClient) CreateFolio(n *pb.Folio) (*pb.Folio, error) {
+	resp, err := fc.client.CreateFolio(fc.ctx, &pb.CreateFolioRequest{
+		Payload: n,
+	}, &grpc.EmptyCallOption{})
+	if resp == nil {
+		log.Fatalf("Failed Create folio call resp nil %v", err)
+	}
+	return resp.GetResult(), err
+}
+
+func (fc *FolioClient) SaveFolio(f *pb.Folio) error {
+
+	_, err := fc.client.UpdateFolio(fc.ctx, &pb.UpdateFolioRequest{
+		Payload: f,
+	})
+	if err != nil {
+		return err
+	}
+	return nil
+}
