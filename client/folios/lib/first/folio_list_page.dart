@@ -1,7 +1,7 @@
-import 'package:folios/default_page.dart';
-import 'package:folios/folio.pbgrpc.dart';
+import 'package:folios/first/default_page.dart';
+import 'package:folios/gen/folio.pbgrpc.dart';
 import 'package:flutter/material.dart';
-import 'package:folios/folio_detail_page.dart';
+import 'package:folios/first/folio_detail_page.dart';
 import 'package:grpc/grpc.dart';
 
 class FolioListPage extends StatefulWidget {

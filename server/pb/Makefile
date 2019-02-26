@@ -60,6 +60,7 @@ golang:
 
 # dart items
 dart:
+	rm ../../client/folios/lib/gen/*.dart
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
@@ -70,7 +71,7 @@ dart:
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 		-I${GOPATH}/src/github.com/lyft/protoc-gen-validate \
-		--dart_out=grpc:../../client/folios/lib \
+		--dart_out=grpc:../../client/folios/lib/gen \
 		infoblox/api/*.proto
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
@@ -78,7 +79,7 @@ dart:
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
 		-I${GOPATH}/src/github.com/lyft/protoc-gen-validate \
-		--dart_out=grpc:../../client/folios/lib \
+		--dart_out=grpc:../../client/folios/lib/gen \
 		folio.proto
 
 # 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \

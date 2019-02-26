@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:folios/folio.pbgrpc.dart';
+import 'package:folios/gen/folio.pbgrpc.dart';
 
-class FolioDetailPage extends StatelessWidget {
-  final Folio item;
-  FolioDetailPage({Key key, this.item}) : super(key: key);
+class UserDetailPage extends StatelessWidget {
+  final User user;
+  UserDetailPage({Key key, this.user}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final levelIndicator = Container(
@@ -41,7 +41,7 @@ class FolioDetailPage extends StatelessWidget {
         ),
         SizedBox(height: 5.0), //10
         Text(
-          item.name,
+          user.email,
           style: TextStyle(color: Colors.white, fontSize: 45.0),
         ),
         SizedBox(height: 30.0),
@@ -54,7 +54,7 @@ class FolioDetailPage extends StatelessWidget {
                 child: Padding(
                     padding: EdgeInsets.only(left: 10.0),
                     child: Text(
-                      item.desc,
+                      user.lastname,
                       style: TextStyle(color: Colors.white),
                     ))),
             //Expanded(flex: 1, child: coursePrice)
@@ -97,7 +97,7 @@ class FolioDetailPage extends StatelessWidget {
     );
 
     final bottomContentText = Text(
-      item.name,
+      user.email,
       style: TextStyle(fontSize: 18.0),
     );
     final readButton = Container(

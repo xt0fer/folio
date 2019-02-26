@@ -1,8 +1,8 @@
-import 'package:folios/default_page.dart';
-import 'package:folios/folio.pbgrpc.dart';
+import 'package:folios/first/default_page.dart';
+import 'package:folios/gen/folio.pbgrpc.dart';
 import 'package:flutter/material.dart';
-import 'package:folios/folio_list_page.dart';
-import 'package:folios/user_detail_page.dart';
+import 'package:folios/first/folio_list_page.dart';
+import 'package:folios/first/user_detail_page.dart';
 import 'package:grpc/grpc.dart';
 
 class UserListPage extends StatefulWidget {
