@@ -3,14 +3,14 @@ import 'package:folios/gen/folio.pb.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-class FolioDetails extends StatelessWidget {
-  FolioDetails({
+class NoteDetails extends StatelessWidget {
+  NoteDetails({
     @required this.isInTabletLayout,
     @required this.item,
   });
 
   final bool isInTabletLayout;
-  final Folio item;
+  final Note item;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class FolioDetails extends StatelessWidget {
           style: textTheme.headline,
         ),
         Text(
-          item?.desc ?? 'Please select one on the left.',
+          item?.note ?? 'Please select one on the left.',
           style: textTheme.subhead,
         ),
       ],

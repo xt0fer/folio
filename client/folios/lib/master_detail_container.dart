@@ -1,14 +1,13 @@
-import 'dart:math';
+//import 'dart:math';
 
 import 'package:folios/gen/folio.pbgrpc.dart';
-import 'package:folios/panes/folio_details.dart';
 import 'package:folios/panes/folio_listing.dart';
 import 'package:folios/gen/folio.pb.dart';
 import 'package:folios/panes/item.dart';
-import 'package:folios/panes/item_details.dart';
 import 'package:folios/panes/item_listing.dart';
 import 'package:flutter/material.dart';
-import 'package:grpc/grpc.dart';
+import 'package:folios/panes/user_listing.dart';
+import 'package:folios/panes/note_listing.dart';
 
 class DrawerItem {
   String title;
@@ -26,18 +25,10 @@ class MasterDetailContainer extends StatefulWidget {
     new DrawerItem("Folios", Icons.folder),
     new DrawerItem("Categories", Icons.bookmark),
     new DrawerItem("People", Icons.people),
-    new DrawerItem("Shares", Icons.share),
-    new DrawerItem("Notes", Icons.note)
+    new DrawerItem("Notes", Icons.note),
+    //new DrawerItem("Shares", Icons.share),
   ];
 
-  static final channel = new ClientChannel('127.0.0.1',
-          port: 8081,
-          options: const ChannelOptions(
-          credentials: const ChannelCredentials.insecure()));
-  static final client = new FolioServiceClient(channel,
-          options: new CallOptions(timeout: new Duration(seconds: 30)));
-  // print("channel $channel ");
-  // print("client $client ");
   @override
   _ItemMasterDetailContainerState createState() =>
       _ItemMasterDetailContainerState();
@@ -48,6 +39,7 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
 
   int _selectedDrawerIndex = 0;
 
+// scrolling of Drawer needed.
   _getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
@@ -57,9 +49,10 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
       case 2:
         return Recordz.user; //new ItemListing();
       case 3:
-        return Recordz.share; //new ItemListing();
-      case 4:
         return Recordz.note; //new ItemListing();
+
+      // case 4:
+        //return Recordz.share; //new ItemListing();
 
       default:
         return Recordz.knownot; //new Text("Error");
@@ -73,11 +66,20 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
 
   Item _selectedItem;
   Folio _selectedFolio;
+  User _selectedUser;
+  Note _selectedNote;
 
   Widget _buildMobileLayout(Recordz kind) {
     if (kind == Recordz.folio) {
       return folioListing(context);
     }
+    if (kind == Recordz.user) {
+      return userListing(context);
+    }
+    if (kind == Recordz.note) {
+      return noteListing(context);
+    }
+
     return itemListing(context);
   }
 
@@ -86,6 +88,20 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
       return folioRow(_selectedFolio, ((item) {
                 setState(() {
                   _selectedFolio = item;
+                });
+              }));
+    }
+    if (kind == Recordz.user) {
+      return userRow(_selectedUser, ((item) {
+                setState(() {
+                  _selectedUser = item;
+                });
+              }));
+    }
+    if (kind == Recordz.note) {
+      return noteRow(_selectedNote, ((item) {
+                setState(() {
+                  _selectedNote = item;
                 });
               }));
     }
@@ -127,14 +143,17 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
       ),
       drawer: new Drawer(
         child: new Column(
+          
           children: <Widget>[
             new UserAccountsDrawerHeader(
-                accountName: new Text("Kristofer"), accountEmail: null),
+                accountName: new Text("Kristofer"), 
+                accountEmail: const Text('kr@example.com'),
+                ),
             new Column(children: drawerOptions)
           ],
         ),
       ),
-      body: content,
+      body:  content,
     );
   }
 }

@@ -3,42 +3,42 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:folios/main.dart';
 import 'package:folios/gen/folio.pbgrpc.dart';
-import 'package:folios/panes/folio_details.dart';
+import 'package:folios/panes/note_details.dart';
 //import 'package:grpc/grpc.dart';
 
-class FolioListing extends StatefulWidget {
-  FolioListing({
+class NoteListing extends StatefulWidget {
+  NoteListing({
     @required this.itemSelectedCallback,
-    this.selectedFolio,
+    this.selectedNote,
     this.title
   });
 
-// class FolioListPage extends StatefulWidget {
-//   FolioListPage({Key key, this.title}) : super(key: key);
+// class NoteListPage extends StatefulWidget {
+//   NoteListPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
-  final ValueChanged<Folio> itemSelectedCallback;
-  final Folio selectedFolio;
+  final ValueChanged<Note> itemSelectedCallback;
+  final Note selectedNote;
 
   @override
-  _FolioListPageState createState() => _FolioListPageState();
+  _NoteListPageState createState() => _NoteListPageState();
 }
 
-class _FolioListPageState extends State<FolioListing> {
+class _NoteListPageState extends State<NoteListing> {
 
-  List<Folio> folios = new List<Folio>();
+  List<Note> folios = new List<Note>();
 
   @override
   void initState() {
 
-    final _ = TheApp.client.listFolio(new ListFolioRequest()).then((dynamic res) async {
+    final _ = TheApp.client.listNote(new ListNoteRequest()).then((dynamic res) async {
       print("results: ${res.toString()} ");
       var lr = await res.results;
       // for (var i in lr) {
       //   this.folios.add(i);
       // }
-      print("list folio worked. ${this.folios.length} ");
+      print("list user worked. ${this.folios.length} ");
       setState(() => this.folios = lr); 
     });
 
@@ -53,21 +53,21 @@ class _FolioListPageState extends State<FolioListing> {
           leading: new Icon(Icons.folder),
           title: Text(item.name),
           onTap: () => widget.itemSelectedCallback(item),
-          selected: widget.selectedFolio == item,
+          selected: widget.selectedNote == item,
         );
       }).toList(),
     );
   }
 }
 
-Widget folioListing(BuildContext context) {
-  return FolioListing(
+Widget noteListing(BuildContext context) {
+  return NoteListing(
       itemSelectedCallback: (item) {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return FolioDetails(
+              return NoteDetails(
                 isInTabletLayout: false,
                 item: item,
               );
@@ -78,24 +78,24 @@ Widget folioListing(BuildContext context) {
     );
 }
 
-Widget folioRow(Folio selFolio, ValueChanged<Folio> cback) {
+Widget noteRow(Note selNote, ValueChanged<Note> cback) {
   return Row(
       children: <Widget>[
         Flexible(
           flex: 1,
           child: Material(
             elevation: 4.0,
-            child: FolioListing(
+            child: NoteListing(
               itemSelectedCallback: cback,
-              selectedFolio: selFolio,
+              selectedNote: selNote,
             ),
           ),
         ),
         Flexible(
           flex: 2,
-          child: FolioDetails(
+          child: NoteDetails(
             isInTabletLayout: true,
-            item: selFolio,
+            item: selNote,
           ),
         ),
       ],
