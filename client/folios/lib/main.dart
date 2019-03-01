@@ -1,6 +1,7 @@
 import 'package:folios/gen/folio.pbgrpc.dart';
 import 'package:folios/master_detail_container.dart';
 import 'package:flutter/material.dart';
+import 'package:folios/theme.dart';
 import 'package:grpc/grpc.dart';
 
 void main() => runApp(TheApp());
@@ -19,9 +20,10 @@ class TheApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Folios',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: isIOS(context) ? FolioTheme : kDefaultTheme,
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      // ),
       home: MasterDetailContainer(),
     );
   }
