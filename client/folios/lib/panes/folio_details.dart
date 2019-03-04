@@ -15,24 +15,22 @@ class FolioDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final Widget content = 
-        new Card(
-                child: new Container(
-//                  padding: new EdgeInsets.all(12.0),
-                  child: new Column(
-                    children: <Widget>[
-Text(
-          item?.name ?? 'No item selected!',
-          style: textTheme.headline,
+    final Widget content = new Card(
+      child: new Container(
+        child: new Column(
+          children: <Widget>[
+            Text(
+              item?.name ?? 'No item selected!',
+              style: textTheme.headline,
+            ),
+            Text(
+              item?.desc ?? 'Please select one on the left.',
+              style: textTheme.subhead,
+            ),
+          ],
         ),
-        Text(
-          item?.desc ?? 'Please select one on the left.',
-          style: textTheme.subhead,
-        ),
-                            ],
-                  ),
-                ),
-              );
+      ),
+    );
 
     if (isInTabletLayout) {
       return Center(child: content);
