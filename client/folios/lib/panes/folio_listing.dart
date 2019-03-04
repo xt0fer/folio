@@ -33,12 +33,7 @@ class _FolioListPageState extends State<FolioListing> {
   void initState() {
 
     final _ = TheApp.client.listFolio(new ListFolioRequest()).then((dynamic res) async {
-      print("results: ${res.toString()} ");
       var lr = await res.results;
-      // for (var i in lr) {
-      //   this.folios.add(i);
-      // }
-      print("list folio worked. ${this.folios.length} ");
       setState(() => this.folios = lr); 
     });
 
@@ -47,7 +42,7 @@ class _FolioListPageState extends State<FolioListing> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return folios.isEmpty ? Center(child: Text('No Folios Found!')) : ListView(
       children: folios.map((item) {
         return ListTile(
           leading: new Icon(Icons.folder),

@@ -8,6 +8,7 @@ import 'package:folios/panes/item_listing.dart';
 import 'package:flutter/material.dart';
 import 'package:folios/panes/user_listing.dart';
 import 'package:folios/panes/note_listing.dart';
+import 'package:folios/panes/tag_listing.dart';
 
 class DrawerItem {
   String title;
@@ -78,6 +79,9 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     }
     if (kind == Recordz.note) {
       return noteListing(context);
+    }
+    if (kind == Recordz.tag) {
+      return tagListing(context);
     }
 
     return itemListing(context);

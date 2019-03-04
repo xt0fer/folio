@@ -1,40 +1,39 @@
-import 'package:folios/master_detail_container.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:folios/main.dart';
 import 'package:folios/gen/folio.pbgrpc.dart';
-import 'package:folios/panes/user_details.dart';
+import 'package:folios/panes/tag_details.dart';
 //import 'package:grpc/grpc.dart';
 
-class UserListing extends StatefulWidget {
-  UserListing({
+class TagListing extends StatefulWidget {
+  TagListing({
     @required this.itemSelectedCallback,
-    this.selectedUser,
+    this.selectedTag,
     this.title
   });
 
-// class UserListPage extends StatefulWidget {
-//   UserListPage({Key key, this.title}) : super(key: key);
+// class TagListPage extends StatefulWidget {
+//   TagListPage({Key key, this.title}) : super(key: key);
 
   final String title;
 
-  final ValueChanged<User> itemSelectedCallback;
-  final User selectedUser;
+  final ValueChanged<Tag> itemSelectedCallback;
+  final Tag selectedTag;
 
   @override
-  _UserListPageState createState() => _UserListPageState();
+  _TagListPageState createState() => _TagListPageState();
 }
 
-class _UserListPageState extends State<UserListing> {
+class _TagListPageState extends State<TagListing> {
 
-  List<User> people = new List<User>();
+  List<Tag> tags = new List<Tag>();
 
   @override
   void initState() {
 
-    final _ = TheApp.client.listUser(new ListUserRequest()).then((dynamic res) async {
+    final _ = TheApp.client.listTag(new ListTagRequest()).then((dynamic res) async {
       var lr = await res.results;
-      setState(() => this.people = lr); 
+      setState(() => this.tags = lr); 
     });
 
     super.initState();
@@ -42,27 +41,27 @@ class _UserListPageState extends State<UserListing> {
 
   @override
   Widget build(BuildContext context) {
-    return people.isEmpty ? Center(child: Text('No People Found!')) : ListView(
-      children: people.map((item) {
+    return tags.isEmpty ? Center(child: Text('No Categories Found!')) :ListView(
+      children: tags.map((item) {
         return ListTile(
           leading: new Icon(Icons.folder),
-          title: Text(item.firstname + " "+ item.lastname),
+          title: Text(item.label),
           onTap: () => widget.itemSelectedCallback(item),
-          selected: widget.selectedUser == item,
+          selected: widget.selectedTag == item,
         );
       }).toList(),
     );
   }
 }
 
-Widget userListing(BuildContext context) {
-  return  UserListing(
+Widget tagListing(BuildContext context) {
+  return TagListing(
       itemSelectedCallback: (item) {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (BuildContext context) {
-              return UserDetails(
+              return TagDetails(
                 isInTabletLayout: false,
                 item: item,
               );
@@ -73,24 +72,24 @@ Widget userListing(BuildContext context) {
     );
 }
 
-Widget userRow(User selUser, ValueChanged<User> cback) {
+Widget tagRow(Tag selTag, ValueChanged<Tag> cback) {
   return Row(
       children: <Widget>[
         Flexible(
           flex: 1,
           child: Material(
             elevation: 4.0,
-            child: UserListing(
+            child: TagListing(
               itemSelectedCallback: cback,
-              selectedUser: selUser,
+              selectedTag: selTag,
             ),
           ),
         ),
         Flexible(
           flex: 2,
-          child: UserDetails(
+          child: TagDetails(
             isInTabletLayout: true,
-            item: selUser,
+            item: selTag,
           ),
         ),
       ],

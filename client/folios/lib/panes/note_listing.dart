@@ -27,19 +27,14 @@ class NoteListing extends StatefulWidget {
 
 class _NoteListPageState extends State<NoteListing> {
 
-  List<Note> folios = new List<Note>();
+  List<Note> notes = new List<Note>();
 
   @override
   void initState() {
 
     final _ = TheApp.client.listNote(new ListNoteRequest()).then((dynamic res) async {
-      print("results: ${res.toString()} ");
       var lr = await res.results;
-      // for (var i in lr) {
-      //   this.folios.add(i);
-      // }
-      print("list user worked. ${this.folios.length} ");
-      setState(() => this.folios = lr); 
+      setState(() => this.notes = lr); 
     });
 
     super.initState();
@@ -47,8 +42,8 @@ class _NoteListPageState extends State<NoteListing> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: folios.map((item) {
+    return notes.isEmpty ? Center(child: Text('No Notes Found!')) :ListView(
+      children: notes.map((item) {
         return ListTile(
           leading: new Icon(Icons.folder),
           title: Text(item.name),

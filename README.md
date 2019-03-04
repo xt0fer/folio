@@ -16,3 +16,7 @@ Folios is written in Flutter (see google flutter) and communicates to the back e
 ## folio server
 
 the folio server is written in Go, uses gRPC for its API and uses a SQLite DB as its datastore.
+
+### Things to do.
+
+Use the github project board for this. 
