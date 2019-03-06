@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:folios/main.dart';
 import 'package:folios/gen/folio.pbgrpc.dart';
 import 'package:folios/panes/note_details.dart';
+import 'package:folios/panes/note_form.dart';
 //import 'package:grpc/grpc.dart';
 
 class NoteListing extends StatefulWidget {
@@ -52,6 +53,15 @@ class _NoteListPageState extends State<NoteListing> {
         );
       }).toList(),
     );
+    RaisedButton(
+          child: new Text("New...",),
+          onPressed: () {
+            setState(() {
+              notes.remove(NoteForm());
+              notes.add(Note());
+            });
+          }
+        );
   }
 }
 
