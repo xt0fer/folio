@@ -27,7 +27,7 @@ class NoteDetails extends StatelessWidget {
       children: [
         //NoteHeader(item)
         NoteHeader(),
-        NoteBody(),
+        NoteBody(item: item),
         Text(
           item?.name ?? 'No item selected!',
           style: textTheme.headline,
@@ -77,11 +77,46 @@ class NoteBody extends StatelessWidget {
 
   final bool isInTabletLayout;
   final Note item;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-        return new Container(child: Text(
-          item?.name ?? 'No item selected!',
-));
+    // Build a Form widget using the _formKey we created above
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextFormField(
+        autofocus: true,
+        // autocorrect: false,
+            initialValue: item.note,
+            // validator: (value) {
+            //   // if (value.isEmpty) {
+            //   //   return 'Please enter some text';
+            //   // }
+            //   return 'true';
+            // },
+              //keyboardType: TextInputType.multiline,
+              maxLines: null,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: RaisedButton(
+              onPressed: () {
+                // Validate will return true if the form is valid, or false if
+                // the form is invalid.
+//                if (_formKey.currentState.validate()) {
+                  // If the form is valid, we want to show a Snackbar
+                  Scaffold.of(context)
+                      .showSnackBar(SnackBar(content: Text('Processing Data')));
+//                }
+              },
+              child: Text('Submit'),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

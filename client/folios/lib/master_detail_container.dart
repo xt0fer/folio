@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:folios/panes/user_listing.dart';
 import 'package:folios/panes/note_listing.dart';
 import 'package:folios/panes/tag_listing.dart';
+import 'package:folios/panes/register_form.dart';
 
 class DrawerItem {
   String title;
@@ -16,17 +17,16 @@ class DrawerItem {
   DrawerItem(this.title, this.icon);
 }
 
-enum Recordz {
-    folio, user, share, tag, note, knownot
-}
+enum Recordz { folio, user, share, tag, note, reggie, knownot }
 //final gaga = Map();
 
 class MasterDetailContainer extends StatefulWidget {
-    final drawerItems = [
+  final drawerItems = [
     new DrawerItem("Folios", Icons.folder),
     new DrawerItem("Categories", Icons.bookmark),
     new DrawerItem("People", Icons.people),
     new DrawerItem("Notes", Icons.note),
+    new DrawerItem("Register", Icons.receipt),
     //new DrawerItem("Shares", Icons.share),
   ];
 
@@ -51,15 +51,17 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
         return Recordz.user; //new ItemListing();
       case 3:
         return Recordz.note; //new ItemListing();
+      case 4:
+        return Recordz.reggie; //new ItemListing();
 
       // case 4:
-        //return Recordz.share; //new ItemListing();
+      //return Recordz.share; //new ItemListing();
 
       default:
         return Recordz.knownot; //new Text("Error");
     }
   }
-  
+
   _onSelectItem(int index) {
     setState(() => _selectedDrawerIndex = index);
     Navigator.of(context).pop(); // close the drawer
@@ -83,6 +85,9 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     if (kind == Recordz.tag) {
       return tagListing(context);
     }
+    if (kind == Recordz.reggie) {
+      return RegisterForm();
+    }
 
     return itemListing(context);
   }
@@ -90,30 +95,30 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
   Widget _buildTabletLayout(Recordz kind) {
     if (kind == Recordz.folio) {
       return folioRow(_selectedFolio, ((item) {
-                setState(() {
-                  _selectedFolio = item;
-                });
-              }));
+        setState(() {
+          _selectedFolio = item;
+        });
+      }));
     }
     if (kind == Recordz.user) {
       return userRow(_selectedUser, ((item) {
-                setState(() {
-                  _selectedUser = item;
-                });
-              }));
+        setState(() {
+          _selectedUser = item;
+        });
+      }));
     }
     if (kind == Recordz.note) {
       return noteRow(_selectedNote, ((item) {
-                setState(() {
-                  _selectedNote = item;
-                });
-              }));
+        setState(() {
+          _selectedNote = item;
+        });
+      }));
     }
     return itemRow(_selectedItem, ((item) {
-                setState(() {
-                  _selectedItem = item;
-                });
-              }));
+      setState(() {
+        _selectedItem = item;
+      });
+    }));
   }
 
   @override
@@ -121,14 +126,12 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
     var drawerOptions = <Widget>[];
     for (var i = 0; i < widget.drawerItems.length; i++) {
       var d = widget.drawerItems[i];
-      drawerOptions.add(
-        new ListTile(
-          leading: new Icon(d.icon),
-          title: new Text(d.title),
-          selected: i == _selectedDrawerIndex,
-          onTap: () => _onSelectItem(i),
-        )
-      );
+      drawerOptions.add(new ListTile(
+        leading: new Icon(d.icon),
+        title: new Text(d.title),
+        selected: i == _selectedDrawerIndex,
+        onTap: () => _onSelectItem(i),
+      ));
     }
 
     Widget content;
@@ -147,17 +150,16 @@ class _ItemMasterDetailContainerState extends State<MasterDetailContainer> {
       ),
       drawer: new Drawer(
         child: new Column(
-          
           children: <Widget>[
             new UserAccountsDrawerHeader(
-                accountName: new Text("Kristofer"), 
-                accountEmail: const Text('kr@example.com'),
-                ),
+              accountName: new Text("Kristofer"),
+              accountEmail: const Text('kr@example.com'),
+            ),
             new Column(children: drawerOptions)
           ],
         ),
       ),
-      body:  content,
+      body: content,
     );
   }
 }
