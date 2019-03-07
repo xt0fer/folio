@@ -26,37 +26,43 @@ class NoteFormState extends State<NoteForm> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
+            decoration: const InputDecoration(
+              labelText: 'Nickname',
+            ),
+            validator: (String value) {
+              if (value.trim().isEmpty) {
+                return 'Nickname is required';
               }
             },
           ),
-          TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-            },
-          ),
-          TextFormField(
-            validator: (value) {
-              if (value.isEmpty) {
-                return 'Please enter some text';
-              }
-            },
-          ),
+          // TextFormField(
+          //   decoration: const InputDecoration(
+          //     labelText: 'Email',
+          //   ),
+          //   validator: (value) {
+          //     if (value.trim().isEmpty) {
+          //       return 'Please enter some text';
+          //     }
+          //   },
+          // ),
+          // TextFormField(
+          //   validator: (value) {
+          //     if (value.isEmpty) {
+          //       return 'Please enter some text';
+          //     }
+          //   },
+          // ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: RaisedButton(
               onPressed: () {
                 // Validate will return true if the form is valid, or false if
                 // the form is invalid.
-                if (_formKey.currentState.validate()) {
-                  // If the form is valid, we want to show a Snackbar
-                  Scaffold.of(context)
-                      .showSnackBar(SnackBar(content: Text('Processing Data')));
-                }
+                // if (_formKey.currentState.validate()) {
+                //   // If the form is valid, we want to show a Snackbar
+                //   Scaffold.of(context)
+                //       .showSnackBar(SnackBar(content: Text('Processing Data')));
+                // }
               },
               child: Text('Submit'),
             ),
