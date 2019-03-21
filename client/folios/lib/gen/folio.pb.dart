@@ -12,6 +12,39 @@ import 'package:protobuf/protobuf.dart' as $pb;
 import 'google/protobuf/field_mask.pb.dart' as $0;
 import 'infoblox/api/collection_operators.pb.dart' as $1;
 
+class PingStatus extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = new $pb.BuilderInfo('PingStatus', package: const $pb.PackageName('folio'))
+    ..a<int>(1, 'id', $pb.PbFieldType.OU3)
+    ..aOS(2, 'status')
+    ..hasRequiredFields = false
+  ;
+
+  PingStatus() : super();
+  PingStatus.fromBuffer(List<int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromBuffer(i, r);
+  PingStatus.fromJson(String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) : super.fromJson(i, r);
+  PingStatus clone() => new PingStatus()..mergeFromMessage(this);
+  PingStatus copyWith(void Function(PingStatus) updates) => super.copyWith((message) => updates(message as PingStatus));
+  $pb.BuilderInfo get info_ => _i;
+  static PingStatus create() => new PingStatus();
+  PingStatus createEmptyInstance() => create();
+  static $pb.PbList<PingStatus> createRepeated() => new $pb.PbList<PingStatus>();
+  static PingStatus getDefault() => _defaultInstance ??= create()..freeze();
+  static PingStatus _defaultInstance;
+  static void $checkItem(PingStatus v) {
+    if (v is! PingStatus) $pb.checkItemFailed(v, _i.qualifiedMessageName);
+  }
+
+  int get id => $_get(0, 0);
+  set id(int v) { $_setUnsignedInt32(0, v); }
+  bool hasId() => $_has(0);
+  void clearId() => clearField(1);
+
+  String get status => $_getS(1, '');
+  set status(String v) { $_setString(1, v); }
+  bool hasStatus() => $_has(1);
+  void clearStatus() => clearField(2);
+}
+
 class User extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = new $pb.BuilderInfo('User', package: const $pb.PackageName('folio'))
     ..a<int>(1, 'id', $pb.PbFieldType.OU3)
@@ -1495,7 +1528,6 @@ class Asset extends $pb.GeneratedMessage {
     ..a<Folio>(3, 'folio', $pb.PbFieldType.OM, Folio.getDefault, Folio.create)
     ..aOS(4, 'uUID')
     ..aOS(5, 'path')
-    ..a<Asset>(6, 'asset', $pb.PbFieldType.OM, Asset.getDefault, Asset.create)
     ..a<Asset>(14, 'thumbnail', $pb.PbFieldType.OM, Asset.getDefault, Asset.create)
     ..a<List<int>>(20, 'blob', $pb.PbFieldType.OY)
     ..hasRequiredFields = false
@@ -1541,19 +1573,14 @@ class Asset extends $pb.GeneratedMessage {
   bool hasPath() => $_has(4);
   void clearPath() => clearField(5);
 
-  Asset get asset => $_getN(5);
-  set asset(Asset v) { setField(6, v); }
-  bool hasAsset() => $_has(5);
-  void clearAsset() => clearField(6);
-
-  Asset get thumbnail => $_getN(6);
+  Asset get thumbnail => $_getN(5);
   set thumbnail(Asset v) { setField(14, v); }
-  bool hasThumbnail() => $_has(6);
+  bool hasThumbnail() => $_has(5);
   void clearThumbnail() => clearField(14);
 
-  List<int> get blob => $_getN(7);
-  set blob(List<int> v) { $_setBytes(7, v); }
-  bool hasBlob() => $_has(7);
+  List<int> get blob => $_getN(6);
+  set blob(List<int> v) { $_setBytes(6, v); }
+  bool hasBlob() => $_has(6);
   void clearBlob() => clearField(20);
 }
 

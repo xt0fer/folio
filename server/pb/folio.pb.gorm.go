@@ -8,6 +8,7 @@ It is generated from these files:
 	folio.proto
 
 It has these top-level messages:
+	PingStatus
 	User
 	CreateUserRequest
 	CreateUserResponse
@@ -626,8 +627,7 @@ type FolioWithAfterToPB interface {
 }
 
 type AssetORM struct {
-	Asset            *AssetORM `gorm:"foreignkey:AssetAssetId;association_foreignkey:Id"`
-	AssetAssetId     *uint32
+	AssetId          *uint32
 	AssetsFolioId    *uint32
 	Blob             []byte
 	Folio            *FolioORM `gorm:"foreignkey:AssetId;association_foreignkey:Id"`
@@ -637,8 +637,7 @@ type AssetORM struct {
 	Path             string
 	ShareId          *uint32
 	TagId            *uint32
-	Thumbnail        *AssetORM `gorm:"foreignkey:ThumbnailAssetId;association_foreignkey:Id"`
-	ThumbnailAssetId *uint32
+	Thumbnail        *AssetORM `gorm:"foreignkey:AssetId;association_foreignkey:Id"`
 	ThumbnailFolioId *uint32
 	UUID             string
 	UserId           *uint32
@@ -670,13 +669,6 @@ func (m *Asset) ToORM(ctx context.Context) (AssetORM, error) {
 	}
 	to.UUID = m.UUID
 	to.Path = m.Path
-	if m.Asset != nil {
-		tempAsset, err := m.Asset.ToORM(ctx)
-		if err != nil {
-			return to, err
-		}
-		to.Asset = &tempAsset
-	}
 	to.Blob = m.Blob
 	if m.Thumbnail != nil {
 		tempThumbnail, err := m.Thumbnail.ToORM(ctx)
@@ -712,13 +704,6 @@ func (m *AssetORM) ToPB(ctx context.Context) (Asset, error) {
 	}
 	to.UUID = m.UUID
 	to.Path = m.Path
-	if m.Asset != nil {
-		tempAsset, err := m.Asset.ToPB(ctx)
-		if err != nil {
-			return to, err
-		}
-		to.Asset = &tempAsset
-	}
 	to.Blob = m.Blob
 	if m.Thumbnail != nil {
 		tempThumbnail, err := m.Thumbnail.ToPB(ctx)
@@ -2585,15 +2570,6 @@ func DefaultStrictUpdateAsset(ctx context.Context, in *Asset, db *gorm1.DB) (*As
 			return nil, err
 		}
 	}
-	filterAsset := AssetORM{}
-	if ormObj.Id == 0 {
-		return nil, errors.New("Can't do overwriting update with no Id value for AssetORM")
-	}
-	filterAsset.AssetAssetId = new(uint32)
-	*filterAsset.AssetAssetId = ormObj.Id
-	if err = db.Where(filterAsset).Delete(AssetORM{}).Error; err != nil {
-		return nil, err
-	}
 	filterFolio := FolioORM{}
 	if ormObj.Id == 0 {
 		return nil, errors.New("Can't do overwriting update with no Id value for AssetORM")
@@ -2607,8 +2583,8 @@ func DefaultStrictUpdateAsset(ctx context.Context, in *Asset, db *gorm1.DB) (*As
 	if ormObj.Id == 0 {
 		return nil, errors.New("Can't do overwriting update with no Id value for AssetORM")
 	}
-	filterThumbnail.ThumbnailAssetId = new(uint32)
-	*filterThumbnail.ThumbnailAssetId = ormObj.Id
+	filterThumbnail.AssetId = new(uint32)
+	*filterThumbnail.AssetId = ormObj.Id
 	if err = db.Where(filterThumbnail).Delete(AssetORM{}).Error; err != nil {
 		return nil, err
 	}
@@ -2706,7 +2682,6 @@ func DefaultApplyFieldMaskAsset(ctx context.Context, patchee *Asset, patcher *As
 	}
 	var err error
 	var updatedFolio bool
-	var updatedAsset bool
 	var updatedThumbnail bool
 	for i, f := range updateMask.Paths {
 		if f == prefix+"Id" {
@@ -2744,27 +2719,6 @@ func DefaultApplyFieldMaskAsset(ctx context.Context, patchee *Asset, patcher *As
 		}
 		if f == prefix+"Path" {
 			patchee.Path = patcher.Path
-			continue
-		}
-		if strings.HasPrefix(f, prefix+"Asset.") && !updatedAsset {
-			updatedAsset = true
-			if patcher.Asset == nil {
-				patchee.Asset = nil
-				continue
-			}
-			if patchee.Asset == nil {
-				patchee.Asset = &Asset{}
-			}
-			if o, err := DefaultApplyFieldMaskAsset(ctx, patchee.Asset, patcher.Asset, &field_mask1.FieldMask{Paths: updateMask.Paths[i:]}, prefix+"Asset.", db); err != nil {
-				return nil, err
-			} else {
-				patchee.Asset = o
-			}
-			continue
-		}
-		if f == prefix+"Asset" {
-			updatedAsset = true
-			patchee.Asset = patcher.Asset
 			continue
 		}
 		if f == prefix+"Blob" {
@@ -3247,6 +3201,11 @@ type NoteORMWithAfterListFind interface {
 }
 type FolioServiceDefaultServer struct {
 	DB *gorm1.DB
+}
+
+// Ping ...
+func (m *FolioServiceDefaultServer) Ping(ctx context.Context, in *PingStatus) (*PingStatus, error) {
+	return &PingStatus{}, nil
 }
 
 // CreateUser ...

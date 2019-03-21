@@ -10,7 +10,8 @@ import (
 	"fmt"
 	"log"
 
-	pb "../server/pb"
+	cltest "../../cltest"
+	pb "../../server/pb"
 	"google.golang.org/grpc"
 )
 
@@ -27,7 +28,7 @@ func main() {
 
 	//var thisUser *pb.User
 
-	fcl := NewFolioClient()
+	fcl := cltest.NewFolioClient()
 	defer fcl.Close()
 
 	//userResp, err := client.ReadUser(ctx, &pb.ReadUserRequest{Id: 1})
@@ -59,7 +60,7 @@ func main() {
 
 	// create a test folio
 
-	users, err := fcl.client.ListUser(fcl.ctx, &pb.ListUserRequest{}, &grpc.EmptyCallOption{})
+	users, err := fcl.Client.ListUser(fcl.Ctx, &pb.ListUserRequest{}, &grpc.EmptyCallOption{})
 
 	if err != nil {
 		log.Fatalf("Failed List User call %v", err)
@@ -81,7 +82,7 @@ func main() {
 		Note: "another simple note. \n with stuff.",
 	})
 	f1, _ := fcl.CreateFolio(&pb.Folio{
-		UUID:  fmt.Sprintf("%v", GimmeUUID()),
+		UUID:  fmt.Sprintf("%v", cltest.GimmeUUID()),
 		Name:  "first folio",
 		Desc:  "a simple first folio",
 		Notes: []*pb.Note{note, n2},
@@ -97,7 +98,7 @@ func main() {
 		log.Printf("Unable to Save Folio %+v -  %v\n", f1, err)
 	}
 
-	folios, err := fcl.client.ListFolio(fcl.ctx, &pb.ListFolioRequest{}, &grpc.EmptyCallOption{})
+	folios, err := fcl.Client.ListFolio(fcl.Ctx, &pb.ListFolioRequest{}, &grpc.EmptyCallOption{})
 
 	if err != nil {
 		log.Fatalf("Failed List Folio call %v", err)

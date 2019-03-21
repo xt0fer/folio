@@ -33,6 +33,74 @@ var (
 	_ = ptypes.DynamicAny{}
 )
 
+// Validate checks the field values on PingStatus with the rules defined in the
+// proto definition for this message. If any rules are violated, an error is returned.
+func (m *PingStatus) Validate() error {
+	if m == nil {
+		return nil
+	}
+
+	// no validation rules for Id
+
+	// no validation rules for Status
+
+	return nil
+}
+
+// PingStatusValidationError is the validation error returned by
+// PingStatus.Validate if the designated constraints aren't met.
+type PingStatusValidationError struct {
+	field  string
+	reason string
+	cause  error
+	key    bool
+}
+
+// Field function returns field value.
+func (e PingStatusValidationError) Field() string { return e.field }
+
+// Reason function returns reason value.
+func (e PingStatusValidationError) Reason() string { return e.reason }
+
+// Cause function returns cause value.
+func (e PingStatusValidationError) Cause() error { return e.cause }
+
+// Key function returns key value.
+func (e PingStatusValidationError) Key() bool { return e.key }
+
+// ErrorName returns error name.
+func (e PingStatusValidationError) ErrorName() string { return "PingStatusValidationError" }
+
+// Error satisfies the builtin error interface
+func (e PingStatusValidationError) Error() string {
+	cause := ""
+	if e.cause != nil {
+		cause = fmt.Sprintf(" | caused by: %v", e.cause)
+	}
+
+	key := ""
+	if e.key {
+		key = "key for "
+	}
+
+	return fmt.Sprintf(
+		"invalid %sPingStatus.%s: %s%s",
+		key,
+		e.field,
+		e.reason,
+		cause)
+}
+
+var _ error = PingStatusValidationError{}
+
+var _ interface {
+	Field() string
+	Reason() string
+	Key() bool
+	Cause() error
+	ErrorName() string
+} = PingStatusValidationError{}
+
 // Validate checks the field values on User with the rules defined in the proto
 // definition for this message. If any rules are violated, an error is returned.
 func (m *User) Validate() error {
@@ -3923,16 +3991,6 @@ func (m *Asset) Validate() error {
 	// no validation rules for UUID
 
 	// no validation rules for Path
-
-	if v, ok := interface{}(m.GetAsset()).(interface{ Validate() error }); ok {
-		if err := v.Validate(); err != nil {
-			return AssetValidationError{
-				field:  "Asset",
-				reason: "embedded message failed validation",
-				cause:  err,
-			}
-		}
-	}
 
 	// no validation rules for Blob
 

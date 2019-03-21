@@ -4,6 +4,14 @@
 ///
 // ignore_for_file: non_constant_identifier_names,library_prefixes,unused_import
 
+const PingStatus$json = const {
+  '1': 'PingStatus',
+  '2': const [
+    const {'1': 'id', '3': 1, '4': 1, '5': 13, '10': 'id'},
+    const {'1': 'Status', '3': 2, '4': 1, '5': 9, '10': 'Status'},
+  ],
+};
+
 const User$json = const {
   '1': 'User',
   '2': const [
@@ -381,7 +389,6 @@ const Asset$json = const {
     const {'1': 'folio', '3': 3, '4': 1, '5': 11, '6': '.folio.Folio', '10': 'folio'},
     const {'1': 'UUID', '3': 4, '4': 1, '5': 9, '10': 'UUID'},
     const {'1': 'Path', '3': 5, '4': 1, '5': 9, '10': 'Path'},
-    const {'1': 'asset', '3': 6, '4': 1, '5': 11, '6': '.folio.Asset', '10': 'asset'},
     const {'1': 'blob', '3': 20, '4': 1, '5': 12, '10': 'blob'},
     const {'1': 'Thumbnail', '3': 14, '4': 1, '5': 11, '6': '.folio.Asset', '10': 'Thumbnail'},
   ],

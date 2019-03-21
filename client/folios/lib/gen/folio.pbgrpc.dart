@@ -11,6 +11,10 @@ import 'folio.pb.dart';
 export 'folio.pb.dart';
 
 class FolioServiceClient extends $grpc.Client {
+  static final _$ping = new $grpc.ClientMethod<PingStatus, PingStatus>(
+      '/folio.FolioService/Ping',
+      (PingStatus value) => value.writeToBuffer(),
+      (List<int> value) => new PingStatus.fromBuffer(value));
   static final _$createUser =
       new $grpc.ClientMethod<CreateUserRequest, CreateUserResponse>(
           '/folio.FolioService/CreateUser',
@@ -114,6 +118,13 @@ class FolioServiceClient extends $grpc.Client {
 
   FolioServiceClient($grpc.ClientChannel channel, {$grpc.CallOptions options})
       : super(channel, options: options);
+
+  $grpc.ResponseFuture<PingStatus> ping(PingStatus request,
+      {$grpc.CallOptions options}) {
+    final call = $createCall(_$ping, new $async.Stream.fromIterable([request]),
+        options: options);
+    return new $grpc.ResponseFuture(call);
+  }
 
   $grpc.ResponseFuture<CreateUserResponse> createUser(CreateUserRequest request,
       {$grpc.CallOptions options}) {
@@ -283,6 +294,13 @@ abstract class FolioServiceBase extends $grpc.Service {
   String get $name => 'folio.FolioService';
 
   FolioServiceBase() {
+    $addMethod(new $grpc.ServiceMethod<PingStatus, PingStatus>(
+        'Ping',
+        ping_Pre,
+        false,
+        false,
+        (List<int> value) => new PingStatus.fromBuffer(value),
+        (PingStatus value) => value.writeToBuffer()));
     $addMethod(new $grpc.ServiceMethod<CreateUserRequest, CreateUserResponse>(
         'CreateUser',
         createUser_Pre,
@@ -425,6 +443,11 @@ abstract class FolioServiceBase extends $grpc.Service {
         (DeleteNoteResponse value) => value.writeToBuffer()));
   }
 
+  $async.Future<PingStatus> ping_Pre(
+      $grpc.ServiceCall call, $async.Future request) async {
+    return ping(call, await request);
+  }
+
   $async.Future<CreateUserResponse> createUser_Pre(
       $grpc.ServiceCall call, $async.Future request) async {
     return createUser(call, await request);
@@ -525,6 +548,7 @@ abstract class FolioServiceBase extends $grpc.Service {
     return deleteNote(call, await request);
   }
 
+  $async.Future<PingStatus> ping($grpc.ServiceCall call, PingStatus request);
   $async.Future<CreateUserResponse> createUser(
       $grpc.ServiceCall call, CreateUserRequest request);
   $async.Future<ReadUserResponse> readUser(
