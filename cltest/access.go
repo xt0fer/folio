@@ -71,7 +71,18 @@ func (fc *FolioClient) Close() {
 	fc.Cancel()
 }
 
-// CreateUser ...
+// Ping ... see if server there, return nil when Everything Fine.
+func (fc *FolioClient) Ping() error {
+	st, err := fc.Client.Ping(fc.Ctx, &pb.PingStatus{})
+	if err != nil {
+		log.Panicf("No server running on %v -- err %v", *local8081, err)
+		return err
+	}
+	log.Println("Svr: ", st.Id, st.Status, *local8081)
+	return nil
+}
+
+// CreateUser ... takes a User struct and creates the user on the db
 func (fc *FolioClient) CreateUser(owner *pb.User) (*pb.User, error) {
 	userResp, err := fc.Client.CreateUser(fc.Ctx, &pb.CreateUserRequest{
 		Payload: owner,
@@ -170,4 +181,20 @@ func (fc *FolioClient) SaveFolio(f *pb.Folio) error {
 		return err
 	}
 	return nil
+}
+
+// GetFolioList ...
+func (fc *FolioClient) GetFolioList() ([]*pb.Folio, error) {
+
+	folios, err := fc.Client.ListFolio(fc.Ctx, &pb.ListFolioRequest{}, &grpc.EmptyCallOption{})
+
+	if err != nil {
+		log.Fatalf("Failed GetFolioList call %v", err)
+		return nil, err
+	}
+
+	folioList := folios.GetResults()
+	log.Printf("total list of folios is %v long.", len(folioList))
+
+	return folioList, nil
 }
