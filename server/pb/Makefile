@@ -10,6 +10,7 @@ proto: golang dart
 golang:
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I${GOPATH}/src/github.com \
 		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
@@ -20,6 +21,7 @@ golang:
 		folio.proto
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I${GOPATH}/src/github.com \
 		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
@@ -30,6 +32,7 @@ golang:
 		folio.proto
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I${GOPATH}/src/github.com \
 		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
@@ -40,6 +43,7 @@ golang:
 		folio.proto
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I${GOPATH}/src/github.com \
 		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
@@ -51,6 +55,7 @@ golang:
 	
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I${GOPATH}/src/github.com \
 		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
@@ -62,7 +67,7 @@ golang:
 
 # dart items
 dart:
-	rm ../../client/folios/lib/gen/*.dart
+	-rm ../../client/folios/lib/gen/*.dart
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
@@ -77,6 +82,7 @@ dart:
 		infoblox/api/*.proto
 	protoc -I/usr/local/include -I. \
 		-I${GOPATH}/src \
+		-I${GOPATH}/src/github.com \
 		-I$(PROTO_ROOT_DIR) \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
 		-I${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
@@ -87,7 +93,16 @@ dart:
 # 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
 # 		-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
 
-
+grpcui:
+	grpcui -proto=folio.proto -import-path=. \
+		-import-path=${GOPATH}/src/github.com \
+		-import-path=$(PROTO_ROOT_DIR) \
+		-import-path=${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway \
+		-import-path=${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
+		-import-path=${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
+		-import-path=${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis \
+		-import-path=${GOPATH}/src/github.com/lyft/protoc-gen-validate \
+		-plaintext 127.0.0.1:8081
 
 # some funky stuff on how to install various chunks of func when there is no golang code in the repo?
 # install:

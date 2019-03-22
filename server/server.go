@@ -8,6 +8,7 @@ import (
 	pb "./pb"
 	"github.com/jinzhu/gorm"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 // type FolioSvcDefault struct {
@@ -62,6 +63,7 @@ func (g *FolioServer) startGRPC() error {
 		return err
 	}
 	grpcServer := grpc.NewServer()
+	reflection.Register(grpcServer)
 	log.Println("RegisterFolioServiceServer...")
 
 	//pb.RegisterFolioServiceServer(grpcServer, g.m)

@@ -1,9 +1,9 @@
 syntax = "proto3";
 
 import "google/api/annotations.proto";
-import "validate/validate.proto";
+//import "validate/validate.proto";
 //import "google/protobuf/empty.proto";
-import "github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto";
+import "infobloxopen/protoc-gen-gorm/options/gorm.proto";
 import "google/protobuf/field_mask.proto";
 //import "github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto";
 import "infoblox/api/collection_operators.proto";

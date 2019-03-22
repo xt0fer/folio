@@ -95,7 +95,6 @@ import gorm2 "github.com/infobloxopen/atlas-app-toolkit/gorm"
 import fmt "fmt"
 import math "math"
 import _ "google.golang.org/genproto/googleapis/api/annotations"
-import _ "github.com/lyft/protoc-gen-validate/validate"
 import _ "google.golang.org/genproto/protobuf/field_mask"
 import _ "github.com/infobloxopen/atlas-app-toolkit/query"
 
