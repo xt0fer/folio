@@ -90,9 +90,9 @@ dart:
 		--dart_out=grpc:../../client/folios/lib/gen \
 		folio.proto
 
-# 		-I${GOPATH}/src/github.com/infobloxopen/protoc-gen-gorm/options/gorm.proto \
-# 		-I${GOPATH}/src/github.com/infobloxopen/atlas-app-toolkit/query/collection_operators.proto \
-
+# this is setup stuff for talking to it via grpcui
+# https://github.com/fullstorydev/grpcui
+#
 grpcui:
 	grpcui -proto=folio.proto -import-path=. \
 		-import-path=${GOPATH}/src/github.com \
@@ -104,11 +104,6 @@ grpcui:
 		-import-path=${GOPATH}/src/github.com/lyft/protoc-gen-validate \
 		-plaintext 127.0.0.1:8081
 
-# some funky stuff on how to install various chunks of func when there is no golang code in the repo?
-# install:
-# 	go install \
-# 		./vendor/github.com/gogo/protobuf/protoc-gen-gogo \
-# 		./vendor/github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
-# 		./vendor/github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger \
-# 		./vendor/github.com/mwitkow/go-proto-validators/protoc-gen-govalidators \
-# 		./vendor/github.com/rakyll/statik		
+#
+#
+#
