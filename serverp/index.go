@@ -40,13 +40,13 @@ func main() {
 	}
 
 	filter := "kris@youngers.org"
-	posts, err := client.Users(&prisma.UsersParams{
+	auser, err := client.Users(&prisma.UsersParams{
 		Where: &prisma.UserWhereInput{
 			Email: &filter,
 		},
 	}).Exec(ctx)
 
-	for _, f := range posts {
+	for _, f := range auser {
 		folios, err := client.Folios(&prisma.FoliosParams{
 			Where: &prisma.FolioWhereInput{ID: &f.ID},
 		}).Exec(ctx)
