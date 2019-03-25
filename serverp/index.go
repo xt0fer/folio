@@ -28,6 +28,45 @@ func main() {
 		panic(err)
 	}
 	for _, user := range users {
-		fmt.Printf("%v\n", user)
+		fmt.Printf("Users\n%v\n", user)
 	}
+
+	folios, err := client.Folios(nil).Exec(ctx)
+	if err != nil {
+		panic(err)
+	}
+	for _, f := range folios {
+		fmt.Printf(">>Folios\n>> %v\n", f)
+	}
+
+	filter := "kris@youngers.org"
+	posts, err := client.Users(&prisma.UsersParams{
+		Where: &prisma.UserWhereInput{
+			Email: &filter,
+		},
+	}).Exec(ctx)
+
+	for _, f := range posts {
+		folios, err := client.Folios(&prisma.FoliosParams{
+			Where: &prisma.FolioWhereInput{ID: &f.ID},
+		}).Exec(ctx)
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf(">>Single User\n%v\n", f)
+		for _, f := range folios {
+			fmt.Printf(">>Folios\n>> %v\n", f)
+		}
+
+	}
+
+	// email := "alice@prisma.io"
+	postsByUser, err := client.User(prisma.UserWhereUniqueInput{
+		Email: &filter,
+	}).Posts(nil).Exec(ctx)
+
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Posts\n%+v\n", postsByUser)
 }
