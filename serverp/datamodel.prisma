@@ -1,7 +1,9 @@
 type User {
   id: ID! @unique
   email: String @unique
-  name: String!
+  firstname: String!
+  lastname: String!
+  thumbnail: Asset
   posts: [Post!]!
 }
 
@@ -10,4 +12,69 @@ type Post {
   title: String!
   published: Boolean! @default(value: "false")
   author: User
+}
+
+# Share is a linkage allowing someone to work with the contents of a folio
+type Share {
+  id: ID! @unique
+  owner: User! @relation(name: "OwnedBy")
+  friend: User! @relation(name: "SharedWith")
+  thumbnail: Asset
+  folios: [Folio!]! @relation(name: "SharedFolios")
+}
+
+# // Tag is a attribute on something
+enum TagType {
+  Person,
+  Place,
+  Thing,
+  Folder,
+  Tag,
+  Category
+}
+type Tag {
+  id: ID! @unique
+  kind: TagType  @default(value: Tag)
+  name: String!
+  desc: String!
+  thumbnail: Asset @relation(name: "TagThumbnail")
+  folios: [Folio!]!
+}
+
+# // Folio center piece
+type Folio {
+  id: ID! @unique
+  uuid: String! @unique
+  name: String!
+  desc: String!
+  thumbnail: Asset @relation(name: "FolioThumbnail")
+  assets: [Asset!]! @relation(name: "FolioAssets")
+  notes: [Note!]!
+  owner: User!
+  tags: [Tag!]!
+  shares: [Share!]! @relation(name: "SharedFolios")
+}
+
+
+
+# // Asset main doc
+type Asset {
+  id: ID! @unique
+  name: String! #SHA256?
+  uuid: String! @unique
+  path: String!
+  note: String
+  thumbnail: Asset @relation(name: "AssetThumbnail")
+  folio: Folio @relation(name: "FolioAssets")
+  #bytes: 
+}
+
+
+# Note text junk
+type Note {
+  id: ID! @unique
+  name: String!
+  note: String
+  thumbnail: Asset
+  folio: Folio
 }
