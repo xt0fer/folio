@@ -3,7 +3,7 @@ type User {
   email: String @unique
   firstname: String!
   lastname: String!
-  thumbnail: Asset
+  thumbnail: Thumbnail
   posts: [Post!]!
 }
 
@@ -19,7 +19,7 @@ type Share {
   id: ID! @unique
   owner: User! @relation(name: "OwnedBy")
   friend: User! @relation(name: "SharedWith")
-  thumbnail: Asset
+  thumbnail: Thumbnail
   folios: [Folio!]! @relation(name: "SharedFolios")
 }
 
@@ -37,18 +37,18 @@ type Tag {
   kind: TagType  @default(value: Tag)
   name: String!
   desc: String!
-  thumbnail: Asset @relation(name: "TagThumbnail")
-  folios: [Folio!]!
+  thumbnail: Thumbnail
+  folios: [Folio!]
 }
 
 # // Folio center piece
 type Folio {
   id: ID! @unique
-  uuid: String! @unique
   name: String!
   desc: String!
-  thumbnail: Asset @relation(name: "FolioThumbnail")
+  thumbnail: Thumbnail
   assets: [Asset!]! @relation(name: "FolioAssets")
+  links: [Link!]! @relation(name: "FolioLinks")
   notes: [Note!]!
   owner: User!
   tags: [Tag!]!
@@ -61,12 +61,12 @@ type Folio {
 type Asset {
   id: ID! @unique
   name: String! #SHA256?
-  uuid: String! @unique
-  path: String!
+  uuid: String
+  path: String
   note: String
-  thumbnail: Asset @relation(name: "AssetThumbnail")
+  mimeType: String
+  thumbnail: Thumbnail
   folio: Folio @relation(name: "FolioAssets")
-  #bytes: 
 }
 
 
@@ -75,6 +75,22 @@ type Note {
   id: ID! @unique
   name: String!
   note: String
-  thumbnail: Asset
+  thumbnail: Thumbnail
   folio: Folio
+}
+
+# Note text junk
+type Link {
+  id: ID! @unique
+  name: String!
+  desc: String
+  url: String
+  thumbnail: Thumbnail
+  folio: Folio @relation(name: "FolioLinks")
+}
+
+type Thumbnail {
+  id: ID! @unique
+  name: String!
+  path: String @default(value: "https://tioga.co/defaultThumb.png")
 }
