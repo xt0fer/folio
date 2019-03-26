@@ -22,7 +22,7 @@ func main() {
 	// 	panic(err)
 	// }
 	// fmt.Printf("Created new user: %+v\n", newUser)
-
+	fmt.Println("start")
 	users, err := client.Users(nil).Exec(ctx)
 	if err != nil {
 		panic(err)
@@ -40,25 +40,24 @@ func main() {
 	}
 
 	filter := "kris@youngers.org"
-	auser, err := client.Users(&prisma.UsersParams{
-		Where: &prisma.UserWhereInput{
+	auser, err := client.User(
+		prisma.UserWhereUniqueInput{
 			Email: &filter,
-		},
-	}).Exec(ctx)
-
-	for _, f := range auser {
-		folios, err := client.Folios(&prisma.FoliosParams{
-			Where: &prisma.FolioWhereInput{ID: &f.ID},
 		}).Exec(ctx)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Printf(">>Single User\n%v\n", f)
-		for _, f := range folios {
-			fmt.Printf(">>Folios\n>> %v\n", f)
-		}
 
+	//for _, f := range auser {
+	folios, err = client.Folios(&prisma.FoliosParams{
+		Where: &prisma.FolioWhereInput{ID: &auser.ID},
+	}).Exec(ctx)
+	if err != nil {
+		panic(err)
 	}
+	fmt.Printf(">>Single User\n%+v\n%s\n", auser, *auser.Email)
+	for _, f := range folios {
+		fmt.Printf(">>Folios\n>> %+v\n", f)
+	}
+
+	//}
 
 	// email := "alice@prisma.io"
 	postsByUser, err := client.User(prisma.UserWhereUniqueInput{
