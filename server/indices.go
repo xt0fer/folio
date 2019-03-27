@@ -1,5 +1,12 @@
 package server
 
+import (
+	"context"
+	"log"
+
+	pb "../server/pb"
+)
+
 // ReadAccountByEmail ...
 // func (m *FolioSvc) ReadAccountByEmail(ctx context.Context, in *pb.ReadAccountRequest, email string) (*pb.ReadAccountResponse, error) {
 // 	log.Println("(m *FolioSvc) ReadAccountByEmail")
@@ -17,3 +24,11 @@ package server
 // 	}
 // 	return nil, errors.New("unable to find the account")
 // }
+
+// Ping ...
+func (m *FolioSvc) Ping(ctx context.Context, in *pb.PingStatus) (*pb.PingStatus, error) {
+	log.Println("(m *FolioSvc) Ping")
+	in.Id = 6789
+	in.Status = "running"
+	return in, nil
+}

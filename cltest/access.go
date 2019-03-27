@@ -1,8 +1,9 @@
-package main
+package cltest
 
 import (
 	"context"
 	"errors"
+	"flag"
 	"log"
 	"time"
 
@@ -14,11 +15,20 @@ import (
 	"google.golang.org/grpc/testdata"
 )
 
+var (
+	tls                = flag.Bool("tls", false, "Connection uses TLS if true, else plain TCP")
+	caFile             = flag.String("ca_file", "", "The file containning the CA root cert file")
+	serverAddr         = flag.String("server_addr", "127.0.0.1:8080", "The server address in the format of host:port")
+	local8081          = flag.String("server_addr2", "127.0.0.1:8081", "The server address in the format of host:port")
+	serverHostOverride = flag.String("server_host_override", "x.test.youtube.com", "The server name use to verify the hostname returned by TLS handshake")
+)
+
+// FolioClient ...
 type FolioClient struct {
-	client pb.FolioServiceClient
-	cancel context.CancelFunc
-	ctx    context.Context
-	conn   *grpc.ClientConn
+	Client pb.FolioServiceClient
+	Cancel context.CancelFunc
+	Ctx    context.Context
+	Conn   *grpc.ClientConn
 }
 
 // NewFolioClient ...
@@ -40,25 +50,41 @@ func NewFolioClient() *FolioClient {
 		opts = append(opts, grpc.WithInsecure())
 	}
 
-	newbie.conn, err = grpc.Dial(*local8081, opts...)
+	newbie.Conn, err = grpc.Dial(*local8081, opts...)
 	if err != nil {
 		log.Fatalf("fail to dial: %v", err)
 	}
-	newbie.client = pb.NewFolioServiceClient(newbie.conn)
-	newbie.ctx, newbie.cancel = context.WithTimeout(context.Background(), 3*time.Second)
+	newbie.Client = pb.NewFolioServiceClient(newbie.Conn)
+	newbie.Ctx, newbie.Cancel = context.WithTimeout(context.Background(), 3*time.Second)
 
+	st, err := newbie.Client.Ping(newbie.Ctx, &pb.PingStatus{})
+	if err != nil {
+		log.Panicf("No server running on %v -- err %v", *local8081, err)
+	}
+	log.Println("Svr: ", st.Id, st.Status, *local8081)
 	return newbie
 }
 
 // Close ... clean up FolioClient items
 func (fc *FolioClient) Close() {
-	fc.conn.Close()
-	fc.cancel()
+	fc.Conn.Close()
+	fc.Cancel()
 }
 
-// CreateUser ...
+// Ping ... see if server there, return nil when Everything Fine.
+func (fc *FolioClient) Ping() error {
+	st, err := fc.Client.Ping(fc.Ctx, &pb.PingStatus{})
+	if err != nil {
+		log.Panicf("No server running on %v -- err %v", *local8081, err)
+		return err
+	}
+	log.Println("Svr: ", st.Id, st.Status, *local8081)
+	return nil
+}
+
+// CreateUser ... takes a User struct and creates the user on the db
 func (fc *FolioClient) CreateUser(owner *pb.User) (*pb.User, error) {
-	userResp, err := fc.client.CreateUser(fc.ctx, &pb.CreateUserRequest{
+	userResp, err := fc.Client.CreateUser(fc.Ctx, &pb.CreateUserRequest{
 		Payload: owner,
 	}, &grpc.EmptyCallOption{})
 	if userResp == nil {
@@ -76,13 +102,15 @@ func GimmeUUID() uuid.UUID {
 // GetUser ...
 func (fc *FolioClient) GetUser(email string) (*pb.User, error) {
 
-	users, err := fc.client.ListUser(fc.ctx, &pb.ListUserRequest{}, &grpc.EmptyCallOption{})
+	users, err := fc.Client.ListUser(fc.Ctx, &pb.ListUserRequest{}, &grpc.EmptyCallOption{})
 
 	if err != nil {
-		log.Fatalf("Failed List User call %v", err)
+		log.Fatalf("Failed in GetUser call %v", err)
+		return nil, err
 	}
 
 	userList := users.GetResults()
+	log.Printf("list of users is %v long.", len(userList))
 	resultAccount := &pb.User{}
 	// search and find the user.
 	for _, a := range userList {
@@ -91,12 +119,28 @@ func (fc *FolioClient) GetUser(email string) (*pb.User, error) {
 			return resultAccount, nil
 		}
 	}
-	return nil, errors.New("unable to find the account")
+	return nil, errors.New("unable to find the user")
 }
 
+// GetUserList ...
+func (fc *FolioClient) GetUserList() ([]*pb.User, error) {
+
+	users, err := fc.Client.ListUser(fc.Ctx, &pb.ListUserRequest{}, &grpc.EmptyCallOption{})
+
+	if err != nil {
+		log.Fatalf("Failed GetUserList call %v", err)
+		return nil, err
+	}
+
+	userList := users.GetResults()
+	log.Printf("list of users is %v long.", len(userList))
+	return userList, nil
+}
+
+// SaveUser ...
 func (fc *FolioClient) SaveUser(user *pb.User) error {
 
-	_, err := fc.client.UpdateUser(fc.ctx, &pb.UpdateUserRequest{
+	_, err := fc.Client.UpdateUser(fc.Ctx, &pb.UpdateUserRequest{
 		Payload: user,
 	})
 	if err != nil {
@@ -105,48 +149,52 @@ func (fc *FolioClient) SaveUser(user *pb.User) error {
 	return nil
 }
 
-// // CreateAccount ...
-// func (fc *FolioClient) CreateAccount(nacct *pb.Account) (*pb.Account, error) {
-// 	acct, err := fc.client.CreateAccount(fc.ctx, &pb.CreateAccountRequest{
-// 		Payload: nacct,
-// 	}, &grpc.EmptyCallOption{})
-// 	if err != nil {
-// 		log.Fatalf("Failed Create Account call %v", err)
-// 	}
-// 	log.Printf("Create Account Response %+v\n", acct)
-// 	return acct.GetResult(), nil
-// }
+// CreateNote ...
+func (fc *FolioClient) CreateNote(n *pb.Note) (*pb.Note, error) {
+	resp, err := fc.Client.CreateNote(fc.Ctx, &pb.CreateNoteRequest{
+		Payload: n,
+	}, &grpc.EmptyCallOption{})
+	if resp == nil {
+		log.Fatalf("Failed Create note call resp nil %v", err)
+	}
+	return resp.GetResult(), err
+}
 
-// func (fc *FolioClient) SaveAccount(nacct *pb.Account) error {
+// CreateFolio ...
+func (fc *FolioClient) CreateFolio(n *pb.Folio) (*pb.Folio, error) {
+	resp, err := fc.Client.CreateFolio(fc.Ctx, &pb.CreateFolioRequest{
+		Payload: n,
+	}, &grpc.EmptyCallOption{})
+	if resp == nil {
+		log.Fatalf("Failed Create folio call resp nil %v", err)
+	}
+	return resp.GetResult(), err
+}
 
-// 	_, err := fc.client.UpdateAccount(fc.ctx, &pb.UpdateAccountRequest{
-// 		Payload: nacct,
-// 	})
-// 	if err != nil {
-// 		return err
-// 	}
-// 	return nil
-// }
+// SaveFolio ...
+func (fc *FolioClient) SaveFolio(f *pb.Folio) error {
 
-// // CreateAccount ...
-// func (fc *FolioClient) CreateArchive(arg *pb.Archive) (*pb.Archive, error) {
-// 	acct, err := fc.client.CreateArchive(fc.ctx, &pb.CreateArchiveRequest{
-// 		Payload: arg,
-// 	}, &grpc.EmptyCallOption{})
-// 	if err != nil {
-// 		log.Fatalf("Failed CreateArchive call %v", err)
-// 	}
-// 	log.Printf("CreateArchive Response %+v\n", acct)
-// 	return acct.GetResult(), nil
-// }
+	_, err := fc.Client.UpdateFolio(fc.Ctx, &pb.UpdateFolioRequest{
+		Payload: f,
+	})
+	if err != nil {
+		return err
+	}
+	return nil
+}
 
-// func (fc *FolioClient) SaveArchive(arg *pb.Archive) error {
+// GetFolioList ...
+func (fc *FolioClient) GetFolioList() ([]*pb.Folio, error) {
 
-// 	_, err := fc.client.UpdateArchive(fc.ctx, &pb.UpdateArchiveRequest{
-// 		Payload: arg,
-// 	})
-// 	if err != nil {
-// 		return err
-// 	}
-// 	return nil
-// }
+	folios, err := fc.Client.ListFolio(fc.Ctx, &pb.ListFolioRequest{}, &grpc.EmptyCallOption{})
+
+	if err != nil {
+		log.Fatalf("Failed GetFolioList call %v", err)
+		return nil, err
+	}
+
+	folioList := folios.GetResults()
+	log.Printf("total list of folios is %v long.", len(folioList))
+
+	return folioList, nil
+}
